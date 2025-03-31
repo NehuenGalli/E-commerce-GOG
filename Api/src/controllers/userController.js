@@ -26,7 +26,7 @@ class UserController {
   }
 
   login = async (req, res) => {
-    await loginBodySchema.validate(req.body);
+    const { email, password } = await loginBodySchema.validate(req.body);
     const user = this.service.users.find(
       (user) => user.email === email && user.password === password
     );
@@ -46,11 +46,9 @@ class UserController {
         .header(HEADER, token)
         .json({ user: { id: user.id, email: user.email } });
     } catch (error) {
-      res
-        .status(400)
-        .json({
-          error: "Invalid data / User already exists and other errors.",
-        });
+      res.status(400).json({
+        error: "Invalid data / User already exists and other errors.",
+      });
     }
   };
 
