@@ -20,5 +20,16 @@ class GamesController {
     }
     res.json(game);
   };
+
+  getRecommended = (req, res) => {
+    const recommendedGames = this.service.getRecommendedGames().map((game) => ({
+      id: game.id,
+      name: game.name,
+      mainImage: game.mainImage,
+      tags: game.tags,
+      price: game.price,
+    }));
+    res.status(200).json(recommendedGames);
+  };
 }
 export default GamesController;

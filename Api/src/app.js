@@ -37,6 +37,12 @@ app.get(
   gamesController.getGames
 );
 
+app.get(
+  "/games/recommended",
+  tokenController.checkRole("public"),
+  gamesController.getRecommended
+);
+
 app
   .route("/games/:gameId")
   .get(tokenController.checkRole("public"), gamesController.getGameById);
