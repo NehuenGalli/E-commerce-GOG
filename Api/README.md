@@ -1,0 +1,1 @@
+# Gog API Implementation JS
