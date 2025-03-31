@@ -52,6 +52,34 @@ class UserController {
     }
   };
 
+  getUserById = async (req, res) => {
+    try {
+      const { userId } = req.params;
+      console.log(userId);
+      const user = await this.service.getUser(userId);
+      console.log(user);
+      res.status(200).json({
+        user: {
+          id: user.id,
+          email: user.email,
+          name: user.email,
+          image: user.image,
+          backgroundImage: user.backgroundImage,
+          games: user.games
+            ? user.games.map((game) => ({
+                id: game.id,
+                name: game.name,
+                mainImage: game.mainImage,
+                tags: game.tag,
+                price: game.price,
+              }))
+            : [],
+        },
+      });
+    } catch (error) {
+      res.status(404).json({ message: "No se encontro el usuario" });
+    }
+  };
   // ...extend with your code
 }
 

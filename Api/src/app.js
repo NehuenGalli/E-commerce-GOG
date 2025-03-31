@@ -29,6 +29,9 @@ app.post(
   tokenController.checkRole("public"),
   userController.register
 );
+app
+  .route("/getUserById/:userId")
+  .get(tokenController.checkRole("public"), userController.getUserById);
 
 // Games
 app.get(
