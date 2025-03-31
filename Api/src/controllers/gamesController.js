@@ -5,7 +5,11 @@ class GamesController {
   }
 
   getGames = (req, res) => {
-    res.json(this.service.getGames());
+    try {
+      res.json(this.service.getGames());
+    } catch (error) {
+      res.status(400).json({ error: "Wrong page number" });
+    }
   };
 
   getGameById = (req, res) => {
@@ -17,5 +21,4 @@ class GamesController {
     res.json(game);
   };
 }
-
 export default GamesController;

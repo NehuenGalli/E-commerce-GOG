@@ -4,6 +4,7 @@ import { initGogSystem } from "@unq-ui/gog-model-js";
 
 import UserController from "./controllers/userController.js";
 import TokenController from "./controllers/tokenController.js";
+import GamesController from "./controllers/gamesController.js";
 
 const gogSystem = initGogSystem();
 
@@ -15,6 +16,7 @@ app.use(express.json());
 
 const tokenController = new TokenController(gogSystem);
 const userController = new UserController(gogSystem, tokenController);
+const gamesController = new GamesController(gogSystem, tokenController);
 
 // User
 app.post("/login", tokenController.checkRole("public"), userController.login);

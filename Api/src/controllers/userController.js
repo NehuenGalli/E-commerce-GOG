@@ -46,7 +46,11 @@ class UserController {
         .header(HEADER, token)
         .json({ user: { id: user.id, email: user.email } });
     } catch (error) {
-      res.status(400).json({ error: error.message });
+      res
+        .status(400)
+        .json({
+          error: "Invalid data / User already exists and other errors.",
+        });
     }
   };
 
