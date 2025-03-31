@@ -54,6 +54,13 @@ app.get(
   searchController.searchGames
 );
 
+// purchase
+app.get(
+  "/purchase",
+  tokenController.checkRole("public"),
+  purchaseController.purchase
+);
+
 app.listen(port, () => {
   console.log(`Listening at http://localhost:${port}`);
 });
