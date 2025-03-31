@@ -24,9 +24,16 @@ app.post(
   userController.register
 );
 
-// Other routes
-// ...
-// ...
+// Games
+app.get(
+  "/games",
+  tokenController.checkRole("public"),
+  gamesController.getGames
+);
+
+app
+  .route("/games/:gameId")
+  .get(tokenController.checkRole("public"), gamesController.getGameById);
 
 app.listen(port, () => {
   console.log(`Listening at http://localhost:${port}`);

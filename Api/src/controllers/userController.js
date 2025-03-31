@@ -7,6 +7,14 @@ const registerBodySchema = object({
   email: string().email().required(),
   password: string().required(),
   image: string().url(),
+  backgroundImage: string().url(),
+})
+  .noUnknown(true)
+  .strict();
+
+const loginBodySchema = object({
+  email: string().email().required(),
+  password: string().required(),
 })
   .noUnknown(true)
   .strict();
@@ -17,11 +25,8 @@ class UserController {
     this.tokenController = tokenController;
   }
 
-  login = (req, res) => {
-    const { email, password } = req.body;
-    if (!email || !password) {
-      res.status(400).json({ error: "email and password are required" });
-    }
+  login = async (req, res) => {
+    await loginBodySchema.validate(req.body);
     const user = this.service.users.find(
       (user) => user.email === email && user.password === password
     );
