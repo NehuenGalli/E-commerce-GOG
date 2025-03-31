@@ -16,7 +16,7 @@ class GamesController {
     const { gameId } = req.params;
     const game = this.service.getGame(gameId);
     if (!game) {
-      return res.status(400).json({ error: "Game not found" });
+      return res.status(404).json({ error: "Game not found" });
     }
     res.json(game);
   };
