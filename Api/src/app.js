@@ -50,13 +50,8 @@ app.get(
 
 app
   .route("/games/:gameId")
-  .get(tokenController.checkRole("public"), gamesController.getGameById);
-
-app.put(
-  "/games/:gameId",
-  tokenController.checkRole("user"),
-  gamesController.addGameToCart
-);
+  .get(tokenController.checkRole("public"), gamesController.getGameById)
+  .put(tokenController.checkRole("user"), gamesController.addGameToCart);
 
 // search
 app.get(

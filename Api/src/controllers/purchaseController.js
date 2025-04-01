@@ -19,16 +19,23 @@ class PurchaseController {
 
   purchase = async (req, res) => {
     try {
-      const draftPurchase = await purchaseBodySchema.validate(req.body);
+      console.log("Draft created:", draft);
+
+      const { cardNumber, cardName, cardExpiration, cardCvv } =
+        purchaseBodySchema.validate(req.body);
+
       const userId = req.user.id;
-      this.service.purchaseGame(userId, draftPurchase);
-      res.status(200).json("Purchase completed");
+      const draft = new DraftPurchase(
+        cardNumber,
+        cardName,
+        cardExpiration,
+        cardCvv
+      );
+      await this.service.purchaseGame(userId, draft);
+      res.status(200).json({ message: "Purchase completed" });
     } catch (error) {
       res.status(400).json({
         error: "Cart is empty",
-      });
-      res.status(401).json({
-        error: "Unauthorized",
       });
     }
   };
