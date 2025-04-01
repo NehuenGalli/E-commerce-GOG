@@ -18,7 +18,7 @@ class GamesController {
         amountOfElements: game.amountOfElements,
         amountOfPages: game.amountOfPages,
       }));
-      res.status(200).json(juegosRestringidos);
+      res.status(200).json({ list: juegosRestringidos });
     } catch (error) {
       res.status(400).json({ error: "Wrong page number" });
     }
@@ -30,7 +30,7 @@ class GamesController {
     if (!game) {
       return res.status(404).json({ error: "Game not found" });
     }
-    res.json(game);
+    res.status(200).json(game);
   };
 
   getRecommended = (req, res) => {

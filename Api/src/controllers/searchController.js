@@ -19,7 +19,7 @@ class SearchController {
         amountOfPages: game.amountOfPages,
       }));
 
-      res.status(200).json(juegosRestringidos);
+      res.status(200).json({ list: juegosRestringidos });
     } catch (error) {
       res.status(400).json({ error: "Wrong page number" });
     }
