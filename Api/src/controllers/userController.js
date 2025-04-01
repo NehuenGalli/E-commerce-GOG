@@ -33,15 +33,22 @@ class UserController {
     if (!user) {
       res.status(400).json({ error: "Invalid credentials" });
     }
+    const token = this.tokenController.generateToken(user.id);
+    const juegos = user.games.map((game) => ({
+      id: game.id,
+      name: game.name,
+      mainImage: game.mainImage,
+      tags: game.tags,
+      price: game.price,
+    }));
     const userInfo = {
       id: user.id,
       email: user.email,
       name: user.name,
       image: user.image,
       backgroundImage: user.backgroundImage,
-      games: user.games,
+      games: juegos,
     };
-    const token = this.tokenController.generateToken(user.id);
     res.header(HEADER, token).json(userInfo);
   };
 
@@ -50,13 +57,22 @@ class UserController {
       const newUser = await registerBodySchema.validate(req.body);
       const user = this.service.addNewUser(newUser);
       const token = this.tokenController.generateToken(user.id);
+
+      const juegos = user.games.map((game) => ({
+        id: game.id,
+        name: game.name,
+        mainImage: game.mainImage,
+        tags: game.tags,
+        price: game.price,
+      }));
+
       const userInfo = {
         id: user.id,
         email: user.email,
         name: user.name,
         image: user.image,
         backgroundImage: user.backgroundImage,
-        games: user.games,
+        games: juegos,
       };
       res.header(HEADER, token).json(userInfo);
     } catch (error) {
