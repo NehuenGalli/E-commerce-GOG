@@ -7,6 +7,7 @@ import TokenController from "./controllers/tokenController.js";
 import GamesController from "./controllers/gamesController.js";
 import PurchaseController from "./controllers/purchaseController.js";
 import SearchController from "./controllers/searchController.js";
+import TagController from "./controllers/tagController.js";
 
 const gogSystem = initGogSystem();
 
@@ -21,6 +22,7 @@ const userController = new UserController(gogSystem, tokenController);
 const gamesController = new GamesController(gogSystem, tokenController);
 const purchaseController = new PurchaseController(gogSystem, tokenController);
 const searchController = new SearchController(gogSystem);
+const tagController = new TagController(gogSystem);
 
 // User
 app.post("/login", tokenController.checkRole("public"), userController.login);
@@ -69,6 +71,9 @@ app.post(
   tokenController.checkRole("user"),
   purchaseController.purchase
 );
+
+// tags
+app.get("/tags", tokenController.checkRole("public"), tagController.getTags);
 
 app.listen(port, () => {
   console.log(`Listening at http://localhost:${port}`);
