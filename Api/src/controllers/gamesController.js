@@ -31,5 +31,38 @@ class GamesController {
     }));
     res.status(200).json(recommendedGames);
   };
+
+  addGameToCart = (req, res) => {
+    try {
+      const { id, name, image } = req.user;
+
+      const { gameId } = req.params;
+      this.service.addGameToCart(id, gameId);
+
+      const game = this.service.getGame(gameId);
+
+      const gameInfo = {
+        id: game.id,
+        name: game.name,
+        mainImage: game.mainImage,
+        tags: game.tags,
+        price: game.price,
+      };
+
+      const userInfo = {
+        id: id,
+        name: name,
+        imagine: image,
+      };
+
+      res.status(200).json({
+        game: gameInfo,
+        user: userInfo,
+      });
+    } catch (error) {
+      res.status(401).json({ error: "Unauthorize" });
+      res.status(404).json({ error: "Not Found" });
+    }
+  };
 }
 export default GamesController;
