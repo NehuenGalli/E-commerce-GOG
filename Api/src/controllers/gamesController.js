@@ -4,9 +4,21 @@ class GamesController {
     this.tokenController = tokenController;
   }
 
-  getGames = (req, res) => {
+  getGames = async (req, res) => {
     try {
-      res.json(this.service.getGames());
+      const { page } = req.query;
+      const juegos = await this.service.getGames(page);
+      const juegosRestringidos = juegos.list.map((game) => ({
+        id: game.id,
+        name: game.name,
+        mainImage: game.mainImage,
+        tags: game.tags,
+        price: game.price,
+        currentPage: game.currentPage,
+        amountOfElements: game.amountOfElements,
+        amountOfPages: game.amountOfPages,
+      }));
+      res.status(200).json(juegosRestringidos);
     } catch (error) {
       res.status(400).json({ error: "Wrong page number" });
     }

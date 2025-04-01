@@ -33,8 +33,16 @@ class UserController {
     if (!user) {
       res.status(400).json({ error: "Invalid credentials" });
     }
+    const userInfo = {
+      id: user.id,
+      email: user.email,
+      name: user.name,
+      image: user.image,
+      backgroundImage: user.backgroundImage,
+      games: user.games,
+    };
     const token = this.tokenController.generateToken(user.id);
-    res.header(HEADER, token).json({ user: { id: user.id, email } });
+    res.header(HEADER, token).json(userInfo);
   };
 
   register = async (req, res) => {
@@ -42,9 +50,15 @@ class UserController {
       const newUser = await registerBodySchema.validate(req.body);
       const user = this.service.addNewUser(newUser);
       const token = this.tokenController.generateToken(user.id);
-      res
-        .header(HEADER, token)
-        .json({ user: { id: user.id, email: user.email } });
+      const userInfo = {
+        id: user.id,
+        email: user.email,
+        name: user.name,
+        image: user.image,
+        backgroundImage: user.backgroundImage,
+        games: user.games,
+      };
+      res.header(HEADER, token).json(userInfo);
     } catch (error) {
       res.status(400).json({
         error: "Invalid data / User already exists and other errors.",
