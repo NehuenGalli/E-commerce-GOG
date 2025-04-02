@@ -1,29 +1,39 @@
 class SearchController {
-  constructor(service) {
-    this.service = service;
+  constructor(service, tokenController) {
+      this.service = service;
+      this.tokenController = tokenController;
   }
 
   searchGames = async (req, res) => {
-    try {
-      const { name, page } = req.query;
-      const juegos = await this.service.searchGame(name, page);
+      try {
+          const { name, page = 1 } = req.query;
+          let result = await this.service.searchGame(name, parseInt(page));
 
-      const juegosRestringidos = juegos.list.map((game) => ({
-        id: game.id,
-        name: game.name,
-        mainImage: game.mainImage,
-        tags: game.tags,
-        price: game.price,
-        currentPage: game.currentPage,
-        amountOfElements: game.amountOfElements,
-        amountOfPages: game.amountOfPages,
-      }));
+          // Si result no es un objeto válido, asignamos valores por defecto
+          if (!result || typeof result !== 'object') {
+              result = { list: [], currentPage: "1", amountOfElements: 0, amountOfPages: 0 };
+          }
 
-      res.status(200).json({ list: juegosRestringidos });
-    } catch (error) {
-      res.status(400).json({ error: "Wrong page number" });
-    }
+          // Convertimos list en un array si no lo es
+          let games = Array.isArray(result.list) ? result.list : result.list ? [result.list] : [];
+
+          // Transformamos los juegos para eliminar relatedGames
+          const transformedList = games.map(transformGame);
+
+          res.json({
+              ...result, // Mantiene todas las demás propiedades (currentPage, amountOfElements, amountOfPages)
+              list: transformedList // Lista de juegos sin relatedGames
+          });
+      } catch (error) {
+          res.status(400).json({ error: error.message });
+      }
   };
 }
+
+const transformGame = (game) => {
+  // Clonar el objeto sin relatedGames
+  const { relatedGames, ...rest } = game;
+  return rest;
+};
 
 export default SearchController;
