@@ -128,7 +128,39 @@ class UserController {
       res.status(404).json({ message: "No se encontro el usuario" });
     }
   };
+  addOrRemoveFriend = async (req, res) => {
+    try {
+      const { userId } = req.params;
+      const loggedUser = req.user.id;
+      const games = req.user.games;
+      console.log(userId);
+      const userWithNewFriendList = await this.service.addOrRemoveFriend(
+        loggedUser,
+        userId
+      );
+      const restrictedGames = games.map((game) => ({
+        id: game.id,
+        name: game.name,
+        mainImage: game.mainImage,
+        tags: game.tag,
+        price: game.price,
+      }));
 
+      const restrictUserWithNewFriendList = {
+        id: userWithNewFriendList.id,
+        email: userWithNewFriendList.email,
+        name: userWithNewFriendList.name,
+        image: userWithNewFriendList.image,
+        backgroundImage: userWithNewFriendList.backgroundImage,
+        games: restrictedGames,
+      };
+
+      console.log(userWithNewFriendList);
+      res.status(200).json([restrictUserWithNewFriendList]);
+    } catch (error) {
+      res.status(404).json({ error: error.message });
+    }
+  };
   // ...extend with your code
 }
 
