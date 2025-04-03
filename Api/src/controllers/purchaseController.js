@@ -20,15 +20,14 @@ class PurchaseController {
   purchase = async (req, res) => {
     try {
       const cardInfo = await purchaseBodySchema.validate(req.body);
-      const cardInfoNumber = cardInfo.cardNumber.length;
       const card = {
-        cardName: cardInfo.cardName,
-        cardNumber: cardInfoNumber,
-        cardExpiration: new Date(cardInfo.cardExpiration),
-        cardCvv: Number(cardInfo.cardCvv),
+        cardHolderName: cardInfo.cardName,
+        cardNumber: Number(cardInfo.cardNumber),
+        expirationDate: new Date(cardInfo.cardExpiration),
+        cvv: Number(cardInfo.cardCvv),
       };
       const userId = req.user.id;
-      console.log("Draft created:", cardInfoNumber);
+      console.log("Draft created:", card);
 
       await this.service.purchase(userId, card);
       res.status(201).json({ message: "Purchase completed" });
