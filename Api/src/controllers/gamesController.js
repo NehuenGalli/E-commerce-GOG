@@ -76,5 +76,41 @@ class GamesController {
       res.status(404).json({ error: "Not Found" });
     }
   };
+
+  deleteGame = async (req, res) => {
+    const { gameId } = req.params;
+    const { id, name, image } = req.user;
+
+     const game = await this.service.getGame(gameId);
+
+    try {
+      const cart = await this.service.removeGameFromCart(id, gameId); 
+      
+      const response = {
+        games: cart.games.map(game => ({  // <-- Usa cart.games, no el juego eliminado
+            id: game.id,
+            name: game.name,
+            mainImage: game.mainImage?.url || null,
+            tags: game.tags?.map(tag => ({
+                id: tag.id,
+                name: tag.name,
+                image: { src: tag.image?.src }
+            })) || [],
+            price: game.price
+        })),
+        user: {
+            id: id,
+            name: name,
+            image: image || null
+        }
+    };
+
+    res.status(200).json(response);
+
+    } catch (error) {
+      return res.status(400).json({ error: error.message});  
+    }
+  };
+
 }
 export default GamesController;
