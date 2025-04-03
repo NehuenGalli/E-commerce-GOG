@@ -110,6 +110,25 @@ class UserController {
       res.status(404).json({ message: "No se encontro el usuario" });
     }
   };
+
+  getFriendsById = async (req, res) => {
+    try {
+      const { userId } = req.params;
+      const user = await this.service.getUser(userId);
+      console.log(user);
+      const friendsList = user.friends.map((friend) => ({
+        id: friend.id,
+        email: friend.email,
+        name: friend.name,
+        image: friend.image,
+      }));
+      console.log(friendsList);
+      res.status(200).json(friendsList);
+    } catch (error) {
+      res.status(404).json({ message: "No se encontro el usuario" });
+    }
+  };
+
   // ...extend with your code
 }
 
