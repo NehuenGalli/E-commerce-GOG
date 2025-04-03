@@ -6,9 +6,9 @@ class SearchController {
   searchGames = async (req, res) => {
     try {
       const { name, page } = req.query;
-      const juegos = await this.service.searchGame(name, page);
+      const games = await this.service.searchGame(name, page);
 
-      const juegosRestringidos = juegos.list.map((game) => ({
+      const juegosRestringidos = games.list.map((game) => ({
         id: game.id,
         name: game.name,
         mainImage: game.mainImage,
