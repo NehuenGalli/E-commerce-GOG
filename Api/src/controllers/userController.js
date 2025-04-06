@@ -67,7 +67,7 @@ class UserController {
         ...transformUser(user),
         games: transformGames(user.games),
       };
-      res.header(HEADER, token).json(userInfo);
+      res.tatus(200).json(userInfo);
     } catch (error) {
       res.status(404).json({ message: error.message });
     }
