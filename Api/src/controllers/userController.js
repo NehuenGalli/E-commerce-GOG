@@ -34,20 +34,11 @@ class UserController {
       res.status(400).json({ error: "Invalid credentials" });
     }
     const token = this.tokenController.generateToken(user.id);
-    const juegos = user.games.map((game) => ({
-      id: game.id,
-      name: game.name,
-      mainImage: game.mainImage,
-      tags: game.tags,
-      price: game.price,
-    }));
+    const games = transformGames(user.games);
+    const userTransformed = transformUser(user);
     const userInfo = {
-      id: user.id,
-      email: user.email,
-      name: user.name,
-      image: user.image,
-      backgroundImage: user.backgroundImage,
-      games: juegos,
+      ...userTransformed,
+      games,
     };
     res.header(HEADER, token).json(userInfo);
   };
@@ -58,21 +49,11 @@ class UserController {
       const user = this.service.addNewUser(newUser);
       const token = this.tokenController.generateToken(user.id);
 
-      const juegos = user.games.map((game) => ({
-        id: game.id,
-        name: game.name,
-        mainImage: game.mainImage,
-        tags: game.tags,
-        price: game.price,
-      }));
-
+      const games = transformGames(user.games);
+      const userTransformed = transformUser(user);
       const userInfo = {
-        id: user.id,
-        email: user.email,
-        name: user.name,
-        image: user.image,
-        backgroundImage: user.backgroundImage,
-        games: juegos,
+        ...userTransformed,
+        games,
       };
       res.header(HEADER, token).json(userInfo);
     } catch (error) {
@@ -85,32 +66,37 @@ class UserController {
   getUserById = async (req, res) => {
     try {
       const { userId } = req.params;
-      console.log(userId);
       const user = await this.service.getUser(userId);
-      console.log(user);
-      res.status(200).json({
-        user: {
-          id: user.id,
-          email: user.email,
-          name: user.email,
-          image: user.image,
-          backgroundImage: user.backgroundImage,
-          games: user.games
-            ? user.games.map((game) => ({
-                id: game.id,
-                name: game.name,
-                mainImage: game.mainImage,
-                tags: game.tag,
-                price: game.price,
-              }))
-            : [],
-        },
-      });
+
+      const games = transformGames(user.games);
+      const userTransformed = transformUser(user);
+      const userInfo = {
+        ...userTransformed,
+        games,
+      };
+
+      res.header(HEADER, token).json(userInfo);
     } catch (error) {
-      res.status(404).json({ message: "No se encontro el usuario" });
+      res.status(404).json({ message: error.message });
     }
   };
-  // ...extend with your code
 }
+
+const transformGames = (games) =>
+  games.map((game) => ({
+    id: game.id,
+    name: game.name,
+    mainImage: game.mainImage,
+    tags: game.tags,
+    price: game.price,
+  }));
+
+const transformUser = (user) => ({
+  id: user.id,
+  email: user.email,
+  name: user.name,
+  image: user.image,
+  backgroundImage: user.backgroundImage,
+});
 
 export default UserController;

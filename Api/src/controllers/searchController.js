@@ -1,13 +1,13 @@
 class SearchController {
-  constructor(service) {
+  constructor(service, tokenController) {
     this.service = service;
+    this.tokenController = tokenController;
   }
 
   searchGames = async (req, res) => {
     try {
       const { name, page } = req.query;
       const games = await this.service.searchGame(name, page);
-
       const juegosRestringidos = games.list.map((game) => ({
         id: game.id,
         name: game.name,
@@ -18,10 +18,9 @@ class SearchController {
         amountOfElements: game.amountOfElements,
         amountOfPages: game.amountOfPages,
       }));
-
-      res.status(200).json({ list: juegosRestringidos });
+      res.status(200).json({ juegosRestringidos });
     } catch (error) {
-      res.status(400).json({ error: "Wrong page number" });
+      res.status(400).json({ error: error.message });
     }
   };
 }
