@@ -34,11 +34,9 @@ class UserController {
       res.status(400).json({ error: "Invalid credentials" });
     }
     const token = this.tokenController.generateToken(user.id);
-    const games = transformGames(user.games);
-    const userTransformed = transformUser(user);
     const userInfo = {
-      ...userTransformed,
-      games,
+      ...transformUser(user),
+      games: transformGames(user.games),
     };
     res.header(HEADER, token).json(userInfo);
   };
@@ -49,17 +47,13 @@ class UserController {
       const user = this.service.addNewUser(newUser);
       const token = this.tokenController.generateToken(user.id);
 
-      const games = transformGames(user.games);
-      const userTransformed = transformUser(user);
       const userInfo = {
-        ...userTransformed,
-        games,
+        ...transformUser(user),
+        games: transformGames(user.games),
       };
       res.header(HEADER, token).json(userInfo);
     } catch (error) {
-      res.status(400).json({
-        error: "Invalid data / User already exists and other errors.",
-      });
+      res.status(400).json({ message: error.message });
     }
   };
 
@@ -67,14 +61,10 @@ class UserController {
     try {
       const { userId } = req.params;
       const user = await this.service.getUser(userId);
-
-      const games = transformGames(user.games);
-      const userTransformed = transformUser(user);
       const userInfo = {
-        ...userTransformed,
-        games,
+        ...transformUser(user),
+        games: transformGames(user.games),
       };
-
       res.header(HEADER, token).json(userInfo);
     } catch (error) {
       res.status(404).json({ message: error.message });

@@ -52,10 +52,7 @@ app
   .route("/games/:gameId")
   .get(tokenController.checkRole("public"), gamesController.getGameById)
   .put(tokenController.checkRole("user"), gamesController.addGameToCart)
-  .delete(
-    tokenController.checkRole("user"),
-    gamesController.deleteGameFromCart
-  );
+  .delete(tokenController.checkRole("user"), gamesController.deleteGame);
 
 // search
 app.get(

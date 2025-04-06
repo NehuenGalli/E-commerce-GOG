@@ -7,17 +7,14 @@ class GamesController {
   getGames = async (req, res) => {
     try {
       const { page } = req.query;
-      const juegos = await this.service.getGames(page).list.map((game) => ({
-        id: game.id,
-        name: game.name,
-        mainImage: game.mainImage,
-        tags: game.tags,
-        price: game.price,
-        currentPage: game.currentPage,
-        amountOfElements: game.amountOfElements,
-        amountOfPages: game.amountOfPages,
-      }));
-      res.status(200).json({ list: juegos });
+      const games = await this.service.getGames(page);
+      const gamesInfo = {
+        list: transformGames(games.list),
+        currentPage: games.currentPage,
+        amountOfElements: games.amountOfElements,
+        amountOfPages: games.amountOfPages,
+      };
+      res.status(200).json(gamesInfo);
     } catch (error) {
       res.status(400).json({ error: error.message });
     }
@@ -55,47 +52,42 @@ class GamesController {
       const { gameId } = req.params;
       const { id } = req.user;
       const cart = this.service.addGameToCart(id, gameId);
-      const games = cart.games.map((game) => ({
-        id: game.id,
-        name: game.name,
-        mainImage: game.mainImage,
-        tags: game.tags,
-        price: game.price,
-      }));
-      const user = {
-        id: cart.user.id,
-        name: cart.user.name,
-        image: cart.user.image,
-      };
-      res.status(200).json({ games, user });
+      res.status(200).json({
+        games: transformGames(cart.games),
+        user: transformUser(cart.user),
+      });
     } catch (error) {
       res.status(400).json({ error: error.message });
     }
   };
 
-  deleteGameFromCart = async (req, res) => {
+  deleteGame = async (req, res) => {
+    const { gameId } = req.params;
+    const { id } = req.user;
     try {
-      const { gameId } = req.params;
-      const { userId } = req.user;
-      const cart = await this.service.removeGameFromCart(userId, gameId);
-      const games = cart.games.map((game) => ({
-        id: game.id,
-        name: game.name,
-        mainImage: game.mainImage,
-        tags: game.tags,
-        price: game.price,
-      }));
-      console.log(games);
-      const user = {
-        id: cart.user.id,
-        name: cart.user.name,
-        image: cart.user.image,
-      };
-      console.log(user);
-      res.status(200).json({ games, user });
+      const cart = await this.service.removeGameFromCart(id, gameId);
+      res.status(200).json({
+        games: transformGames(cart.games),
+        user: transformUser(cart.user),
+      });
     } catch (error) {
       return res.status(404).json({ error: error.message });
     }
   };
 }
+
+const transformGames = (games) =>
+  games.map((game) => ({
+    id: game.id,
+    name: game.name,
+    mainImage: game.mainImage,
+    tags: game.tags,
+    price: game.price,
+  }));
+
+const transformUser = (user) => ({
+  id: user.id,
+  name: user.name,
+  image: user.image,
+});
 export default GamesController;
