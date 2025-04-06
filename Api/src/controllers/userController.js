@@ -2,7 +2,10 @@ import { object, string } from "yup";
 
 import { HEADER } from "../constants.js";
 
-import { transformGames, transformUser } from "../helpers/transformData.js";
+import {
+  transformGames,
+  transformUser5datos,
+} from "../helpers/transformData.js";
 
 const registerBodySchema = object({
   name: string().required(),
@@ -37,7 +40,7 @@ class UserController {
     }
     const token = this.tokenController.generateToken(user.id);
     const userInfo = {
-      ...transformUser(user),
+      ...transformUser5datos(user),
       games: transformGames(user.games),
     };
     res.header(HEADER, token).json(userInfo);
@@ -50,7 +53,7 @@ class UserController {
       const token = this.tokenController.generateToken(user.id);
 
       const userInfo = {
-        ...transformUser(user),
+        ...transformUser5datos(user),
         games: transformGames(user.games),
       };
       res.header(HEADER, token).json(userInfo);
@@ -64,7 +67,7 @@ class UserController {
       const { userId } = req.params;
       const user = await this.service.getUser(userId);
       const userInfo = {
-        ...transformUser(user),
+        ...transformUser5datos(user),
         games: transformGames(user.games),
       };
       console.log(userInfo);
@@ -78,14 +81,9 @@ class UserController {
     try {
       const { userId } = req.params;
       const user = await this.service.getUser(userId);
-      console.log(user);
       const friendsList = user.friends.map((friend) => ({
-        id: friend.id,
-        email: friend.email,
-        name: friend.name,
-        image: friend.image,
-        backgroundImage: friend.backgroundImage,
-        games: transformGames(user.games),
+        ...transformUser5datos(friend),
+        games: transformGames(friend.games),
       }));
       console.log(friendsList);
       res.status(200).json(friendsList);
