@@ -13,4 +13,12 @@ const transformUser = (user) => ({
   image: user.image,
 });
 
-export { transformGames, transformUser };
+const transformUser5datos = (user) => ({
+  id: user.id,
+  email: user.email,
+  name: user.name,
+  image: user.image,
+  backgroundImage: user.backgroundImage,
+});
+
+export { transformGames, transformUser, transformUser5datos };
