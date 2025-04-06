@@ -8,13 +8,12 @@ class GamesController {
     try {
       const { page } = req.query;
       const games = await this.service.getGames(page);
-      const gamesInfo = {
+      res.status(200).json({
         list: transformGames(games.list),
         currentPage: games.currentPage,
         amountOfElements: games.amountOfElements,
         amountOfPages: games.amountOfPages,
-      };
-      res.status(200).json(gamesInfo);
+      });
     } catch (error) {
       res.status(400).json({ error: error.message });
     }
@@ -30,18 +29,11 @@ class GamesController {
     }
   };
 
-  getRecommended = (req, res) => {
+  getRecommended = async (req, res) => {
     try {
-      const recommendedGames = this.service
-        .getRecommendedGames()
-        .map((game) => ({
-          id: game.id,
-          name: game.name,
-          mainImage: game.mainImage,
-          tags: game.tags,
-          price: game.price,
-        }));
-      res.status(200).json(recommendedGames);
+      res
+        .status(200)
+        .json(transformGames(await this.service.getRecommendedGames()));
     } catch (error) {
       res.status(404).json({ error: error.message });
     }
