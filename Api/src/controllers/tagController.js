@@ -13,7 +13,7 @@ class TagController {
       }));
       res.status(200).json(tags);
     } catch (error) {
-      res.status(400).json({ error: "Error" });
+      res.status(400).json({ error: error.message });
     }
   };
 }
