@@ -31,9 +31,16 @@ app.post(
   tokenController.checkRole("public"),
   userController.register
 );
-app 
+app
   .route("/getUserById/:userId")
   .get(tokenController.checkRole("public"), userController.getUserById);
+app
+  .route("/getFriendsById/:userId/friends")
+  .get(tokenController.checkRole("public"), userController.getFriendsById);
+
+app
+  .route("/addOrRemoveFriend/:userId/friends")
+  .put(tokenController.checkRole("user"), userController.addOrRemoveFriend);
 
 // Games
 app.get(
@@ -53,7 +60,11 @@ app
   .get(tokenController.checkRole("public"), gamesController.getGameById)
   .put(tokenController.checkRole("user"), gamesController.addGameToCart);
 
-  app.delete("/games/:gameId", tokenController.checkRole("user"), gamesController.deleteGame);
+app.delete(
+  "/games/:gameId",
+  tokenController.checkRole("user"),
+  gamesController.deleteGame
+);
 
 // search
 app.get(

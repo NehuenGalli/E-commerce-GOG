@@ -2,6 +2,11 @@ import { object, string } from "yup";
 
 import { HEADER } from "../constants.js";
 
+import {
+  transformGames,
+  transformUser5datos,
+} from "../helpers/transformData.js";
+
 const registerBodySchema = object({
   name: string().required(),
   email: string().email().required(),
@@ -34,20 +39,9 @@ class UserController {
       res.status(400).json({ error: "Invalid credentials" });
     }
     const token = this.tokenController.generateToken(user.id);
-    const juegos = user.games.map((game) => ({
-      id: game.id,
-      name: game.name,
-      mainImage: game.mainImage,
-      tags: game.tags,
-      price: game.price,
-    }));
     const userInfo = {
-      id: user.id,
-      email: user.email,
-      name: user.name,
-      image: user.image,
-      backgroundImage: user.backgroundImage,
-      games: juegos,
+      ...transformUser5datos(user),
+      games: transformGames(user.games),
     };
     res.header(HEADER, token).json(userInfo);
   };
@@ -58,56 +52,62 @@ class UserController {
       const user = this.service.addNewUser(newUser);
       const token = this.tokenController.generateToken(user.id);
 
-      const juegos = user.games.map((game) => ({
-        id: game.id,
-        name: game.name,
-        mainImage: game.mainImage,
-        tags: game.tags,
-        price: game.price,
-      }));
-
       const userInfo = {
-        id: user.id,
-        email: user.email,
-        name: user.name,
-        image: user.image,
-        backgroundImage: user.backgroundImage,
-        games: juegos,
+        ...transformUser5datos(user),
+        games: transformGames(user.games),
       };
       res.header(HEADER, token).json(userInfo);
     } catch (error) {
-      res.status(400).json({
-        error: "Invalid data / User already exists and other errors.",
-      });
+      res.status(400).json({ message: error.message });
     }
   };
 
   getUserById = async (req, res) => {
     try {
       const { userId } = req.params;
-      console.log(userId);
       const user = await this.service.getUser(userId);
-      console.log(user);
-      res.status(200).json({
-        user: {
-          id: user.id,
-          email: user.email,
-          name: user.email,
-          image: user.image,
-          backgroundImage: user.backgroundImage,
-          games: user.games
-            ? user.games.map((game) => ({
-                id: game.id,
-                name: game.name,
-                mainImage: game.mainImage,
-                tags: game.tag,
-                price: game.price,
-              }))
-            : [],
-        },
-      });
+      const userInfo = {
+        ...transformUser5datos(user),
+        games: transformGames(user.games),
+      };
+      console.log(userInfo);
+      res.status(200).json(userInfo);
+    } catch (error) {
+      res.status(404).json({ message: error.message });
+    }
+  };
+
+  getFriendsById = async (req, res) => {
+    try {
+      const { userId } = req.params;
+      const user = await this.service.getUser(userId);
+      const friendsList = user.friends.map((friend) => ({
+        ...transformUser5datos(friend),
+        games: transformGames(friend.games),
+      }));
+      console.log(friendsList);
+      res.status(200).json(friendsList);
     } catch (error) {
       res.status(404).json({ message: "No se encontro el usuario" });
+    }
+  };
+  addOrRemoveFriend = async (req, res) => {
+    try {
+      const { userId } = req.params;
+      const loggedUser = req.user.id;
+      console.log(userId);
+      const userWithNewFriendList = await this.service.addOrRemoveFriend(
+        loggedUser,
+        userId
+      );
+      const userInfo = {
+        ...transformUser5datos(userWithNewFriendList),
+        games: transformGames(userWithNewFriendList.games),
+      };
+      console.log(userWithNewFriendList);
+      res.status(200).json([userInfo]);
+    } catch (error) {
+      res.status(404).json({ error: error.message });
     }
   };
   // ...extend with your code
