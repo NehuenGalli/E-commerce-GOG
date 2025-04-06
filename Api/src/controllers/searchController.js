@@ -1,3 +1,5 @@
+import { transformGames } from "../helpers/transformData.js";
+
 class SearchController {
   constructor(service, tokenController) {
     this.service = service;
@@ -9,7 +11,7 @@ class SearchController {
       const { name, page } = req.query;
       const games = await this.service.searchGame(name, page);
       const gamesInfo = {
-        list: transformGames(games),
+        list: transformGames(games.list),
         currentPage: games.currentPage,
         amountOfElements: games.amountOfElements,
         amountOfPages: games.amountOfPages,
@@ -20,12 +22,5 @@ class SearchController {
     }
   };
 }
-const transformGames = (games) =>
-  games.list.map((game) => ({
-    id: game.id,
-    name: game.name,
-    mainImage: game.mainImage,
-    tags: game.tags,
-    price: game.price,
-  }));
+
 export default SearchController;

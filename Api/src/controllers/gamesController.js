@@ -1,3 +1,5 @@
+import { transformGames, transformUser } from "../helpers/transformData.js";
+
 class GamesController {
   constructor(service, tokenController) {
     this.service = service;
@@ -54,9 +56,9 @@ class GamesController {
   };
 
   deleteGame = async (req, res) => {
-    const { gameId } = req.params;
-    const { id } = req.user;
     try {
+      const { gameId } = req.params;
+      const { id } = req.user;
       const cart = await this.service.removeGameFromCart(id, gameId);
       res.status(200).json({
         games: transformGames(cart.games),
@@ -68,18 +70,4 @@ class GamesController {
   };
 }
 
-const transformGames = (games) =>
-  games.map((game) => ({
-    id: game.id,
-    name: game.name,
-    mainImage: game.mainImage,
-    tags: game.tags,
-    price: game.price,
-  }));
-
-const transformUser = (user) => ({
-  id: user.id,
-  name: user.name,
-  image: user.image,
-});
 export default GamesController;

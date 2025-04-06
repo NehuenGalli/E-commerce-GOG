@@ -2,6 +2,8 @@ import { object, string } from "yup";
 
 import { HEADER } from "../constants.js";
 
+import { transformGames, transformUser } from "../helpers/transformData.js";
+
 const registerBodySchema = object({
   name: string().required(),
   email: string().email().required(),
@@ -71,22 +73,5 @@ class UserController {
     }
   };
 }
-
-const transformGames = (games) =>
-  games.map((game) => ({
-    id: game.id,
-    name: game.name,
-    mainImage: game.mainImage,
-    tags: game.tags,
-    price: game.price,
-  }));
-
-const transformUser = (user) => ({
-  id: user.id,
-  email: user.email,
-  name: user.name,
-  image: user.image,
-  backgroundImage: user.backgroundImage,
-});
 
 export default UserController;
