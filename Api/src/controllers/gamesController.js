@@ -1,68 +1,73 @@
+import { transformGames, transformUser } from "../helpers/transformData.js";
+
 class GamesController {
   constructor(service, tokenController) {
     this.service = service;
     this.tokenController = tokenController;
   }
 
-  getGames = (req, res) => {
+  getGames = async (req, res) => {
     try {
-      res.json(this.service.getGames());
+      const { page } = req.query;
+      const games = await this.service.getGames(page);
+      res.status(200).json({
+        list: transformGames(games.list),
+        currentPage: games.currentPage,
+        amountOfElements: games.amountOfElements,
+        amountOfPages: games.amountOfPages,
+      });
     } catch (error) {
-      res.status(400).json({ error: "Wrong page number" });
+      res.status(400).json({ error: error.message });
     }
   };
 
   getGameById = (req, res) => {
-    const { gameId } = req.params;
-    const game = this.service.getGame(gameId);
-    if (!game) {
-      return res.status(404).json({ error: "Game not found" });
+    try {
+      const { gameId } = req.params;
+      const game = this.service.getGame(gameId);
+      res.status(200).json(game);
+    } catch (error) {
+      res.status(400).json({ error: error.message });
     }
-    res.json(game);
   };
 
-  getRecommended = (req, res) => {
-    const recommendedGames = this.service.getRecommendedGames().map((game) => ({
-      id: game.id,
-      name: game.name,
-      mainImage: game.mainImage,
-      tags: game.tags,
-      price: game.price,
-    }));
-    res.status(200).json(recommendedGames);
+  getRecommended = async (req, res) => {
+    try {
+      res
+        .status(200)
+        .json(transformGames(await this.service.getRecommendedGames()));
+    } catch (error) {
+      res.status(404).json({ error: error.message });
+    }
   };
 
   addGameToCart = (req, res) => {
     try {
-      const { id, name, image } = req.user;
-
       const { gameId } = req.params;
-      this.service.addGameToCart(id, gameId);
-
-      const game = this.service.getGame(gameId);
-
-      const gameInfo = {
-        id: game.id,
-        name: game.name,
-        mainImage: game.mainImage,
-        tags: game.tags,
-        price: game.price,
-      };
-
-      const userInfo = {
-        id: id,
-        name: name,
-        imagine: image,
-      };
-
+      const { id } = req.user;
+      const cart = this.service.addGameToCart(id, gameId);
       res.status(200).json({
-        game: gameInfo,
-        user: userInfo,
+        games: transformGames(cart.games),
+        user: transformUser(cart.user),
       });
     } catch (error) {
-      res.status(401).json({ error: "Unauthorize" });
-      res.status(404).json({ error: "Not Found" });
+      res.status(400).json({ error: error.message });
+    }
+  };
+
+  deleteGame = async (req, res) => {
+    try {
+      const { gameId } = req.params;
+      const { id } = req.user;
+      const cart = await this.service.removeGameFromCart(id, gameId);
+      res.status(200).json({
+        games: transformGames(cart.games),
+        user: transformUser(cart.user),
+      });
+    } catch (error) {
+      return res.status(404).json({ error: error.message });
     }
   };
 }
+
 export default GamesController;

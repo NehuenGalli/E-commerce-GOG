@@ -3,7 +3,6 @@ class TagController {
     this.service = service;
   }
 
-  //No hay funcion para llamar a los tags
   getTags = (req, res) => {
     try {
       const tags = this.service.tags.map((tag) => ({
@@ -13,7 +12,7 @@ class TagController {
       }));
       res.status(200).json(tags);
     } catch (error) {
-      res.status(400).json({ error: "Error" });
+      res.status(400).json({ error: error.message });
     }
   };
 }
