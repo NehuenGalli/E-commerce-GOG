@@ -1,4 +1,4 @@
-import { transformGames } from "../helpers/transformData.js"
+import { transformGames } from "../helpers/gameHelper.js";
 
 class TagController {
   constructor(service) {

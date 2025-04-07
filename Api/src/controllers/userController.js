@@ -2,10 +2,8 @@ import { object, string } from "yup";
 
 import { HEADER } from "../constants.js";
 
-import {
-  transformGames,
-  transformUser5datos,
-} from "../helpers/transformData.js";
+import { transformGames } from "../helpers/gameHelper.js";
+import { transformUser5datos } from "../helpers/userHelper.js";
 
 const registerBodySchema = object({
   name: string().required(),

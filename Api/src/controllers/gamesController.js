@@ -1,8 +1,7 @@
-import { transformGames, transformUser } from "../helpers/transformData.js";
 import { DraftReview } from "@unq-ui/gog-model-js/src/model/Drafts.js";
-import { transformGameReviews } from "../helpers/reviewHelpers.js";
-import { filterObject } from "../helpers/filterObject.js";
 import { object, boolean, string } from "yup";
+import { filterGame, transformGames, transformGameWhitReviews,  } from "../helpers/gameHelper.js";
+import { transformUser, transformUser5datos } from "../helpers/userHelper.js"
 
 const reviewBodySchema = object({
   isRecommended: boolean().required(),
@@ -36,7 +35,8 @@ class GamesController {
     try {
       const { gameId } = req.params;
       const game = this.service.getGame(gameId);
-      res.status(200).json(game);
+      const response = transformGameWhitReviews(game);
+      res.status(200).json(response);
     } catch (error) {
       res.status(400).json({ error: error.message });
     }
@@ -92,8 +92,8 @@ class GamesController {
       const user = await this.service.getUser(id);  
         
       const draftReview = new DraftReview(gameId, isRecommended, text);
-      this.service.addReview(id, draftReview);
-      const response = transformGameReviews(game); 
+      await this.service.addReview(id, draftReview);
+      const response = transformGameWhitReviews(game); 
       res.status(200).json(response);  
 
     } catch (error){
