@@ -20,8 +20,7 @@ class TagController {
 
   getGameByTag = async (req, res) => {
     const { tagId } = req.params; 
-    const page = parseInt(req.query.page) || 1;
-
+    const { page } = req.query;
     try {
       const tag = await this.service.getTag(tagId);
       const pageInfo = await this.service.getGamesByTag(tagId, page);
