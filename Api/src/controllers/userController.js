@@ -110,7 +110,6 @@ class UserController {
       res.status(404).json({ error: error.message });
     }
   };
-  // ...extend with your code
 }
 
 export default UserController;
