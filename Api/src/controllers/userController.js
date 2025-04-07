@@ -88,7 +88,7 @@ class UserController {
       console.log(friendsList);
       res.status(200).json(friendsList);
     } catch (error) {
-      res.status(404).json({ message: "No se encontro el usuario" });
+      res.status(404).json({ message: error.message });
     }
   };
   addOrRemoveFriend = async (req, res) => {
