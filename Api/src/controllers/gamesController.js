@@ -60,14 +60,16 @@ class GamesController {
       const { gameId } = req.params;
       const { id } = req.user;
       const cart = await this.service.removeGameFromCart(id, gameId);
-      res.status(200).json({
+      const cartInfo = {
         games: transformGames(cart.games),
-        user: transformUser(cart.user),
-      });
+        user: transformUser(cart.user)
+      }; 
+        res.status(200).json(cartInfo);
     } catch (error) {
       return res.status(404).json({ error: error.message });
     }
   };
+
 }
 
 export default GamesController;
