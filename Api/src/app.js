@@ -60,6 +60,8 @@ app
   .put(tokenController.checkRole("user"), gamesController.addGameToCart)
   .delete(tokenController.checkRole("user"), gamesController.deleteGame);
 
+  app.put("/games/:gameId/reviews", tokenController.checkRole("user"), gamesController.addReview);
+  
 // search
 app.get(
   "/search",

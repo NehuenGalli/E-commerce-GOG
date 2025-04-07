@@ -1,4 +1,15 @@
 import { transformGames, transformUser } from "../helpers/transformData.js";
+import { DraftReview } from "@unq-ui/gog-model-js/src/model/Drafts.js";
+import { transformGameReviews } from "../helpers/reviewHelpers.js";
+import { filterObject } from "../helpers/filterObject.js";
+import { object, boolean, string } from "yup";
+
+const reviewBodySchema = object({
+  isRecommended: boolean().required(),
+  text: string().required(),
+})
+  .noUnknown(true)
+  .strict();
 
 class GamesController {
   constructor(service, tokenController) {
@@ -67,6 +78,26 @@ class GamesController {
         res.status(200).json(cartInfo);
     } catch (error) {
       return res.status(404).json({ error: error.message });
+    }
+  };
+
+
+  addReview = async (req, res) => {
+    const { gameId } = req.params;
+    const { id} = req.user;
+    
+    try {
+      const { isRecommended, text } = await reviewBodySchema.validate(req.body);
+      const game = await this.service.getGame(gameId);
+      const user = await this.service.getUser(id);  
+        
+      const draftReview = new DraftReview(gameId, isRecommended, text);
+      this.service.addReview(id, draftReview);
+      const response = transformGameReviews(game); 
+      res.status(200).json(response);  
+
+    } catch (error){
+      return res.status(404).json({ error: error.message});
     }
   };
 
