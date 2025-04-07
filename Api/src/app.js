@@ -61,7 +61,7 @@ app
   .delete(tokenController.checkRole("user"), gamesController.deleteGame);
 
   app.put("/games/:gameId/reviews", tokenController.checkRole("user"), gamesController.addReview);
-  
+
 // search
 app.get(
   "/search",
@@ -78,6 +78,8 @@ app.post(
 
 // tags
 app.get("/tags", tokenController.checkRole("public"), tagController.getTags);
+
+app.get("/tags/:tagId", tokenController.checkRole("public"), tagController.getGameByTag);
 
 app.listen(port, () => {
   console.log(`Listening at http://localhost:${port}`);
