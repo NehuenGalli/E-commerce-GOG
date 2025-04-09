@@ -31,7 +31,7 @@ app.post(
   tokenController.checkRole("public"),
   userController.register
 );
-
+app.get("/users/current",tokenController.checkRole("user"),userController.currentUser);
 app
   .route("/users/:userId")
   .get(tokenController.checkRole("public"), userController.getUserById);
@@ -80,6 +80,8 @@ app.post(
 app.get("/tags", tokenController.checkRole("public"), tagController.getTags);
 
 app.get("/tags/:tagId", tokenController.checkRole("public"), tagController.getGameByTag);
+
+app.get("/users/current/cart",tokenController.checkRole("user"),userController.getUserCurrentCart);
 
 app.listen(port, () => {
   console.log(`Listening at http://localhost:${port}`);

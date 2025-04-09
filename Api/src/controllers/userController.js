@@ -4,7 +4,7 @@ import { HEADER } from "../constants.js";
 
 import { transformGames } from "../helpers/gameHelper.js";
 import { transformUser5datos } from "../helpers/userHelper.js";
-
+import { filterGame } from "../helpers/gameHelper.js";
 const registerBodySchema = object({
   name: string().required(),
   email: string().email().required(),
@@ -68,7 +68,7 @@ class UserController {
         ...transformUser5datos(user),
         games: transformGames(user.games),
       };
-      console.log(userInfo);
+      
       res.status(200).json(userInfo);
     } catch (error) {
       res.status(404).json({ message: error.message });
@@ -83,7 +83,7 @@ class UserController {
         ...transformUser5datos(friend),
         games: transformGames(friend.games),
       }));
-      console.log(friendsList);
+      
       res.status(200).json(friendsList);
     } catch (error) {
       res.status(404).json({ message: error.message });
@@ -93,7 +93,7 @@ class UserController {
     try {
       const { userId } = req.params;
       const loggedUser = req.user.id;
-      console.log(userId);
+      
       const userWithNewFriendList = await this.service.addOrRemoveFriend(
         loggedUser,
         userId
@@ -102,12 +102,45 @@ class UserController {
         ...transformUser5datos(userWithNewFriendList),
         games: transformGames(userWithNewFriendList.games),
       };
-      console.log(userWithNewFriendList);
+      
       res.status(200).json([userInfo]);
     } catch (error) {
       res.status(404).json({ error: error.message });
     }
   };
+  getUserCurrentCart = async (req,res) =>{
+    try{
+      
+      const cart= await this.service.getCart(req.user?.id);
+      const cartinfo={
+        id:cart.user.id,
+        name:cart.user.name,
+        image:cart.user.image,
+        games:(cart.games).map(filterGame)
+      }
+      res.status(200).json(cartinfo);
+    }catch(error){res.status(401).json({message:error.message})
+
+    }
+  
+
+  }
+  currentUser = async (req, res) => {
+    console.log("pepe");
+    try{
+      const user= await this.service.getUser(req.user?.id);
+      const transformUser={
+        id:user.id,
+        name:user.name,
+        image:user.image,
+        backgroundImage:user.backgroundImage,
+        games:(user.games).map(filterGame)
+      }
+      res.status(200).json(transformUser);
+
+    }
+    catch(error){res.status(401).json({message:error.message})}
+  }
 }
 
 export default UserController;
