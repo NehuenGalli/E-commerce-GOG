@@ -89,15 +89,13 @@ class UserController {
       res.status(404).json({ message: error.message });
     }
   };
+
   addOrRemoveFriend = async (req, res) => {
     try {
       const { userId } = req.params;
       const loggedUser = req.user.id;
 
-      const userWithNewFriendList = await this.service.addOrRemoveFriend(
-        loggedUser,
-        userId
-      );
+      const userWithNewFriendList = await this.service.addOrRemoveFriend(loggedUser,userId);
       const userInfo = {
         ...transformUser5datos(userWithNewFriendList),
         games: transformGames(userWithNewFriendList.games),
@@ -112,6 +110,7 @@ class UserController {
       }
     }
   };
+
   getUserCurrentCart = async (req, res) => {
     try {
       const cart = await this.service.getCart(req.user?.id);
@@ -126,8 +125,8 @@ class UserController {
       res.status(401).json({ message: error.message });
     }
   };
+
   currentUser = async (req, res) => {
-    console.log("pepe");
     try {
       const user = await this.service.getUser(req.user?.id);
       const response = {
