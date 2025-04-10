@@ -1,11 +1,10 @@
 import { DraftReview } from "@unq-ui/gog-model-js/src/model/Drafts.js";
 import { object, boolean, string } from "yup";
 import {
-  filterGame,
   transformGames,
   transformGameWhitReviews,
 } from "../helpers/gameHelper.js";
-import { transformUser, transformUser5datos } from "../helpers/userHelper.js";
+import { transformUser } from "../helpers/userHelper.js";
 
 const reviewBodySchema = object({
   isRecommended: boolean().required(),
@@ -92,7 +91,6 @@ class GamesController {
     try {
       const { isRecommended, text } = await reviewBodySchema.validate(req.body);
       const game = await this.service.getGame(gameId);
-      const user = await this.service.getUser(id);
 
       const draftReview = new DraftReview(gameId, isRecommended, text);
       await this.service.addReview(id, draftReview);
