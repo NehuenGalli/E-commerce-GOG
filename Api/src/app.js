@@ -31,7 +31,11 @@ app.post(
   tokenController.checkRole("public"),
   userController.register
 );
-app.get("/users/current",tokenController.checkRole("user"),userController.currentUser);
+app.get(
+  "/users/current",
+  tokenController.checkRole("user"),
+  userController.currentUser
+);
 app
   .route("/users/:userId")
   .get(tokenController.checkRole("public"), userController.getUserById);
@@ -60,7 +64,11 @@ app
   .put(tokenController.checkRole("user"), gamesController.addGameToCart)
   .delete(tokenController.checkRole("user"), gamesController.deleteGame);
 
-  app.put("/games/:gameId/reviews", tokenController.checkRole("user"), gamesController.addReview);
+app.put(
+  "/games/:gameId/reviews",
+  tokenController.checkRole("user"),
+  gamesController.addReview
+);
 
 // search
 app.get(
@@ -79,9 +87,17 @@ app.post(
 // tags
 app.get("/tags", tokenController.checkRole("public"), tagController.getTags);
 
-app.get("/tags/:tagId", tokenController.checkRole("public"), tagController.getGameByTag);
+app.get(
+  "/tags/:tagId",
+  tokenController.checkRole("public"),
+  tagController.getGameByTag
+);
 
-app.get("/users/current/cart",tokenController.checkRole("user"),userController.getUserCurrentCart);
+app.get(
+  "/users/current/cart",
+  tokenController.checkRole("user"),
+  userController.getUserCurrentCart
+);
 
 app.listen(port, () => {
   console.log(`Listening at http://localhost:${port}`);
