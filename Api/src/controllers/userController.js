@@ -68,7 +68,7 @@ class UserController {
         ...transformUser5datos(user),
         games: transformGames(user.games),
       };
-      
+
       res.status(200).json(userInfo);
     } catch (error) {
       res.status(404).json({ message: error.message });
@@ -83,7 +83,7 @@ class UserController {
         ...transformUser5datos(friend),
         games: transformGames(friend.games),
       }));
-      
+
       res.status(200).json(friendsList);
     } catch (error) {
       res.status(404).json({ message: error.message });
@@ -93,7 +93,7 @@ class UserController {
     try {
       const { userId } = req.params;
       const loggedUser = req.user.id;
-      
+
       const userWithNewFriendList = await this.service.addOrRemoveFriend(
         loggedUser,
         userId
@@ -102,41 +102,43 @@ class UserController {
         ...transformUser5datos(userWithNewFriendList),
         games: transformGames(userWithNewFriendList.games),
       };
-      
+
       res.status(200).json([userInfo]);
     } catch (error) {
-      res.status(404).json({ error: error.message });
+      if (error.name === "UserException") {
+        res.status(400).json({ error: error.message });
+      } else {
+        res.status(404).json({ error: error.message });
+      }
     }
   };
-  getUserCurrentCart = async (req,res) =>{
-    try{
-      
-      const cart= await this.service.getCart(req.user?.id);
-      const cartinfo={
-        id:cart.user.id,
-        name:cart.user.name,
-        image:cart.user.image,
-        games:(cart.games).map(filterGame)
-      }
+  getUserCurrentCart = async (req, res) => {
+    try {
+      const cart = await this.service.getCart(req.user?.id);
+      const cartinfo = {
+        id: cart.user.id,
+        name: cart.user.name,
+        image: cart.user.image,
+        games: cart.games.map(filterGame),
+      };
       res.status(200).json(cartinfo);
-    }catch(error){res.status(401).json({message:error.message})
-
+    } catch (error) {
+      res.status(401).json({ message: error.message });
     }
-  
-
-  }
+  };
   currentUser = async (req, res) => {
     console.log("pepe");
-    try{
+    try {
       const user = await this.service.getUser(req.user?.id);
-      const response ={
+      const response = {
         ...transformUser5datos(user),
-        games:(user.games).map(filterGame)
-      }
+        games: user.games.map(filterGame),
+      };
       res.status(200).json(response);
+    } catch (error) {
+      res.status(401).json({ message: error.message });
     }
-    catch(error){res.status(401).json({message:error.message})}
-  }
+  };
 }
 
 export default UserController;

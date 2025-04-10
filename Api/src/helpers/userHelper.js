@@ -12,4 +12,4 @@ const transformUser5datos = (user) => ({
   backgroundImage: user.backgroundImage,
 });
 
-export { transformUser, transformUser5datos }
+export { transformUser, transformUser5datos };

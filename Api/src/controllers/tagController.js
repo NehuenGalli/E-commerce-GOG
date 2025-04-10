@@ -19,10 +19,9 @@ class TagController {
   };
 
   getGameByTag = async (req, res) => {
-    const { tagId } = req.params; 
+    const { tagId } = req.params;
     const { page } = req.query;
     try {
-      const tag = await this.service.getTag(tagId);
       const pageInfo = await this.service.getGamesByTag(tagId, page);
 
       const response = {
@@ -30,13 +29,12 @@ class TagController {
         currentPage: pageInfo.currentPage,
         amountOfElements: pageInfo.amountOfElements,
         amountOfPages: pageInfo.amountOfPages,
-      }
+      };
 
       res.status(200).json(response);
     } catch (error) {
-      res.status(404).json({ error: error.message});
+      res.status(404).json({ error: error.message });
     }
-
   };
 }
 

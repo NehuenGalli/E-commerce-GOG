@@ -1,7 +1,10 @@
 import { DraftReview } from "@unq-ui/gog-model-js/src/model/Drafts.js";
 import { object, boolean, string } from "yup";
-import { filterGame, transformGames, transformGameWhitReviews,  } from "../helpers/gameHelper.js";
-import { transformUser, transformUser5datos } from "../helpers/userHelper.js"
+import {
+  transformGames,
+  transformGameWhitReviews,
+} from "../helpers/gameHelper.js";
+import { transformUser } from "../helpers/userHelper.js";
 
 const reviewBodySchema = object({
   isRecommended: boolean().required(),
@@ -62,7 +65,7 @@ class GamesController {
         user: transformUser(cart.user),
       });
     } catch (error) {
-      res.status(400).json({ error: error.message });
+      res.status(404).json({ error: error.message });
     }
   };
 
@@ -73,34 +76,30 @@ class GamesController {
       const cart = await this.service.removeGameFromCart(id, gameId);
       const cartInfo = {
         games: transformGames(cart.games),
-        user: transformUser(cart.user)
-      }; 
-        res.status(200).json(cartInfo);
+        user: transformUser(cart.user),
+      };
+      res.status(200).json(cartInfo);
     } catch (error) {
       return res.status(404).json({ error: error.message });
     }
   };
 
-
   addReview = async (req, res) => {
     const { gameId } = req.params;
-    const { id} = req.user;
-    
+    const { id } = req.user;
+
     try {
       const { isRecommended, text } = await reviewBodySchema.validate(req.body);
       const game = await this.service.getGame(gameId);
-      const user = await this.service.getUser(id);  
-        
+
       const draftReview = new DraftReview(gameId, isRecommended, text);
       await this.service.addReview(id, draftReview);
-      const response = transformGameWhitReviews(game); 
-      res.status(200).json(response);  
-
-    } catch (error){
-      return res.status(404).json({ error: error.message});
+      const response = transformGameWhitReviews(game);
+      res.status(200).json(response);
+    } catch (error) {
+      return res.status(404).json({ error: error.message });
     }
   };
-
 }
 
 export default GamesController;
