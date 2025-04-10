@@ -9,8 +9,8 @@ const registerBodySchema = object({
   name: string().required(),
   email: string().email().required(),
   password: string().required(),
-  image: string().url(),
-  backgroundImage: string().url(),
+  image: string().url().required(),
+  backgroundImage: string().url().required(),
 })
   .noUnknown(true)
   .strict();
@@ -128,16 +128,12 @@ class UserController {
   currentUser = async (req, res) => {
     console.log("pepe");
     try{
-      const user= await this.service.getUser(req.user?.id);
-      const transformUser={
-        id:user.id,
-        name:user.name,
-        image:user.image,
-        backgroundImage:user.backgroundImage,
+      const user = await this.service.getUser(req.user?.id);
+      const response ={
+        ...transformUser5datos(user),
         games:(user.games).map(filterGame)
       }
-      res.status(200).json(transformUser);
-
+      res.status(200).json(response);
     }
     catch(error){res.status(401).json({message:error.message})}
   }
