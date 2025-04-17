@@ -97,7 +97,10 @@ class GamesController {
       const response = transformGameWhitReviews(game);
       res.status(200).json(response);
     } catch (error) {
-      return res.status(404).json({ error: error.message });
+      if (error.name === 'ValidationError') {
+        return res.status(400).json({ error: error.message }); // Body inválido
+      }
+        return res.status(404).json({ error: error.message }); // Por ej. el juego no existe
     }
   };
 }
