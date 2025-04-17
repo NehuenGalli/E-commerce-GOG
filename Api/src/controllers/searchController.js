@@ -8,8 +8,8 @@ class SearchController {
 
   searchGames = async (req, res) => {
     try {
-      const { name, page } = req.query;
-      const games = await this.service.searchGame(name, page);
+      const { query, page } = req.query;
+      const games = await this.service.searchGame(query, page);
       const gamesInfo = {
         list: transformGames(games.list),
         currentPage: games.currentPage,
