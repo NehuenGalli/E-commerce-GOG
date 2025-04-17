@@ -35,7 +35,7 @@ class UserController {
       (user) => user.email === email && user.password === password
     );
       if (!user) {
-        res.status(400).json({ error: "Invalid credentials" });
+        return res.status(400).json({ error: "Invalid credentials" });
     }
       const token = this.tokenController.generateToken(user.id);
       const userInfo = {
