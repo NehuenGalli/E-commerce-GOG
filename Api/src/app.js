@@ -1,5 +1,5 @@
 import express from "express";
-
+import cors from "cors";
 import { initGogSystem } from "@unq-ui/gog-model-js";
 
 import UserController from "./controllers/userController.js";
@@ -14,6 +14,7 @@ const gogSystem = initGogSystem();
 const app = express();
 const port = 3000;
 
+app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
