@@ -1,0 +1,16 @@
+.buscador {
+  color: rgba(255, 255, 255, 0.55) !important;
+}
+
+.buscador::placeholder {
+  color: rgba(255, 255, 255, 0.55) !important;
+  opacity: 1;
+}
+
+.nav-link.text-white:hover {
+  color: rgb(209, 131, 215) !important;
+}
+
+.navbar-darkGray {
+  background-color: #212121;
+}

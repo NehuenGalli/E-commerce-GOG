@@ -1,0 +1,15 @@
+.font-color-price {
+  color: #6e1d72;
+}
+
+.font-color-tags {
+  color: #212121cc;
+}
+
+.font-color-tags:hover {
+  color: rgb(209, 131, 215) !important;
+}
+
+.color-bodyCard {
+  background-color: #ededed;
+}
