@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { API_URL } from "../constants";
 import axios from "axios";
+import NavBar from "../components/navBar/navBar";
 
 const TagGames = () => {
   const { tagId } = useParams();
@@ -26,6 +27,7 @@ const TagGames = () => {
   //   const ultimaPagina = () => setCurrentPage(games.amountOfPages);
   return (
     <>
+      <NavBar />
       <ListTagGames games={games.list} />
     </>
   );

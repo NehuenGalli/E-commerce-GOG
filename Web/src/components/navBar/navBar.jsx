@@ -6,9 +6,9 @@ const NavBar = () => {
   const isLoggedIn = !!localStorage.getItem("authToken");
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-darkGray fw-bolder shadow-lg	">
+    <nav className="navbar navbar-expand-lg py-0 navbar-darkGray fw-bolder shadow-lg">
       <div className="container gap-3 gap-lg-5">
-        <Link className="navbar-brand" to="/">
+        <Link className="navbar-brand mx-5" to="/">
           <img src={gogLogo} alt="gogLogo" width="60" />
         </Link>
 
@@ -32,16 +32,16 @@ const NavBar = () => {
             <Link className="nav-link text-white hover-white" to="/">
               LIBRARY
             </Link>
-            <form className="d-flex align-items-center border-bottom border-white ">
+            <form className="d-flex align-items-center border-bottom border-white w-50 ">
               <i className="bi bi-search text-white "></i>
               <input
-                className="form-control border-0 bg-transparent shadow-none ps-2 buscador"
+                className="form-control border-0 bg-transparent shadow-none py-0 ps-2 buscador"
                 type="search"
                 placeholder="SEARCH"
               />
             </form>
           </div>
-          <div className="d-flex ms-auto align-items-lg-center gap-2 my-lg-0 my-4">
+          <div className="mx-5 d-flex ms-auto align-items-lg-center gap-2 my-lg-0 my-4">
             {!isLoggedIn ? (
               <>
                 <Link className="nav-link text-white hover-white" to="/">
