@@ -1,4 +1,4 @@
-import NavBarNoLogueado from "../components/navBar/navBarNoLogueado";
+import NavBar from "../components/navBar/navBar";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { API_URL } from "../constants";
@@ -21,19 +21,42 @@ const Home = () => {
   const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
-    axios
-      .get(`${API_URL}/games/recommended`)
-      .then((response) => setGamesRecommended(response.data));
+    const fetchRecommendedGames = async () => {
+      try {
+        const response = await axios.get(`${API_URL}/games/recommended`);
+        setGamesRecommended(response.data);
+      } catch (error) {
+        console.error("Error fetching recommended games:", error);
+      }
+    };
+
+    fetchRecommendedGames();
   }, []);
 
   useEffect(() => {
-    axios.get(`${API_URL}/tags`).then((response) => setTags(response.data));
+    const fetchTags = async () => {
+      try {
+        const response = await axios.get(`${API_URL}/tags`);
+        setTags(response.data);
+      } catch (error) {
+        console.error("Error fetching tags:", error);
+      }
+    };
+    fetchTags();
   }, []);
 
   useEffect(() => {
-    axios
-      .get(`${API_URL}/games?page=${currentPage}`)
-      .then((response) => setgames(response.data));
+    const fetchGames = async () => {
+      try {
+        const response = await axios.get(
+          `${API_URL}/games?page=${currentPage}`
+        );
+        setgames(response.data);
+      } catch (error) {
+        console.error("Error fetching games:", error);
+      }
+    };
+    fetchGames();
   }, [currentPage]);
 
   const primerPagina = () => setCurrentPage(1);
@@ -43,7 +66,7 @@ const Home = () => {
   const ultimaPagina = () => setCurrentPage(games.amountOfPages);
   return (
     <div>
-      <NavBarNoLogueado />
+      <NavBar />
       <Carrucel gamesRecommended={gamesRecommended} />
       <TagSlides tags={tags} />
       <NewsSection games={games} />

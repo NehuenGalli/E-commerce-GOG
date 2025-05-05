@@ -12,20 +12,32 @@ const TagSlides = ({ tags }) => {
       <div className="mx-5">
         <Swiper
           modules={[Navigation]}
-          spaceBetween={20}
-          slidesPerView={4}
+          spaceBetween={10}
           navigation
-          loop={true}
+          loop={tags.length > 4}
+          breakpoints={{
+            0: {
+              slidesPerView: 1,
+            },
+            770: {
+              slidesPerView: 2,
+            },
+            1024: {
+              slidesPerView: 3,
+            },
+            1200: {
+              slidesPerView: 4,
+            },
+          }}
         >
-          {tags.slice(0, 10).map((tag, i) => (
-            <SwiperSlide key={i}>
-              <Link className="card text-bg-dark h-100" to={`/tags/${tag.id}`}>
+          {tags.slice(0, 10).map((tag) => (
+            <SwiperSlide key={tag.id}>
+              <Link className="card text-bg-dark" to={`/tags/${tag.id}`}>
                 <img
                   src={tag.image.src}
                   alt={tag.name}
-                  className="card-img"
+                  className="card-img object-fit-cover"
                   height="300"
-                  style={{ objectFit: "cover" }}
                 />
                 <div className="card-img-overlay d-flex justify-content-center align-items-end">
                   <h5 className="card-title text-uppercase">{tag.name}</h5>
