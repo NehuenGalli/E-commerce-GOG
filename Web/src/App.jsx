@@ -1,8 +1,8 @@
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router";
 
-import Home from "./pags/home";
-import TagGames from "./pags/TagGames";
+import Home from "./pages/home";
+import TagGames from "./pages/tagGames";
 function App() {
   return (
     <BrowserRouter>
