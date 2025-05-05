@@ -13,17 +13,16 @@ const Carrucel = ({ gamesRecommended }) => {
         navigation
         pagination={{ clickable: true }}
         slidesPerView={1}
-        loop={true}
+        loop={gamesRecommended.length > 1}
       >
-        {gamesRecommended.map((game, i) => (
-          <SwiperSlide key={i}>
+        {gamesRecommended.map((game) => (
+          <SwiperSlide key={game.id}>
             <div className="mx-5">
               <img
                 src={game.mainImage}
                 alt={game.name}
-                className="w-100"
+                className="w-100 object-fit-cover"
                 height="480px"
-                style={{ objectFit: "fill" }}
               />
             </div>
           </SwiperSlide>

@@ -5,9 +5,9 @@ const NewsSection = ({ games }) => {
   return (
     <div className="container my-3">
       <h3 className="mb-4">NEW & TRENDING</h3>
-      <div className="mx-3 row row-cols-1 row-cols-md-3 g-5">
+      <div className="mx-3 row row-cols-1 row-cols-lg-2 row-cols-xl-3 g-5">
         {games.list.map((game) => (
-          <div className="col mb-5">
+          <div key={game.id} className="col mb-5">
             <div className="card h-100">
               <img
                 src={game.mainImage}
@@ -17,10 +17,11 @@ const NewsSection = ({ games }) => {
                 alt="..."
               />
               <div className="card-body d-flex flex-column color-bodyCard">
-                <h3 className="card-title">{game.name}</h3>
-                <div className="d-inline-flex flex-wrap  my-3 ">
+                <h2 className="card-title text-uppercase">{game.name}</h2>
+                <div className="d-inline-flex flex-wrap my-3 gap-2">
                   {game.tags.map((tag) => (
                     <Link
+                      key={`${tag.id}`}
                       to={`/tags/${tag.id}`}
                       className="fw-bolder me-5 font-color-tags link-offset-1"
                     >
@@ -28,9 +29,9 @@ const NewsSection = ({ games }) => {
                     </Link>
                   ))}
                 </div>
-                <h5 className="fw-bolder font-color-price text-end mt-auto">
+                <h3 className="fw-bolder font-color-price text-end mt-auto">
                   {game.price.currency} {game.price.amount.toFixed(2)}
-                </h5>
+                </h3>
               </div>
             </div>
           </div>
