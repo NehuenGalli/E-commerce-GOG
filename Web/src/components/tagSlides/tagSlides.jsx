@@ -32,11 +32,11 @@ const TagSlides = ({ tags }) => {
         >
           {tags.slice(0, 10).map((tag) => (
             <SwiperSlide key={tag.id}>
-              <Link className="card text-bg-dark" to={`/tags/${tag.id}`}>
+              <Link className="card text-bg-dark" to={`/games/${tag.id}`}>
                 <img
                   src={tag.image.src}
                   alt={tag.name}
-                  className="card-img object-fit-cover"
+                  className="card-img object-fit-cover "
                   height="300"
                 />
                 <div className="card-img-overlay d-flex justify-content-center align-items-end">
