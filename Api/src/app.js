@@ -14,7 +14,11 @@ const gogSystem = initGogSystem();
 const app = express();
 const port = 3000;
 
-app.use(cors());
+const corsOptions = {
+  exposedHeaders: "Authorization",
+};
+
+app.use(cors(corsOptions));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
