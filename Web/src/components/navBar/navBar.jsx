@@ -1,14 +1,15 @@
 import { Link } from "react-router";
 import gogLogo from "../../assets/gog.svg";
 import "./navBar.css";
+import { HOME_URL } from "../../constants";
 
 const NavBar = () => {
   const isLoggedIn = !!localStorage.getItem("authToken");
 
   return (
     <nav className="navbar navbar-expand-lg py-0 navbar-darkGray fw-bolder shadow-lg">
-      <div className="container gap-3 gap-lg-5">
-        <Link className="navbar-brand mx-5" to="/">
+      <div className="container gap-3 gap-lg-5 ">
+        <Link className="mx-lg-5 navbar-brand" to={HOME_URL}>
           <img src={gogLogo} alt="gogLogo" width="60" />
         </Link>
 
@@ -26,7 +27,7 @@ const NavBar = () => {
           id="navbarContent"
         >
           <div className="navbar-nav gap-3 align-items-lg-center">
-            <Link className="nav-link text-white hover-white" to="/">
+            <Link className="nav-link text-white hover-white" to={HOME_URL}>
               STORE
             </Link>
             <Link className="nav-link text-white hover-white" to="/">
