@@ -2,8 +2,9 @@ import NavBar from "../components/navBar/navBar";
 import { useEffect, useState } from "react";
 import Paginacion from "../components/pagination/paginacion";
 import NewsSection from "../components/newsSection/newsSection";
-import Carrucel from "../components/carrusel/carrusel";
+import Carrusel from "../components/carrusel/carrusel";
 import TagSlides from "../components/tagSlides/tagSlides";
+import { API } from "../constants";
 import {
   getRecommendedGames,
   getTags,
@@ -24,48 +25,60 @@ const Home = () => {
 
   const [currentPage, setCurrentPage] = useState(1);
 
+  const [errorMessage, setErrorMessage] = useState("");
+
+  const [isLoading, setIsLoading] = useState(true);
+
   useEffect(() => {
+    setIsLoading(true);
     getRecommendedGames()
       .then((recommendedGames) => {
         setRecommendedGames(recommendedGames);
       })
       .catch((error) => {
-        console.error("Error fetching recommended games:", error.message);
-      });
+        if (error.response) {
+          console.log("status code:", error.response.status);
+          setErrorMessage(error.response.data.error);
+        } else if (error.request) {
+          setErrorMessage("No se recibió respuesta del servidor.");
+        } else {
+          setErrorMessage("Error inesperado al enviar la solicitud.");
+        }
+      })
+      .finally(() => setIsLoading(false));
   }, []);
 
   useEffect(() => {
+    setIsLoading(true);
     getTags()
       .then((tags) => setTags(tags))
-      .catch((error) => console.error("Error fetching tags:", error.message));
+      .catch((error) => console.log("Error fetching tags:", error))
+      .finally(() => setIsLoading(false));
   }, []);
 
   useEffect(() => {
     getGames(currentPage)
       .then((games) => setGames(games))
-      .catch((error) => console.error("Error fetching games:", error.message));
+      .catch((error) => console.log("Error fetching games:", error));
   }, [currentPage]);
-
-  const firstPage = () => setCurrentPage(1);
-  const previousPage = () => setCurrentPage((prev) => Math.max(prev - 1, 1));
-  const nextPage = () =>
-    setCurrentPage((prev) => Math.min(prev + 1, games.amountOfPages));
-  const lastPage = () => setCurrentPage(games.amountOfPages);
 
   return (
     <>
-      <NavBar />
-      <Carrucel recommendedGames={recommendedGames} />
-      <TagSlides tags={tags} />
-      <NewsSection games={games} />
-      <Paginacion
-        totalPages={games.amountOfPages}
-        currentPage={currentPage}
-        firstPage={firstPage}
-        previousPage={previousPage}
-        nextPage={nextPage}
-        lastPage={lastPage}
-      />
+      <NavBar isLoggedIn={!!localStorage.getItem(API.TOKEN_KEY)} />
+      {isLoading && <h1> cargando </h1>}
+      {!isLoading && (
+        <>
+          {errorMessage.length !== 0 && <h1>{errorMessage}</h1>}
+          <Carrusel recommendedGames={recommendedGames} />
+          <TagSlides tags={tags} />
+          <NewsSection games={games} />
+          <Paginacion
+            currentPage={currentPage}
+            totalPages={games.amountOfPages}
+            onPageChange={setCurrentPage}
+          />
+        </>
+      )}
     </>
   );
 };

@@ -1,5 +1,6 @@
 import { Link } from "react-router";
 import "./newsSection.css";
+import { ROUTES } from "../../constants";
 
 const NewsSection = ({ games }) => {
   return (
@@ -14,16 +15,16 @@ const NewsSection = ({ games }) => {
                 className="card-img-top"
                 width="327"
                 height="234"
-                alt="..."
+                alt={game.name}
               />
               <div className="card-body d-flex flex-column color-bodyCard">
                 <h2 className="card-title text-uppercase">{game.name}</h2>
-                <div className="d-inline-flex flex-wrap my-3 gap-2">
+                <div className="d-flex flex-wrap my-3 gap-3 me-5">
                   {game.tags.slice(0, 10).map((tag) => (
                     <Link
                       key={tag.id}
-                      to={`/tags/${tag.id}`}
-                      className="fw-bolder me-5 font-color-tags link-offset-1"
+                      to={`${ROUTES.GAMES}/${tag.id}`}
+                      className="fw-bolder font-color-tags link-offset-1"
                     >
                       {tag.name}
                     </Link>

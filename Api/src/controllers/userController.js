@@ -32,16 +32,16 @@ class UserController {
     try {
       const { email, password } = await loginBodySchema.validate(req.body);
       const user = this.service.users.find(
-      (user) => user.email === email && user.password === password
-    );
+        (user) => user.email === email && user.password === password
+      );
       if (!user) {
         return res.status(400).json({ error: "Invalid credentials" });
-    }
+      }
       const token = this.tokenController.generateToken(user.id);
       const userInfo = {
-      ...transformUser5datos(user),
-      games: transformGames(user.games),
-    };
+        ...transformUser5datos(user),
+        games: transformGames(user.games),
+      };
       res.header(HEADER, token).json(userInfo);
     } catch (error) {
       res.status(400).json({ error: error.message });
@@ -99,7 +99,10 @@ class UserController {
       const { userId } = req.params;
       const loggedUser = req.user.id;
 
-      const userWithNewFriendList = await this.service.addOrRemoveFriend(loggedUser,userId);
+      const userWithNewFriendList = await this.service.addOrRemoveFriend(
+        loggedUser,
+        userId
+      );
       const userInfo = {
         ...transformUser5datos(userWithNewFriendList),
         games: transformGames(userWithNewFriendList.games),

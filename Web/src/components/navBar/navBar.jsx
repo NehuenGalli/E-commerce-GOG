@@ -1,15 +1,13 @@
 import { Link } from "react-router";
 import gogLogo from "../../assets/gog.svg";
 import "./navBar.css";
-import { HOME_URL } from "../../constants";
+import { ROUTES } from "../../constants";
 
-const NavBar = () => {
-  const isLoggedIn = !!localStorage.getItem("authToken");
-
+const NavBar = ({ isLoggedIn }) => {
   return (
-    <nav className="navbar navbar-expand-lg py-0 navbar-darkGray fw-bolder shadow-lg">
+    <nav className="navbar navbar-expand-lg py-0 fw-bolder shadow-lg">
       <div className="container gap-3 gap-lg-5 ">
-        <Link className="mx-lg-5 navbar-brand" to={HOME_URL}>
+        <Link className="mx-lg-5 navbar-brand" to={ROUTES.HOME}>
           <img src={gogLogo} alt="gogLogo" width="60" />
         </Link>
 
@@ -27,10 +25,10 @@ const NavBar = () => {
           id="navbarContent"
         >
           <div className="navbar-nav gap-3 align-items-lg-center">
-            <Link className="nav-link text-white hover-white" to={HOME_URL}>
+            <Link className="nav-link text-white" to={ROUTES.HOME}>
               STORE
             </Link>
-            <Link className="nav-link text-white hover-white" to="/">
+            <Link className="nav-link text-white" to="/">
               LIBRARY
             </Link>
             <form className="d-flex align-items-center border-bottom border-white w-50 ">
@@ -43,18 +41,20 @@ const NavBar = () => {
             </form>
           </div>
           <div className="mx-5 d-flex ms-auto align-items-lg-center gap-2 my-lg-0 my-4">
-            {!isLoggedIn ? (
+            {!isLoggedIn && (
               <>
-                <Link className="nav-link text-white hover-white" to="/">
+                <Link className="nav-link text-white " to="/">
                   LOGIN
                 </Link>
                 <span className="text-white"> / </span>
-                <Link className="nav-link text-white hover-white" to="/">
+                <Link className="nav-link text-white " to="/">
                   REGISTER
                 </Link>
               </>
-            ) : (
-              <Link className="nav-link text-white hover-white" to="/">
+            )}
+
+            {isLoggedIn && (
+              <Link className="nav-link text-white " to="/">
                 <i className="bi bi-cart4 fs-1" />
               </Link>
             )}
