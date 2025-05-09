@@ -3,9 +3,11 @@ import Slide from "../slide/slide";
 import { ROUTES } from "../../constants";
 
 const TagSlides = ({ tags }) => {
-  const ids = tags.map((tag) => tag.id);
-  const names = tags.map((tag) => tag.name);
-  const images = tags.map((tag) => tag.image.src);
+  const tagsFormatted = tags.map((tag) => ({
+    id: tag.id,
+    name: tag.name,
+    image: tag.image.src,
+  }));
 
   const extraLink = (
     <Link
@@ -27,7 +29,7 @@ const TagSlides = ({ tags }) => {
     <div className="container my-3 ">
       <h3 className="mb-4">BROWSE BY CATEGORY</h3>
       <div className="mx-5">
-        <Slide images={images} names={names} ids={ids} extraSlide={extraLink} />
+        <Slide list={tagsFormatted} extraSlide={extraLink} />
       </div>
     </div>
   );
