@@ -1,11 +1,9 @@
-import Paginacion from "../components/pagination/paginacion";
 import ListTagGames from "../components/listTagGames/listTagGames";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
-import { API_URL } from "../constants";
 import axios from "axios";
 import NavBar from "../components/navBar/navBar";
-import { TOKEN } from "../constants";
+import { API } from "../constants";
 
 const TagGames = () => {
   const { tagId } = useParams();
@@ -18,7 +16,7 @@ const TagGames = () => {
   //   const [currentPage, setCurrentPage] = useState(1);
   useEffect(() => {
     axios
-      .get(`${API_URL}/tags/${tagId}?page=${1}`)
+      .get(`${API.BASE_URL}/tags/${tagId}?page=${1}`)
       .then((response) => setgames(response.data));
   }, [tagId]);
   //   const primerPagina = () => setCurrentPage(1);
@@ -28,7 +26,7 @@ const TagGames = () => {
   //   const ultimaPagina = () => setCurrentPage(games.amountOfPages);
   return (
     <>
-      <NavBar isLoggedIn={!!localStorage.getItem(TOKEN)} />
+      <NavBar isLoggedIn={!!localStorage.getItem(API.TOKEN_KEY)} />
       <ListTagGames games={games.list} />
     </>
   );
