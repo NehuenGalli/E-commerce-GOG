@@ -4,8 +4,7 @@
   height: 240px;
   background-color: #d183d7cc;
   border-radius: 0.3rem;
-  top: 55%;
-  transform: translateY(-50%);
+  transform: translateY(-40%);
   box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);
 }
 

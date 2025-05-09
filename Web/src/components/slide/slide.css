@@ -1,0 +1,40 @@
+.slide .swiper-button-next,
+.slide .swiper-button-prev {
+  width: 60px;
+  height: 120px;
+  background-color: #d183d7cc;
+  border-radius: 0.3rem;
+  transform: translateY(-30%);
+}
+
+.slide .swiper-button-next {
+  right: 0%;
+}
+
+.slide .swiper-button-prev {
+  left: 0%;
+}
+
+.slide .swiper-button-next::after,
+.slide .swiper-button-prev::after {
+  font-size: 30px;
+  font-weight: bold;
+  color: black;
+}
+
+.slide .swiper-button-prev:hover,
+.slide .swiper-button-next:hover {
+  background-color: #ff1493;
+  border-color: #ff1493;
+}
+
+.slide .card:hover {
+  opacity: 0.8;
+  transition: opacity 0.3s ease;
+  color: #ffffffcc;
+}
+
+.slide .card:hover .card-img-overlay {
+  background-color: rgba(0, 0, 0, 0.3);
+  transition: background-color 0.3s ease;
+}

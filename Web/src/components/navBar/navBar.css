@@ -7,10 +7,10 @@
   opacity: 1;
 }
 
-.nav-link.text-white:hover {
+.navbar .nav-link:hover {
   color: rgb(209, 131, 215) !important;
 }
 
-.navbar-darkGray {
+.navbar {
   background-color: #212121;
 }
