@@ -1,7 +1,5 @@
 import { object, string } from "yup";
 
-import { HEADER } from "../constants.js";
-
 const purchaseBodySchema = object({
   cardName: string().required(),
   cardNumber: string().required(),

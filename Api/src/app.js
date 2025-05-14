@@ -1,5 +1,5 @@
 import express from "express";
-
+import cors from "cors";
 import { initGogSystem } from "@unq-ui/gog-model-js";
 
 import UserController from "./controllers/userController.js";
@@ -14,6 +14,11 @@ const gogSystem = initGogSystem();
 const app = express();
 const port = 3000;
 
+const corsOptions = {
+  exposedHeaders: "Authorization",
+};
+
+app.use(cors(corsOptions));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
@@ -31,9 +36,19 @@ app.post(
   tokenController.checkRole("public"),
   userController.register
 );
+app.get(
+  "/users/current",
+  tokenController.checkRole("user"),
+  userController.currentUser
+);
 app
-  .route("/getUserById/:userId")
+  .route("/users/:userId")
   .get(tokenController.checkRole("public"), userController.getUserById);
+
+app
+  .route("/users/:userId/friends")
+  .get(tokenController.checkRole("public"), userController.getFriendsById)
+  .put(tokenController.checkRole("user"), userController.addOrRemoveFriend);
 
 // Games
 app.get(
@@ -54,6 +69,12 @@ app
   .put(tokenController.checkRole("user"), gamesController.addGameToCart)
   .delete(tokenController.checkRole("user"), gamesController.deleteGame);
 
+app.put(
+  "/games/:gameId/reviews",
+  tokenController.checkRole("user"),
+  gamesController.addReview
+);
+
 // search
 app.get(
   "/search",
@@ -70,6 +91,18 @@ app.post(
 
 // tags
 app.get("/tags", tokenController.checkRole("public"), tagController.getTags);
+
+app.get(
+  "/tags/:tagId",
+  tokenController.checkRole("public"),
+  tagController.getGameByTag
+);
+
+app.get(
+  "/users/current/cart",
+  tokenController.checkRole("user"),
+  userController.getUserCurrentCart
+);
 
 app.listen(port, () => {
   console.log(`Listening at http://localhost:${port}`);

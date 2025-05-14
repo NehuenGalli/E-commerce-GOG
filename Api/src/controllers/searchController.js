@@ -1,4 +1,4 @@
-import { transformGames } from "../helpers/transformData.js";
+import { transformGames } from "../helpers/gameHelper.js";
 
 class SearchController {
   constructor(service, tokenController) {
@@ -8,8 +8,8 @@ class SearchController {
 
   searchGames = async (req, res) => {
     try {
-      const { name, page } = req.query;
-      const games = await this.service.searchGame(name, page);
+      const { query, page } = req.query;
+      const games = await this.service.searchGame(query, page);
       const gamesInfo = {
         list: transformGames(games.list),
         currentPage: games.currentPage,
