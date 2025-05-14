@@ -64,7 +64,7 @@ const Home = () => {
 
   return (
     <>
-      <NavBar isLoggedIn={!!localStorage.getItem(API.TOKEN_KEY)} />
+      <NavBar isLoggedIn={!!localStorage.getItem("jwt")} />
       {isLoading && <h1> cargando </h1>}
       {!isLoading && (
         <>

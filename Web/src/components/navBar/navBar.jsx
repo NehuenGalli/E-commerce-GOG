@@ -43,7 +43,7 @@ const NavBar = ({ isLoggedIn }) => {
           <div className="mx-5 d-flex ms-auto align-items-lg-center gap-2 my-lg-0 my-4">
             {!isLoggedIn && (
               <>
-                <Link className="nav-link text-white " to="/">
+                <Link className="nav-link text-white " to="/login">
                   LOGIN
                 </Link>
                 <span className="text-white"> / </span>
