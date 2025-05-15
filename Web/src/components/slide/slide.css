@@ -31,10 +31,19 @@
 .slide .card:hover {
   opacity: 0.8;
   transition: opacity 0.3s ease;
-  color: #ffffffcc;
+  color: #ffffffcc !important;
 }
 
 .slide .card:hover .card-img-overlay {
   background-color: rgba(0, 0, 0, 0.3);
   transition: background-color 0.3s ease;
+}
+
+.slide .card img {
+  height: 300px;
+}
+
+.slide .card-body {
+  height: 300px !important;
+  background-color: #898989 !important;
 }

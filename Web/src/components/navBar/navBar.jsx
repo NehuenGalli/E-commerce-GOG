@@ -17,7 +17,7 @@ const NavBar = ({ isLoggedIn }) => {
           data-bs-toggle="collapse"
           data-bs-target="#navbarContent"
         >
-          <i className="bi bi-list fs-1 text-white"></i>
+          <i className="bi bi-list fs-1 "></i>
         </button>
 
         <div
@@ -25,14 +25,14 @@ const NavBar = ({ isLoggedIn }) => {
           id="navbarContent"
         >
           <div className="navbar-nav gap-3 align-items-lg-center">
-            <Link className="nav-link text-white" to={ROUTES.HOME}>
+            <Link className="nav-link " to={ROUTES.HOME}>
               STORE
             </Link>
-            <Link className="nav-link text-white" to="/">
+            <Link className="nav-link" to="/">
               LIBRARY
             </Link>
             <form className="d-flex align-items-center border-bottom border-white w-50 ">
-              <i className="bi bi-search text-white "></i>
+              <i className="bi bi-search"></i>
               <input
                 className="form-control border-0 bg-transparent shadow-none py-0 ps-2 buscador"
                 type="search"
@@ -43,18 +43,18 @@ const NavBar = ({ isLoggedIn }) => {
           <div className="mx-5 d-flex ms-auto align-items-lg-center gap-2 my-lg-0 my-4">
             {!isLoggedIn && (
               <>
-                <Link className="nav-link text-white " to="/">
+                <Link className="nav-link  " to="/">
                   LOGIN
                 </Link>
-                <span className="text-white"> / </span>
-                <Link className="nav-link text-white " to="/">
+                <span className=""> / </span>
+                <Link className="nav-link  " to="/">
                   REGISTER
                 </Link>
               </>
             )}
 
             {isLoggedIn && (
-              <Link className="nav-link text-white " to="/">
+              <Link className="nav-link  " to="/">
                 <i className="bi bi-cart4 fs-1" />
               </Link>
             )}

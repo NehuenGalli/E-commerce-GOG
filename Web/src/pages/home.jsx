@@ -15,7 +15,7 @@ const Home = () => {
   const [games, setGames] = useState({
     list: [],
     currentPage: 1,
-    amountOfElements: 1,
+    amountOfElements: 0,
     amountOfPages: 1,
   });
 
@@ -27,33 +27,22 @@ const Home = () => {
 
   const [errorMessage, setErrorMessage] = useState("");
 
-  const [isLoading, setIsLoading] = useState(true);
+  // const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    setIsLoading(true);
     getRecommendedGames()
       .then((recommendedGames) => {
         setRecommendedGames(recommendedGames);
       })
       .catch((error) => {
-        if (error.response) {
-          console.log("status code:", error.response.status);
-          setErrorMessage(error.response.data.error);
-        } else if (error.request) {
-          setErrorMessage("No se recibió respuesta del servidor.");
-        } else {
-          setErrorMessage("Error inesperado al enviar la solicitud.");
-        }
-      })
-      .finally(() => setIsLoading(false));
+        setErrorMessage(error.response.data.error);
+      });
   }, []);
 
   useEffect(() => {
-    setIsLoading(true);
     getTags()
       .then((tags) => setTags(tags))
-      .catch((error) => console.log("Error fetching tags:", error))
-      .finally(() => setIsLoading(false));
+      .catch((error) => console.log("Error fetching tags:", error));
   }, []);
 
   useEffect(() => {
@@ -65,20 +54,17 @@ const Home = () => {
   return (
     <>
       <NavBar isLoggedIn={!!localStorage.getItem(API.TOKEN_KEY)} />
-      {isLoading && <h1> cargando </h1>}
-      {!isLoading && (
-        <>
-          {errorMessage.length !== 0 && <h1>{errorMessage}</h1>}
-          <Carrusel recommendedGames={recommendedGames} />
-          <TagSlides tags={tags} />
-          <NewsSection games={games} />
-          <Paginacion
-            currentPage={currentPage}
-            totalPages={games.amountOfPages}
-            onPageChange={setCurrentPage}
-          />
-        </>
-      )}
+      <>
+        {errorMessage.length !== 0 && <h1>{errorMessage}</h1>}
+        <Carrusel recommendedGames={recommendedGames} />
+        <TagSlides tags={tags} />
+        <NewsSection games={games} />
+        <Paginacion
+          currentPage={currentPage}
+          totalPages={games.amountOfPages}
+          onPageChange={setCurrentPage}
+        />
+      </>
     </>
   );
 };

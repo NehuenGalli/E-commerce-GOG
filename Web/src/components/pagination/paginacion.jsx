@@ -1,3 +1,4 @@
+import "./paginacion.css";
 const Paginacion = ({ totalPages, currentPage, onPageChange }) => {
   const firstPage = () => onPageChange(1);
 
