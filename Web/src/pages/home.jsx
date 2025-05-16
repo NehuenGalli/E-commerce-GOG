@@ -1,84 +1,53 @@
 import NavBar from "../components/navBar/navBar";
 import { useEffect, useState } from "react";
-import Paginacion from "../components/pagination/paginacion";
-import NewsSection from "../components/newsSection/newsSection";
+import ListAllGames from "../components/listAllGames/listAllGames";
 import Carrusel from "../components/carrusel/carrusel";
 import TagSlides from "../components/tagSlides/tagSlides";
-import { API } from "../constants";
-import {
-  getRecommendedGames,
-  getTags,
-  getGames,
-} from "../services/gameServices";
-
-const Home = () => {
-  const [games, setGames] = useState({
-    list: [],
-    currentPage: 1,
-    amountOfElements: 1,
-    amountOfPages: 1,
-  });
-
+import { getRecommendedGames, getTags } from "../services/gameServices";
+import { ToastContainer, toast } from "react-toastify";
+import Spinner from "../components/spinner/Spinner";
+const Home = ({ isLoggedIn }) => {
   const [recommendedGames, setRecommendedGames] = useState([]);
-
   const [tags, setTags] = useState([]);
-
-  const [currentPage, setCurrentPage] = useState(1);
-
-  const [errorMessage, setErrorMessage] = useState("");
-
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoadingRecommendedGames, setIsLoadingRecommendedGames] =
+    useState(false);
+  const [isLoadingTags, setIsLoadingTags] = useState(false);
 
   useEffect(() => {
-    setIsLoading(true);
+    setIsLoadingRecommendedGames(true);
     getRecommendedGames()
       .then((recommendedGames) => {
         setRecommendedGames(recommendedGames);
       })
       .catch((error) => {
-        if (error.response) {
-          console.log("status code:", error.response.status);
-          setErrorMessage(error.response.data.error);
-        } else if (error.request) {
-          setErrorMessage("No se recibió respuesta del servidor.");
-        } else {
-          setErrorMessage("Error inesperado al enviar la solicitud.");
-        }
+        toast.error(error);
       })
-      .finally(() => setIsLoading(false));
+      .finally(() => setIsLoadingRecommendedGames(false));
   }, []);
 
   useEffect(() => {
-    setIsLoading(true);
+    setIsLoadingTags(true);
     getTags()
       .then((tags) => setTags(tags))
-      .catch((error) => console.log("Error fetching tags:", error))
-      .finally(() => setIsLoading(false));
+      .catch((error) => toast.error(error))
+      .finally(() => setIsLoadingTags(false));
   }, []);
-
-  useEffect(() => {
-    getGames(currentPage)
-      .then((games) => setGames(games))
-      .catch((error) => console.log("Error fetching games:", error));
-  }, [currentPage]);
 
   return (
     <>
-      <NavBar isLoggedIn={!!localStorage.getItem("jwt")} />
-      {isLoading && <h1> cargando </h1>}
-      {!isLoading && (
+      <NavBar isLoggedIn={isLoggedIn} />
+
+      {isLoadingRecommendedGames || isLoadingTags ? (
+        <Spinner />
+      ) : (
         <>
-          {errorMessage.length !== 0 && <h1>{errorMessage}</h1>}
           <Carrusel recommendedGames={recommendedGames} />
           <TagSlides tags={tags} />
-          <NewsSection games={games} />
-          <Paginacion
-            currentPage={currentPage}
-            totalPages={games.amountOfPages}
-            onPageChange={setCurrentPage}
-          />
+          <ListAllGames />
         </>
       )}
+
+      <ToastContainer />
     </>
   );
 };

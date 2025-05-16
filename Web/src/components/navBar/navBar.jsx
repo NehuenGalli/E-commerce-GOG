@@ -1,9 +1,10 @@
-import { Link } from "react-router";
+import { Link, NavLink, Route } from "react-router";
 import gogLogo from "../../assets/gog.svg";
 import "./navBar.css";
 import { ROUTES } from "../../constants";
 
 const NavBar = ({ isLoggedIn }) => {
+  console.log(isLoggedIn);
   return (
     <nav className="navbar navbar-expand-lg py-0 fw-bolder shadow-lg">
       <div className="container gap-3 gap-lg-5 ">
@@ -17,7 +18,7 @@ const NavBar = ({ isLoggedIn }) => {
           data-bs-toggle="collapse"
           data-bs-target="#navbarContent"
         >
-          <i className="bi bi-list fs-1 text-white"></i>
+          <i className="bi bi-list fs-1 "></i>
         </button>
 
         <div
@@ -25,14 +26,17 @@ const NavBar = ({ isLoggedIn }) => {
           id="navbarContent"
         >
           <div className="navbar-nav gap-3 align-items-lg-center">
-            <Link className="nav-link text-white" to={ROUTES.HOME}>
+            <NavLink className="nav-link " to={ROUTES.HOME}>
               STORE
-            </Link>
-            <Link className="nav-link text-white" to="/">
+            </NavLink>
+            <NavLink
+              className="nav-link"
+              to={isLoggedIn ? "/library" : ROUTES.LOGIN}
+            >
               LIBRARY
-            </Link>
+            </NavLink>
             <form className="d-flex align-items-center border-bottom border-white w-50 ">
-              <i className="bi bi-search text-white "></i>
+              <i className="bi bi-search"></i>
               <input
                 className="form-control border-0 bg-transparent shadow-none py-0 ps-2 buscador"
                 type="search"
@@ -43,20 +47,20 @@ const NavBar = ({ isLoggedIn }) => {
           <div className="mx-5 d-flex ms-auto align-items-lg-center gap-2 my-lg-0 my-4">
             {!isLoggedIn && (
               <>
-                <Link className="nav-link text-white " to="/login">
+                <NavLink className="nav-link" to={ROUTES.LOGIN}>
                   LOGIN
-                </Link>
+                </NavLink>
                 <span className="text-white"> / </span>
-                <Link className="nav-link text-white " to="/">
+                <NavLink className="nav-link" to="/">
                   REGISTER
-                </Link>
+                </NavLink>
               </>
             )}
 
             {isLoggedIn && (
-              <Link className="nav-link text-white " to="/">
+              <NavLink className="nav-link  " to="/">
                 <i className="bi bi-cart4 fs-1" />
-              </Link>
+              </NavLink>
             )}
           </div>
         </div>

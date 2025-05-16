@@ -10,15 +10,8 @@ const TagSlides = ({ tags }) => {
   }));
 
   const extraLink = (
-    <Link
-      to={ROUTES.TAGS}
-      className="card text-decoration-none "
-      style={{ backgroundColor: "#898989" }}
-    >
-      <div
-        className="card-body d-flex flex-column justify-content-center align-items-center "
-        style={{ height: "300px" }}
-      >
+    <Link to={ROUTES.TAGS} className="card text-decoration-none ">
+      <div className="card-body d-flex flex-column justify-content-center align-items-center ">
         <i className="bi bi-plus-circle fs-1 mb-3"></i>
         <h5 className="card-title text-uppercase ">Ver todos los tags</h5>
       </div>
