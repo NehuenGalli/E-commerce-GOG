@@ -4,7 +4,6 @@ import "./navBar.css";
 import { ROUTES } from "../../constants";
 
 const NavBar = ({ isLoggedIn }) => {
-  console.log(isLoggedIn);
   return (
     <nav className="navbar navbar-expand-lg py-0 fw-bolder shadow-lg">
       <div className="container gap-3 gap-lg-5 ">

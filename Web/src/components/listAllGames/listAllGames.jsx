@@ -3,7 +3,7 @@ import { getGames } from "../../services/gameServices";
 import Paginacion from "../pagination/paginacion";
 import NewsSection from "../newsSection/newsSection";
 import { ToastContainer, toast } from "react-toastify";
-import Spinner from "../spinner/Spinner";
+import { GameCardSkelton } from "../skelton/GameCardSkelton/GameCardSkelton";
 
 const ListAllGames = () => {
   const [games, setGames] = useState({
@@ -28,7 +28,7 @@ const ListAllGames = () => {
 
   return (
     <>
-      {isLoading && <Spinner />}
+      {isLoading && <GameCardSkelton count={9} />}
       {!isLoading && (
         <>
           <NewsSection games={games} />
