@@ -9,6 +9,9 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(
     !!localStorage.getItem(API.TOKEN_KEY)
   );
+  const logIn = () => setIsLoggedIn(true);
+  // const logOut = () => setIsLoggedIn(false);
+
   return (
     <>
       <BrowserRouter>
@@ -19,9 +22,7 @@ function App() {
           />
           <Route
             path={ROUTES.LOGIN}
-            element={
-              <Login setIsLoggedIn={setIsLoggedIn} isLoggedIn={isLoggedIn} />
-            }
+            element={<Login logIn={logIn} isLoggedIn={isLoggedIn} />}
           />
           <Route
             path={ROUTES.GAMES_BY_TAG}
