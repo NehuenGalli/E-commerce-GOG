@@ -24,4 +24,14 @@ const getGames = (page) =>
     .then((res) => res.data)
     .catch((error) => error);
 
+// const search = (query, page) => {
+//   return api
+//     .get(`/search?query=${encodeURIComponent(query)}&page=${page}`)
+//     .then((res) => res.data)
+//     .catch((error) => {
+//       console.error("API error:", error);
+//       throw error;
+//     });
+// };
+
 export { getRecommendedGames, getTags, getGames };

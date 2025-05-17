@@ -2,6 +2,7 @@ import { Link } from "react-router";
 import gogLogo from "../../assets/gog.svg";
 import "./navBar.css";
 import { ROUTES } from "../../constants";
+import SearchForm from "./searchForm";
 
 const NavBar = ({ isLoggedIn }) => {
   return (
@@ -31,14 +32,17 @@ const NavBar = ({ isLoggedIn }) => {
             <Link className="nav-link text-white" to="/">
               LIBRARY
             </Link>
-            <form className="d-flex align-items-center border-bottom border-white w-50 ">
+
+            <SearchForm></SearchForm>
+
+            {/* <form className="d-flex align-items-center border-bottom border-white w-50 ">
               <i className="bi bi-search text-white "></i>
               <input
                 className="form-control border-0 bg-transparent shadow-none py-0 ps-2 buscador"
                 type="search"
                 placeholder="SEARCH"
               />
-            </form>
+            </form> */}
           </div>
           <div className="mx-5 d-flex ms-auto align-items-lg-center gap-2 my-lg-0 my-4">
             {!isLoggedIn && (

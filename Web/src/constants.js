@@ -11,4 +11,5 @@ export const ROUTES = {
   GAMES_BY_TAG: "/games/:tagId",
   GAME_DETAIL: "/game/:gameId",
   RECOMMENDED: "/games/recommended",
+  SEARCH: "/search/:search",
 };

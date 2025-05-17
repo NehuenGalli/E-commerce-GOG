@@ -1,11 +1,11 @@
 import GameExtraInfo from "./gameExtraInfo";
 import "./listGames.css";
 
-const ListGames = ({ games, nameTag }) => {
+const ListGames = ({ games, title }) => {
   return (
     <>
       <div className="container mt-5">
-        <h1>TAG: {nameTag}</h1>
+        <h1>{title}</h1>
 
         {games.map((game) => (
           <div className="card mb-3 mx-5">
