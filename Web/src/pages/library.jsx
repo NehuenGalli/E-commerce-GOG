@@ -6,9 +6,8 @@ import axios from "axios";
 import NavBar from "../components/navBar/navBar";
 import { API } from "../constants";
 
-const TagGames = () => {
-  const { tagId } = useParams();
-  const [games, setgames] = useState({
+const Library = () => {
+  const [games, user] = useState({
     list: [],
     currentPage: 1,
     amountOfElements: 0,
@@ -16,27 +15,30 @@ const TagGames = () => {
   });
 
   const [currentPage, setCurrentPage] = useState(1);
-
   useEffect(() => {
     axios
-      .get(`${API.BASE_URL}/tags/${tagId}?page=${currentPage}`)
-      .then((response) => setgames(response.data));
-  }, [tagId, currentPage]);
+      .get(`${API.BASE_URL}/users/current`)
+      .then((response) => user(response.data));
+  }, []);
 
-  const elemento = games?.list?.[0]?.tags?.find((item) => item.id === tagId);
+  const asd = axios
+    .get(`${API.BASE_URL}/users/current`)
+    .then((response) => user(response.data));
 
+  console.log(asd);
   return (
     <>
       <NavBar isLoggedIn={!!localStorage.getItem(API.TOKEN_KEY)} />
-      <ListGames games={games.list} title={"TAG: " + elemento?.name} />
+
+      <ListGames games={games.list} title={"GAMES "} />
 
       <Paginacion
         currentPage={currentPage}
-        totalPages={games.amountOfPages}
+        totalPages={games.list.amountOfPages}
         onPageChange={setCurrentPage}
       />
     </>
   );
 };
 
-export default TagGames;
+export default Library;

@@ -4,6 +4,7 @@ import { ROUTES } from "./constants";
 import Home from "./pages/home";
 import TagGames from "./pages/tagGames";
 import SearchGames from "./pages/searchGames";
+import Library from "./pages/library";
 function App() {
   return (
     <BrowserRouter>
@@ -12,6 +13,7 @@ function App() {
         <Route path={ROUTES.GAMES_BY_TAG} element={<TagGames />} />
 
         <Route path={ROUTES.SEARCH} element={<SearchGames />} />
+        <Route path={ROUTES.LIBRARY} element={<Library />} />
       </Routes>
     </BrowserRouter>
   );

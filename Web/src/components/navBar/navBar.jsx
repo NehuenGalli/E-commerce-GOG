@@ -29,7 +29,11 @@ const NavBar = ({ isLoggedIn }) => {
             <Link className="nav-link text-white" to={ROUTES.HOME}>
               STORE
             </Link>
-            <Link className="nav-link text-white" to="/">
+
+            <Link
+              className="nav-link text-white"
+              to={isLoggedIn ? ROUTES.LIBRARY : ROUTES.LIBRARY} //TIENE QUE IR LOGIN DESPUES DEL :
+            >
               LIBRARY
             </Link>
 

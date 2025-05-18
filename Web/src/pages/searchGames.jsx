@@ -9,8 +9,6 @@ import { API } from "../constants";
 const SearchGames = () => {
   const searchData = useParams();
 
-  console.log(searchData.search);
-
   const [games, setGames] = useState({
     list: [],
     currentPage: 1,
@@ -29,7 +27,8 @@ const SearchGames = () => {
       .catch((error) => console.error(error));
   }, [searchData, currentPage]);
 
-  console.log(games);
+  const dataa = axios.get(`${API.BASE_URL}/users/current`);
+
   // useEffect(() => {
   //   axios
   //     .get(`${API.BASE_URL}/search/${searchData.search}&page=${currentPage}`)
