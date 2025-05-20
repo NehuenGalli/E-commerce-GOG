@@ -2,14 +2,14 @@
   color: #6e1d72;
 }
 
-.font-color-tags {
-  color: #212121cc;
+a {
+  color: #212121cc !important;
 }
 
-.font-color-tags:hover {
+a:hover {
   color: rgb(209, 131, 215) !important;
 }
 
-.color-bodyCard {
+.card-body {
   background-color: #ededed;
 }

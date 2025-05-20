@@ -12,19 +12,19 @@ const NewsSection = ({ games }) => {
             <div className="card h-100">
               <img
                 src={game.mainImage}
-                className="card-img-top"
+                className="card-img-top object-fit-cover"
                 width="327"
                 height="234"
                 alt={game.name}
               />
-              <div className="card-body d-flex flex-column color-bodyCard">
+              <div className="card-body d-flex flex-column">
                 <h2 className="card-title text-uppercase">{game.name}</h2>
                 <div className="d-flex flex-wrap my-3 gap-3 me-5">
                   {game.tags.slice(0, 10).map((tag) => (
                     <Link
                       key={tag.id}
                       to={`${ROUTES.GAMES}/${tag.id}`}
-                      className="fw-bolder font-color-tags link-offset-1"
+                      className="fw-bolder link-offset-1"
                     >
                       {tag.name}
                     </Link>
