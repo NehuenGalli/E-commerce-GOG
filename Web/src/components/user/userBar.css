@@ -1,0 +1,12 @@
+.btn {
+  background-color: #6b217f !important;
+  color: white !important;
+  border: none;
+  font-size: 16px;
+  border-radius: 4px;
+  display: block;
+}
+
+span {
+  color: white;
+}

@@ -20,10 +20,8 @@ const SearchGames = () => {
   const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
-    if (!query) return;
-
     axios
-      .get(`${API.BASE_URL}/search?name=${query}&page=${currentPage}`)
+      .get(`${API.BASE_URL}/search?query=${query}&page=${currentPage}`)
       .then((response) => setGames(response.data))
       .catch((error) => console.log(error));
   }, [query, currentPage]);
@@ -36,8 +34,12 @@ const SearchGames = () => {
     <>
       <NavBar isLoggedIn={!!localStorage.getItem(API.TOKEN_KEY)} />
       <ListGames games={games.list} title={"SEARCH: " + query} />
-      {/* Aquí puedes usar el componente Paginacion si lo tienes */}
-      {/* <Paginacion currentPage={currentPage} totalPages={games.amountOfPages} onChangePage={setCurrentPage} /> */}
+
+      <Paginacion
+        currentPage={currentPage}
+        totalPages={games.amountOfPages}
+        onPageChange={setCurrentPage}
+      />
     </>
   );
 };

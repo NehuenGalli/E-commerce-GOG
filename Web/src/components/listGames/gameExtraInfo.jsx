@@ -1,7 +1,8 @@
 import { Link } from "react-router";
 import { ROUTES } from "../../constants";
 
-const GameExtraInfo = ({ game }) => {
+const GameExtraInfo = ({ game, needUser }) => {
+  const token = !!localStorage.getItem("jwt");
   return (
     <>
       {game.tags && (
@@ -24,7 +25,7 @@ const GameExtraInfo = ({ game }) => {
         </div>
       )}
 
-      {game.price && (
+      {game.price && !needUser && (
         //
         <div className="col-md-2 d-flex align-items-center justify-content-end violeta">
           <div className="d-flex flex-column m-5 align-items-center">

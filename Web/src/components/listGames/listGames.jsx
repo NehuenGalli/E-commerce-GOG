@@ -1,7 +1,7 @@
 import GameExtraInfo from "./gameExtraInfo";
 import "./listGames.css";
 
-const ListGames = ({ games, title }) => {
+const ListGames = ({ games, title, displayUser }) => {
   return (
     <>
       <div className="container mt-5">
@@ -18,7 +18,7 @@ const ListGames = ({ games, title }) => {
                 />
               </div>
 
-              <GameExtraInfo game={game}></GameExtraInfo>
+              <GameExtraInfo game={game} needUser={displayUser}></GameExtraInfo>
             </div>
           </div>
         ))}
