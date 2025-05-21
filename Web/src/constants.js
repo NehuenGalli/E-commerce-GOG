@@ -12,6 +12,6 @@ export const ROUTES = {
   GAME_DETAIL: "/game/:gameId",
   RECOMMENDED: "/games/recommended",
   LOGIN: "/login",
-  SEARCH: "/search/:search",
+  SEARCH: "/search",
   LIBRARY: "/library",
 };

@@ -7,36 +7,28 @@ import NavBar from "../components/navBar/navBar";
 import { API } from "../constants";
 
 const Library = () => {
-  const [games, user] = useState({
-    list: [],
-    currentPage: 1,
-    amountOfElements: 0,
-    amountOfPages: 0,
+  const [userLogged, setUserLogged] = useState({
+    id: "",
+    email: "",
+    name: "",
+    image: "",
+    backgroundImage: "",
+    games: [],
   });
 
   const [currentPage, setCurrentPage] = useState(1);
+
   useEffect(() => {
     axios
       .get(`${API.BASE_URL}/users/current`)
-      .then((response) => user(response.data));
+      .then((response) => setUserLogged(response.data));
   }, []);
 
-  const asd = axios
-    .get(`${API.BASE_URL}/users/current`)
-    .then((response) => user(response.data));
-
-  console.log(asd);
   return (
     <>
       <NavBar isLoggedIn={!!localStorage.getItem(API.TOKEN_KEY)} />
 
-      <ListGames games={games.list} title={"GAMES "} />
-
-      <Paginacion
-        currentPage={currentPage}
-        totalPages={games.list.amountOfPages}
-        onPageChange={setCurrentPage}
-      />
+      <ListGames games={userLogged.games} title={"GAMES "} />
     </>
   );
 };

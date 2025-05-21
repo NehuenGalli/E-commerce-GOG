@@ -5,6 +5,7 @@ import { ROUTES } from "../../constants";
 import SearchForm from "./searchForm";
 
 const NavBar = ({ isLoggedIn }) => {
+  console.log(isLoggedIn);
   return (
     <nav className="navbar navbar-expand-lg py-0 fw-bolder shadow-lg">
       <div className="container gap-3 gap-lg-5 ">
@@ -36,7 +37,7 @@ const NavBar = ({ isLoggedIn }) => {
               LIBRARY
             </NavLink>
 
-            <SearchForm></SearchForm>
+            <SearchForm routeSearch={ROUTES.SEARCH}></SearchForm>
           </div>
           <div className="mx-5 d-flex ms-auto align-items-lg-center gap-2 my-lg-0 my-4">
             {!isLoggedIn && (

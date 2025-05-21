@@ -30,9 +30,17 @@ function App() {
             path={ROUTES.GAMES_BY_TAG}
             element={<TagGames isLoggedIn={isLoggedIn} />}
           />
+          <Route
+            path={ROUTES.SEARCH}
+            element={<SearchGames />}
+            isLoggedIn={isLoggedIn}
+          />
+          <Route
+            path={ROUTES.LIBRARY}
+            element={<Library />}
+            isLoggedIn={isLoggedIn}
+          />
         </Routes>
-        <Route path={ROUTES.SEARCH} element={<SearchGames />} />
-        <Route path={ROUTES.LIBRARY} element={<Library />} />
       </BrowserRouter>
     </>
   );

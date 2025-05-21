@@ -1,13 +1,14 @@
 import ListGames from "../components/listGames/listGames";
 import Paginacion from "../components/pagination/paginacion";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router";
+import { useSearchParams } from "react-router";
 import axios from "axios";
 import NavBar from "../components/navBar/navBar";
 import { API } from "../constants";
 
 const SearchGames = () => {
-  const searchData = useParams();
+  const [searchParams] = useSearchParams();
+  const query = searchParams.get("q");
 
   const [games, setGames] = useState({
     list: [],
@@ -19,27 +20,24 @@ const SearchGames = () => {
   const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
+    if (!query) return;
+
     axios
-      .get(
-        `${API.BASE_URL}/search?query=${searchData.search}&page=${currentPage}`
-      )
+      .get(`${API.BASE_URL}/search?name=${query}&page=${currentPage}`)
       .then((response) => setGames(response.data))
-      .catch((error) => console.error(error));
-  }, [searchData, currentPage]);
+      .catch((error) => console.log(error));
+  }, [query, currentPage]);
 
-  const dataa = axios.get(`${API.BASE_URL}/users/current`);
-
-  // useEffect(() => {
-  //   axios
-  //     .get(`${API.BASE_URL}/search/${searchData.search}&page=${currentPage}`)
-  //     .then((response) => setGames(response.data))
-  //     .catch((error) => console.error(error));
-  // }, [searchData, currentPage]);
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [query]);
 
   return (
     <>
       <NavBar isLoggedIn={!!localStorage.getItem(API.TOKEN_KEY)} />
-      <ListGames games={games.list} title={"SEARCH: " + searchData.search} />
+      <ListGames games={games.list} title={"SEARCH: " + query} />
+      {/* Aquí puedes usar el componente Paginacion si lo tienes */}
+      {/* <Paginacion currentPage={currentPage} totalPages={games.amountOfPages} onChangePage={setCurrentPage} /> */}
     </>
   );
 };
