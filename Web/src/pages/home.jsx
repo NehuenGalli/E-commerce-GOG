@@ -37,7 +37,7 @@ const Home = ({ isLoggedIn }) => {
 
   return (
     <>
-      <NavBar isLoggedIn={isLoggedIn} />
+      {/* <NavBar isLoggedIn={isLoggedIn} /> */}
       {isLoadingRecommendedGames ? (
         <CarrucelSkelton />
       ) : (
