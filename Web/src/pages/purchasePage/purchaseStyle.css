@@ -1,0 +1,47 @@
+.formPurchase {
+  display: flex;
+  justify-content: center;
+  background-color: #212121;
+  opacity: 1;
+  width: 400px;
+  margin: auto;
+  padding: 10px;
+  border-radius: 10px;
+  height: auto;
+}
+
+label {
+  color: white;
+}
+.colorOfForm.size {
+  width: 50% !important;
+  height: 400px !important;
+}
+.btn.btn-primary.persButton {
+  background-color: #7dc215 !important;
+  color: black !important;
+  border-color: #7dc215 !important;
+  margin-top: 20px;
+  width: 50%;
+  border-radius: 10px;
+}
+
+.formP {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.inputP {
+  width: 300px;
+}
+
+.purchaseAndcheckOut {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.colorOfForm {
+  background-color: #212121;
+}
