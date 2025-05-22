@@ -2,6 +2,7 @@ import { Link, NavLink, Route } from "react-router";
 import gogLogo from "../../assets/gog.svg";
 import "./navBar.css";
 import { ROUTES } from "../../constants";
+import SearchForm from "../search/searchForm";
 
 const NavBar = ({ isLoggedIn }) => {
   return (
@@ -30,18 +31,12 @@ const NavBar = ({ isLoggedIn }) => {
             </NavLink>
             <NavLink
               className="nav-link"
-              to={isLoggedIn ? "/library" : ROUTES.LOGIN}
+              to={isLoggedIn ? ROUTES.LIBRARY : ROUTES.LOGIN}
             >
               LIBRARY
             </NavLink>
-            <form className="d-flex align-items-center border-bottom border-white w-50 ">
-              <i className="bi bi-search"></i>
-              <input
-                className="form-control border-0 bg-transparent shadow-none py-0 ps-2 buscador"
-                type="search"
-                placeholder="SEARCH"
-              />
-            </form>
+
+            <SearchForm routeSearch={ROUTES.SEARCH}></SearchForm>
           </div>
           <div className="mx-5 d-flex ms-auto align-items-lg-center gap-2 my-lg-0 my-4">
             {!isLoggedIn && (

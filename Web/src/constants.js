@@ -1,7 +1,7 @@
 export const API = {
   BASE_URL: "http://localhost:3000",
   AUTH_HEADER: "authorization",
-  TOKEN_KEY: "token",
+  TOKEN_KEY: "jwt",
 };
 
 export const ROUTES = {
@@ -12,4 +12,7 @@ export const ROUTES = {
   GAME_DETAIL: "/game/:gameId",
   RECOMMENDED: "/games/recommended",
   LOGIN: "/login",
+  SEARCH: "/search",
+  LIBRARY: "/library",
+  USER_CURRENT: "/users/current",
 };
