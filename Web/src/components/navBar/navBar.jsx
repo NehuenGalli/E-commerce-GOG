@@ -5,7 +5,6 @@ import { ROUTES } from "../../constants";
 import SearchForm from "./searchForm";
 
 const NavBar = ({ isLoggedIn }) => {
-  console.log(isLoggedIn);
   return (
     <nav className="navbar navbar-expand-lg py-0 fw-bolder shadow-lg">
       <div className="container gap-3 gap-lg-5 ">
@@ -32,7 +31,7 @@ const NavBar = ({ isLoggedIn }) => {
             </NavLink>
             <NavLink
               className="nav-link"
-              to={isLoggedIn ? ROUTES.LIBRARY : ROUTES.LIBRARY}
+              to={isLoggedIn ? ROUTES.LIBRARY : ROUTES.LOGIN}
             >
               LIBRARY
             </NavLink>

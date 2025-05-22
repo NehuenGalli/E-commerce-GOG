@@ -4,17 +4,17 @@ import "./listGames.css";
 const ListGames = ({ games, title, displayUser }) => {
   return (
     <>
-      <div className="container mt-5">
-        <h1>{title}</h1>
+      <div className="container mt-3">
+        <h2>{title}</h2>
 
         {games.map((game) => (
-          <div className="card mb-3 mx-5">
+          <div key={game.id} className="card mb-3 mx-5">
             <div className="row g-0">
               <div className="col-md-4">
                 <img
                   src={game.mainImage}
-                  className="img-fluid rounded-start object-fit-cover"
-                  alt="..."
+                  className="w-100 object-fit-cover"
+                  alt={game.name}
                 />
               </div>
 

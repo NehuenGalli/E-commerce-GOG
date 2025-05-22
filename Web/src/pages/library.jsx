@@ -1,13 +1,11 @@
 import ListGames from "../components/listGames/listGames";
-import Paginacion from "../components/pagination/paginacion";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router";
-import axios from "axios";
 import NavBar from "../components/navBar/navBar";
-import { API } from "../constants";
-import UserBar from "../components/user/userBar";
+import UserHeader from "../components/user/userHeader";
+import { userCurrent } from "../services/userService";
+import { toast, ToastContainer } from "react-toastify";
 
-const Library = () => {
+const Library = ({ logOut, isLoggedIn }) => {
   const [userLogged, setUserLogged] = useState({
     id: "",
     email: "",
@@ -16,39 +14,30 @@ const Library = () => {
     backgroundImage: "",
     games: [],
   });
-
-  const [currentPage, setCurrentPage] = useState(1);
-
-  // useEffect(() => {
-  //   axios
-  //     .get(`${API.BASE_URL}/users/current`)
-  //     .then((response) => setUserLogged(response.data));
-  // }, []);
+  const navBar = <NavBar isLoggedIn={isLoggedIn} />;
+  useEffect(() => {
+    {
+      navBar;
+    }
+  }, [isLoggedIn]);
 
   useEffect(() => {
-    const token = !!localStorage.getItem("jwt");
-
-    if (token) {
-      axios
-        .get(`${API.BASE_URL}/users/current`, {
-          headers: {
-            Authorization: localStorage.getItem("jwt"),
-          },
-        })
-        .then((response) => {
-          setUserLogged(response.data);
-        })
-        .catch((error) => {
-          console.error("Error al obtener el usuario:", error);
-        });
-    }
+    userCurrent()
+      .then((userInfo) => {
+        setUserLogged(userInfo);
+      })
+      .catch((error) => {
+        toast.error(error);
+      });
   }, []);
 
   return (
     <>
-      <NavBar isLoggedIn={!!localStorage.getItem(API.TOKEN_KEY)} />
-      <UserBar user={userLogged}></UserBar>
+      {navBar}
+      <UserHeader user={userLogged} logOut={logOut}></UserHeader>
       <ListGames games={userLogged.games} title={"GAMES "} displayUser={true} />
+
+      <ToastContainer />
     </>
   );
 };

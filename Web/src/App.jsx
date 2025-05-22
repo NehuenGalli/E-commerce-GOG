@@ -12,7 +12,7 @@ function App() {
     !!localStorage.getItem(API.TOKEN_KEY)
   );
   const logIn = () => setIsLoggedIn(true);
-  // const logOut = () => setIsLoggedIn(false);
+  const logOut = () => setIsLoggedIn(false);
 
   return (
     <>
@@ -32,13 +32,11 @@ function App() {
           />
           <Route
             path={ROUTES.SEARCH}
-            element={<SearchGames />}
-            isLoggedIn={isLoggedIn}
+            element={<SearchGames isLoggedIn={isLoggedIn} />}
           />
           <Route
             path={ROUTES.LIBRARY}
-            element={<Library />}
-            isLoggedIn={isLoggedIn}
+            element={<Library logOut={logOut} isLoggedIn={isLoggedIn} />}
           />
         </Routes>
       </BrowserRouter>
