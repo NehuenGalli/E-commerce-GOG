@@ -25,7 +25,6 @@ const GameExtraInfo = ({ game, needUser }) => {
       )}
 
       {game.price && !needUser && (
-        //
         <div className="col-md-2 d-flex align-items-center justify-content-end violeta">
           <div className="d-flex flex-column m-5 align-items-center">
             <h4>{game.price.currency}</h4>
