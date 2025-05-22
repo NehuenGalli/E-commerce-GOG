@@ -1,9 +1,10 @@
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router";
 import { ROUTES, API } from "./constants";
-import Home from "./pages/home";
 import TagGames from "./pages/tagGames";
 import Login from "./pages/login";
+import Home from "./pages/home/home";
+import Tags from "./pages/tags/tags";
 import { useState } from "react";
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(
@@ -28,6 +29,7 @@ function App() {
             path={ROUTES.GAMES_BY_TAG}
             element={<TagGames isLoggedIn={isLoggedIn} />}
           />
+          <Route path={ROUTES.Tags} element={<Tag />} />
         </Routes>
       </BrowserRouter>
     </>

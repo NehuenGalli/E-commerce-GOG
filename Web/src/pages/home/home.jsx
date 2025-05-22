@@ -1,12 +1,12 @@
-import NavBar from "../components/navBar/navBar";
+import NavBar from "../../components/navBar/navBar";
 import { useEffect, useState } from "react";
-import ListAllGames from "../components/listAllGames/listAllGames";
-import Carrusel from "../components/carrusel/carrusel";
-import TagSlides from "../components/tagSlides/tagSlides";
-import { getRecommendedGames, getTags } from "../services/gameServices";
+import ListGames from "./listGames/listGames";
+import Carrusel from "../../components/carrusel/carrusel";
+import TagSlides from "../../components/tagSlides/tagSlides";
+import { getRecommendedGames, getTags } from "../../services/gameServices";
 import { ToastContainer, toast } from "react-toastify";
-import { CarrucelSkelton } from "../components/skelton/GameCardSkelton/CarrucelSkelton";
-import { SlideSkelton } from "../components/skelton/GameCardSkelton/SlideSkelton";
+import { CarrucelSkelton } from "../../components/skelton/GameCardSkelton/CarrucelSkelton";
+import { SlideSkelton } from "../../components/skelton/GameCardSkelton/SlideSkelton";
 
 const Home = ({ isLoggedIn }) => {
   const [recommendedGames, setRecommendedGames] = useState([]);
@@ -44,7 +44,7 @@ const Home = ({ isLoggedIn }) => {
         <Carrusel recommendedGames={recommendedGames} />
       )}
       {isLoadingTags ? <SlideSkelton /> : <TagSlides tags={tags} />}
-      <ListAllGames />
+      <ListGames />
       <ToastContainer />
     </>
   );
