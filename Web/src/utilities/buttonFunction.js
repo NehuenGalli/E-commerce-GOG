@@ -1,7 +1,7 @@
 import { API, ROUTES } from "../constants";
 
 const logOutFunction = (logOut, navigate) => {
-  logOut;
+  logOut();
   localStorage.removeItem(API.TOKEN_KEY);
   navigate(ROUTES.HOME);
 };

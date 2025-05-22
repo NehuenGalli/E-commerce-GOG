@@ -13,7 +13,7 @@ const UserHeader = ({ user, logOut }) => {
             <span className="fw-semibold ">{user.name}</span>
           </div>
           <div className="ms-auto">
-            <ActionButtons haveLoggout={true} logOut={logOut}></ActionButtons>
+            <ActionButtons haveLoggout={true} logOut={logOut} />
           </div>
         </div>
       </div>

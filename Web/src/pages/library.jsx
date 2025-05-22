@@ -14,12 +14,6 @@ const Library = ({ logOut, isLoggedIn }) => {
     backgroundImage: "",
     games: [],
   });
-  const navBar = <NavBar isLoggedIn={isLoggedIn} />;
-  useEffect(() => {
-    {
-      navBar;
-    }
-  }, [isLoggedIn]);
 
   useEffect(() => {
     userCurrent()
@@ -33,7 +27,6 @@ const Library = ({ logOut, isLoggedIn }) => {
 
   return (
     <>
-      {navBar}
       <UserHeader user={userLogged} logOut={logOut}></UserHeader>
       <ListGames games={userLogged.games} title={"GAMES "} displayUser={true} />
 

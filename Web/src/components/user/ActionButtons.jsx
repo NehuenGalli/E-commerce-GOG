@@ -1,8 +1,9 @@
 import { logOutFunction } from "../../utilities/buttonFunction";
 import { useNavigate } from "react-router";
 
-const ActionButtons = (haveLoggout, logOut) => {
+const ActionButtons = ({ haveLoggout, logOut }) => {
   const navigate = useNavigate();
+
   return (
     <>
       {haveLoggout && (

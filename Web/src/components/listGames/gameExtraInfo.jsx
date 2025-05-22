@@ -2,7 +2,6 @@ import { Link } from "react-router";
 import { ROUTES } from "../../constants";
 
 const GameExtraInfo = ({ game, needUser }) => {
-  const token = !!localStorage.getItem("jwt");
   return (
     <>
       {game.tags && (
