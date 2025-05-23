@@ -21,7 +21,7 @@ export const GameCardSkelton = ({ count }) => {
                     </div>
                     <Skeleton
                       height={20}
-                      className="fw-bolder font-color-price text-end mt-auto"
+                      className="fw-bolder text-end mt-auto"
                     />
                   </div>
                 </div>

@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
 import { getGames } from "../../../services/gameServices";
 import Paginacion from "../../../components/pagination/paginacion";
-import NewsSection from "../newsSection/newsSection";
+import ListAllGames from "../../../components/listAllGames/listAllGames";
 import { ToastContainer, toast } from "react-toastify";
 import { GameCardSkelton } from "../../../components/skelton/GameCardSkelton/GameCardSkelton";
 
-const ListAllGames = () => {
+const TrendingSection = () => {
   const [games, setGames] = useState({
     list: [],
     currentPage: 1,
@@ -31,7 +31,10 @@ const ListAllGames = () => {
       {isLoading && <GameCardSkelton count={9} />}
       {!isLoading && (
         <>
-          <NewsSection games={games} />
+          <div className="container my-4">
+            <h3 className="mb-4">NEW & TRENDING</h3>
+            <ListAllGames games={games} />
+          </div>
           <Paginacion
             currentPage={currentPage}
             totalPages={games.amountOfPages}
@@ -44,4 +47,4 @@ const ListAllGames = () => {
   );
 };
 
-export default ListAllGames;
+export default TrendingSection;
