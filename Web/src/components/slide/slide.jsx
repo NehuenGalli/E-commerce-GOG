@@ -35,7 +35,7 @@ const Slide = ({ list, extraSlide }) => {
               <img
                 src={e.image}
                 alt={e.name}
-                className="card-img object-fit-cover"
+                className="card-img object-fit-cover opacity-75 "
               />
               <div className="card-img-overlay d-flex justify-content-center align-items-end">
                 <h5 className="card-title text-uppercase">{e.name}</h5>
