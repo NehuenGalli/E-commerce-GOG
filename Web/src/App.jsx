@@ -1,14 +1,14 @@
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router";
 import { ROUTES, API } from "./constants";
-import Home from "./pages/home";
+import { useState } from "react";
 import TagGames from "./pages/tagGames";
 import SearchGames from "./pages/searchGames";
 import Library from "./pages/library";
 import Login from "./pages/login";
-import { useState, useEffect } from "react";
+import Home from "./pages/home/home";
+import Tags from "./pages/tags/tags";
 import NavBar from "./components/navBar/navBar";
-import { useNavigate } from "react-router";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(
@@ -28,6 +28,7 @@ function App() {
           <Route path={ROUTES.GAMES_BY_TAG} element={<TagGames />} />
           <Route path={ROUTES.SEARCH} element={<SearchGames />} />
           <Route path={ROUTES.LIBRARY} element={<Library logOut={logOut} />} />
+          <Route path={ROUTES.TAGS} element={<Tags />} />
         </Routes>
       </BrowserRouter>
     </>

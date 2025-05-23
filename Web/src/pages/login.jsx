@@ -1,19 +1,14 @@
 import LoginForm from "../components/loginForm/login";
 import { useNavigate } from "react-router";
 import { login } from "../services/userService";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import NavBar from "../components/navBar/navBar";
 
-const Login = () => {
+const Login = ({ logIn }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
   const navigate = useNavigate();
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-
-  useEffect(() => {
-    setIsAuthenticated(!!localStorage.getItem("jwt"));
-  }, []);
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -29,6 +24,7 @@ const Login = () => {
 
     try {
       await login({ email: trimmedEmail, password: trimmedPassword });
+      logIn();
       navigate("/");
     } catch (error) {
       setError(error.message);

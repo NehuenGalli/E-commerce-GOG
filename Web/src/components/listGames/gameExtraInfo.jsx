@@ -5,7 +5,7 @@ const GameExtraInfo = ({ game, needUser }) => {
   return (
     <>
       {game.tags && (
-        <div className="col-md-6">
+        <div className="col-lg-6">
           <div className="card-body">
             <h1 className="card-title">{game.name}</h1>
 
@@ -25,10 +25,10 @@ const GameExtraInfo = ({ game, needUser }) => {
       )}
 
       {game.price && !needUser && (
-        <div className="col-md-2 d-flex align-items-center justify-content-end violeta">
-          <div className="d-flex flex-column m-5 align-items-center">
-            <h4>{game.price.currency}</h4>
-            <h4>{game.price.amount.toFixed(2)}</h4>
+        <div className="col-lg-2 d-flex align-items-center justify-content-end violeta ">
+          <div className="d-flex flex-lg-column mb-2 mb-lg-0 me-3  me-lg-5 gap-3 gap-lg-0 ">
+            <h3>{game.price.currency}</h3>
+            <h3>{game.price.amount.toFixed(2)}</h3>
           </div>
         </div>
       )}
