@@ -28,7 +28,7 @@ function App() {
           <Route path={ROUTES.GAMES_BY_TAG} element={<TagGames />} />
           <Route path={ROUTES.SEARCH} element={<SearchGames />} />
           <Route path={ROUTES.LIBRARY} element={<Library logOut={logOut} />} />
-          <Route path={ROUTES.Tags} element={<Tags />} />
+          <Route path={ROUTES.TAGS} element={<Tags />} />
         </Routes>
       </BrowserRouter>
     </>

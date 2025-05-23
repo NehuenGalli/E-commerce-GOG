@@ -1,4 +1,3 @@
-import NavBar from "../../components/navBar/navBar";
 import { useEffect, useState } from "react";
 import ListGames from "./listGames/listGames";
 import Carrusel from "../../components/carrusel/carrusel";
@@ -8,7 +7,7 @@ import { ToastContainer, toast } from "react-toastify";
 import { CarrucelSkelton } from "../../components/skelton/GameCardSkelton/CarrucelSkelton";
 import { SlideSkelton } from "../../components/skelton/GameCardSkelton/SlideSkelton";
 
-const Home = ({ isLoggedIn }) => {
+const Home = () => {
   const [recommendedGames, setRecommendedGames] = useState([]);
   const [tags, setTags] = useState([]);
   const [isLoadingRecommendedGames, setIsLoadingRecommendedGames] =
@@ -37,7 +36,6 @@ const Home = ({ isLoggedIn }) => {
 
   return (
     <>
-      {/* <NavBar isLoggedIn={isLoggedIn} /> */}
       {isLoadingRecommendedGames ? (
         <CarrucelSkelton />
       ) : (
