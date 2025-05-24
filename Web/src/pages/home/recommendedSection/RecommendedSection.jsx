@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { getRecommendedGames } from "../../../services/gameServices";
 import Carrusel from "../../../components/carrusel/carrusel";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import { CarrucelSkelton } from "../../../components/skelton/GameCardSkelton/CarrucelSkelton";
 const RecommendedSection = () => {
   const [recommendedGames, setRecommendedGames] = useState([]);
@@ -25,12 +25,11 @@ const RecommendedSection = () => {
       {isLoadingRecommendedGames ? (
         <CarrucelSkelton />
       ) : (
-        <div className="container my-4 ">
-          <h3 className="mb-4">FEATURED & RECOMMENDED</h3>
+        <>
+          <h3 className="my-4">FEATURED & RECOMMENDED</h3>
           <Carrusel recommendedGames={recommendedGames} />
-        </div>
+        </>
       )}
-      <ToastContainer />
     </>
   );
 };
