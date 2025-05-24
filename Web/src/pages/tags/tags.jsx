@@ -11,7 +11,10 @@ const Tags = () => {
   }, []);
   return (
     <>
-      <ListAllTags tags={tags} />
+      <div className="container">
+        <h3 className="my-4">BROWSE BY CATEGORY</h3>
+        <ListAllTags tags={tags} />
+      </div>
       <ToastContainer />
     </>
   );
