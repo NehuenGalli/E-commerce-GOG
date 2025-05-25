@@ -9,6 +9,7 @@ import Login from "./pages/login";
 import Home from "./pages/home/home";
 import Tags from "./pages/tags/tags";
 import NavBar from "./components/navBar/navBar";
+import User from "./pages/user";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(
@@ -29,6 +30,7 @@ function App() {
           <Route path={ROUTES.SEARCH} element={<SearchGames />} />
           <Route path={ROUTES.LIBRARY} element={<Library logOut={logOut} />} />
           <Route path={ROUTES.TAGS} element={<Tags />} />
+          <Route path={ROUTES.USER} element={<User />} />
         </Routes>
       </BrowserRouter>
     </>

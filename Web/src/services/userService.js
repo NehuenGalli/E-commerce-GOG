@@ -20,7 +20,7 @@ const login = async ({ email, password }) => {
   }
 };
 
-const userCurrent = (page) =>
+const userCurrent = () =>
   api
     .get(`${API.BASE_URL}${ROUTES.USER_CURRENT}`, {
       headers: {
