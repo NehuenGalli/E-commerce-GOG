@@ -15,6 +15,7 @@ export const ROUTES = {
   SEARCH: "/search",
   LIBRARY: "/library",
   USER_CURRENT: "/users/current",
-  USER: "/user",
+  USERS: "/users",
+  USER_BY_ID: "/user/:userId",
   USER_REVIEWS: "/userReviews",
 };

@@ -30,7 +30,7 @@ function App() {
           <Route path={ROUTES.SEARCH} element={<SearchGames />} />
           <Route path={ROUTES.LIBRARY} element={<Library logOut={logOut} />} />
           <Route path={ROUTES.TAGS} element={<Tags />} />
-          <Route path={ROUTES.USER} element={<User />} />
+          <Route path={ROUTES.USER_BY_ID} element={<User />} />
         </Routes>
       </BrowserRouter>
     </>

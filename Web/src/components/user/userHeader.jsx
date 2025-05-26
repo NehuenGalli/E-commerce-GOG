@@ -3,7 +3,7 @@ import ActionButtons from "./ActionButtons";
 import { Link } from "react-router";
 import { ROUTES } from "../../constants";
 
-const UserHeader = ({ user, logOut }) => {
+const UserHeader = ({ user, logOut, idUserLogged }) => {
   return (
     <>
       <div className="container-xl mt-4">
@@ -17,7 +17,11 @@ const UserHeader = ({ user, logOut }) => {
             <span className="fw-semibold ">{user.name}</span>
           </div>
           <div className="ms-auto">
-            <ActionButtons logOut={logOut} />
+            <ActionButtons
+              logOut={logOut}
+              user={user}
+              idUserLogged={idUserLogged}
+            />
           </div>
         </div>
       </div>

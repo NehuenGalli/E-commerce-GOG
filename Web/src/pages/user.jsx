@@ -5,9 +5,21 @@ import { userCurrent } from "../services/userService";
 import { toast, ToastContainer } from "react-toastify";
 import { API, ROUTES } from "../constants";
 import axios from "axios";
+import { useParams } from "react-router";
 
-const User = ({ logOut, isLoggedIn }) => {
+const User = () => {
+  const { userId } = useParams();
+
   const [userLogged, setUserLogged] = useState({
+    id: "",
+    email: "",
+    name: "",
+    image: "",
+    backgroundImage: "",
+    games: [],
+  });
+
+  const [userInfo, setUserInfo] = useState({
     id: "",
     email: "",
     name: "",
@@ -29,16 +41,26 @@ const User = ({ logOut, isLoggedIn }) => {
   }, []);
 
   useEffect(() => {
-    if (!userLogged.id) return;
     axios
-      .get(`${API.BASE_URL}${ROUTES.USER_REVIEWS}/${userLogged.id}`)
+      .get(`${API.BASE_URL}${ROUTES.USERS}/${userId}`)
+      .then((userInfo) => {
+        setUserInfo(userInfo.data);
+      })
+      .catch((error) => {
+        toast.error(error);
+      });
+  }, []);
+
+  useEffect(() => {
+    axios
+      .get(`${API.BASE_URL}${ROUTES.USER_REVIEWS}/${userId}`)
       .then((reviewsInfo) => {
         setReviews(reviewsInfo.data);
       })
       .catch((error) => {
         toast.error(error);
       });
-  }, [userLogged.id]);
+  }, []);
 
   const reviewsFormated = reviews.map((review) => ({
     id: review.id,
@@ -48,10 +70,9 @@ const User = ({ logOut, isLoggedIn }) => {
     isRecommended: review.isRecommended,
   }));
 
-  console.log(reviewsFormated);
   return (
     <>
-      <UserHeader user={userLogged}></UserHeader>
+      <UserHeader user={userInfo} idUserLogged={userLogged.id}></UserHeader>
       <ListGames games={reviewsFormated} title={"GAMES "} displayUser={true} />
       <ToastContainer />
     </>

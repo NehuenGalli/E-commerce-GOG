@@ -1,5 +1,7 @@
 import axios from "axios";
 import { API, ROUTES } from "../constants";
+import { addFriend, removeFriend } from "../utilities/success_message";
+import { errorMessage } from "../utilities/error_message";
 
 const api = axios.create({
   baseURL: API.BASE_URL,
@@ -32,4 +34,38 @@ const userCurrent = () =>
       throw errorMessage(error);
     });
 
-export { login, userCurrent };
+const friendsUserLogged = (idUserLogged) =>
+  api
+    .get(`${API.BASE_URL}${ROUTES.USERS}/${idUserLogged}/friends`)
+    .then((res) => res.data)
+    .catch((error) => {
+      throw errorMessage(error);
+    });
+
+const addOrRemoveF = (idFriend, idUserLogged) =>
+  api
+    .put(
+      `${API.BASE_URL}${ROUTES.USERS}/${idFriend}/friends`,
+      {},
+      {
+        headers: {
+          Authorization: localStorage.getItem(API.TOKEN_KEY),
+        },
+      }
+    )
+    .then((res) => {
+      //friendsUserLogged le manda una promesa, hay que hacer que devuelva la lista
+      const listFriend = [];
+      friendsUserLogged(idUserLogged).then((res) => (listFriend = res));
+      console.log(listFriend);
+      if (listFriend.some((friend) => friend.id === idUserLogged)) {
+        addFriend;
+      } else {
+        removeFriend;
+      }
+    })
+    .catch((error) => {
+      throw errorMessage(error);
+    });
+
+export { login, userCurrent, friendsUserLogged, addOrRemoveF };
