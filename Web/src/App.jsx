@@ -9,6 +9,8 @@ import Login from "./pages/login";
 import Home from "./pages/home/home";
 import Tags from "./pages/tags/tags";
 import NavBar from "./components/navBar/navBar";
+import Game from "./pages/game";
+import Register from "./pages/register";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(
@@ -29,6 +31,9 @@ function App() {
           <Route path={ROUTES.SEARCH} element={<SearchGames />} />
           <Route path={ROUTES.LIBRARY} element={<Library logOut={logOut} />} />
           <Route path={ROUTES.TAGS} element={<Tags />} />
+          <Route path={ROUTES.GAME_DETAIL} element={<Game />} />
+          <Route path={ROUTES.REGISTER}element={<Register />} />
+
         </Routes>
       </BrowserRouter>
     </>

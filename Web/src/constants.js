@@ -7,7 +7,7 @@ export const API = {
 export const ROUTES = {
   HOME: "/",
   TAGS: "/tags",
-  GAMES: "/games",
+  GAMES: "/games/:gameId",
   GAMES_BY_TAG: "/games/:tagId",
   GAME_DETAIL: "/game/:gameId",
   RECOMMENDED: "/games/recommended",
@@ -15,4 +15,5 @@ export const ROUTES = {
   SEARCH: "/search",
   LIBRARY: "/library",
   USER_CURRENT: "/users/current",
+  REGISTER:"/register",
 };
