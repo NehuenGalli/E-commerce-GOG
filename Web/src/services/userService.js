@@ -21,4 +21,19 @@ const login = async ({ email, password }) => {
   }
 };
 
-export { login };
+const getCart = async (token) => {
+  try {
+    const response = await api.get("/users/current/cart", {
+      headers: {
+        Authorization: token,
+      },
+    });
+
+    return response.data;
+  } catch (error) {
+    const errorMessage = error.response?.data?.error || "Failed to fetch cart";
+    throw new Error(errorMessage);
+  }
+}
+
+export { login, getCart };
