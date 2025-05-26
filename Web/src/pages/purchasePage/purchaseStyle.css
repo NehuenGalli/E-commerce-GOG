@@ -2,12 +2,12 @@ label {
   color: white;
 }
 
-.containerForm{
+.containerForm {
   margin-right: 30px;
   margin-top: 30px;
 }
 
-.container-checkOut{
+.container-checkOut {
   padding: 2rem;
   flex: 1 1 280px;
   max-width: 400px;
@@ -26,11 +26,12 @@ label {
 }
 
 .form-control.inputP {
-  width: 400px;
+  width: 300px;
 }
 
 .formBGColor {
   background-color: #212121;
+  width: 400px;
 }
 
 .purchaseAndcheckOut {
