@@ -19,6 +19,7 @@ const FormPurchase = ({items}) => {
     purchase(nameCard, numCard, expDate, cvv)
       .then((response) => {
         toast.success(response.data);
+        localStorage.removeItem("cart");
         navigate(ROUTES.LIBRARY);
       })
       .catch((error) => {
