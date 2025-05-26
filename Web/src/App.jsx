@@ -39,8 +39,7 @@ function App() {
           <Route path={ROUTES.LIBRARY} element={<Library logOut={logOut} />} />
           <Route path={ROUTES.TAGS} element={<Tags />} />
           <Route path={ROUTES.GAME_DETAIL} element={<Game />} />
-          <Route path={ROUTES.REGISTER}element={<Register />} />
-
+          <Route path={ROUTES.REGISTER} element={<Register />} />
           <Route path={ROUTES.CART} element={<Cart />} />
           <Route path={ROUTES.USER} element={<User />} />
           <Route path={ROUTES.PURCHASE} element={<Purchase isLoggedIn={isLoggedIn} />} />
