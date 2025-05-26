@@ -10,7 +10,7 @@ import Reviews from "../components/reviews/review"
 const Game = () => {
   const { gameId } = useParams();
   const [game, setGame] = useState(null);
-  const[user,setUser]= useState(null);
+  const [user,setUser]= useState(null);
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -42,7 +42,7 @@ const Game = () => {
       
 
         const response = await axios.get("http://localhost:3000/users/current");
-        setGame(response.data);
+        setUser(response.data);
       } catch (error) {
         console.error("Error al obtener los datos del juego:", error);
         setError(error.response?.data?.message || error.message || 'Error al pedir usuario el juego');
