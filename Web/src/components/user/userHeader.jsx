@@ -1,5 +1,7 @@
 import "./userHeader.css";
 import ActionButtons from "./ActionButtons";
+import { Link } from "react-router";
+import { ROUTES } from "../../constants";
 
 const UserHeader = ({ user, logOut }) => {
   return (
@@ -13,7 +15,7 @@ const UserHeader = ({ user, logOut }) => {
             <span className="fw-semibold ">{user.name}</span>
           </div>
           <div className="ms-auto">
-            <ActionButtons haveLoggout={true} logOut={logOut} />
+            <ActionButtons logOut={logOut} />
           </div>
         </div>
       </div>

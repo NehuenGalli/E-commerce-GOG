@@ -12,9 +12,12 @@ export const ROUTES = {
   GAME_DETAIL: "/game/:gameId",
   GAME_DELETE: "/games",
   RECOMMENDED: "/games/recommended",
+  PURCHASE: "/purchase",
   LOGIN: "/login",
   SEARCH: "/search",
   LIBRARY: "/library",
   USER_CURRENT: "/users/current",
   CART: "/cart",
+  USER: "/user",
+  USER_REVIEWS: "/userReviews",
 };

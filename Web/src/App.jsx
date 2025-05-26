@@ -13,6 +13,8 @@ import Cart from "./pages/cart";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+import User from "./pages/user";
+import Purchase from "./pages/purchasePage/purchase";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(
@@ -25,6 +27,7 @@ function App() {
   return (
     <>
       <BrowserRouter>
+
         <NavBar isLoggedIn={isLoggedIn} />
         <Routes>
           <Route path={ROUTES.HOME} element={<Home />} />
@@ -34,21 +37,11 @@ function App() {
           <Route path={ROUTES.LIBRARY} element={<Library logOut={logOut} />} />
           <Route path={ROUTES.TAGS} element={<Tags />} />
           <Route
-            path={ROUTES.HOME}
-            element={<Home isLoggedIn={isLoggedIn} />}
-          />
-          <Route
-            path={ROUTES.LOGIN}
-            element={<Login logIn={logIn} isLoggedIn={isLoggedIn} />}
-          />
-          <Route
-            path={ROUTES.GAMES_BY_TAG}
-            element={<TagGames isLoggedIn={isLoggedIn} />}
-          />
-          <Route
             path={ROUTES.CART}
             element={<Cart isLoggedIn={isLoggedIn} />}
           />
+          <Route path={ROUTES.USER} element={<User />} />
+          <Route path={ROUTES.PURCHASE} element={<Purchase />} />
         </Routes>
       </BrowserRouter>
       <ToastContainer />
