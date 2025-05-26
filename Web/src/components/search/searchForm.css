@@ -1,0 +1,12 @@
+.buscador {
+  color: rgba(255, 255, 255, 0.55) !important;
+}
+
+.buscador::placeholder {
+  color: rgba(255, 255, 255, 0.55) !important;
+  opacity: 1;
+}
+
+.buscador.i {
+  color: white !important;
+}
