@@ -21,6 +21,17 @@ const login = async ({ email, password }) => {
   }
 };
 
+const register = async (formData) => {
+  try {
+    const response = await api.post(ROUTES.REGISTER, formData);
+    return response.data;
+  } catch (error) {
+    const errorMessage =
+      error.response?.data?.message || error.message || "Registration failed";
+    throw new Error(errorMessage);
+  }
+};
+
 const userCurrent = () =>
   api
     .get(`${API.BASE_URL}${ROUTES.USER_CURRENT}`, {
@@ -43,9 +54,9 @@ const getCart = async (token) => {
 
     return response.data;
   } catch (error) {
-    const errorMessage = error.response?.data?.error || "Failed to fetch cart";
+    const errorMessage = error.response?.data?.error || error.message || "Failed to fetch cart";
     throw new Error(errorMessage);
   }
 }
 
-export { login, getCart, userCurrent };
+export { login, getCart, userCurrent, register };

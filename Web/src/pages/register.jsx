@@ -1,47 +1,58 @@
 import RegisterForm from "../components/registerForm/registerForm";
 import { useNavigate } from "react-router";
-import { login } from "../services/userService";
+import { register } from "../services/userService";
 import { useState } from "react";
-import NavBar from "../components/navBar/navBar";
+import { ROUTES } from "../constants";
 
-const Register = ({ logIn }) => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+const Register = () => {
+  
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+    name: "",
+    image: "",
+    backgroundImage: ""
+  });
+
   const [error, setError] = useState(null);
   const navigate = useNavigate();
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value
+    }));
+  };
 
   const onSubmit = async (e) => {
     e.preventDefault();
     e.stopPropagation();
 
-    const trimmedEmail = email.trim();
-    const trimmedPassword = password.trim();
+    const trimmedEmail = formData.email.trim();
+    const trimmedPassword = formData.password.trim();
+    const trimmedName = formData.name.trim();
 
-    if (!trimmedEmail || !trimmedPassword) {
-      setError("Fields cannot be empty");
+    if (!trimmedEmail || !trimmedPassword || !trimmedName) {
+      setError("Email, password and name cannot be empty");
       return;
     }
 
     try {
-      await login({ email: trimmedEmail, password: trimmedPassword });
-      logIn();
-      navigate("/");
+      await register(formData);
+      navigate(ROUTES.LOGIN);
     } catch (error) {
       setError(error.message);
     }
   };
 
   return (
-    <>
-      <RegisterForm
-        email={email}
-        password={password}
-        error={error}
-        onEmailChange={(e) => setEmail(e.target.value)}
-        onPasswordChange={(e) => setPassword(e.target.value)}
-        onSubmit={onSubmit}
-      />
-    </>
+    <RegisterForm
+      formData={formData}
+      onChange={handleChange}
+      onSubmit={onSubmit}
+      error={error} 
+    />
   );
 };
 
