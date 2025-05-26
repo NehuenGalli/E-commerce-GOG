@@ -31,4 +31,16 @@ const getGames = (page) =>
       throw errorMessage(error);
     });
 
-export { getRecommendedGames, getTags, getGames };
+const removeGame = (gameId, token) =>
+  api
+    .delete(`${ROUTES.GAME_DELETE}/${gameId}`, {
+      headers: {
+        Authorization: token,
+      },
+    })
+    .then((res) => res.data)
+    .catch((error) => {
+      throw errorMessage(error);
+    });
+
+export { getRecommendedGames, getTags, getGames, removeGame };

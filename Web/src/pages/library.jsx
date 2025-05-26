@@ -1,6 +1,5 @@
 import ListGames from "../components/listGames/listGames";
 import { useEffect, useState } from "react";
-import NavBar from "../components/navBar/navBar";
 import UserHeader from "../components/user/userHeader";
 import { userCurrent } from "../services/userService";
 import { toast, ToastContainer } from "react-toastify";
