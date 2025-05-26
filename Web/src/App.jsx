@@ -16,7 +16,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(
-    !!localStorage.getItem("jwt")
+    !!localStorage.getItem(API.TOKEN_KEY)
   );
 
   const logOut = () => setIsLoggedIn(false);

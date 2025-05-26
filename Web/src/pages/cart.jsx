@@ -1,11 +1,12 @@
 import EmptyCart from "../components/cart/emptyCart";
 import CartWithItems from "../components/cart/CartWithItems";   
-import NavBar from "../components/navBar/navBar";
 import { getCart } from "../services/userService";
 import { useNavigate } from 'react-router';
 import { useEffect, useState } from "react";
 import { removeGame } from "../services/gameServices";
 import { showRemovedFromCartToast } from "../services/toastService";
+import { ROUTES } from "../constants";
+import { API } from "../constants";
 
 
 
@@ -17,12 +18,12 @@ const Cart = () => {
     const [error, setError] = useState(null);
 
     useEffect(() => {
-        const token = localStorage.getItem("jwt");
+        const token = localStorage.getItem(API.TOKEN_KEY);
         const isAuth = !!token;
         setIsAuthenticated(isAuth);
 
         if (!isAuth) {
-            navigate("/login");
+            navigate(ROUTES.LOGIN);
         }
 
         getCart(token)
@@ -35,7 +36,7 @@ const Cart = () => {
     }, []);
 
     const handleRemove = async (gameId) => {
-        const token = localStorage.getItem("jwt");
+        const token = localStorage.getItem(API.TOKEN_KEY);
         try {
             await removeGame(gameId, token);
             showRemovedFromCartToast();
