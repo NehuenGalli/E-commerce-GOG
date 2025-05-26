@@ -1,5 +1,6 @@
 import axios from "axios";
 import { API, ROUTES } from "../constants";
+import { errorMessage } from "../utilities/error_message";
 
 const api = axios.create({
   baseURL: API.BASE_URL,
@@ -20,7 +21,7 @@ const login = async ({ email, password }) => {
   }
 };
 
-const userCurrent = (page) =>
+const userCurrent = () =>
   api
     .get(`${API.BASE_URL}${ROUTES.USER_CURRENT}`, {
       headers: {
@@ -32,4 +33,19 @@ const userCurrent = (page) =>
       throw errorMessage(error);
     });
 
-export { login, userCurrent };
+const getCart = async (token) => {
+  try {
+    const response = await api.get("/users/current/cart", {
+      headers: {
+        Authorization: token,
+      },
+    });
+
+    return response.data;
+  } catch (error) {
+    const errorMessage = error.response?.data?.error || "Failed to fetch cart";
+    throw new Error(errorMessage);
+  }
+}
+
+export { login, getCart, userCurrent };

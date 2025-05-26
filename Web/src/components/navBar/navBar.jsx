@@ -52,7 +52,7 @@ const NavBar = ({ isLoggedIn }) => {
             )}
 
             {isLoggedIn && (
-              <NavLink className="nav-link  " to="/">
+              <NavLink className="nav-link  " to="/cart">
                 <i className="bi bi-cart4 fs-1" />
               </NavLink>
             )}

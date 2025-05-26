@@ -50,6 +50,10 @@ app
   .get(tokenController.checkRole("public"), userController.getFriendsById)
   .put(tokenController.checkRole("user"), userController.addOrRemoveFriend);
 
+app
+  .route("/userReviews/:userId")
+  .get(tokenController.checkRole("public"), userController.getUserReviewsById);
+
 // Games
 app.get(
   "/games",

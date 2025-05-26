@@ -9,6 +9,12 @@ import Login from "./pages/login";
 import Home from "./pages/home/home";
 import Tags from "./pages/tags/tags";
 import NavBar from "./components/navBar/navBar";
+import Cart from "./pages/cart";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+import User from "./pages/user";
+import Purchase from "./pages/purchasePage/purchase";
 import Game from "./pages/game";
 import Register from "./pages/register";
 
@@ -23,6 +29,7 @@ function App() {
   return (
     <>
       <BrowserRouter>
+
         <NavBar isLoggedIn={isLoggedIn} />
         <Routes>
           <Route path={ROUTES.HOME} element={<Home />} />
@@ -34,8 +41,12 @@ function App() {
           <Route path={ROUTES.GAME_DETAIL} element={<Game />} />
           <Route path={ROUTES.REGISTER}element={<Register />} />
 
+          <Route path={ROUTES.CART} element={<Cart />} />
+          <Route path={ROUTES.USER} element={<User />} />
+          <Route path={ROUTES.PURCHASE} element={<Purchase isLoggedIn={isLoggedIn} />} />
         </Routes>
       </BrowserRouter>
+      <ToastContainer />
     </>
   );
 }
