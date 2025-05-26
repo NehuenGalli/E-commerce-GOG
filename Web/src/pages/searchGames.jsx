@@ -32,7 +32,6 @@ const SearchGames = () => {
 
   return (
     <>
-      <NavBar isLoggedIn={!!localStorage.getItem(API.TOKEN_KEY)} />
       <ListGames games={games.list} title={"SEARCH: " + query} />
 
       <Paginacion

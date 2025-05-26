@@ -1,45 +1,37 @@
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router";
 import { ROUTES, API } from "./constants";
-import Home from "./pages/Home";
+import { useState } from "react";
 import TagGames from "./pages/tagGames";
 import SearchGames from "./pages/searchGames";
 import Library from "./pages/library";
 import Login from "./pages/login";
-import { useState } from "react";
+import Home from "./pages/home/home";
+import Tags from "./pages/tags/tags";
+import NavBar from "./components/navBar/navBar";
+import User from "./pages/user";
 import Purchase from "./pages/purchasePage/purchase";
+
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(
     !!localStorage.getItem(API.TOKEN_KEY)
   );
-  const logIn = () => setIsLoggedIn(true);
+
   const logOut = () => setIsLoggedIn(false);
+  const logIn = () => setIsLoggedIn(true);
 
   return (
     <>
       <BrowserRouter>
+        <NavBar isLoggedIn={isLoggedIn} />
         <Routes>
-          <Route
-            path={ROUTES.HOME}
-            element={<Home isLoggedIn={isLoggedIn} />}
-          />
-          <Route
-            path={ROUTES.LOGIN}
-            element={<Login logIn={logIn} isLoggedIn={isLoggedIn} />}
-          />
-          <Route
-            path={ROUTES.GAMES_BY_TAG}
-            element={<TagGames isLoggedIn={isLoggedIn} />}
-          />
-          <Route
-            path={ROUTES.SEARCH}
-            element={<SearchGames isLoggedIn={isLoggedIn} />}
-          />
-          <Route
-            path={ROUTES.LIBRARY}
-            element={<Library logOut={logOut} isLoggedIn={isLoggedIn} />}
-          />
-
+          <Route path={ROUTES.HOME} element={<Home />} />
+          <Route path={ROUTES.LOGIN} element={<Login logIn={logIn} />} />
+          <Route path={ROUTES.GAMES_BY_TAG} element={<TagGames />} />
+          <Route path={ROUTES.SEARCH} element={<SearchGames />} />
+          <Route path={ROUTES.LIBRARY} element={<Library logOut={logOut} />} />
+          <Route path={ROUTES.TAGS} element={<Tags />} />
+          <Route path={ROUTES.USER} element={<User />} />
           <Route path={ROUTES.PURCHASE} element={<Purchase />} />
         </Routes>
       </BrowserRouter>
