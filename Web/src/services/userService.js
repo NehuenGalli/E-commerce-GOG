@@ -32,8 +32,6 @@ const userCurrent = (page) =>
       throw errorMessage(error);
     });
 
-export { login, userCurrent };
-
 const getCart = async (token) => {
   try {
     const response = await api.get("/users/current/cart", {
@@ -49,4 +47,4 @@ const getCart = async (token) => {
   }
 }
 
-export { login, getCart };
+export { login, getCart, userCurrent };

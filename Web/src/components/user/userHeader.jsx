@@ -8,7 +8,7 @@ const UserHeader = ({ user, logOut }) => {
         <div className="d-flex align-items-center">
           <div className="d-flex align-items-center gap-3">
             <div className="rounded-circle border border-black">
-              <img src={user.image} />
+              <img src={user.image} alt="user image"/>
             </div>
             <span className="fw-semibold ">{user.name}</span>
           </div>

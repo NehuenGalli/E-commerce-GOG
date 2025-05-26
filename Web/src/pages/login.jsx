@@ -2,7 +2,8 @@ import LoginForm from "../components/loginForm/login";
 import { useNavigate } from "react-router";
 import { login } from "../services/userService";
 import { useState } from "react";
-import NavBar from "../components/navBar/navBar";
+import { ROUTES } from "../constants";
+import { logInFunction } from "../utilities/buttonFunction";
 
 const Login = ({ logIn }) => {
   const [email, setEmail] = useState("");
@@ -24,8 +25,7 @@ const Login = ({ logIn }) => {
 
     try {
       await login({ email: trimmedEmail, password: trimmedPassword });
-      logIn();
-      navigate("/");
+      logInFunction(logIn, navigate);
     } catch (error) {
       setError(error.message);
     }

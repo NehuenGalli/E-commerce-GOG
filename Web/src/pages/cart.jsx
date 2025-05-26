@@ -48,7 +48,6 @@ const Cart = () => {
 
     return (
         <>
-            <NavBar isLoggedIn={isAuthenticated}/>
             {cart === null ? (
             <p>Loading...</p>
             ) : cart.games.length === 0 ? (

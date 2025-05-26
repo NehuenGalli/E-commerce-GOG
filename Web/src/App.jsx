@@ -9,9 +9,7 @@ import Login from "./pages/login";
 import Home from "./pages/home/home";
 import Tags from "./pages/tags/tags";
 import NavBar from "./components/navBar/navBar";
-
 import Cart from "./pages/cart";
-import { useState } from "react";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
