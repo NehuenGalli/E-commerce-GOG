@@ -1,4 +1,4 @@
-import { Link, NavLink, Route } from "react-router";
+import { Link, NavLink } from "react-router";
 import gogLogo from "../../assets/gog.svg";
 import "./navBar.css";
 import { ROUTES } from "../../constants";

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import { SlideSkelton } from "../../../components/skelton/GameCardSkelton/SlideSkelton";
 import { getTags } from "../../../services/gameServices";
 import { Link } from "react-router";
@@ -37,14 +37,13 @@ const TagSection = () => {
       {isLoadingTags ? (
         <SlideSkelton />
       ) : (
-        <div className="container my-3 ">
-          <h3 className="mb-4">BROWSE BY CATEGORY</h3>
+        <>
+          <h3 className="my-4">BROWSE BY CATEGORY</h3>
           <div className="mx-5">
             <Slide list={tagsFormatted} extraSlide={extraLink} />
           </div>
-        </div>
+        </>
       )}
-      <ToastContainer />
     </>
   );
 };
