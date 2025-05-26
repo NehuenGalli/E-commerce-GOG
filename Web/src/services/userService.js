@@ -1,5 +1,6 @@
 import axios from "axios";
 import { API, ROUTES } from "../constants";
+import { errorMessage } from "../utilities/error_message";
 
 const api = axios.create({
   baseURL: API.BASE_URL,
@@ -20,7 +21,7 @@ const login = async ({ email, password }) => {
   }
 };
 
-const userCurrent = (page) =>
+const userCurrent = () =>
   api
     .get(`${API.BASE_URL}${ROUTES.USER_CURRENT}`, {
       headers: {
