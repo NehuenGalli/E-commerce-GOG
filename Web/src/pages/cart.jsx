@@ -1,5 +1,5 @@
+import CartWithItems from "../components/cart/cartWithItems";
 import EmptyCart from "../components/cart/emptyCart";
-import CartWithItems from "../components/cart/CartWithItems";   
 import { getCart } from "../services/userService";
 import { useNavigate } from 'react-router';
 import { useEffect, useState } from "react";
@@ -7,6 +7,7 @@ import { removeGame } from "../services/gameServices";
 import { showRemovedFromCartToast } from "../services/toastService";
 import { ROUTES } from "../constants";
 import { API } from "../constants";
+import { toast } from "react-toastify";
 
 
 

@@ -36,12 +36,9 @@ function App() {
           <Route path={ROUTES.SEARCH} element={<SearchGames />} />
           <Route path={ROUTES.LIBRARY} element={<Library logOut={logOut} />} />
           <Route path={ROUTES.TAGS} element={<Tags />} />
-          <Route
-            path={ROUTES.CART}
-            element={<Cart isLoggedIn={isLoggedIn} />}
-          />
+          <Route path={ROUTES.CART} element={<Cart />} />
           <Route path={ROUTES.USER} element={<User />} />
-          <Route path={ROUTES.PURCHASE} element={<Purchase />} />
+          <Route path={ROUTES.PURCHASE} element={<Purchase isLoggedIn={isLoggedIn} />} />
         </Routes>
       </BrowserRouter>
       <ToastContainer />

@@ -28,16 +28,4 @@ const purchase = (nameCard, numCard, expDate, cvv) =>
       throw errorMessage(error);
     });
 
-const getCart = () =>
-  api
-    .get(`${ROUTES.USER_CURRENT}${ROUTES.CART}`, {
-      headers: {
-        Authorization: localStorage.getItem(API.TOKEN_KEY),
-      },
-    })
-    .then((res) => res.data)
-    .catch((error) => {
-      throw errorMessage(error);
-    });
-
-export { purchase, getCart };
+export { purchase };

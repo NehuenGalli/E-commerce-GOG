@@ -13,7 +13,6 @@ const FormPurchase = ({ items }) => {
   const [expDate, setExpDate] = useState("");
   const [cvv, setCVV] = useState("");
 
-  console.log({ items });
   const navigate = useNavigate();
 
   const submitCard = (e) => {

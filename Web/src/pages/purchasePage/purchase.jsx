@@ -1,14 +1,29 @@
 import "./purchaseStyle.css";
-import { ToastContainer } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 import FormPurchase from "./FormPurchase";
+import { useEffect } from "react";
+import { useNavigate } from "react-router";
+import { ROUTES } from "../../constants";
 
-const Purchase = () => {
+const Purchase = ({isLoggedIn}) => {
   const storedCart = JSON.parse(localStorage.getItem("cart")) || { games: [] };
-  console.log({ storedCart });
+  const hasGames = storedCart.games && storedCart.games.length > 0;
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!isLoggedIn) {
+      navigate(ROUTES.LOGIN);
+    }
+
+    if (!hasGames) {
+      navigate(ROUTES.CART);
+    }
+  }, [isLoggedIn, hasGames ,navigate]);
+
   return (
     <>
       <div className="container d-lg-flex mt-4 justify-content-center justify-content-sm-center flex-column flex-lg-row">
-        <FormPurchase items={storedCart.games} />
+        {hasGames && <FormPurchase items={storedCart.games} />}
       </div>
 
       <ToastContainer />
