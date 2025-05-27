@@ -31,6 +31,27 @@ const getGames = (page) =>
     });
 
 
+const getGameById = (gameId) =>
+  api
+    .get(`${ROUTES.GAME_BY_ID}/${gameId}`)
+    .then((res) => res.data)
+    .catch((error) => {
+      throw errorMessage(error);
+    });
+
+const addReview = async (gameId, reviewData, token) => {
+  try {
+    const response = await api.put(`/games/${gameId}/reviews`, reviewData, {
+      headers: {
+        Authorization: token,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    throw errorMessage(error);
+  }
+};
+
 const addGameToCart = async (gameId, token) => {
   try {
     const response = await api.put(`/games/${gameId}`, { gameId }, {
@@ -57,4 +78,4 @@ const removeGame = (gameId, token) =>
       throw errorMessage(error);
     });
 
-export { getRecommendedGames, getTags, getGames, removeGame, addGameToCart };
+export { getRecommendedGames, getTags, getGames, removeGame, addGameToCart, getGameById, addReview }; 

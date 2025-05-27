@@ -1,31 +1,29 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
-import axios from "axios";
+import { getGameById } from "../services/gameServices";
 
 import GamePortInfo from "../components/gamePortInfo/gamePortInformation";
 import GameImagesCarrucel from "../components/GameImagesCarrucel/gameImagesCarrucel";
 import GameAbout from "../components/gameAbout/gameabout";
 import Reviews from "../components/reviews/review"
 
-const Game = () => {
+const Game = ({ isLoggedIn }) => {
   const { gameId } = useParams();
   const [game, setGame] = useState(null);
-  const [user,setUser]= useState(null);
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
-  useEffect(() => {
+useEffect(() => {
     const fetchGameData = async () => {
       try {
         setIsLoading(true);
         setError(null);
-      
-
-        const response = await axios.get("http://localhost:3000/games/g_3498");
-        setGame(response.data);
+        
+        const gameData = await getGameById(gameId);
+        setGame(gameData);
       } catch (error) {
         console.error("Error al obtener los datos del juego:", error);
-        setError(error.response?.data?.message || error.message || 'Error al cargar el juego');
+        setError(error.message);
       } finally {
         setIsLoading(false);
       }
@@ -34,26 +32,6 @@ const Game = () => {
     fetchGameData();
   }, [gameId]);
 
-  /*useEffect(() => {
-    const fetchUserData = async () => {
-      try {
-        setIsLoading(true);
-        setError(null);
-      
-
-        const response = await axios.get("http://localhost:3000/users/current");
-        setUser(response.data);
-      } catch (error) {
-        console.error("Error al obtener los datos del juego:", error);
-        setError(error.response?.data?.message || error.message || 'Error al pedir usuario el juego');
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    fetchUserData();
-  }, []);
-*/
   if (isLoading) {
     return (
       <div style={{
@@ -137,10 +115,10 @@ const Game = () => {
 
   return (
     <div style={{paddingLeft: '100px',paddingRight: '100px',marginTop:'30px'}}>
-      <GamePortInfo game={game} />
+      <GamePortInfo game={game} isLoggedIn={isLoggedIn} />
       <GameImagesCarrucel game={game} />
       <GameAbout game={game} />
-      <Reviews game={game} />
+      <Reviews game={game} isLoggedIn={isLoggedIn} />
     </div>
   );
 };

@@ -1,22 +1,46 @@
 import './gamePort-info.css';
 import AddToCart  from '../portAddToCart/addToCart';
-const GamePortInfo = ({ game }) => {
+import { userCurrent } from '../../services/userService';
+import { useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
+
+const GamePortInfo = ({ game, isLoggedIn }) => {
+  const [userGames, setUserGames] = useState([]);
+
+  useEffect(() => {
+    const fetchUserGames = async () => {
+      if (!isLoggedIn) {
+        setUserGames([]);
+        return;
+      }
+
+      try {
+        const user = await userCurrent();
+        setUserGames(user?.games || []);
+      } catch (error) {
+        toast.error(error.message);
+        setUserGames([]);
+      }
+    };
+
+    fetchUserGames();
+  }, [isLoggedIn]);
+
+  const userHasGame = isLoggedIn && userGames.some(userGame => userGame.id === game.id);
+
   return (
-    <div className=" border-0" style={{ 
-     
-    }}>
+    <div className="border-0">
       <div className="position-relative">
         <img
           src={game.mainImage}
           alt={game.name}
           className="w-100 object-fit-cover imagen"
-          style={{ 
-            height: "600px", 
+          style={{
+            height: "600px",
             objectPosition: "center top" 
           }}
         />
       </div>
-
 
       <div className="mt-4" style={{ fontSize: '1.5rem' }}> 
         <p>
@@ -35,9 +59,9 @@ const GamePortInfo = ({ game }) => {
           ))}</strong> 
         </p>
       </div>
-      
-        <AddToCart game={game}/>
-      
+
+      {!userHasGame && <AddToCart game={game} />}
+
     </div>
     
   );

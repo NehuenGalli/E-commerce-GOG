@@ -17,7 +17,7 @@ const AddToCart = ({ game }) => {
       const token = localStorage.getItem(API.TOKEN_KEY);
       if (!token) {
         navigate(ROUTES.LOGIN);
-        toast.console.error('You must be logged in to add a game to the cart');
+        toast.error('You must be logged in to add a game to the cart');
       }
       await addGameToCart(game.id, token);
       toast.success('Game added to cart successfully');

@@ -1,18 +1,14 @@
-import React, { useState } from 'react';
-import './Reviews.css'; // Asegurate de tener este archivo
+import './Reviews.css';
 import thumbUp from './thumb-up.png';
 import thumbDown from './thumb-down.png';
 import CurrentReview from './currentReview';
 
-const Reviews = ({ game,user }) => {
-  
- 
+const Reviews = ({ game, isLoggedIn }) => {
 
   return (
-    
     <div className="container-fluid px-0">
       <h4>REVIEWS</h4>
-      <CurrentReview />
+      <CurrentReview game={game} isLoggedIn={isLoggedIn} />
       {/* Grid de reviews */}
       <div className="row gx-5 gy-2 mx-0 mt-2">
         {game.reviews.map((review, index) => (

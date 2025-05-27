@@ -9,6 +9,7 @@ export const ROUTES = {
   TAGS: "/tags",
   GAMES: "/games",
   GAMES_BY_TAG: "/games/:tagId",
+  GAME_BY_ID: "/games",
   GAME_DETAIL: "/game/:gameId",
   GAME_DELETE: "/games",
   RECOMMENDED: "/games/recommended",
