@@ -42,30 +42,36 @@ const friendsUserLogged = (idUserLogged) =>
       throw errorMessage(error);
     });
 
-const addOrRemoveF = (idFriend, idUserLogged) =>
-  api
-    .put(
-      `${API.BASE_URL}${ROUTES.USERS}/${idFriend}/friends`,
-      {},
-      {
-        headers: {
-          Authorization: localStorage.getItem(API.TOKEN_KEY),
-        },
-      }
-    )
-    .then((res) => {
-      //friendsUserLogged le manda una promesa, hay que hacer que devuelva la lista
-      const listFriend = [];
-      friendsUserLogged(idUserLogged).then((res) => (listFriend = res));
-      console.log(listFriend);
-      if (listFriend.some((friend) => friend.id === idUserLogged)) {
-        addFriend;
-      } else {
-        removeFriend;
-      }
+const addOrRemoveF = (idFriend, idUserLogged) => {
+  return friendsUserLogged(idUserLogged)
+    .then((listFriend) => {
+      const isAlreadyFriend = listFriend.some(
+        (friend) => friend.id === idFriend
+      );
+
+      return api
+        .put(
+          `${API.BASE_URL}${ROUTES.USERS}/${idFriend}/friends`,
+          {},
+          {
+            headers: {
+              Authorization: localStorage.getItem(API.TOKEN_KEY),
+            },
+          }
+        )
+        .then(() => {
+          if (isAlreadyFriend) {
+            console.log("Removido");
+            return removeFriend;
+          } else {
+            console.log("Agregado");
+            return addFriend;
+          }
+        });
     })
     .catch((error) => {
       throw errorMessage(error);
     });
+};
 
 export { login, userCurrent, friendsUserLogged, addOrRemoveF };
