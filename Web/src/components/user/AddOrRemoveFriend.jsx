@@ -13,7 +13,6 @@ const AddOrRemoveFriend = ({ userId, idUserLogged }) => {
     addOrRemoveF(userId, isFriendBool)
       .then((message) => {
         toast.success(message);
-
         setIsFriendBool((prev) => !prev);
       })
 
@@ -33,7 +32,6 @@ const AddOrRemoveFriend = ({ userId, idUserLogged }) => {
       >
         {isFriendBool ? <>Remove Friend</> : <>Add Friend</>}
       </button>
-      <ToastContainer></ToastContainer>
     </>
   );
 };
