@@ -19,7 +19,23 @@ const ListAllGames = ({ games }) => {
             </div>
 
             <div className="card-body d-flex flex-column">
-              <h2 className="card-title text-uppercase">{game.name}</h2>
+              <h2 className="card-title text-uppercase">
+                {game.gameId ? (
+              <Link
+                to={`${ROUTES.GAMES}/${game.gameId}`}
+                className="text-decoration-none text-dark"
+              >
+                {game.name}
+              </Link>
+            ) : (
+              <Link
+                to={`${ROUTES.GAMES}/${game.id}`}
+                className="text-decoration-none text-dark"
+              >
+                {game.name}
+              </Link>
+            )}
+              </h2>
               <div className="d-flex flex-wrap my-3 gap-3 me-5">
                 {game.tags.slice(0, 10).map((tag) => (
                   <Link
