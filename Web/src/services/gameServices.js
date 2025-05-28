@@ -14,14 +14,6 @@ const getRecommendedGames = () =>
       throw errorMessage(error);
     });
 
-const getTags = () =>
-  api
-    .get(ROUTES.TAGS)
-    .then((res) => res.data)
-    .catch((error) => {
-      throw errorMessage(error);
-    });
-
 const getGames = (page) =>
   api
     .get(`${ROUTES.GAMES}?page=${page}`)
@@ -29,7 +21,6 @@ const getGames = (page) =>
     .catch((error) => {
       throw errorMessage(error);
     });
-
 
 const getGameById = (gameId) =>
   api
@@ -54,14 +45,21 @@ const addReview = async (gameId, reviewData, token) => {
 
 const addGameToCart = async (gameId, token) => {
   try {
-    const response = await api.put(`/games/${gameId}`, { gameId }, {
-      headers: {
-        Authorization: token,
-      },
-    });
+    const response = await api.put(
+      `/games/${gameId}`,
+      { gameId },
+      {
+        headers: {
+          Authorization: token,
+        },
+      }
+    );
     return response.data;
   } catch (error) {
-    const errorMessage = error.response?.data?.error || error.message || "Failed to add game to cart";
+    const errorMessage =
+      error.response?.data?.error ||
+      error.message ||
+      "Failed to add game to cart";
     throw new Error(errorMessage);
   }
 };
@@ -78,4 +76,11 @@ const removeGame = (gameId, token) =>
       throw errorMessage(error);
     });
 
-export { getRecommendedGames, getTags, getGames, removeGame, addGameToCart, getGameById, addReview }; 
+export {
+  getRecommendedGames,
+  getGames,
+  removeGame,
+  addGameToCart,
+  getGameById,
+  addReview,
+};

@@ -4,9 +4,8 @@ import "swiper/css/navigation";
 import { Navigation } from "swiper/modules";
 import { Link } from "react-router";
 import "./slide.css";
-import { ROUTES } from "../../constants";
 
-const Slide = ({ list, extraSlide }) => {
+const Slide = ({ list, extraSlide, route }) => {
   return (
     <div className="slide">
       <Swiper
@@ -31,7 +30,7 @@ const Slide = ({ list, extraSlide }) => {
       >
         {list.slice(0, 10).map((e) => (
           <SwiperSlide key={e.id}>
-            <Link className="card text-bg-dark" to={`${ROUTES.GAMES}/${e.id}`}>
+            <Link className="card text-bg-dark" to={`${route}/${e.id}`}>
               <img
                 src={e.image}
                 alt={e.name}

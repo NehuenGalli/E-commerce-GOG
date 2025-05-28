@@ -2,10 +2,9 @@ import ListGames from "../components/listGames/listGames";
 import Paginacion from "../components/pagination/paginacion";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router";
-import axios from "axios";
-import NavBar from "../components/navBar/navBar";
-import { API } from "../constants";
-
+import { toast, ToastContainer } from "react-toastify";
+import { searchGames } from "../services/searchService";
+import { notFoundGames_message } from "../utilities/error_message";
 const SearchGames = () => {
   const [searchParams] = useSearchParams();
   const query = searchParams.get("q");
@@ -20,10 +19,9 @@ const SearchGames = () => {
   const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
-    axios
-      .get(`${API.BASE_URL}/search?query=${query}&page=${currentPage}`)
-      .then((response) => setGames(response.data))
-      .catch((error) => console.log(error));
+    searchGames(query, currentPage)
+      .then((games) => setGames(games))
+      .catch((error) => toast.error(error));
   }, [query, currentPage]);
 
   useEffect(() => {
@@ -41,6 +39,14 @@ const SearchGames = () => {
           onPageChange={setCurrentPage}
         />
       )}
+
+      {games.amountOfPages === 0 && (
+        <div className="d-flex justify-content-center align-items-center my-5">
+          <h1>{notFoundGames_message}</h1>
+        </div>
+      )}
+
+      <ToastContainer />
     </>
   );
 };

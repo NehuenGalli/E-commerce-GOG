@@ -68,6 +68,7 @@ const User = () => {
     mainImage: review.game.mainImage,
     text: review.text,
     isRecommended: review.isRecommended,
+    gameId: review.game.id,
   }));
 
   return (

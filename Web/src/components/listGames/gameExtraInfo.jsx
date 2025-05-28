@@ -1,20 +1,36 @@
 import { Link } from "react-router";
 import { ROUTES } from "../../constants";
-import recommended from "../../assets/recommended.svg";
-import notRecommended from "../../assets/notRecommended.svg";
+
 const GameExtraInfo = ({ game, needUser }) => {
   return (
     <>
       <div className="col-lg-6">
         <div className="card-body">
-          <h1 className="card-title">{game.name}</h1>
+          <h1 className="card-title">
+            {game.gameId ? (
+              <Link
+                to={`${ROUTES.GAMES}/${game.gameId}`}
+                className="text-decoration-none text-dark"
+              >
+                {game.name}
+              </Link>
+            ) : (
+              <Link
+                to={`${ROUTES.GAMES}/${game.id}`}
+                className="text-decoration-none text-dark"
+              >
+                {game.name}
+              </Link>
+            )}
+          </h1>
+
           {game.tags && (
             <>
               <div className="d-flex flex-wrap my-3 gap-3 me-5 pt-3">
                 {game.tags.slice(0, 10).map((tag) => (
                   <Link
                     key={tag.id}
-                    to={`${ROUTES.GAMES}/${tag.id}`}
+                    to={`${ROUTES.TAGS}/${tag.id}`}
                     className="fw-bolder font-color-tags link-offset-1"
                   >
                     {tag.name}
