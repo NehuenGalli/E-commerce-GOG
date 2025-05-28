@@ -1,0 +1,38 @@
+.cart-container {
+    background-color: #808080;
+}
+
+.cart-title {
+    padding-bottom: 2.3rem;
+    padding-top: 2.5rem;
+    font-size: 2.5rem;
+    color: white;
+    font-weight: bold;
+    font-family: sans-serif;
+    margin-bottom: 0;
+}
+
+.button-price-container {
+    gap: 1rem;
+}
+
+.game-price {
+    font-size: 2.5rem;
+    color: white;
+    font-family: sans-serif;
+    padding-right: 5rem;
+}
+
+.cart-button {
+    padding: 1rem;
+    background-color: #9ACD32;
+    border: none;
+    border-radius: 1px;
+    font-size: 1.7rem;
+    font-family: sans-serif;
+    width: 15rem;
+}
+
+.cart-button:hover {
+    opacity: 0.9;
+}

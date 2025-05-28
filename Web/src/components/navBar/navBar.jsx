@@ -45,14 +45,14 @@ const NavBar = ({ isLoggedIn }) => {
                   LOGIN
                 </NavLink>
                 <span className="text-white"> / </span>
-                <NavLink className="nav-link" to="/">
+                <NavLink className="nav-link" to={ROUTES.REGISTER}>
                   REGISTER
                 </NavLink>
               </>
             )}
 
             {isLoggedIn && (
-              <NavLink className="nav-link  " to="/">
+              <NavLink className="nav-link  " to={ROUTES.CART}>
                 <i className="bi bi-cart4 fs-1" />
               </NavLink>
             )}

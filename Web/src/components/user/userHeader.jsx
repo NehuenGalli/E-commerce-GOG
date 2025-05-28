@@ -10,9 +10,7 @@ const UserHeader = ({ user, logOut, idUserLogged }) => {
         <div className="d-flex align-items-center">
           <div className="d-flex align-items-center gap-3">
             <div className="rounded-circle border border-black">
-              <Link to={ROUTES.USER}>
-                <img src={user.image} />
-              </Link>
+              <img src={user.image} alt="user image"/>
             </div>
             <span className="fw-semibold ">{user.name}</span>
           </div>

@@ -1,9 +1,12 @@
 import axios from "axios";
 import { API, ROUTES } from "../constants";
+<<<<<<< HEAD
 import {
   success_addFriend_message,
   sucess_removeFriend_message,
 } from "../utilities/success_message";
+=======
+>>>>>>> 21ce3332898c98c930686bf3d1b21457c9b12d00
 import { errorMessage } from "../utilities/error_message";
 
 const api = axios.create({
@@ -21,6 +24,17 @@ const login = async ({ email, password }) => {
     return response.data;
   } catch (error) {
     const errorMessage = error.response?.data?.error || "Login failed";
+    throw new Error(errorMessage);
+  }
+};
+
+const register = async (formData) => {
+  try {
+    const response = await api.post(ROUTES.REGISTER, formData);
+    return response.data;
+  } catch (error) {
+    const errorMessage =
+      error.response?.data?.message || error.message || "Registration failed";
     throw new Error(errorMessage);
   }
 };
@@ -70,4 +84,20 @@ const addOrRemoveF = (idFriend, isFriendBool) => {
     });
 };
 
-export { login, userCurrent, friendsUserLogged, addOrRemoveF };
+
+const getCart = async (token) => {
+  try {
+    const response = await api.get("/users/current/cart", {
+      headers: {
+        Authorization: token,
+      },
+    });
+
+    return response.data;
+  } catch (error) {
+    const errorMessage = error.response?.data?.error || error.message || "Failed to fetch cart";
+    throw new Error(errorMessage);
+  }
+}
+
+export { login, getCart, userCurrent, register, friendsUserLogged, addOrRemoveF  };
