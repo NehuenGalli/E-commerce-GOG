@@ -154,10 +154,6 @@ class UserController {
       const { userId } = req.params;
       const reviews = await this.service.getUserReviews(userId);
 
-      // const reviewsList = reviews.map((review) => ({
-      //   ...formatReview(review),
-      // }));
-
       const reviewsList = reviews.map((review) =>
         formatReview(review, review.game)
       );

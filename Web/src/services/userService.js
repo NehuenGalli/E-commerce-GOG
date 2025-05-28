@@ -1,5 +1,9 @@
 import axios from "axios";
 import { API, ROUTES } from "../constants";
+import {
+  success_addFriend_message,
+  sucess_removeFriend_message,
+} from "../utilities/success_message";
 import { errorMessage } from "../utilities/error_message";
 
 const api = axios.create({
@@ -44,6 +48,39 @@ const userCurrent = () =>
       throw errorMessage(error);
     });
 
+const friendsUserLogged = (idUserLogged) =>
+  api
+    .get(`${API.BASE_URL}${ROUTES.USERS}/${idUserLogged}/friends`)
+    .then((res) => res.data)
+    .catch((error) => {
+      throw errorMessage(error);
+    });
+
+const addOrRemoveF = (idFriend, isFriendBool) => {
+  return api
+    .put(
+      `${API.BASE_URL}${ROUTES.USERS}/${idFriend}/friends`,
+      {},
+      {
+        headers: {
+          Authorization: localStorage.getItem(API.TOKEN_KEY),
+        },
+      }
+    )
+    .then((res) => {
+      if (isFriendBool) {
+        console.log("Removido");
+        return sucess_removeFriend_message;
+      } else {
+        console.log("Agregado");
+        return success_addFriend_message;
+      }
+    })
+    .catch((error) => {
+      throw errorMessage(error);
+    });
+};
+
 const getCart = async (token) => {
   try {
     const response = await api.get("/users/current/cart", {
@@ -54,9 +91,17 @@ const getCart = async (token) => {
 
     return response.data;
   } catch (error) {
-    const errorMessage = error.response?.data?.error || error.message || "Failed to fetch cart";
+    const errorMessage =
+      error.response?.data?.error || error.message || "Failed to fetch cart";
     throw new Error(errorMessage);
   }
-}
+};
 
-export { login, getCart, userCurrent, register };
+export {
+  login,
+  getCart,
+  userCurrent,
+  register,
+  friendsUserLogged,
+  addOrRemoveF,
+};

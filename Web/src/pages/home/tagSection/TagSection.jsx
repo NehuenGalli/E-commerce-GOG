@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { toast } from "react-toastify";
 import { SlideSkelton } from "../../../components/skelton/GameCardSkelton/SlideSkelton";
-import { getTags } from "../../../services/gameServices";
+import { getTags } from "../../../services/tagServices";
 import { Link } from "react-router";
 import { ROUTES } from "../../../constants";
 import Slide from "../../../components/slide/slide";
@@ -40,7 +40,11 @@ const TagSection = () => {
         <>
           <h3 className="my-4">BROWSE BY CATEGORY</h3>
           <div className="mx-5">
-            <Slide list={tagsFormatted} extraSlide={extraLink} />
+            <Slide
+              list={tagsFormatted}
+              extraSlide={extraLink}
+              route={ROUTES.TAGS}
+            />
           </div>
         </>
       )}
