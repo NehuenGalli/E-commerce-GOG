@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { getGames } from "../../../services/gameServices";
 import Paginacion from "../../../components/pagination/paginacion";
-import ListAllGames from "../../../components/listAllGames/listAllGames";
-import { ToastContainer, toast } from "react-toastify";
+import ListAllGames from "../../../components/listAllGames/ListAllGames";
+import { toast } from "react-toastify";
 import { GameCardSkelton } from "../../../components/skelton/GameCardSkelton/GameCardSkelton";
 
 const TrendingSection = () => {
@@ -31,10 +31,8 @@ const TrendingSection = () => {
       {isLoading && <GameCardSkelton count={9} />}
       {!isLoading && (
         <>
-          <div className="container my-4">
-            <h3 className="mb-4">NEW & TRENDING</h3>
-            <ListAllGames games={games} />
-          </div>
+          <h3 className="my-4">NEW & TRENDING</h3>
+          <ListAllGames games={games} />
           <Paginacion
             currentPage={currentPage}
             totalPages={games.amountOfPages}
@@ -42,7 +40,6 @@ const TrendingSection = () => {
           />
         </>
       )}
-      <ToastContainer />
     </>
   );
 };
