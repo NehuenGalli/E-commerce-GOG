@@ -34,11 +34,13 @@ const SearchGames = () => {
     <>
       <ListGames games={games.list} title={"SEARCH: " + query} />
 
-      <Paginacion
-        currentPage={currentPage}
-        totalPages={games.amountOfPages}
-        onPageChange={setCurrentPage}
-      />
+      {games.amountOfPages != 0 && (
+        <Paginacion
+          currentPage={currentPage}
+          totalPages={games.amountOfPages}
+          onPageChange={setCurrentPage}
+        />
+      )}
     </>
   );
 };

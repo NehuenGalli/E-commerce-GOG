@@ -1,6 +1,9 @@
 import axios from "axios";
 import { API, ROUTES } from "../constants";
-import { addFriend, removeFriend } from "../utilities/success_message";
+import {
+  success_addFriend_message,
+  sucess_removeFriend_message,
+} from "../utilities/success_message";
 import { errorMessage } from "../utilities/error_message";
 
 const api = axios.create({
@@ -42,32 +45,25 @@ const friendsUserLogged = (idUserLogged) =>
       throw errorMessage(error);
     });
 
-const addOrRemoveF = (idFriend, idUserLogged) => {
-  return friendsUserLogged(idUserLogged)
-    .then((listFriend) => {
-      const isAlreadyFriend = listFriend.some(
-        (friend) => friend.id === idFriend
-      );
-
-      return api
-        .put(
-          `${API.BASE_URL}${ROUTES.USERS}/${idFriend}/friends`,
-          {},
-          {
-            headers: {
-              Authorization: localStorage.getItem(API.TOKEN_KEY),
-            },
-          }
-        )
-        .then(() => {
-          if (isAlreadyFriend) {
-            console.log("Removido");
-            return removeFriend;
-          } else {
-            console.log("Agregado");
-            return addFriend;
-          }
-        });
+const addOrRemoveF = (idFriend, isFriendBool) => {
+  return api
+    .put(
+      `${API.BASE_URL}${ROUTES.USERS}/${idFriend}/friends`,
+      {},
+      {
+        headers: {
+          Authorization: localStorage.getItem(API.TOKEN_KEY),
+        },
+      }
+    )
+    .then((res) => {
+      if (isFriendBool) {
+        console.log("Removido");
+        return sucess_removeFriend_message;
+      } else {
+        console.log("Agregado");
+        return success_addFriend_message;
+      }
     })
     .catch((error) => {
       throw errorMessage(error);

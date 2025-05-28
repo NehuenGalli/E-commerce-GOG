@@ -6,7 +6,7 @@ import { ROUTES } from "../../constants";
 const UserHeader = ({ user, logOut, idUserLogged }) => {
   return (
     <>
-      <div className="container-xl mt-4">
+      <div className="container mt-4">
         <div className="d-flex align-items-center">
           <div className="d-flex align-items-center gap-3">
             <div className="rounded-circle border border-black">
