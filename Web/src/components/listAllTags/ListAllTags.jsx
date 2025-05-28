@@ -1,8 +1,10 @@
+import { ROUTES } from "../../constants";
+import { Link } from "react-router";
 const ListAllTags = ({ tags }) => {
   return (
     <div className="mx-5 row row-cols-1 row-cols-md-2 row-cols-xl-3 g-3">
       {tags.map((tag) => (
-        <div key={tag.id} className="col ">
+        <Link to={`${ROUTES.GAMES}/${tag.id}`} key={tag.id} className="col ">
           <div className="card text-bg-dark rounded-1 ratio ratio-1x1">
             <img
               src={tag.image.src}
@@ -15,7 +17,7 @@ const ListAllTags = ({ tags }) => {
               </h2>
             </div>
           </div>
-        </div>
+        </Link>
       ))}
     </div>
   );
