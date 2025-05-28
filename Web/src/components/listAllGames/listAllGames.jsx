@@ -40,7 +40,7 @@ const ListAllGames = ({ games }) => {
                 {game.tags.slice(0, 10).map((tag) => (
                   <Link
                     key={tag.id}
-                    to={`${ROUTES.GAMES}/${tag.id}`}
+                    to={`${ROUTES.TAGS}/${tag.id}`}
                     className="fw-bolder link-offset-1"
                   >
                     {tag.name}
