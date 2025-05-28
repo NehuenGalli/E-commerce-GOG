@@ -1,9 +1,11 @@
 import { toast } from 'react-toastify';
 import './currentReview.css';
-import { useState, useEffect} from 'react';
+import { useState, useEffect } from 'react';
 import { API } from '../../constants';
 import { addReview } from '../../services/gameServices';
 import { userCurrent } from '../../services/userService';
+import thumbUp from './thumb-up.png';
+import thumbDown from './thumb-down.png';
 
 const CurrentReview = ({ game, isLoggedIn }) => {
 
@@ -15,8 +17,8 @@ const CurrentReview = ({ game, isLoggedIn }) => {
     isRecommended: true
   });
   const [isUserLoading, setIsUserLoading] = useState(true);
- 
-useEffect(() => {
+
+  useEffect(() => {
     const fetchUser = async () => {
       if (isLoggedIn) {
         try {
@@ -26,8 +28,8 @@ useEffect(() => {
         } catch (error) {
           toast.error(error);
         } finally {
-        setIsUserLoading(false);
-      }
+          setIsUserLoading(false);
+        }
       }
     };
 
@@ -84,6 +86,26 @@ useEffect(() => {
           </div>
         </div>
 
+        <div className="mb-3 d-flex align-items-center gap-3">
+          <span className="text-review">Recommended</span>
+          <div className="d-flex gap-2">
+            <button
+              type="button"
+              className={`btn p-1 border-0 ${review.isRecommended ? 'opacity-100' : 'opacity-50'}`}
+              onClick={() => setReview({ ...review, isRecommended: true })}
+            >
+              <img src={thumbUp} alt="Recommended" className='icon-thumb' />
+            </button>
+            <button
+              type="button"
+              className={`btn p-1 border-0 ${!review.isRecommended ? 'opacity-100' : 'opacity-50'}`}
+              onClick={() => setReview({ ...review, isRecommended: false })}
+            >
+              <img src={thumbDown} alt="Not Recommended" className='icon-thumb' />
+            </button>
+          </div>
+        </div>
+
         <form onSubmit={handleSubmit}>
           <div className="mt-auto mb-3">
             <textarea
@@ -99,29 +121,10 @@ useEffect(() => {
             />
           </div>
 
-          <div className="mb-3 form-check">
-            <input
-              type="checkbox"
-              id="recommendCheckbox"
-              checked={review.isRecommended}
-              onChange={(e) => setReview({ ...review, isRecommended: e.target.checked })}
-              className="form-check-input"
-            />
-            <label htmlFor="recommendCheckbox" className="form-check-label">
-              Recomendar este juego
-            </label>
-          </div>
-
           <div className="review-input-container">
             <button
               type="submit"
-              className="btn btn-primary"
-              style={{
-                display: 'block',
-                margin: '0 auto',
-                width: 'fit-content'
-              }}
-            >
+              className="btn-review">
               Add Review
             </button>
           </div>
