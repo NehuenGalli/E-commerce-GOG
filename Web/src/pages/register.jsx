@@ -3,6 +3,7 @@ import { useNavigate } from "react-router";
 import { register } from "../services/userService";
 import { useState } from "react";
 import { ROUTES } from "../constants";
+import { ToastContainer } from "react-toastify";
 
 const Register = () => {
   
@@ -47,13 +48,17 @@ const Register = () => {
   };
 
   return (
-    <RegisterForm
-      formData={formData}
-      onChange={handleChange}
-      onSubmit={onSubmit}
-      error={error} 
-    />
+    <>
+      <RegisterForm
+        formData={formData}
+        onChange={handleChange}
+        onSubmit={onSubmit}
+        error={error} 
+      />
+      <ToastContainer />
+    </>
   );
+  
 };
 
 export default Register;

@@ -61,7 +61,7 @@ const GamePortInfo = ({ game, isLoggedIn }) => {
         <p>
           <strong>Release date: {game.releaseDate}</strong>
         </p>
-        <p>
+        <div>
           <strong>
             Tags:
             {game.tags.slice(0, 5).map((tag) => (
@@ -75,7 +75,7 @@ const GamePortInfo = ({ game, isLoggedIn }) => {
             ))}
             <ModalTags tags={game.tags} />
           </strong>
-        </p>
+        </div>
       </div>
 
       {!userHasGame && <AddToCart game={game} />}

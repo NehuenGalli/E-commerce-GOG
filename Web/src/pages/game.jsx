@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { getGameById } from "../services/gameServices";
+import { toast, ToastContainer } from "react-toastify";
 
 import GamePortInfo from "../components/gamePortInfo/gamePortInformation";
 import GameImagesCarrucel from "../components/GameImagesCarrucel/gameImagesCarrucel";
@@ -22,7 +23,6 @@ useEffect(() => {
         const gameData = await getGameById(gameId);
         setGame(gameData);
       } catch (error) {
-        console.error("Error al obtener los datos del juego:", error);
         setError(error.message);
       } finally {
         setIsLoading(false);
@@ -119,6 +119,7 @@ useEffect(() => {
       <GameImagesCarrucel game={game} />
       <GameAbout game={game} />
       <Reviews game={game} isLoggedIn={isLoggedIn} />
+      <ToastContainer />
     </div>
   );
 };

@@ -1,6 +1,11 @@
 import { ROUTES } from "../../constants";
 import { Link } from "react-router";
 const ModalTags = ({ tags }) => {
+
+  const uniqueTags = tags.filter(
+    (tag, index, self) => index === self.findIndex(t => t.id === tag.id)
+  );
+
   return (
     <>
       <Link
@@ -24,7 +29,7 @@ const ModalTags = ({ tags }) => {
               ></button>
             </div>
             <div className="modal-body">
-              {tags.map((tag) => (
+              {uniqueTags.map((tag) => (
                 <Link
                   key={tag.id}
                   to={`${ROUTES.TAGS}/${tag.id}`}

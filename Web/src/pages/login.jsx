@@ -3,6 +3,7 @@ import { useNavigate } from "react-router";
 import { login } from "../services/userService";
 import { useState } from "react";
 import { logInFunction } from "../utilities/buttonFunction";
+import { ToastContainer } from "react-toastify";
 
 const Login = ({ logIn }) => {
   const [email, setEmail] = useState("");
@@ -40,6 +41,7 @@ const Login = ({ logIn }) => {
         onPasswordChange={(e) => setPassword(e.target.value)}
         onSubmit={onSubmit}
       />
+      <ToastContainer />
     </>
   );
 };

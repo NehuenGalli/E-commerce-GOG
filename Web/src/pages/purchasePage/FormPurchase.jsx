@@ -23,10 +23,10 @@ const FormPurchase = ({ items }) => {
       return;
     }
     purchase(nameCard, numCard, expDate, cvv)
-      .then((response) => {
-        toast.success(response.data);
+      .then(() => {
+        toast.success("Compra exitosa");
         localStorage.removeItem("cart");
-        navigate(ROUTES.LIBRARY);
+        setTimeout(() => navigate(ROUTES.LIBRARY), 1000);
       })
       .catch((error) => {
         toast.error(error);
