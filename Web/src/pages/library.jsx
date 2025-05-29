@@ -36,16 +36,19 @@ const Library = ({ logOut, isLoggedIn }) => {
       .catch((error) => {
         toast.error(error);
       })
-      .finally(() => setIsLoadingGames(false));
+      .finally(() => {
+        setIsLoadingGames(false);
+      });
   }, []);
 
-  if (isLoadingGames) {
-    return <Spinner />;
-  }
+  const hasGames = userLogged.games && userLogged.games.length === 0;
+
+  if (isLoadingGames) return <Spinner />;
+
   return (
     <>
       <UserHeader user={userLogged} logOut={logOut}></UserHeader>
-      {userLogged.games.length === 0 ? (
+      {hasGames ? (
         <LibraryEmpty />
       ) : (
         <ListGames
