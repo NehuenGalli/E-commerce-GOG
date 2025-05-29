@@ -2,36 +2,22 @@ label {
   color: white;
 }
 
-.containerForm {
-  margin-right: 30px;
-  margin-top: 30px;
-}
-
 .container-checkOut {
   padding: 2rem;
   flex: 1 1 280px;
   max-width: 400px;
 }
 
-.colorOfForm.size {
-  width: 50% !important;
-  height: auto !important;
-}
 .btn.btn-primary.persButton {
   background-color: #7dc215 !important;
   color: black !important;
   border-color: #7dc215 !important;
   width: auto;
-  border-radius: 10px;
-}
-
-.form-control.inputP {
-  width: 300px;
+  border-radius: 3px;
 }
 
 .formBGColor {
   background-color: #212121;
-  width: 400px;
 }
 
 .purchaseAndcheckOut {

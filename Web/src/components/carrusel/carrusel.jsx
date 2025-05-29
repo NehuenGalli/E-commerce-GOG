@@ -1,5 +1,7 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination } from "swiper/modules";
+import { Link } from "react-router-dom";
+import { ROUTES } from "../../constants";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
@@ -18,12 +20,14 @@ const Carrucel = ({ recommendedGames }) => {
         {recommendedGames.map((game) => (
           <SwiperSlide key={game.id}>
             <div className="mx-5">
-              <img
-                src={game.mainImage}
-                alt={game.name}
-                className="w-100 object-fit-cover"
-                height="480px"
-              />
+              <Link to={`${ROUTES.GAMES}/${game.id}`}>
+                <img
+                  src={game.mainImage}
+                  alt={game.name}
+                  className="w-100 object-fit-cover"
+                  height="480px"
+                />
+              </Link>
             </div>
           </SwiperSlide>
         ))}

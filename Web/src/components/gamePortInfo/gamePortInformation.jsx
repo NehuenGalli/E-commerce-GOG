@@ -33,53 +33,48 @@ const GamePortInfo = ({ game, isLoggedIn }) => {
     isLoggedIn && userGames.some((userGame) => userGame.id === game.id);
 
   return (
-    <div className="border-0">
-      <div className="position-relative">
+    <>
+      <div className="ratio ratio-21x9 mt-4 text-bg-dark">
         <img
           src={game.mainImage}
           alt={game.name}
-          className="w-100 object-fit-cover imagen"
-          style={{
-            height: "600px",
-            objectPosition: "center top",
-          }}
+          className="object-fit-cover opacity-75 "
         />
+        <h2 className="d-flex align-items-end justify-content-center text-white fs-1 pb-3">
+          {game.name}
+        </h2>
       </div>
-
-      <div className="mt-4" style={{ fontSize: "1.5rem" }}>
-        <p>
-          <strong>Developer: {game.developer.name}</strong>
-        </p>
-        <p>
-          <strong>
-            Website:
-            <Link to={game.website} className="link-offset-1 badge ">
-              {game.website}
-            </Link>
-          </strong>
-        </p>
-        <p>
-          <strong>Release date: {game.releaseDate}</strong>
-        </p>
+      <div className="my-4" style={{ fontFamily: "sans-serif" }}>
         <div>
-          <strong>
-            Tags:
-            {game.tags.slice(0, 5).map((tag) => (
-              <Link
-                key={tag.id}
-                to={`${ROUTES.TAGS}/${tag.id}`}
-                className="link-offset-1 badge "
-              >
-                {tag.name}
-              </Link>
-            ))}
-            <ModalTags tags={game.tags} />
-          </strong>
+          <strong>Developer: {game.developer.name}</strong>
+        </div>
+        <div>
+          <strong>Website: </strong>
+          <Link to={game.website} className="link-offset-1  ">
+            {game.website}
+          </Link>
+        </div>
+        <div>
+          <strong>Release date: </strong>
+          <span>{new Date(game.releaseDate).toLocaleDateString()}</span>
+        </div>
+        <div>
+          <strong>Tags: </strong>
+          {game.tags.slice(0, 5).map((tag) => (
+            <Link
+              key={tag.id}
+              to={`${ROUTES.TAGS}/${tag.id}`}
+              className="link-offset-1 me-2"
+            >
+              {tag.name}
+            </Link>
+          ))}
+          <ModalTags tags={game.tags} />
         </div>
       </div>
 
       {!userHasGame && <AddToCart game={game} />}
-    </div>
+    </>
   );
 };
 

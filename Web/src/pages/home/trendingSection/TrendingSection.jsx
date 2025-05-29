@@ -20,9 +20,7 @@ const TrendingSection = () => {
     setIsLoading(true);
     getGames(currentPage)
       .then((games) => setGames(games))
-      .catch((error) => {
-        toast.error(error);
-      })
+      .catch((error) => toast.error(error))
       .finally(() => setIsLoading(false));
   }, [currentPage]);
 

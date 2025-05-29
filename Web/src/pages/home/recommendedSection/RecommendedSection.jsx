@@ -11,12 +11,8 @@ const RecommendedSection = () => {
   useEffect(() => {
     setIsLoadingRecommendedGames(true);
     getRecommendedGames()
-      .then((recommendedGames) => {
-        setRecommendedGames(recommendedGames);
-      })
-      .catch((error) => {
-        toast.error(error);
-      })
+      .then((recommendedGames) => setRecommendedGames(recommendedGames))
+      .catch((error) => toast.error(error))
       .finally(() => setIsLoadingRecommendedGames(false));
   }, []);
 

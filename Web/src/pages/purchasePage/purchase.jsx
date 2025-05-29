@@ -1,14 +1,15 @@
 import "./purchaseStyle.css";
 import { toast, ToastContainer } from "react-toastify";
 import FormPurchase from "./FormPurchase";
-import { useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { ROUTES } from "../../constants";
+import CheckOut from "../../../checkOut/checkOut";
+import "./purchaseStyle.css";
 import { getCart } from "../../services/userService";
 import { API } from "../../constants";
 
 const Purchase = ({ isLoggedIn }) => {
-
   const navigate = useNavigate();
   const [cart, setCart] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -46,10 +47,18 @@ const Purchase = ({ isLoggedIn }) => {
 
   return (
     <>
-      <div className="container d-lg-flex mt-4 justify-content-center justify-content-sm-center flex-column flex-lg-row">
-        {cart && cart.games && cart.games.length > 0 && <FormPurchase items={cart.games} />}
-      </div>
-
+      {cart && cart.games && cart.games.length > 0 && (
+        <div className="container mt-4 ">
+          <div className="justify-content-center row g-4">
+            <div className="col-12 col-lg-7">
+              <FormPurchase items={cart.games} />
+            </div>
+            <div className="col-8 col-lg-4">
+              <CheckOut items={cart.games} />
+            </div>
+          </div>
+        </div>
+      )}
       <ToastContainer />
     </>
   );
