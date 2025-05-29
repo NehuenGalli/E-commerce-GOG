@@ -8,33 +8,31 @@ const ListAllGames = ({ games }) => {
       {games.list.map((game) => (
         <div key={game.id} className="col">
           <div className="card h-100">
-            <div className="ratio ratio-4x3">
+            <Link to={`${ROUTES.GAMES}/${game.id}`} className="ratio ratio-4x3">
               <img
                 src={game.mainImage}
                 className="card-img-top object-fit-cover"
-                width="327"
-                height="234"
                 alt={game.name}
               />
-            </div>
+            </Link>
 
             <div className="card-body d-flex flex-column">
               <h2 className="card-title text-uppercase">
                 {game.gameId ? (
-              <Link
-                to={`${ROUTES.GAMES}/${game.gameId}`}
-                className="text-decoration-none text-dark"
-              >
-                {game.name}
-              </Link>
-            ) : (
-              <Link
-                to={`${ROUTES.GAMES}/${game.id}`}
-                className="text-decoration-none text-dark"
-              >
-                {game.name}
-              </Link>
-            )}
+                  <Link
+                    to={`${ROUTES.GAMES}/${game.gameId}`}
+                    className="text-decoration-none text-dark"
+                  >
+                    {game.name}
+                  </Link>
+                ) : (
+                  <Link
+                    to={`${ROUTES.GAMES}/${game.id}`}
+                    className="text-decoration-none text-dark"
+                  >
+                    {game.name}
+                  </Link>
+                )}
               </h2>
               <div className="d-flex flex-wrap my-3 gap-3 me-5">
                 {game.tags.slice(0, 10).map((tag) => (

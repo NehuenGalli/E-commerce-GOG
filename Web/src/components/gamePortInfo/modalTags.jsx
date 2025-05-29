@@ -1,15 +1,14 @@
 import { ROUTES } from "../../constants";
 import { Link } from "react-router";
 const ModalTags = ({ tags }) => {
-
   const uniqueTags = tags.filter(
-    (tag, index, self) => index === self.findIndex(t => t.id === tag.id)
+    (tag, index, self) => index === self.findIndex((t) => t.id === tag.id)
   );
 
   return (
     <>
       <Link
-        className="link-offset-1 badge "
+        className="link-offset-1 me-2 "
         data-bs-toggle="modal"
         data-bs-target="#modalTag"
       >
