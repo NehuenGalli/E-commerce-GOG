@@ -6,13 +6,14 @@ import ReviewCard from './reviewsCard';
 import { API, ROUTES } from '../../constants';
 import { useNavigate } from 'react-router';
 import { toast } from 'react-toastify';
+import { getToken } from '../../utilities/localstorageUtils';
 import './reviewss.css';
 
 const Reviewss = ({ game, isLoggedIn }) => {
   const [currentUser, setCurrentUser] = useState(null);
   const [reviews, setReviews] = useState([]);
   const [loading, setLoading] = useState(true);
-  const token = localStorage.getItem(API.TOKEN_KEY);
+  const token = getToken();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -41,7 +42,7 @@ const Reviewss = ({ game, isLoggedIn }) => {
       toast.success("Review submitted successfully");
       setReviews(updatedGame.reviews || []);
     } catch (error) {
-      toast.error("Error adding review");
+      toast.error(error);
     }
   };
 
