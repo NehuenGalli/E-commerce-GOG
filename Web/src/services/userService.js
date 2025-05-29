@@ -48,6 +48,14 @@ const userCurrent = () =>
       throw errorMessage(error);
     });
 
+const getUserById = (userId) =>
+  api
+    .get(`${API.BASE_URL}${ROUTES.USERS}/${userId}`)
+    .then((res) => res.data)
+    .catch((error) => {
+      throw errorMessage(error);
+    });
+
 const friendsUserLogged = (idUserLogged) =>
   api
     .get(`${API.BASE_URL}${ROUTES.USERS}/${idUserLogged}/friends`)
@@ -95,11 +103,21 @@ const getCart = async (token) => {
   }
 };
 
+const getReviewsById = (userId) =>
+  api
+    .get(`${API.BASE_URL}${ROUTES.USER_REVIEWS}/${userId}`)
+    .then((res) => res.data)
+    .catch((error) => {
+      throw errorMessage(error);
+    });
+
 export {
   login,
   getCart,
   userCurrent,
+  getUserById,
   register,
   friendsUserLogged,
   addOrRemoveF,
+  getReviewsById,
 };

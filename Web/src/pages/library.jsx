@@ -1,11 +1,24 @@
 import ListGames from "../components/listGames/listGames";
 import { useEffect, useState } from "react";
 import UserHeader from "../components/user/userHeader";
+import Spinner from "../components/spinner/Spinner";
 import { userCurrent } from "../services/userService";
 import { toast, ToastContainer } from "react-toastify";
 import LibraryEmpty from "../components/library/libraryEmpty";
+import { ROUTES } from "../constants";
+import { useNavigate } from "react-router";
 
 const Library = ({ logOut, isLoggedIn }) => {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!isLoggedIn) {
+      navigate(ROUTES.LOGIN);
+    }
+  }, []);
+
+  const [isLoadingGames, setIsLoadingGames] = useState(true);
+
   const [userLogged, setUserLogged] = useState({
     id: "",
     email: "",
@@ -22,16 +35,24 @@ const Library = ({ logOut, isLoggedIn }) => {
       })
       .catch((error) => {
         toast.error(error);
-      });
+      })
+      .finally(() => setIsLoadingGames(false));
   }, []);
 
+  if (isLoadingGames) {
+    return <Spinner />;
+  }
   return (
     <>
       <UserHeader user={userLogged} logOut={logOut}></UserHeader>
       {userLogged.games.length === 0 ? (
         <LibraryEmpty />
       ) : (
-      <ListGames games={userLogged.games} title={"GAMES "} displayUser={true} />
+        <ListGames
+          games={userLogged.games}
+          title={"GAMES "}
+          displayUser={true}
+        />
       )}
       <ToastContainer />
     </>

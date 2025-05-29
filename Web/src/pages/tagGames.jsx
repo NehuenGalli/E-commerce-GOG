@@ -1,5 +1,6 @@
 import ListGames from "../components/listGames/listGames";
 import Paginacion from "../components/pagination/paginacion";
+import Spinner from "../components/spinner/Spinner";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { toast, ToastContainer } from "react-toastify";
@@ -8,6 +9,8 @@ import { findTagInGames } from "../utilities/filters";
 
 const TagGames = () => {
   const { tagId } = useParams();
+  const [isLoadingGames, setIsLoadingGames] = useState(true);
+
   const [games, setgames] = useState({
     list: [],
     currentPage: 1,
@@ -20,8 +23,13 @@ const TagGames = () => {
   useEffect(() => {
     getGamesByTag(tagId, currentPage)
       .then((games) => setgames(games))
-      .catch((error) => toast.error(error));
+      .catch((error) => toast.error(error))
+      .finally(() => setIsLoadingGames(false));
   }, [tagId, currentPage]);
+
+  if (isLoadingGames) {
+    return <Spinner />;
+  }
 
   return (
     <>

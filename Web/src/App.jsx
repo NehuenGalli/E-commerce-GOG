@@ -31,9 +31,15 @@ function App() {
           <Route path={ROUTES.LOGIN} element={<Login logIn={logIn} />} />
           <Route path={ROUTES.GAMES_BY_TAG} element={<TagGames />} />
           <Route path={ROUTES.SEARCH} element={<SearchGames />} />
-          <Route path={ROUTES.LIBRARY} element={<Library logOut={logOut} />} />
+          <Route
+            path={ROUTES.LIBRARY}
+            element={<Library logOut={logOut} isLoggedIn={isLoggedIn} />}
+          />
           <Route path={ROUTES.TAGS} element={<Tags />} />
-          <Route path={ROUTES.USER_BY_ID} element={<User />} />
+          <Route
+            path={ROUTES.USER_BY_ID}
+            element={<User isLoggedIn={isLoggedIn} />}
+          />
           <Route
             path={ROUTES.GAME_DETAIL}
             element={<Game isLoggedIn={isLoggedIn} />}

@@ -1,5 +1,6 @@
 import ListGames from "../components/listGames/listGames";
 import Paginacion from "../components/pagination/paginacion";
+import Spinner from "../components/spinner/Spinner";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router";
 import { toast, ToastContainer } from "react-toastify";
@@ -8,6 +9,7 @@ import { notFoundGames_message } from "../utilities/error_message";
 const SearchGames = () => {
   const [searchParams] = useSearchParams();
   const query = searchParams.get("q");
+  const [isLoadingGames, setIsLoadingGames] = useState(true);
 
   const [games, setGames] = useState({
     list: [],
@@ -21,12 +23,17 @@ const SearchGames = () => {
   useEffect(() => {
     searchGames(query, currentPage)
       .then((games) => setGames(games))
-      .catch((error) => toast.error(error));
+      .catch((error) => toast.error(error))
+      .finally(() => setIsLoadingGames(false));
   }, [query, currentPage]);
 
   useEffect(() => {
     setCurrentPage(1);
   }, [query]);
+
+  if (isLoadingGames) {
+    return <Spinner />;
+  }
 
   return (
     <>
