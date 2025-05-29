@@ -8,6 +8,7 @@ import { success_gameRemovedFromCart_message } from "../utilities/success_messag
 import { ROUTES } from "../constants";
 import { getToken } from "../utilities/localstorageUtils";
 import { toast, ToastContainer } from "react-toastify";  
+import Spinner from "../components/spinner/Spinner";
 
 
 const Cart = () => {
@@ -50,7 +51,7 @@ const Cart = () => {
     return (
         <>
             {cart === null ? (
-            <p>Loading...</p>
+            <Spinner />
             ) : cart.games.length === 0 ? (
             <EmptyCart />
             ) : (

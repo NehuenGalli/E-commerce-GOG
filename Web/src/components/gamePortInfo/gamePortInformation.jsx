@@ -1,4 +1,5 @@
 import "./gamePort-info.css";
+import Spinner from "../spinner/Spinner";
 import AddToCart from "../portAddToCart/addToCart";
 import { userCurrent } from "../../services/userService";
 import { useEffect, useState } from "react";
@@ -9,11 +10,13 @@ import ModalTags from "./modalTags";
 
 const GamePortInfo = ({ game, isLoggedIn }) => {
   const [userGames, setUserGames] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchUserGames = async () => {
       if (!isLoggedIn) {
         setUserGames([]);
+        setLoading(false);
         return;
       }
 
@@ -23,14 +26,17 @@ const GamePortInfo = ({ game, isLoggedIn }) => {
       } catch (error) {
         toast.error(error.message);
         setUserGames([]);
+      } finally {
+        setLoading(false);
       }
     };
 
     fetchUserGames();
   }, [isLoggedIn]);
 
-  const userHasGame =
-    isLoggedIn && userGames.some((userGame) => userGame.id === game.id);
+  const userHasGame = isLoggedIn && userGames.some((userGame) => userGame.id === game.id);
+
+  if (loading) return <Spinner />;
 
   return (
     <>
