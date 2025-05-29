@@ -11,14 +11,7 @@ import { useNavigate } from "react-router";
 const Library = ({ logOut, isLoggedIn }) => {
   const navigate = useNavigate();
 
-  useEffect(() => {
-    if (!isLoggedIn) {
-      navigate(ROUTES.LOGIN);
-    }
-  }, [isLoggedIn, navigate]);
-
   const [isLoadingGames, setIsLoadingGames] = useState(true);
-
   const [userLogged, setUserLogged] = useState({
     id: "",
     email: "",
@@ -29,17 +22,20 @@ const Library = ({ logOut, isLoggedIn }) => {
   });
 
   useEffect(() => {
-    userCurrent()
-      .then((userInfo) => {
+    const fetchUserData = async () => {
+      try {
+        const userInfo = await userCurrent();
         setUserLogged(userInfo);
-      })
-      .catch((error) => {
+      } catch (error) {
         toast.error(error);
-      })
-      .finally(() => {
+      } finally {
         setIsLoadingGames(false);
-      });
+      }
+    };
+
+    fetchUserData();
   }, []);
+
 
   const hasGames = userLogged.games && userLogged.games.length === 0;
 

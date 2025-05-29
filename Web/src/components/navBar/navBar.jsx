@@ -31,11 +31,10 @@ const NavBar = ({ isLoggedIn }) => {
             </NavLink>
             <NavLink
               className="nav-link"
-              to={ROUTES.LIBRARY}
+              to={ isLoggedIn ? ROUTES.LIBRARY : ROUTES.LOGIN}
             >
               LIBRARY
             </NavLink>
-
             <SearchForm routeSearch={ROUTES.SEARCH}></SearchForm>
           </div>
           <div className="mx-5 d-flex ms-auto align-items-lg-center gap-2 my-lg-0 my-4">

@@ -1,18 +1,19 @@
 import RegisterForm from "../components/registerForm/registerForm";
-// import { useNavigate } from "react-router";
+import { useNavigate } from "react-router";
 import { register } from "../services/userService";
 import { useState, useEffect } from "react";
 import { ROUTES } from "../constants";
 import { ToastContainer } from "react-toastify";
 
-const Register = (isLoggedIn) => {
-  // const navigate = useNavigate();
-  // console.log("isLoggedIn", isLoggedIn);
-  // useEffect(() => {
-  //   if (!isLoggedIn) {
-  //     navigate(ROUTES.HOME);
-  //   }
-  // }, [isLoggedIn, navigate]);
+const Register = ({ isLoggedIn }) => {
+  const navigate = useNavigate();
+
+  console.log("isLoggedIn", isLoggedIn);
+  useEffect(() => {
+    if (isLoggedIn) {
+      navigate(ROUTES.HOME);
+    }
+  }, [isLoggedIn, navigate]);
 
   const [formData, setFormData] = useState({
     email: "",
