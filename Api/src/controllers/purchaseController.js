@@ -25,7 +25,6 @@ class PurchaseController {
         cvv: Number(cardInfo.cardCvv),
       };
       const userId = req.user.id;
-      console.log("Draft created:", card);
 
       await this.service.purchase(userId, card);
       res.status(201).json({ message: "Purchase completed" });

@@ -21,12 +21,11 @@ export const ROUTES = {
   USER_CART: "/users/current/cart",
   USERS: "/users",
   USER_BY_ID: "/user/:userId",
-  REGISTER: "/register", 
+  REGISTER: "/register",
   CART: "/cart",
-
-  USER: "/user", 
+  FRIENDS: "/friends",
+  USER: "/user",
   USER_REVIEWS: "/userReviews",
 
-  GAME_REVIEWS: (gameId) => `/games/${gameId}/reviews`
-
+  GAME_REVIEWS: (gameId) => `/games/${gameId}/reviews`,
 };

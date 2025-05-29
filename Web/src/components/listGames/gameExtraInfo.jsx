@@ -1,5 +1,7 @@
 import { Link } from "react-router";
 import { ROUTES } from "../../constants";
+import recommendedIcon from "../../assets/recommendedIcon.svg";
+import unrecommendedIcon from "../../assets/unrecommendedIcon.svg";
 
 const GameExtraInfo = ({ game, needUser }) => {
   return (
@@ -54,15 +56,10 @@ const GameExtraInfo = ({ game, needUser }) => {
         <>
           <div className="col-lg-2 d-flex align-items-start justify-content-end mt-3 ">
             <div className="d-flex flex-lg-column mb-2 mb-lg-0 me-3  me-lg-5 gap-3 gap-lg-0 ">
-              {game.isRecommended ? (
-                <span className=" bg-primary bg-opacity-10 p-0">
-                  <i className="bi bi-hand-thumbs-up-fill fs-1 text-primary"></i>
-                </span>
-              ) : (
-                <span className=" bg-danger bg-opacity-10 p-0 ">
-                  <i className="bi bi-hand-thumbs-down-fill text-danger fs-1"></i>
-                </span>
-              )}
+              <img
+                src={game.isRecommended ? recommendedIcon : unrecommendedIcon}
+                alt={game.isRecommended ? "Recommended" : "Not Recommended"}
+              />
             </div>
           </div>
         </>

@@ -1,13 +1,24 @@
 import ListGames from "../components/listGames/listGames";
 import { useEffect, useState } from "react";
 import UserHeader from "../components/user/userHeader";
+import Spinner from "../components/spinner/Spinner";
 import { userCurrent } from "../services/userService";
 import { toast, ToastContainer } from "react-toastify";
 import LibraryEmpty from "../components/library/libraryEmpty";
-import Spinner from "../components/spinner/Spinner";
+import { ROUTES } from "../constants";
+import { useNavigate } from "react-router";
 
 const Library = ({ logOut, isLoggedIn }) => {
-  const [loading , setLoading] = useState(true);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!isLoggedIn) {
+      navigate(ROUTES.LOGIN);
+    }
+  }, [isLoggedIn, navigate]);
+
+  const [isLoadingGames, setIsLoadingGames] = useState(true);
+
   const [userLogged, setUserLogged] = useState({
     id: "",
     email: "",
@@ -26,13 +37,13 @@ const Library = ({ logOut, isLoggedIn }) => {
         toast.error(error);
       })
       .finally(() => {
-        setLoading(false);
+        setIsLoadingGames(false);
       });
   }, []);
 
   const hasGames = userLogged.games && userLogged.games.length === 0;
 
-  if (loading) return <Spinner />;
+  if (isLoadingGames) return <Spinner />;
 
   return (
     <>
@@ -40,7 +51,11 @@ const Library = ({ logOut, isLoggedIn }) => {
       {hasGames ? (
         <LibraryEmpty />
       ) : (
-      <ListGames games={userLogged.games} title={"GAMES "} displayUser={true} />
+        <ListGames
+          games={userLogged.games}
+          title={"GAMES "}
+          displayUser={true}
+        />
       )}
       <ToastContainer />
     </>

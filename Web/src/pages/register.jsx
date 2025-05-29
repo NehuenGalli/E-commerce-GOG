@@ -1,28 +1,33 @@
 import RegisterForm from "../components/registerForm/registerForm";
 import { useNavigate } from "react-router";
 import { register } from "../services/userService";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { ROUTES } from "../constants";
 import { ToastContainer } from "react-toastify";
 
-const Register = () => {
-  
+const Register = (isLoggedIn) => {
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (isLoggedIn) {
+      navigate(ROUTES.HOME);
+    }
+  }, [isLoggedIn, navigate]);
+
   const [formData, setFormData] = useState({
     email: "",
     password: "",
     name: "",
     image: "",
-    backgroundImage: ""
+    backgroundImage: "",
   });
 
   const [error, setError] = useState(null);
-  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
       ...prev,
-      [name]: value
+      [name]: value,
     }));
   };
 
@@ -53,12 +58,11 @@ const Register = () => {
         formData={formData}
         onChange={handleChange}
         onSubmit={onSubmit}
-        error={error} 
+        error={error}
       />
       <ToastContainer />
     </>
   );
-  
 };
 
 export default Register;

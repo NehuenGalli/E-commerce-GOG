@@ -1,6 +1,6 @@
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router";
-import { ROUTES, API } from "./constants";
+import { ROUTES } from "./constants";
 import { useState } from "react";
 import TagGames from "./pages/tagGames";
 import SearchGames from "./pages/searchGames";
@@ -28,17 +28,29 @@ function App() {
         <NavBar isLoggedIn={isLoggedIn} />
         <Routes>
           <Route path={ROUTES.HOME} element={<Home />} />
-          <Route path={ROUTES.LOGIN} element={<Login logIn={logIn} />} />
+          <Route
+            path={ROUTES.LOGIN}
+            element={<Login logIn={logIn} isLoggedIn={isLoggedIn} />}
+          />
           <Route path={ROUTES.GAMES_BY_TAG} element={<TagGames />} />
           <Route path={ROUTES.SEARCH} element={<SearchGames />} />
-          <Route path={ROUTES.LIBRARY} element={<Library logOut={logOut} />} />
+          <Route
+            path={ROUTES.LIBRARY}
+            element={<Library logOut={logOut} isLoggedIn={isLoggedIn} />}
+          />
           <Route path={ROUTES.TAGS} element={<Tags />} />
-          <Route path={ROUTES.USER_BY_ID} element={<User />} />
+          <Route
+            path={ROUTES.USER_BY_ID}
+            element={<User isLoggedIn={isLoggedIn} />}
+          />
           <Route
             path={ROUTES.GAME_DETAIL}
             element={<Game isLoggedIn={isLoggedIn} />}
           />
-          <Route path={ROUTES.REGISTER} element={<Register />} />
+          <Route
+            path={ROUTES.REGISTER}
+            element={<Register isLoggedIn={isLoggedIn} />}
+          />
           <Route path={ROUTES.CART} element={<Cart />} />
           <Route path={ROUTES.USER} element={<User />} />
           <Route

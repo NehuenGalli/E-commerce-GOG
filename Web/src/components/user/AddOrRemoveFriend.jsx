@@ -1,6 +1,6 @@
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 
-import { addOrRemoveF, friendsUserLogged } from "../../services/userService";
+import { addOrRemoveF } from "../../services/userService";
 
 import { isFriend } from "../../utilities/isFriend";
 
@@ -26,12 +26,23 @@ const AddOrRemoveFriend = ({ userId, idUserLogged }) => {
   }, [userId, idUserLogged]);
   return (
     <>
-      <button
-        className="btn btn-actionButton"
-        onClick={() => functionAddOrRemoveFriend()}
-      >
-        {isFriendBool ? <>Remove Friend</> : <>Add Friend</>}
-      </button>
+      {!isFriendBool && (
+        <button
+          className="btn btn-actionButton py-2 px-5 rounded-1"
+          onClick={() => functionAddOrRemoveFriend()}
+        >
+          Add Friend
+        </button>
+      )}
+
+      {isFriendBool && (
+        <button
+          className="btn btn-danger py-2 px-5 rounded-1"
+          onClick={() => functionAddOrRemoveFriend()}
+        >
+          Remove Friend
+        </button>
+      )}
     </>
   );
 };

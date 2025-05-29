@@ -93,7 +93,6 @@ app.post(
   purchaseController.purchase
 );
 
-// tags
 app.get("/tags", tokenController.checkRole("public"), tagController.getTags);
 
 app.get(
