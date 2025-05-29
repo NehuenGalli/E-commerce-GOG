@@ -17,7 +17,7 @@ const User = ({ isLoggedIn }) => {
   const { userId } = useParams();
   const [isLoadingReviews, setIsLoadingReviews] = useState(true);
   const [isLoadingUserById, setIsLoadingUserById] = useState(true);
-  //const [isLoadingReviews, setIsLoadingReviews] = useState(true);
+  const [isLoadingUserLogged, setIsLoadingUserLogged] = useState(true);
 
   const navigate = useNavigate();
 
@@ -55,6 +55,9 @@ const User = ({ isLoggedIn }) => {
       })
       .catch((error) => {
         toast.error(error);
+      })
+      .finally(() => {
+        setIsLoadingUserLogged(false);
       });
   }, []);
 
@@ -97,7 +100,7 @@ const User = ({ isLoggedIn }) => {
     gameId: review.game.id,
   }));
 
-  if (isLoadingReviews && isLoadingUserById) {
+  if (isLoadingReviews && isLoadingUserById && isLoadingUserLogged) {
     return <Spinner />;
   }
 

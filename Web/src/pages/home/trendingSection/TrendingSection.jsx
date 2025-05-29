@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { getGames } from "../../../services/gameServices";
 import Paginacion from "../../../components/pagination/paginacion";
-import ListAllGames from "../../../components/listAllGames/ListAllGames";
+import ListAllGames from "../../../components/listAllGames/listAllGames";
 import { toast } from "react-toastify";
 import { GameCardSkelton } from "../../../components/skelton/GameCardSkelton/GameCardSkelton";
 

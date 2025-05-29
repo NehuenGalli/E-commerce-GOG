@@ -1,30 +1,30 @@
-import { useState } from 'react';
-import thumbUp from '../../assets/thumb-up.png';
-import thumbDown from '../../assets/thumb-down.png';
-import './currentReviews.css';
+import { useState } from "react";
+import "./currentReviews.css";
+import recommendedIcon from "../../assets/recommendedIcon.svg";
+import unrecommendedIcon from "../../assets/unrecommendedIcon.svg";
 
 const CurrentReview = ({ onSubmit, currentUser }) => {
   const [review, setReview] = useState({
-    text: '',
+    text: "",
     isRecommended: true,
-    submitting: false
+    submitting: false,
   });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!review.text.trim()) return;
 
-    setReview(currentState  => ({ ...currentState , submitting: true }));
+    setReview((currentState) => ({ ...currentState, submitting: true }));
 
     const success = await onSubmit({
       text: review.text,
-      isRecommended: review.isRecommended
+      isRecommended: review.isRecommended,
     });
 
     if (success) {
-      setReview({ text: '', isRecommended: true, submitting: false });
+      setReview({ text: "", isRecommended: true, submitting: false });
     } else {
-      setReview(currentState  => ({ ...currentState , submitting: false }));
+      setReview((currentState) => ({ ...currentState, submitting: false }));
     }
   };
 
@@ -39,31 +39,49 @@ const CurrentReview = ({ onSubmit, currentUser }) => {
         <h2 className="username-title">{currentUser.name}</h2>
       </div>
 
-
       <form onSubmit={handleSubmit} className="review-form">
         <div className="recommendation-section">
           <span className="recommendation-text">Recommended</span>
           <div className="recommendation-buttons">
             <button
               type="button"
-              className={`thumb-btn ${review.isRecommended ? 'opacity-100' : 'opacity-50'}`}
-              onClick={() => setReview(currentState  => ({ ...currentState , isRecommended: true }))}
+              className={`thumb-btn ${
+                review.isRecommended ? "opacity-100" : "opacity-50"
+              }`}
+              onClick={() =>
+                setReview((currentState) => ({
+                  ...currentState,
+                  isRecommended: true,
+                }))
+              }
             >
-              <img src={thumbUp} alt="Recommended" />
+              <img src={recommendedIcon} alt="Recommended" />
             </button>
             <button
               type="button"
-              className={`thumb-btn ${!review.isRecommended ? 'opacity-100' : 'opacity-50'}`}
-              onClick={() => setReview(currentState  => ({ ...currentState , isRecommended: false }))}
+              className={`thumb-btn ${
+                !review.isRecommended ? "opacity-100" : "opacity-50"
+              }`}
+              onClick={() =>
+                setReview((currentState) => ({
+                  ...currentState,
+                  isRecommended: false,
+                }))
+              }
             >
-              <img src={thumbDown} alt="Not Recommended" />
+              <img src={unrecommendedIcon} alt="Not Recommended" />
             </button>
           </div>
         </div>
 
         <textarea
           value={review.text}
-          onChange={(e) => setReview(currentState  => ({ ...currentState , text: e.target.value }))}
+          onChange={(e) =>
+            setReview((currentState) => ({
+              ...currentState,
+              text: e.target.value,
+            }))
+          }
           placeholder="Write your review..."
           className="review-textarea"
         />
@@ -73,7 +91,7 @@ const CurrentReview = ({ onSubmit, currentUser }) => {
           className="btn-review"
           disabled={review.submitting || !review.text.trim()}
         >
-          {review.submitting ? 'Submitting...' : 'Add review'}
+          {review.submitting ? "Submitting..." : "Add review"}
         </button>
       </form>
     </div>

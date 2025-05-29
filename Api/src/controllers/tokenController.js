@@ -1,26 +1,27 @@
-import jwt from 'jsonwebtoken';
+import jwt from "jsonwebtoken";
 
-import { JWT_SECRET } from '../constants.js';
+import { JWT_SECRET } from "../constants.js";
 
 class TokenController {
   constructor(service) {
     this.service = service;
   }
-  
-  generateToken = (userId) => jwt.sign({ userId }, JWT_SECRET, { expiresIn: '24h' });
-  
+
+  generateToken = (userId) =>
+    jwt.sign({ userId }, JWT_SECRET, { expiresIn: "24h" });
+
   validateToken = (token) => jwt.verify(token, JWT_SECRET);
 
   checkRole = (role) => {
     return (req, res, next) => {
-      if (role === 'public') {
+      if (role === "public") {
         next();
-        return
+        return;
       }
-      if (role === 'admin' || role === 'user') {
+      if (role === "admin" || role === "user") {
         const authHeader = req.headers.authorization;
         if (!authHeader) {
-          res.status(401).json({ error: 'Authorization header is required' });
+          res.status(401).json({ error: "Authorization header is required" });
           return;
         }
         try {
@@ -30,13 +31,13 @@ class TokenController {
           next();
         } catch (error) {
           console.log(error);
-          res.status(401).json({ error: 'Invalid token' });
+          res.status(401).json({ error: "Invalid token" });
         }
       } else {
         throw new Error(`Invalid role: ${role}`);
       }
-    }
-  }
+    };
+  };
 }
 
 export default TokenController;

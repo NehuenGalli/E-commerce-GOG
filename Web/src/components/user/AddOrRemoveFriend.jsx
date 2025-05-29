@@ -1,6 +1,6 @@
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 
-import { addOrRemoveF, friendsUserLogged } from "../../services/userService";
+import { addOrRemoveF } from "../../services/userService";
 
 import { isFriend } from "../../utilities/isFriend";
 

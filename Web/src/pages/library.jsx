@@ -15,7 +15,7 @@ const Library = ({ logOut, isLoggedIn }) => {
     if (!isLoggedIn) {
       navigate(ROUTES.LOGIN);
     }
-  }, []);
+  }, [isLoggedIn, navigate]);
 
   const [isLoadingGames, setIsLoadingGames] = useState(true);
 

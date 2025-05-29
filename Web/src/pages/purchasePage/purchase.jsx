@@ -1,13 +1,13 @@
 import "./purchaseStyle.css";
 import { toast, ToastContainer } from "react-toastify";
-import FormPurchase from "./FormPurchase";
+import FormPurchase from "../../components/FormPurchase/FormPurchase";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { ROUTES } from "../../constants";
 import CheckOut from "../../components/checkOut/checkOut";
 import "./purchaseStyle.css";
 import { getCart } from "../../services/userService";
-import { API } from "../../constants";
+import { getToken } from "../../utilities/localstorageUtils";
 
 const Purchase = ({ isLoggedIn }) => {
   const navigate = useNavigate();
@@ -22,7 +22,7 @@ const Purchase = ({ isLoggedIn }) => {
     const fetchCart = async () => {
       try {
         setLoading(true);
-        const token = localStorage.getItem(API.TOKEN_KEY);
+        const token = getToken();
         const cartData = await getCart(token);
         setCart(cartData);
 
@@ -40,7 +40,6 @@ const Purchase = ({ isLoggedIn }) => {
     fetchCart();
   }, [isLoggedIn, navigate]);
 
-  console.log("Cart data:", cart);
   if (loading) {
     return <div className="loading-spinner">Loading cart...</div>;
   }

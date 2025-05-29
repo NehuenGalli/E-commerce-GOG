@@ -5,12 +5,21 @@ import { useState } from "react";
 import { logInFunction } from "../utilities/buttonFunction";
 import { ToastContainer } from "react-toastify";
 import { fieldsCannotBeEmpty_message } from "../utilities/error_message";
+import { useEffect } from "react";
+import { ROUTES } from "../constants";
 
-const Login = ({ logIn }) => {
+const Login = ({ logIn, isLoggedIn }) => {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      navigate(ROUTES.HOME);
+    }
+  }, [isLoggedIn, navigate]);
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
-  const navigate = useNavigate();
 
   const onSubmit = async (e) => {
     e.preventDefault();

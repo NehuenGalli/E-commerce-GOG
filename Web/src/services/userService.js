@@ -5,6 +5,7 @@ import {
   sucess_removeFriend_message,
 } from "../utilities/success_message";
 import { errorMessage } from "../utilities/error_message";
+import { getToken, setToken } from "../utilities/localstorageUtils";
 
 const api = axios.create({
   baseURL: API.BASE_URL,
@@ -16,7 +17,7 @@ const login = async ({ email, password }) => {
 
     const token = response.headers[API.AUTH_HEADER];
     if (token) {
-      localStorage.setItem(API.TOKEN_KEY, token);
+      setToken(token);
     }
     return response.data;
   } catch (error) {
@@ -40,7 +41,7 @@ const userCurrent = () =>
   api
     .get(`${API.BASE_URL}${ROUTES.USER_CURRENT}`, {
       headers: {
-        Authorization: localStorage.getItem(API.TOKEN_KEY),
+        Authorization: getToken(),
       },
     })
     .then((res) => res.data)
@@ -58,7 +59,7 @@ const getUserById = (userId) =>
 
 const friendsUserLogged = (idUserLogged) =>
   api
-    .get(`${API.BASE_URL}${ROUTES.USERS}/${idUserLogged}/friends`)
+    .get(`${API.BASE_URL}${ROUTES.USERS}/${idUserLogged}${ROUTES.FRIENDS}`)
     .then((res) => res.data)
     .catch((error) => {
       throw errorMessage(error);
@@ -67,11 +68,11 @@ const friendsUserLogged = (idUserLogged) =>
 const addOrRemoveF = (idFriend, isFriendBool) => {
   return api
     .put(
-      `${API.BASE_URL}${ROUTES.USERS}/${idFriend}/friends`,
+      `${API.BASE_URL}${ROUTES.USERS}/${idFriend}${ROUTES.FRIENDS}`,
       {},
       {
         headers: {
-          Authorization: localStorage.getItem(API.TOKEN_KEY),
+          Authorization: getToken(),
         },
       }
     )

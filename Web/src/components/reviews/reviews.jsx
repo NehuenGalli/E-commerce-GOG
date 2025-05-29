@@ -1,14 +1,14 @@
-import { useState, useEffect } from 'react';
-import { addReview } from '../../services/gameServices';
-import { userCurrent } from '../../services/userService';
-import CurrentReview from './currentReviews';
-import ReviewCard from './reviewsCard';
-import { ROUTES } from '../../constants';
-import { useNavigate } from 'react-router';
-import { toast } from 'react-toastify';
-import { getToken } from '../../utilities/localstorageUtils';
-import { success_addReview_message } from '../../utilities/success_message';
-import './reviews.css';
+import { useState, useEffect } from "react";
+import { addReview } from "../../services/gameServices";
+import { userCurrent } from "../../services/userService";
+import CurrentReview from "./currentReviews";
+import ReviewCard from "./reviewsCard";
+import { ROUTES } from "../../constants";
+import { useNavigate } from "react-router";
+import { toast } from "react-toastify";
+import { getToken } from "../../utilities/localstorageUtils";
+import { success_addReview_message } from "../../utilities/success_message";
+import "./reviews.css";
 
 const Reviews = ({ game, isLoggedIn }) => {
   const [currentUser, setCurrentUser] = useState(null);
@@ -34,10 +34,8 @@ const Reviews = ({ game, isLoggedIn }) => {
     loadData();
   }, [game, isLoggedIn]);
 
-
   const handleNewReview = async (reviewData) => {
     try {
-
       const updatedGame = await addReview(game.id, reviewData, token);
 
       toast.success(success_addReview_message);
@@ -50,35 +48,37 @@ const Reviews = ({ game, isLoggedIn }) => {
   if (loading) return <div className="loading-spinner">Loading reviews...</div>;
 
   const userReview = currentUser
-    ? reviews.find(r => r.user.id === currentUser.id)
+    ? reviews.find((r) => r.user.id === currentUser.id)
     : null;
 
   return (
     <div className="reviews-container">
       <h2 className="reviews-title">REVIEWS</h2>
 
-      {/* Review del usuario o formulario */}
       <div className="user-review-container">
         {userReview ? (
           <ReviewCard review={userReview} isCurrentUser />
         ) : isLoggedIn ? (
-          <CurrentReview
-            onSubmit={handleNewReview}
-            currentUser={currentUser}
-          />
+          <CurrentReview onSubmit={handleNewReview} currentUser={currentUser} />
         ) : (
           <div className="bloqued-review-container">
-            <p className="bloqued-review-text">Inicie sesión para dejar una review</p>
-            <button className="btn-bloqued-review" onClick={() => navigate(ROUTES.LOGIN)}>Login</button>
+            <p className="bloqued-review-text">
+              Inicie sesión para dejar una review
+            </p>
+            <button
+              className="btn-bloqued-review"
+              onClick={() => navigate(ROUTES.LOGIN)}
+            >
+              Login
+            </button>
           </div>
         )}
       </div>
 
-      {/* Listado de otras reviews */}
       <div className="reviews-grid">
         {reviews
-          .filter(review => !userReview || review.id !== userReview.id)
-          .map(review => (
+          .filter((review) => !userReview || review.id !== userReview.id)
+          .map((review) => (
             <ReviewCard key={review.id} review={review} />
           ))}
       </div>

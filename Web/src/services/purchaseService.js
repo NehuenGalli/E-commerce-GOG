@@ -1,6 +1,8 @@
 import axios from "axios";
 import { errorMessage } from "../utilities/error_message";
 
+import { getToken } from "../utilities/localstorageUtils";
+
 import { API, ROUTES } from "../constants";
 
 const api = axios.create({
@@ -19,7 +21,7 @@ const purchase = (nameCard, numCard, expDate, cvv) =>
       },
       {
         headers: {
-          Authorization: localStorage.getItem(API.TOKEN_KEY),
+          Authorization: getToken(),
         },
       }
     )
