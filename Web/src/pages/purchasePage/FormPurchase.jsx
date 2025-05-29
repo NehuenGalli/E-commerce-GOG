@@ -1,10 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router";
-import "./purchaseStyle.css";
 import { purchase } from "../../services/purchaseService";
 import { ROUTES } from "../../constants";
 import { toast } from "react-toastify";
-import CheckOut from "../../../checkOut/checkOut";
 import { validateCardData } from "../../utilities/validateCard";
 
 const FormPurchase = ({ items }) => {
@@ -37,68 +35,61 @@ const FormPurchase = ({ items }) => {
     <>
       <form
         onSubmit={submitCard}
-        className=" formBGColor px-5 rounded-2 containerForm w-90"
+        className="formBGColor rounded-2 d-flex flex-column justify-content-center py-3 px-5 gap-3 "
       >
-        <h3 className="text-white mt-3">{`Buy ${items[0].name}`}</h3>
-        <div className="mb-3 d-flex flex-column flex-column align-items-center">
-          <div className="mb-3 d-flex flex-column ">
-            <label className="form-label d-flex ">CARD HOLDER NAME</label>
-            <input
-              type="text"
-              className="form-control inputP d-flex"
-              value={nameCard}
-              onChange={(e) => {
-                setNameCard(e.target.value);
-              }}
-              required
-            />
-          </div>
-          <div className="mb-3 flex-column">
-            <label className="form-label d-flex">NUMBER</label>
-            <input
-              type="text"
-              className="form-control inputP d-flex"
-              onChange={(e) => {
-                setNumCard(e.target.value);
-              }}
-              required
-            />
-          </div>
-          <div className="mb-3 flex-column">
-            <label className="form-label d-flex">CVV</label>
-            <input
-              type="password"
-              className="form-control inputP d-flex"
-              onChange={(e) => {
-                setCVV(e.target.value);
-              }}
-              required
-            />
-          </div>
-          <div className="mb-3 flex-column">
-            <label className="form-label d-flex">EXPIRATION DATE</label>
-            <input
-              type="text"
-              className="form-control inputP d-flex "
-              onChange={(e) => {
-                setExpDate(e.target.value);
-              }}
-              required
-            />
-          </div>
-          <div className="d-flex">
-            <button
-              type="submit"
-              className="btn btn-primary persButton d-flex justify-content-center w-fit-content"
-            >
-              Buy
-            </button>
-          </div>
+        <h3 className="text-white align-self-start">{`Buy ${items[0].name}`}</h3>
+        <div>
+          <label className="form-label ">CARD HOLDER NAME</label>
+          <input
+            type="text"
+            className="form-control"
+            value={nameCard}
+            onChange={(e) => {
+              setNameCard(e.target.value);
+            }}
+            required
+          />
         </div>
+        <div>
+          <label className="form-label ">NUMBER</label>
+          <input
+            type="text"
+            className="form-control"
+            onChange={(e) => {
+              setNumCard(e.target.value);
+            }}
+            required
+          />
+        </div>
+        <div>
+          <label className="form-label ">CVV</label>
+          <input
+            type="password"
+            className="form-control"
+            onChange={(e) => {
+              setCVV(e.target.value);
+            }}
+            required
+          />
+        </div>
+        <div>
+          <label className="form-label ">EXPIRATION DATE</label>
+          <input
+            type="text"
+            className="form-control "
+            onChange={(e) => {
+              setExpDate(e.target.value);
+            }}
+            required
+          />
+        </div>
+        <button
+          type="submit"
+          className="btn btn-primary persButton w-25 align-self-center my-2"
+        >
+          Buy
+        </button>
       </form>
-      <div className="container-checkOut">
-        <CheckOut items={items} />
-      </div>
     </>
   );
 };

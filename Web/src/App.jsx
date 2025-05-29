@@ -10,18 +10,14 @@ import Home from "./pages/home/home";
 import Tags from "./pages/tags/tags";
 import NavBar from "./components/navBar/navBar";
 import Cart from "./pages/cart";
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-
 import User from "./pages/user";
 import Purchase from "./pages/purchasePage/purchase";
 import Game from "./pages/game";
 import Register from "./pages/register";
+import { getToken } from "./utilities/localstorageUtils";
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(
-    !!localStorage.getItem(API.TOKEN_KEY)
-  );
+  const [isLoggedIn, setIsLoggedIn] = useState(!!getToken());
 
   const logOut = () => setIsLoggedIn(false);
   const logIn = () => setIsLoggedIn(true);
@@ -51,7 +47,6 @@ function App() {
           />
         </Routes>
       </BrowserRouter>
-      <ToastContainer />
     </>
   );
 }

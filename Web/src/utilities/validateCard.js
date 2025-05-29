@@ -13,6 +13,5 @@ export const validateCardData = ({ nameCard, numCard, cvv }) => {
     return "CVV must be 3 or 4 digits.";
   }
 
-  // Si todo está bien
   return null;
 };
