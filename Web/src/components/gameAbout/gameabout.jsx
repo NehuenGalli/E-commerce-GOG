@@ -14,10 +14,10 @@ const GameAbout = ({ game }) => {
           <strong>OS: {game.requirement.os.join(", ")}</strong>
         </div>
         <div>
-          <strong>Processor: {game.requirement.processor.join(", ")}</strong>
+          <strong>Processor: {game.requirement.processor}</strong>
         </div>
         <div>
-          <strong>Memory: {game.requirement.memory} GB</strong>
+          <strong>Memory: {game.requirement.memory} GB</strong> 
         </div>
         <div>
           <strong>Graphics: {game.requirement.graphics.join(", ")}</strong>

@@ -31,7 +31,7 @@ const NavBar = ({ isLoggedIn }) => {
             </NavLink>
             <NavLink
               className="nav-link"
-              to={isLoggedIn ? ROUTES.LIBRARY : ROUTES.LOGIN}
+              to={ROUTES.LIBRARY}
             >
               LIBRARY
             </NavLink>
