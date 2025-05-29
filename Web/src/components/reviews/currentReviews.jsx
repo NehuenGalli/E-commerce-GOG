@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import thumbUp from './thumb-up.png';
-import thumbDown from './thumb-down.png';
+import thumbUp from '../../assets/thumb-up.png';
+import thumbDown from '../../assets/thumb-down.png';
 import './currentReviews.css';
 
 const CurrentReview = ({ onSubmit, currentUser }) => {
