@@ -5,6 +5,9 @@ import { HEADER } from "../constants.js";
 import { transformGames } from "../helpers/gameHelper.js";
 import { transformUser5datos } from "../helpers/userHelper.js";
 import { filterGame } from "../helpers/gameHelper.js";
+
+import { formatReview } from "../helpers/reviewHelper.js";
+
 const registerBodySchema = object({
   name: string().required(),
   email: string().email().required(),
@@ -143,6 +146,21 @@ class UserController {
       res.status(200).json(response);
     } catch (error) {
       res.status(401).json({ message: error.message });
+    }
+  };
+
+  getUserReviewsById = async (req, res) => {
+    try {
+      const { userId } = req.params;
+      const reviews = await this.service.getUserReviews(userId);
+
+      const reviewsList = reviews.map((review) =>
+        formatReview(review, review.game)
+      );
+
+      res.status(200).json(reviewsList);
+    } catch (error) {
+      res.status(404).json({ message: error.message });
     }
   };
 }

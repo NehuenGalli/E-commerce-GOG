@@ -1,14 +1,15 @@
 import { logOutFunction } from "../../utilities/buttonFunction";
 import { useNavigate } from "react-router";
+import AddOrRemoveFriend from "./AddOrRemoveFriend";
 
-const ActionButtons = ({ haveLoggout, logOut }) => {
+const ActionButtons = ({ logOut, user, idUserLogged }) => {
   const navigate = useNavigate();
 
   return (
     <>
-      {haveLoggout && (
+      {logOut && (
         <button
-          className="btn btn-loggout"
+          className="btn btn-actionButton"
           onClick={() => {
             logOutFunction(logOut, navigate);
           }}
@@ -17,7 +18,9 @@ const ActionButtons = ({ haveLoggout, logOut }) => {
         </button>
       )}
 
-      {!haveLoggout && <button className="btn">Add Friend</button>}
+      {!logOut && (
+        <AddOrRemoveFriend userId={user.id} idUserLogged={idUserLogged} />
+      )}
     </>
   );
 };

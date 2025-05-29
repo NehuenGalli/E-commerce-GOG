@@ -6,4 +6,9 @@ const logOutFunction = (logOut, navigate) => {
   navigate(ROUTES.HOME);
 };
 
-export { logOutFunction };
+const logInFunction = (logIn, navigate) => {
+  logIn();
+  navigate(ROUTES.HOME);
+};
+
+export { logOutFunction, logInFunction };

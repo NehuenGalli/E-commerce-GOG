@@ -1,0 +1,65 @@
+import CartWithItems from "../components/cart/cartWithItems";
+import EmptyCart from "../components/cart/emptyCart";
+import { getCart } from "../services/userService";
+import { useNavigate } from 'react-router';
+import { useEffect, useState } from "react";
+import { removeGame } from "../services/gameServices";
+import { showRemovedFromCartToast } from "../services/toastService";
+import { ROUTES } from "../constants";
+import { API } from "../constants";
+import { ToastContainer } from "react-toastify";  
+
+
+
+const Cart = () => {
+
+    const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const navigate = useNavigate();
+    const [cart, setCart] = useState(null);
+    const [error, setError] = useState(null);
+
+    useEffect(() => {
+        const token = localStorage.getItem(API.TOKEN_KEY);
+        const isAuth = !!token;
+        setIsAuthenticated(isAuth);
+
+        if (!isAuth) {
+            navigate(ROUTES.LOGIN);
+        }
+
+        getCart(token)
+        .then((data) => {
+            setCart(data);
+        })
+        .catch((error) => {
+            setError(error.message);
+        });
+    }, []);
+
+    const handleRemove = async (gameId) => {
+        const token = localStorage.getItem(API.TOKEN_KEY);
+        try {
+            await removeGame(gameId, token);
+            showRemovedFromCartToast();
+        } catch (error) {
+            setError(error.message);
+        }
+        const updatedCart = await getCart(token);
+        setCart(updatedCart);
+    }
+
+    return (
+        <>
+            {cart === null ? (
+            <p>Loading...</p>
+            ) : cart.games.length === 0 ? (
+            <EmptyCart />
+            ) : (
+            <CartWithItems items={cart.games}  onRemove={handleRemove} />
+            )}
+            <ToastContainer />
+        </>
+    );
+} 
+
+export default Cart;

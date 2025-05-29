@@ -1,0 +1,28 @@
+.icon-thumb {
+  width: 40px;
+  height: 40px;
+}
+
+.text-review{
+    font-size: 1.5rem;
+    line-height: 1.5;
+    color: #fff;
+    font-weight: 400;
+    padding: .5rem;
+}
+
+.btn-review {
+    background-color: #6B217F;
+    color: white;
+    border: none;
+    padding: 10px 0;
+    width: 30%;
+    font-size: 16px;
+    border-radius: 4px;
+    display: block;
+    margin: 15px auto auto;
+}
+
+.btn-review:hover {
+    background-color: #8629a0;
+}

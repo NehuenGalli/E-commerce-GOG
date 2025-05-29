@@ -1,4 +1,4 @@
-import { getTags } from "../../services/gameServices";
+import { getTags } from "../../services/tagServices";
 import { useState, useEffect } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import ListAllTags from "../../components/listAllTags/ListAllTags";
