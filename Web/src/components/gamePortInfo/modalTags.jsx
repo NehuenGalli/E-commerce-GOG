@@ -1,11 +1,15 @@
 import { ROUTES } from "../../constants";
 import { Link } from "react-router";
-import { useNavigate } from "react-router";
+
 const ModalTags = ({ tags }) => {
-  const navigate = useNavigate();
   const uniqueTags = tags.filter(
     (tag, index, self) => index === self.findIndex((t) => t.id === tag.id)
   );
+
+  const closeModal = (e) => {
+    document.getElementsByClassName("modal-backdrop")[0].remove();
+    e.preventDefault();
+  };
 
   return (
     <>
@@ -30,26 +34,13 @@ const ModalTags = ({ tags }) => {
               ></button>
             </div>
             <div className="modal-body">
-              <button
-                className="btn btn-primary"
-                onClick={() => {
-                  console.log(
-                    document.getElementsByClassName("modal-backdrop")
-                  );
-                  document.getElementsByClassName("modal-backdrop")[0].remove();
-                }}
-              >
-                Hola
-              </button>
               {uniqueTags.map((tag) => (
                 <Link
                   key={tag.id}
                   to={`${ROUTES.TAGS}/${tag.id}`}
                   className="link-offset-1 badge text-white fs-6"
                   onClick={() => {
-                    document
-                      .getElementsByClassName("modal-backdrop")[0]
-                      .remove();
+                    closeModal(e);
                   }}
                 >
                   {tag.name}
