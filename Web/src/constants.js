@@ -18,10 +18,15 @@ export const ROUTES = {
   SEARCH: "/search",
   LIBRARY: "/library",
   USER_CURRENT: "/users/current",
+  USER_CART: "/users/current/cart",
   USERS: "/users",
   USER_BY_ID: "/user/:userId",
-  REGISTER: "/register",
+  REGISTER: "/register", 
   CART: "/cart",
-  USER: "/user",
+
+  USER: "/user", 
   USER_REVIEWS: "/userReviews",
+
+  GAME_REVIEWS: (gameId) => "/games/${gameId}/reviews"
+  
 };

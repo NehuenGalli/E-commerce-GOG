@@ -1,40 +1,64 @@
 import "./purchaseStyle.css";
-import { ToastContainer } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 import FormPurchase from "./FormPurchase";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { ROUTES } from "../../constants";
 import CheckOut from "../../../checkOut/checkOut";
 import "./purchaseStyle.css";
+import { getCart } from "../../services/userService";
+import { API } from "../../constants";
 
 const Purchase = ({ isLoggedIn }) => {
-  const storedCart = JSON.parse(localStorage.getItem("cart")) || { games: [] };
-  const hasGames = storedCart.games && storedCart.games.length > 0;
   const navigate = useNavigate();
+  const [cart, setCart] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     if (!isLoggedIn) {
       navigate(ROUTES.LOGIN);
     }
 
-    if (!hasGames) {
-      navigate(ROUTES.CART);
-    }
-  }, [isLoggedIn, hasGames, navigate]);
+    const fetchCart = async () => {
+      try {
+        setLoading(true);
+        const token = localStorage.getItem(API.TOKEN_KEY);
+        const cartData = await getCart(token);
+        setCart(cartData);
+
+        if (!cartData.games || cartData.games.length === 0) {
+          toast.info("Your cart is empty");
+          navigate(ROUTES.CART);
+        }
+      } catch (error) {
+        toast.error(error.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchCart();
+  }, [isLoggedIn, navigate]);
+
+  console.log("Cart data:", cart);
+  if (loading) {
+    return <div className="loading-spinner">Loading cart...</div>;
+  }
 
   return (
     <>
-      <div className="container mt-4 ">
-        <div className="justify-content-center row g-4">
-          <div className="col-12 col-lg-7">
-            {hasGames && <FormPurchase items={storedCart.games} />}
-          </div>
-          <div className="col-8 col-lg-4">
-            <CheckOut items={storedCart.games} />
+      {cart && cart.games && cart.games.length > 0 && (
+        <div className="container mt-4 ">
+          <div className="justify-content-center row g-4">
+            <div className="col-12 col-lg-7">
+              <FormPurchase items={cart.games} />
+            </div>
+            <div className="col-8 col-lg-4">
+              <CheckOut items={cart.games} />
+            </div>
           </div>
         </div>
-      </div>
-
+      )}
       <ToastContainer />
     </>
   );

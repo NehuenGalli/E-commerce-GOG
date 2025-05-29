@@ -1,0 +1,100 @@
+/* ReviewCard.css */
+
+.review-card {
+  background-color: #808080;
+  border-radius: 4px;
+  padding: 15px;
+  margin-bottom: 15px;
+}
+
+.review-card.current-user {
+  background-color: #808080;
+}
+
+.review-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  padding-bottom: 8px;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+}
+
+.user-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  margin-right: 20px;
+  object-fit: cover;
+  background-color: black;
+  border: 1px solid white;
+}
+
+.user-name {
+  margin: 0;
+  font-size: 16px;
+  font-weight: bold;
+  color: white;
+}
+
+.recommendation img{
+  width: 30px;
+  height: 30px;
+  margin-right: 5px;
+}
+
+.review-content {
+  margin-left: 42px;
+}
+
+.review-text {
+  margin: 0 0 8px 0;
+  font-size: 14px;
+  line-height: 1.4;
+  color: white;
+  white-space: pre-wrap;
+}
+
+/* Estilo específico para el diseño de la foto
+.review-card.checkbox-style {
+  background-color: transparent;
+  border-left: none;
+  padding: 0;
+  margin-bottom: 20px;
+}
+
+.review-card.checkbox-style .review-header {
+  display: none;
+}
+
+.review-card.checkbox-style .review-content {
+  margin-left: 0;
+}
+
+.review-card.checkbox-style .review-text {
+  margin-left: 20px;
+  font-style: italic;
+}
+
+.checkbox-list {
+  margin-bottom: 5px;
+}
+
+.checkbox-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 3px;
+}
+
+.checkbox-item input {
+  margin-right: 8px;
+}
+
+.checkbox-label {
+  font-size: 14px;
+  color: #333;
+} */

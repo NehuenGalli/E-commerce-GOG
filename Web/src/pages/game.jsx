@@ -6,8 +6,13 @@ import { toast, ToastContainer } from "react-toastify";
 import GamePortInfo from "../components/gamePortInfo/gamePortInformation";
 import GameImagesCarrucel from "../components/GameImagesCarrucel/gameImagesCarrucel";
 import GameAbout from "../components/gameAbout/gameabout";
+<<<<<<< HEAD
 import Reviews from "../components/reviews/review";
 import RelatedGameSection from "./game/RelatedGameSection";
+=======
+import Reviews from "../components/reviews/reviews"
+
+>>>>>>> 5d456eda02c5759e28889427a0436ba37b7428ea
 const Game = ({ isLoggedIn }) => {
   const { gameId } = useParams();
   const [game, setGame] = useState(null);

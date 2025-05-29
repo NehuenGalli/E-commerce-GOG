@@ -69,10 +69,8 @@ const addOrRemoveF = (idFriend, isFriendBool) => {
     )
     .then((res) => {
       if (isFriendBool) {
-        console.log("Removido");
         return sucess_removeFriend_message;
       } else {
-        console.log("Agregado");
         return success_addFriend_message;
       }
     })
@@ -83,7 +81,7 @@ const addOrRemoveF = (idFriend, isFriendBool) => {
 
 const getCart = async (token) => {
   try {
-    const response = await api.get("/users/current/cart", {
+    const response = await api.get(ROUTES.USER_CART, {
       headers: {
         Authorization: token,
       },

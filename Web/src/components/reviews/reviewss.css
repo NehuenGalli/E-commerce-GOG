@@ -1,0 +1,59 @@
+/* Reviews.css */
+
+.reviews-container {
+  margin: 0 auto;
+}
+
+.reviews-title {
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #333;
+  padding-bottom: 10px;
+}
+
+.user-review-container {
+  margin-bottom: 30px;
+}
+
+.reviews-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.bloqued-review-container {
+  text-align: center;
+  padding: 20px;
+  background-color: #808080;
+  border-radius: 8px;
+}
+
+.bloqued-review-text {
+  font-size: 18px;
+  font-weight: 500;
+  color: white;
+  margin-bottom: 15px;
+}
+
+.btn-bloqued-review {
+  background-color: #6B217F;
+  color: white;
+  border: none;
+  padding: 10px 0;
+  width: 30%;
+  font-size: 16px;
+  border-radius: 4px;
+  display: block;
+  margin: 15px auto auto;
+}
+
+.btn-bloqued-review:hover {
+  background-color: #8629a0;
+}
+
+/* Estilos responsivos */
+@media (max-width: 768px) {
+  .reviews-grid {
+    grid-template-columns: 1fr;
+  }
+}

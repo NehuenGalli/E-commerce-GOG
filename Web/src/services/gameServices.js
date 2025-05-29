@@ -32,7 +32,7 @@ const getGameById = (gameId) =>
 
 const addReview = async (gameId, reviewData, token) => {
   try {
-    const response = await api.put(`/games/${gameId}/reviews`, reviewData, {
+    const response = await api.put(ROUTES.GAME_REVIEWS(gameId), reviewData, {
       headers: {
         Authorization: token,
       },
@@ -46,7 +46,7 @@ const addReview = async (gameId, reviewData, token) => {
 const addGameToCart = async (gameId, token) => {
   try {
     const response = await api.put(
-      `/games/${gameId}`,
+      `${ROUTES.GAME_BY_ID}/${gameId}`,
       { gameId },
       {
         headers: {
