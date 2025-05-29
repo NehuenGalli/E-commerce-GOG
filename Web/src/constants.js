@@ -27,6 +27,6 @@ export const ROUTES = {
   USER: "/user", 
   USER_REVIEWS: "/userReviews",
 
-  GAME_REVIEWS: (gameId) => "/games/${gameId}/reviews"
-  
+  GAME_REVIEWS: (gameId) => `/games/${gameId}/reviews`
+
 };

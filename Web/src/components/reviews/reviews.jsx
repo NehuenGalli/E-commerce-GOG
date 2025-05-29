@@ -3,16 +3,18 @@ import { addReview } from '../../services/gameServices';
 import { userCurrent } from '../../services/userService';
 import CurrentReview from './currentReviews';
 import ReviewCard from './reviewsCard';
-import { API, ROUTES } from '../../constants';
+import { ROUTES } from '../../constants';
 import { useNavigate } from 'react-router';
 import { toast } from 'react-toastify';
-import './reviewss.css';
+import { getToken } from '../../utilities/localstorageUtils';
+import { success_addReview_message } from '../../utilities/success_message';
+import './reviews.css';
 
-const Reviewss = ({ game, isLoggedIn }) => {
+const Reviews = ({ game, isLoggedIn }) => {
   const [currentUser, setCurrentUser] = useState(null);
   const [reviews, setReviews] = useState([]);
   const [loading, setLoading] = useState(true);
-  const token = localStorage.getItem(API.TOKEN_KEY);
+  const token = getToken();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -38,10 +40,10 @@ const Reviewss = ({ game, isLoggedIn }) => {
 
       const updatedGame = await addReview(game.id, reviewData, token);
 
-      toast.success("Review submitted successfully");
+      toast.success(success_addReview_message);
       setReviews(updatedGame.reviews || []);
     } catch (error) {
-      toast.error("Error adding review");
+      toast.error(error);
     }
   };
 
@@ -84,4 +86,4 @@ const Reviewss = ({ game, isLoggedIn }) => {
   );
 };
 
-export default Reviewss;
+export default Reviews;

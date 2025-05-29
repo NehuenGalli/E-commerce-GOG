@@ -1,4 +1,5 @@
 import "./emptyCart.css";
+import emptyCart from "../../assets/emptyCart.svg";
 import { useNavigate } from 'react-router';
 
 const EmptyCart = () => {
@@ -9,7 +10,7 @@ const EmptyCart = () => {
         <div className="empty-cart-container">
             <div className="empty-cart-box">
                 <div className="empty-cart-icon">
-                    <img src="emptyCart.svg" alt="empty cart" className="empty-cart-image" />
+                    <img src={emptyCart} alt="empty cart" className="empty-cart-image" />
                 </div>
                 <div className="empty-cart-text">
                     Start by adding a game!

@@ -4,6 +4,7 @@ import { login } from "../services/userService";
 import { useState } from "react";
 import { logInFunction } from "../utilities/buttonFunction";
 import { ToastContainer } from "react-toastify";
+import { fieldsCannotBeEmpty_message } from "../utilities/error_message";
 
 const Login = ({ logIn }) => {
   const [email, setEmail] = useState("");
@@ -19,7 +20,7 @@ const Login = ({ logIn }) => {
     const trimmedPassword = password.trim();
 
     if (!trimmedEmail || !trimmedPassword) {
-      setError("Fields cannot be empty");
+      setError(fieldsCannotBeEmpty_message);
       return;
     }
 

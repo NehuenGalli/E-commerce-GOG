@@ -3,19 +3,22 @@ import "./addToCart.css";
 import { useNavigate } from "react-router";
 import { addGameToCart } from "../../services/gameServices";
 import { toast } from "react-toastify";
+import { getToken } from "../../utilities/localstorageUtils";
+import { success_gameAddedSuccessfully_mensage } from "../../utilities/success_message";
+import { mustBeLoggedIn_message } from "../../utilities/error_message";
 
 const AddToCart = ({ game }) => {
   const navigate = useNavigate();
 
   const handleAddToCart = async () => {
     try {
-      const token = localStorage.getItem(API.TOKEN_KEY);
+      const token = getToken();
       if (!token) {
         navigate(ROUTES.LOGIN);
-        toast.error("You must be logged in to add a game to the cart");
+        toast.error(mustBeLoggedIn_message);
       }
       await addGameToCart(game.id, token);
-      toast.success("Game added to cart successfully");
+      toast.success(success_gameAddedSuccessfully_mensage);
     } catch (error) {
       toast.error(error.message);
     }
