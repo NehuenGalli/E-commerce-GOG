@@ -11,6 +11,12 @@ import { useNavigate } from "react-router";
 const Library = ({ logOut, isLoggedIn }) => {
   const navigate = useNavigate();
 
+  useEffect(() => {
+    if (!isLoggedIn) {
+      navigate(ROUTES.LOGIN);
+    }
+  }, []);
+
   const [isLoadingGames, setIsLoadingGames] = useState(true);
   const [userLogged, setUserLogged] = useState({
     id: "",
@@ -35,7 +41,6 @@ const Library = ({ logOut, isLoggedIn }) => {
 
     fetchUserData();
   }, []);
-
 
   const hasGames = userLogged.games && userLogged.games.length === 0;
 

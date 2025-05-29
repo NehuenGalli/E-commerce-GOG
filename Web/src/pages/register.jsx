@@ -8,7 +8,6 @@ import { ToastContainer } from "react-toastify";
 const Register = ({ isLoggedIn }) => {
   const navigate = useNavigate();
 
-  console.log("isLoggedIn", isLoggedIn);
   useEffect(() => {
     if (isLoggedIn) {
       navigate(ROUTES.HOME);
