@@ -6,24 +6,24 @@ import { toast, ToastContainer } from "react-toastify";
 import GamePortInfo from "../components/gamePortInfo/gamePortInformation";
 import GameImagesCarrucel from "../components/GameImagesCarrucel/gameImagesCarrucel";
 import GameAbout from "../components/gameAbout/gameabout";
-import Reviews from "../components/reviews/review"
-
+import Reviews from "../components/reviews/review";
+import RelatedGameSection from "./game/RelatedGameSection";
 const Game = ({ isLoggedIn }) => {
   const { gameId } = useParams();
   const [game, setGame] = useState(null);
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
-useEffect(() => {
+  useEffect(() => {
     const fetchGameData = async () => {
       try {
         setIsLoading(true);
         setError(null);
-        
+
         const gameData = await getGameById(gameId);
         setGame(gameData);
       } catch (error) {
-        setError(error.message);
+        toast.error(error);
       } finally {
         setIsLoading(false);
       }
@@ -34,39 +34,43 @@ useEffect(() => {
 
   if (isLoading) {
     return (
-      <div style={{
-        position: 'fixed',
-        top: 0,
-        left: 0,
-        right: 0,
-        bottom: 0,
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: 'rgba(0, 0, 0, 0.2)',
-        zIndex: 1000,
-      }}>
-        <div style={{
-          display: 'flex',
-          alignItems: 'flex-end',
-          gap: '24px',
-          height: '120px'
-        }}>
+      <div
+        style={{
+          position: "fixed",
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          backgroundColor: "rgba(0, 0, 0, 0.2)",
+          zIndex: 1000,
+        }}
+      >
+        <div
+          style={{
+            display: "flex",
+            alignItems: "flex-end",
+            gap: "24px",
+            height: "120px",
+          }}
+        >
           {[0, 1, 2].map((i) => (
-            <div 
+            <div
               key={i}
               style={{
-                width: '40px',
-                height: '40px',
-                borderRadius: '50%',
-                background: 'linear-gradient(145deg, #6e8efb, #a777e3)',
+                width: "40px",
+                height: "40px",
+                borderRadius: "50%",
+                background: "linear-gradient(145deg, #6e8efb, #a777e3)",
                 boxShadow: `
                   0 0 15px rgba(167, 119, 227, 0.8),
                   0 0 30px rgba(167, 119, 227, 0.4)
                 `,
                 animation: `bounce 0.9s infinite ease-in-out`,
                 animationDelay: `${i * 0.15}s`,
-                transformOrigin: 'bottom center'
+                transformOrigin: "bottom center",
               }}
             />
           ))}
@@ -90,34 +94,41 @@ useEffect(() => {
 
   if (error) {
     return (
-      <div style={{
-        padding: '2rem',
-        textAlign: 'center',
-        color: '#ff6b6b'
-      }}>
+      <div
+        style={{
+          padding: "2rem",
+          textAlign: "center",
+          color: "#ff6b6b",
+        }}
+      >
         <h2>Error al cargar el juego</h2>
         <p>{error}</p>
-        <p>Game ID: {gameId || 'No proporcionado'}</p>
+        <p>Game ID: {gameId || "No proporcionado"}</p>
       </div>
     );
   }
 
   if (!game) {
     return (
-      <div style={{
-        padding: '2rem',
-        textAlign: 'center'
-      }}>
+      <div
+        style={{
+          padding: "2rem",
+          textAlign: "center",
+        }}
+      >
         <p>No se encontraron datos para este juego</p>
       </div>
     );
   }
 
   return (
-    <div style={{paddingLeft: '100px',paddingRight: '100px',marginTop:'30px'}}>
+    <div className="container ">
       <GamePortInfo game={game} isLoggedIn={isLoggedIn} />
       <GameImagesCarrucel game={game} />
       <GameAbout game={game} />
+      {game.relatedGames.length > 0 && (
+        <RelatedGameSection relatedGames={game.relatedGames} />
+      )}
       <Reviews game={game} isLoggedIn={isLoggedIn} />
       <ToastContainer />
     </div>

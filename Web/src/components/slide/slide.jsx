@@ -32,7 +32,7 @@ const Slide = ({ list, extraSlide, route }) => {
           <SwiperSlide key={e.id}>
             <Link className="card text-bg-dark" to={`${route}/${e.id}`}>
               <img
-                src={e.image}
+                src={e.mainImage}
                 alt={e.name}
                 className="card-img object-fit-cover opacity-75 "
               />

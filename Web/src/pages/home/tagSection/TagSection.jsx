@@ -21,7 +21,7 @@ const TagSection = () => {
   const tagsFormatted = tags.map((tag) => ({
     id: tag.id,
     name: tag.name,
-    image: tag.image.src,
+    mainImage: tag.image.src,
   }));
 
   const extraLink = (
