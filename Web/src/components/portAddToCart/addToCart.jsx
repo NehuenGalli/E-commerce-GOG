@@ -4,7 +4,7 @@ import { useNavigate } from "react-router";
 import { addGameToCart } from "../../services/gameServices";
 import { toast } from "react-toastify";
 import { getToken } from "../../utilities/localstorageUtils";
-import { success_gameAddedSuccessfully_mensage } from "../../utilities/success_message";
+import { success_gameAddedSuccessfully_message} from "../../utilities/success_message";
 import { mustBeLoggedIn_message } from "../../utilities/error_message";
 
 const AddToCart = ({ game }) => {
@@ -18,7 +18,7 @@ const AddToCart = ({ game }) => {
         toast.error(mustBeLoggedIn_message);
       }
       await addGameToCart(game.id, token);
-      toast.success(success_gameAddedSuccessfully_mensage);
+      toast.success(success_gameAddedSuccessfully_message);
     } catch (error) {
       toast.error(error.message);
     }
