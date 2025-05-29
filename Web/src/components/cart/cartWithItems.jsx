@@ -2,7 +2,7 @@ import "./cartWithItems.css";
 import { useNavigate } from "react-router";
 import { FaTrash } from "react-icons/fa";
 import { ROUTES } from "../../constants";
-import CheckOut from "../../../checkOut/checkOut";
+import CheckOut from "../checkOut/checkOut";
 
 const CartWithItems = ({ items, onRemove }) => {
   const navigate = useNavigate();

@@ -7,7 +7,7 @@ import { API, ROUTES } from '../../constants';
 import { useNavigate } from 'react-router';
 import { toast } from 'react-toastify';
 import { getToken } from '../../utilities/localstorageUtils';
-import './reviewss.css';
+import './reviews.css';
 
 const Reviewss = ({ game, isLoggedIn }) => {
   const [currentUser, setCurrentUser] = useState(null);

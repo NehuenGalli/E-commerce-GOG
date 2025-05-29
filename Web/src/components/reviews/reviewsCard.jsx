@@ -1,5 +1,7 @@
-import thumbUp from './thumb-up.png';
-import thumbDown from './thumb-down.png';
+import thumbUp from '../../assets/thumb-up.png';
+import thumbDown from '../../assets/thumb-down.png';
+import { Link } from 'react-router';
+import { ROUTES } from '../../constants';
 import './reviewsCard.css';
 
 const ReviewCard = ({ review, isCurrentUser }) => {
@@ -12,7 +14,9 @@ const ReviewCard = ({ review, isCurrentUser }) => {
             alt={review.user.name}
             className="user-avatar"
           />
-          <h3 className="user-name">{review.user.name}</h3>
+          <Link to={`${ROUTES.USER}/${review.user?.id}`}>
+              <h3 className="user-name">{review.user.name}</h3>
+          </Link>
         </div>
         <div className="recommendation">
           <img 

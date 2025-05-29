@@ -6,9 +6,8 @@ import { useEffect, useState } from "react";
 import { removeGame } from "../services/gameServices";
 import { showRemovedFromCartToast } from "../services/toastService";
 import { ROUTES } from "../constants";
-import { API } from "../constants";
+import { getToken } from "../utilities/localstorageUtils";
 import { ToastContainer } from "react-toastify";  
-
 
 
 const Cart = () => {
@@ -19,7 +18,7 @@ const Cart = () => {
     const [error, setError] = useState(null);
 
     useEffect(() => {
-        const token = localStorage.getItem(API.TOKEN_KEY);
+        const token = getToken();
         const isAuth = !!token;
         setIsAuthenticated(isAuth);
 
@@ -37,7 +36,7 @@ const Cart = () => {
     }, []);
 
     const handleRemove = async (gameId) => {
-        const token = localStorage.getItem(API.TOKEN_KEY);
+        const token = getToken();
         try {
             await removeGame(gameId, token);
             showRemovedFromCartToast();

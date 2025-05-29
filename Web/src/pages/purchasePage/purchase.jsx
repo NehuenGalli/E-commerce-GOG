@@ -4,7 +4,7 @@ import FormPurchase from "./FormPurchase";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { ROUTES } from "../../constants";
-import CheckOut from "../../../checkOut/checkOut";
+import CheckOut from "../../components/checkOut/checkOut";
 import "./purchaseStyle.css";
 import { getCart } from "../../services/userService";
 import { API } from "../../constants";
