@@ -1,0 +1,95 @@
+.current-review-container {
+  background-color: #808080;
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.user-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.user-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  background-color: #000;
+  border: 2px solid #fff;
+  margin-right: 10px;
+}
+
+.username-title {
+  margin: 0;
+  font-size: 18px;
+  color: white;
+}
+
+.review-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.review-textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  margin-bottom: 15px;
+  min-height: 100px;
+  resize: vertical;
+  background-color: #cccccc;
+}
+
+.recommendation-section {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 15px;
+}
+
+.recommendation-text {
+  font-weight: 500;
+  color: white;
+}
+
+.recommendation-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.thumb-btn {
+  background-color: transparent;
+  border: none;
+  padding: 5px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.thumb-btn img {
+  width: 30px;
+  height: 30px;
+}
+
+.btn-review {
+    background-color: #6B217F;
+    color: white;
+    border: none;
+    padding: 10px 0;
+    width: 30%;
+    font-size: 16px;
+    border-radius: 4px;
+    display: block;
+    margin: 15px auto auto;
+}
+
+.btn-review:hover {
+    background-color: #8629a0;
+}
+
+.btn-review:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}

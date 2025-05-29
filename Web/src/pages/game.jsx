@@ -6,7 +6,7 @@ import { toast, ToastContainer } from "react-toastify";
 import GamePortInfo from "../components/gamePortInfo/gamePortInformation";
 import GameImagesCarrucel from "../components/GameImagesCarrucel/gameImagesCarrucel";
 import GameAbout from "../components/gameAbout/gameabout";
-import Reviews from "../components/reviews/review"
+import Reviews from "../components/reviews/reviews"
 
 const Game = ({ isLoggedIn }) => {
   const { gameId } = useParams();
