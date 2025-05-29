@@ -34,7 +34,6 @@ const CartWithItems = ({ items, onRemove }) => {
         <button
           className="buy-cart-btn"
           onClick={() => {
-            localStorage.setItem("cart", JSON.stringify({ games: items }));
             navigate(ROUTES.PURCHASE);
           }}
         >
