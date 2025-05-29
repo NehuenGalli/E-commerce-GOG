@@ -1,9 +1,15 @@
 import { ROUTES } from "../../constants";
 import { Link } from "react-router";
+
 const ModalTags = ({ tags }) => {
   const uniqueTags = tags.filter(
     (tag, index, self) => index === self.findIndex((t) => t.id === tag.id)
   );
+
+  const closeModal = (e) => {
+    document.getElementsByClassName("modal-backdrop")[0].remove();
+    e.preventDefault();
+  };
 
   return (
     <>
@@ -33,6 +39,9 @@ const ModalTags = ({ tags }) => {
                   key={tag.id}
                   to={`${ROUTES.TAGS}/${tag.id}`}
                   className="link-offset-1 badge text-white fs-6"
+                  onClick={() => {
+                    closeModal(e);
+                  }}
                 >
                   {tag.name}
                 </Link>
