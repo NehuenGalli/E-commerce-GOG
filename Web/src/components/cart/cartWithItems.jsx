@@ -13,29 +13,29 @@ const CartWithItems = ({ items, onRemove }) => {
         <div className="row g-3 mt-2">
           <div className="cart-with-items rounded p-4 col-12 col-lg-8">
             {items.map((game) => (
-              <div
-                key={game.id}
-                className="row bg-white align-items-center my-3"
-              >
-                <img
-                  className="col-12 col-md-6 "
-                  src={game.mainImage}
-                  alt={game.name}
-                />
-                <h3 className="col-4 col-md-3 text-center d-flex justify-content-center ">
-                  {game.name}
-                </h3>
-                <div className="col-4 col-md-2 cart-price d-flex justify-content-center">
-                  USD {game.price.amount.toFixed(2)}
-                </div>
+              <div key={game.id} className="card my-3 border-0">
+                <div className="row align-items-center">
+                  <img
+                    className="col-12 col-md-6 "
+                    src={game.mainImage}
+                    alt={game.name}
+                  />
 
-                <div className="col-4 col-md-1 d-flex justify-content-center">
-                  <button
-                    className="remove-item-btn"
-                    onClick={() => onRemove(game.id)}
-                  >
-                    <FaTrash />
-                  </button>
+                  <h3 className="col-12 col-md-3 text-center d-flex justify-content-center ">
+                    {game.name}
+                  </h3>
+                  <div className="col-8 col-md-2 cart-price d-flex justify-content-center">
+                    USD {game.price.amount.toFixed(2)}
+                  </div>
+
+                  <div className="col-2 col-md-1 d-flex justify-content-center">
+                    <button
+                      className="remove-item-btn"
+                      onClick={() => onRemove(game.id)}
+                    >
+                      <FaTrash />
+                    </button>
+                  </div>
                 </div>
               </div>
             ))}
