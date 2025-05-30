@@ -47,6 +47,7 @@ const FormPurchase = ({ items }) => {
             onChange={(e) => {
               setNameCard(e.target.value);
             }}
+            pattern="[A-Za-z\s]+"
             required
           />
         </div>
@@ -54,21 +55,25 @@ const FormPurchase = ({ items }) => {
           <label className="form-label ">NUMBER</label>
           <input
             type="text"
+            inputMode="numeric"
             className="form-control"
             onChange={(e) => {
               setNumCard(e.target.value);
             }}
             required
+            maxLength={16}
           />
         </div>
         <div>
           <label className="form-label ">CVV</label>
           <input
             type="password"
+            inputMode="numeric"
             className="form-control"
             onChange={(e) => {
               setCVV(e.target.value);
             }}
+            maxLength={4}
             required
           />
         </div>
@@ -80,6 +85,7 @@ const FormPurchase = ({ items }) => {
             onChange={(e) => {
               setExpDate(e.target.value);
             }}
+            placeholder="MM/YY"
             required
           />
         </div>
