@@ -8,39 +8,53 @@ const CartWithItems = ({ items, onRemove }) => {
   const navigate = useNavigate();
 
   return (
-    <div className="cart-items-container">
-      <div className="cart-with-items">
-        <div className="items-list">
-          {items.map((game) => (
-            <div key={game.id} className="cart-item">
-              <img src={game.mainImage} alt={game.name} />
-              <div className="game-info">
-                <h3>{game.name}</h3>
-                <div className="cart-price">
+    <>
+      <div className="container">
+        <div className="row g-3 mt-2">
+          <div className="cart-with-items rounded p-4 col-12 col-lg-8">
+            {items.map((game) => (
+              <div
+                key={game.id}
+                className="row bg-white align-items-center my-3"
+              >
+                <img
+                  className="col-12 col-md-6 "
+                  src={game.mainImage}
+                  alt={game.name}
+                />
+                <h3 className="col-4 col-md-3 text-center d-flex justify-content-center ">
+                  {game.name}
+                </h3>
+                <div className="col-4 col-md-2 cart-price d-flex justify-content-center">
                   USD {game.price.amount.toFixed(2)}
                 </div>
+
+                <div className="col-4 col-md-1 d-flex justify-content-center">
+                  <button
+                    className="remove-item-btn"
+                    onClick={() => onRemove(game.id)}
+                  >
+                    <FaTrash />
+                  </button>
+                </div>
               </div>
+            ))}
+          </div>
+          <div className="col-12 col-lg-4 d-flex justify-content-center align-self-start">
+            <CheckOut items={items}>
               <button
-                className="remove-item-btn"
-                onClick={() => onRemove(game.id)}
+                className="buy-cart-btn"
+                onClick={() => {
+                  navigate(ROUTES.PURCHASE);
+                }}
               >
-                <FaTrash />
+                Buy
               </button>
-            </div>
-          ))}
+            </CheckOut>
+          </div>
         </div>
       </div>
-      <CheckOut items={items}>
-        <button
-          className="buy-cart-btn"
-          onClick={() => {
-            navigate(ROUTES.PURCHASE);
-          }}
-        >
-          Buy
-        </button>
-      </CheckOut>
-    </div>
+    </>
   );
 };
 

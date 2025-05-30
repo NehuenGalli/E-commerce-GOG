@@ -1,77 +1,25 @@
 import { useState } from "react";
 
 const GameImagesCarrucel = ({ game }) => {
-  const allImages = [
-    ...(game?.multimedia?.map((media) => media.url) || []),
-  ].filter((url) => url);
-  const [currentImage, setCurrentImage] = useState(allImages[0] || "");
+  const [currentImage, setCurrentImage] = useState(game.multimedia[0].url);
 
   return (
-    <div>
-      <div style={{ textAlign: "center", marginBottom: "15px" }}>
-        <img
-          src={
-            currentImage || "https://via.placeholder.com/800x450?text=No+Image"
-          }
-          style={{
-            width: "100%",
-            height: "700px",
-            objectFit: "cover",
-            objectPosition: "center top",
-            borderRadius: "8px",
-            boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
-          }}
-          alt="Imagen principal del juego"
-        />
+    <>
+      <div className="ratio ratio-16x9">
+        <img className="object-fit-cover" src={currentImage} alt={game.name} />;
       </div>
-
-      {allImages.length > 1 && (
-        <div
-          style={{
-            display: "flex",
-            gap: "10px",
-            flexWrap: "wrap",
-            justifyContent: "center",
-            padding: "10px 0",
-          }}
-        >
-          {allImages.map((imageUrl, index) => (
-            <div
-              key={index}
-              style={{
-                width: "270px",
-                height: "190px",
-                cursor: "pointer",
-                border:
-                  currentImage === imageUrl
-                    ? "2px solid #6200ea"
-                    : "2px solid transparent",
-                borderRadius: "4px",
-                transition: "all 0.3s ease",
-              }}
-              onClick={() => setCurrentImage(imageUrl)}
-            >
-              <img
-                src={imageUrl}
-                style={{
-                  width: "100%",
-                  height: "100%",
-                  objectFit: "cover",
-                  borderRadius: "2px",
-                }}
-                alt={`Miniatura ${index + 1}`}
-                onMouseOver={(e) =>
-                  (e.currentTarget.parentNode.style.transform = "scale(1.05)")
-                }
-                onMouseOut={(e) =>
-                  (e.currentTarget.parentNode.style.transform = "scale(1)")
-                }
-              />
-            </div>
-          ))}
-        </div>
-      )}
-    </div>
+      <div className="row row-cols-3 row-cols-lg-6 g-3 mx-2 mt-1">
+        {game.multimedia.map((image, i) => (
+          <img
+            key={i}
+            className="img-fluid rounded"
+            src={image.url}
+            alt={`Game image ${i + 1}`}
+            onClick={() => setCurrentImage(image.url)}
+          />
+        ))}
+      </div>
+    </>
   );
 };
 
