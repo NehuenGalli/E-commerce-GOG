@@ -7,8 +7,8 @@ const ModalTags = ({ tags }) => {
   );
 
   const closeModal = (e) => {
-    document.getElementsByClassName("modal-backdrop")[0].remove();
     e.preventDefault();
+    // document.getElementsByClassName("modal-backdrop")[0].remove();
   };
 
   return (
@@ -39,9 +39,7 @@ const ModalTags = ({ tags }) => {
                   key={tag.id}
                   to={`${ROUTES.TAGS}/${tag.id}`}
                   className="link-offset-1 badge text-white fs-6"
-                  onClick={() => {
-                    closeModal(e);
-                  }}
+                  onClick={() => closeModal()}
                 >
                   {tag.name}
                 </Link>
