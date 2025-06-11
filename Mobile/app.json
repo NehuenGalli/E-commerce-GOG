@@ -1,11 +1,11 @@
 {
   "expo": {
-    "name": "probandoReactNative",
-    "slug": "probandoReactNative",
+    "name": "GOG",
+    "slug": "GOG",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/gog-icon.png",
-    "scheme": "probandoreactnative",
+    "scheme": "GOG",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
