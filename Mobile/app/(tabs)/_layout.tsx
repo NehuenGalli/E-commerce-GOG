@@ -9,6 +9,9 @@ const TabLayout = () => {
         tabBarActiveTintColor: "#6E1D72",
         tabBarShowLabel: false,
         headerShown: false,
+        sceneStyle: {
+          backgroundColor: "#D9D9D9",
+        },
       }}
     >
       <Tabs.Screen

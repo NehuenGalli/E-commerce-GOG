@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { getGames } from "../../services/gameServices";
 import { ActivityIndicator } from "react-native";
 import ListAllGames from "@/components/listAllGames/listAllGames";
+import Toast from "react-native-toast-message";
 
 const Home = () => {
   const [games, setGames] = useState<any>({
@@ -18,7 +19,13 @@ const Home = () => {
     setIsLoading(true);
     getGames(currentPage)
       .then((games: any) => setGames(games))
-      .catch((error: any) => console.log(error))
+      .catch((error: any) =>
+        Toast.show({
+          type: "error",
+          text1: "Error loading games",
+          text2: error,
+        })
+      )
       .finally(() => setIsLoading(false));
   }, [currentPage]);
 
