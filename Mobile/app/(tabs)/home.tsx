@@ -1,20 +1,36 @@
-import { View, Button } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { useEffect, useState } from "react";
+import { getGames } from "../../services/gameServices";
+import { ActivityIndicator } from "react-native";
+import ListAllGames from "@/components/listAllGames/listAllGames";
 
 const Home = () => {
+  const [games, setGames] = useState<any>({
+    list: [],
+    currentPage: 1,
+    amountOfElements: 0,
+    amountOfPages: 1,
+  });
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    setIsLoading(true);
+    getGames(currentPage)
+      .then((games: any) => setGames(games))
+      .catch((error: any) => console.log(error))
+      .finally(() => setIsLoading(false));
+  }, [currentPage]);
+
   return (
-    <SafeAreaView style={{ flex: 1 }}>
-      <View
-        className="bg-red-600"
-        style={{
-          flex: 1,
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        <Button title="Home" />
-      </View>
-    </SafeAreaView>
+    <>
+      {isLoading && <ActivityIndicator size="large" color="#007AFF" />}
+      {!isLoading && (
+        <>
+          <ListAllGames games={games} title="FEATURED & RECOMMENDED" />
+        </>
+      )}
+    </>
   );
 };
 
