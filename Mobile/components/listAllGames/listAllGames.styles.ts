@@ -1,8 +1,14 @@
 import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
+  list: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+
   card: {
-    maxWidth: 384,
+    maxWidth: 550,
     borderRadius: 8,
     overflow: "hidden",
     backgroundColor: "#fff",
@@ -39,7 +45,7 @@ export const styles = StyleSheet.create({
   },
 
   pageTitle: {
-    marginTop: 20,
+    marginTop: 10,
     fontSize: 24,
     fontWeight: "bold",
     color: "#333",
