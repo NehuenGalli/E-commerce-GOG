@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { getGames } from "../../services/gameServices";
 import { ActivityIndicator } from "react-native";
-import ListAllGames from "@/components/listAllGames/listAllGames";
+import ListAllGames from "@/components/listAllGames/listAllGames"
+
 
 const Home = () => {
   const [games, setGames] = useState<any>({

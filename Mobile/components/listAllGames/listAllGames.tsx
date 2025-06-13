@@ -2,6 +2,7 @@ import { styles } from "./listAllGames.styles";
 import { FlatList, Image, Pressable, Text, View } from "react-native";
 import { useNavigateTo } from "../../hooks/useNavigateTo";
 
+
 const ListAllGames = ({ games, title }: any) => {
   const { navigateToGame } = useNavigateTo();
   return (

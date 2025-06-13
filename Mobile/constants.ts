@@ -6,6 +6,10 @@ export const API = {
 
 export const ROUTES_API = {
   GAMES: "/games",
+  SEARCH: "/search",
+  USER_CURRENT: "/users/current",
+  USERS: "/users",
+  FRIENDS: "/friends",
 };
 
 export const ROUTES_MOBILE = {
