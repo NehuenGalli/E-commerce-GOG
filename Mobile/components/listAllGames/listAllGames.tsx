@@ -7,7 +7,7 @@ const ListAllGames = ({ games, title }: any) => {
   return (
     <>
       <FlatList
-        data={games.list}
+        data={games}
         keyExtractor={(game) => game.id}
         ListHeaderComponent={<Text style={styles.pageTitle}>{title}</Text>}
         renderItem={({ item }) => (
