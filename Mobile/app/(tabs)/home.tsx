@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { getRecommendedGames } from "../../services/gameServices";
-import { ActivityIndicator } from "react-native";
 import ListAllGames from "@/components/listAllGames/listAllGames";
 import Toast from "react-native-toast-message";
+import Spinner from "@/components/spinner";
 
 const Home = () => {
   const [games, setGames] = useState<any>({
@@ -30,7 +30,7 @@ const Home = () => {
 
   return (
     <>
-      {isLoading && <ActivityIndicator size="large" color="#007AFF" />}
+      {isLoading && <Spinner />}
       {!isLoading && (
         <>
           <ListAllGames games={games} title="FEATURED & RECOMMENDED" />
