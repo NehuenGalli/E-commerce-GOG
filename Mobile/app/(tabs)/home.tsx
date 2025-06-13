@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getGames } from "../../services/gameServices";
+import { getRecommendedGames } from "../../services/gameServices";
 import { ActivityIndicator } from "react-native";
 import ListAllGames from "@/components/listAllGames/listAllGames";
 import Toast from "react-native-toast-message";
@@ -12,12 +12,11 @@ const Home = () => {
     amountOfPages: 1,
   });
 
-  const [currentPage, setCurrentPage] = useState(1);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     setIsLoading(true);
-    getGames(currentPage)
+    getRecommendedGames()
       .then((games: any) => setGames(games))
       .catch((error: any) =>
         Toast.show({
@@ -27,7 +26,7 @@ const Home = () => {
         })
       )
       .finally(() => setIsLoading(false));
-  }, [currentPage]);
+  }, []);
 
   return (
     <>

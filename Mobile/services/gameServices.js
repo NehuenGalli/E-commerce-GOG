@@ -14,4 +14,12 @@ const getGames = (page) =>
       throw errorMessage(error);
     });
 
-export { getGames };
+const getRecommendedGames = () =>
+  api
+    .get(ROUTES_API.RECOMMENDED)
+    .then((res) => res.data)
+    .catch((error) => {
+      throw errorMessage(error);
+    });
+
+export { getGames, getRecommendedGames };
