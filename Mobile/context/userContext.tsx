@@ -1,10 +1,12 @@
 import { createContext, useState } from "react";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { API } from "../constants";
 
 export const userContext = createContext({
   name: "",
   imageUrl: "",
   isLoggedIn: false,
-  logIn: () => {},
+  logIn: (token?: string) => {},
   logOut: () => {},
   getToken: () => {},
 });
@@ -14,19 +16,24 @@ export const UserProvider = ({ children }: any) => {
   const [imageUrl, setImageUrl] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  const getToken = () => {};
+  const getToken = async () => {
+    return await AsyncStorage.getItem(API.TOKEN_KEY);
+  };
 
-  const logIn = () => {
+  const logIn = async (token?: string) => {
     setIsLoggedIn(true);
     setName("");
     setImageUrl("");
-    // setToken("token");
+    if (token) {
+      await AsyncStorage.setItem(API.TOKEN_KEY, token);
+    }
   };
-  const logOut = () => {
+
+  const logOut = async () => {
     setIsLoggedIn(false);
     setName("");
     setImageUrl("");
-    // removeToken("token");
+    await AsyncStorage.removeItem(API.TOKEN_KEY);
   };
 
   return (

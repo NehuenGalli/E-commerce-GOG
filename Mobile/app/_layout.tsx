@@ -4,15 +4,14 @@ import Toast from "react-native-toast-message";
 
 export default function RootLayout() {
   return (
-    <>
       <UserProvider>
-        {/* <Stack initialRouteName="login"> */}
-        <Stack screenOptions={{ contentStyle: { backgroundColor: "#D9D9D9" } }}>
+        <Stack initialRouteName="login"
+          screenOptions={{ contentStyle: { backgroundColor: "#D9D9D9" } }}>
+
           <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-          {/* <Stack.Screen name="login" options={{ headerShown: false }} /> */}
+          <Stack.Screen name="login" options={{ headerShown: false }} />
         </Stack>
         <Toast />
       </UserProvider>
-    </>
   );
 }
