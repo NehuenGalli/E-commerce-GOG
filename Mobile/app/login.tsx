@@ -4,6 +4,7 @@ import { useRouter } from "expo-router";
 import LoginForm from "../components/loginForm/loginForm";
 import { login } from "../services/userService"
 import { fieldsCannotBeEmpty_message } from "../utilities/error_message";
+import { Keyboard } from "react-native";
 
 export default function Login() {
   const { logIn, isLoggedIn, getToken } = useContext(userContext);
@@ -20,6 +21,7 @@ export default function Login() {
   }, [isLoggedIn]);
 
   const onSubmit = async () => {
+    Keyboard.dismiss();
     const trimmedEmail = email.trim();
     const trimmedPassword = password.trim();
 
