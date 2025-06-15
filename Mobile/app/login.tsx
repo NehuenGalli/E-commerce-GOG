@@ -34,11 +34,8 @@ export default function Login() {
         setError("No se pudo obtener el token de autenticación");
         return;
       }
-      await logIn(loginResult.token);
-      
-      const savedToken = await getToken(); 
-      console.log("Token guardado:", savedToken);
-      
+      logIn(loginResult.token);
+        
       router.replace("/home");
       
     } catch (err: any) {

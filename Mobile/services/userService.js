@@ -5,7 +5,6 @@ const api = axios.create({
   baseURL: API.BASE_URL,
 });
 
-
 const login = async ({ email, password }) => {
   try {
     const response = await api.post(ROUTES_API.LOGIN, { email, password });

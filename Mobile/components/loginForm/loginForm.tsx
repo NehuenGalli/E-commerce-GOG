@@ -1,4 +1,6 @@
-import { View, Text, TextInput, Button, StyleSheet, TouchableOpacity } from "react-native";
+import React from "react";
+import Toast from "react-native-toast-message";
+import { View, Text, TextInput, TouchableOpacity } from "react-native";
 import { styles } from "./loginForm.style";
 
 type LoginFormProps = {
@@ -18,10 +20,23 @@ export default function LoginForm({
   onSubmit,
   error,
 }: LoginFormProps) {
+
+
+  React.useEffect(() => {
+    if (error) {
+      Toast.show({
+        type: 'error',
+        text1: 'Error',
+        text2: error,
+        position: 'top',
+        topOffset: 100,
+      });
+    }
+  }, [error]); 
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Sign in</Text>
-      {error && <Text style={styles.error}>{error}</Text>}
       <Text style={styles.signInText}>SIGN IN WITH EMAIL</Text>
       <TextInput
         style={styles.input}
@@ -45,20 +60,3 @@ export default function LoginForm({
     </View>
   );
 }
-
-
-// const styles = StyleSheet.create({
-//   container: { padding: 20 },
-//   title: { fontSize: 24, marginBottom: 20 },
-//   input: {
-//     borderWidth: 1,
-//     borderColor: "#ccc",
-//     padding: 10,
-//     marginVertical: 10,
-//     borderRadius: 5,
-//   },
-//   error: {
-//     color: "red",
-//     marginBottom: 10,
-//   },
-// });
