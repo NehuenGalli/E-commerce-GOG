@@ -7,6 +7,7 @@ export const API = {
 export const ROUTES_API = {
   GAMES: "/games",
   RECOMMENDED: "/games/recommended",
+  LOGIN: "/login",
 };
 
 export const ROUTES_MOBILE = {
