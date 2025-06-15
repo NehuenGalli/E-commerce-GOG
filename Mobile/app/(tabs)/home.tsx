@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import { getGames } from "../../services/gameServices";
-import { ActivityIndicator } from "react-native";
-import ListAllGames from "@/components/listAllGames/listAllGames"
-
+import { getRecommendedGames } from "../../services/gameServices";
+import ListAllGames from "@/components/listAllGames/listAllGames";
+import Toast from "react-native-toast-message";
+import Spinner from "@/components/spinner";
 
 const Home = () => {
   const [games, setGames] = useState<any>({
@@ -12,20 +12,25 @@ const Home = () => {
     amountOfPages: 1,
   });
 
-  const [currentPage, setCurrentPage] = useState(1);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     setIsLoading(true);
-    getGames(currentPage)
+    getRecommendedGames()
       .then((games: any) => setGames(games))
-      .catch((error: any) => console.log(error))
+      .catch((error: any) =>
+        Toast.show({
+          type: "error",
+          text1: "Error loading games",
+          text2: error,
+        })
+      )
       .finally(() => setIsLoading(false));
-  }, [currentPage]);
+  }, []);
 
   return (
     <>
-      {isLoading && <ActivityIndicator size="large" color="#007AFF" />}
+      {isLoading && <Spinner />}
       {!isLoading && (
         <>
           <ListAllGames games={games} title="FEATURED & RECOMMENDED" />

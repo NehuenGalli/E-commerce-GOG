@@ -1,0 +1,63 @@
+import React from "react";
+import Toast from "react-native-toast-message";
+import { View, Text, TextInput, TouchableOpacity, TouchableWithoutFeedback, Keyboard } from "react-native";
+import { styles } from "./loginForm.style";
+
+type LoginFormProps = {
+  email: string;
+  password: string;
+  onEmailChange: (text: string) => void;
+  onPasswordChange: (text: string) => void;
+  onSubmit: () => void;
+  error?: string;
+};
+
+export default function LoginForm({
+  email,
+  password,
+  onEmailChange,
+  onPasswordChange,
+  onSubmit,
+  error,
+}: LoginFormProps) {
+
+  React.useEffect(() => {
+    if (error) {
+      Toast.show({
+        type: 'error',
+        text1: 'Error',
+        text2: error,
+        position: 'top',
+        topOffset: 100,
+      });
+    }
+  }, [error]); 
+
+  return (
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+      <View style={styles.container}>
+        <Text style={styles.title}>Sign in</Text>
+        <Text style={styles.signInText}>SIGN IN WITH EMAIL</Text>
+        <TextInput
+          style={styles.input}
+          placeholder="Email"
+          value={email}
+          onChangeText={onEmailChange}
+          keyboardType="email-address"
+          autoCapitalize="none"
+        />
+        <Text style={styles.signInText}>PASSWORD</Text>
+        <TextInput
+          style={styles.input}
+          placeholder="Password"
+          value={password}
+          onChangeText={onPasswordChange}
+          secureTextEntry
+        />
+        <TouchableOpacity style={styles.signInButton} onPress={onSubmit}>
+          <Text style={styles.signInButtonText}>Sign in</Text>
+        </TouchableOpacity>
+      </View>
+    </TouchableWithoutFeedback>
+  );
+}

@@ -10,6 +10,8 @@ export const ROUTES_API = {
   USER_CURRENT: "/users/current",
   USERS: "/users",
   FRIENDS: "/friends",
+  RECOMMENDED: "/games/recommended",
+  LOGIN: "/login",
 };
 
 export const ROUTES_MOBILE = {
