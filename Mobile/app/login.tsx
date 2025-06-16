@@ -7,7 +7,7 @@ import { fieldsCannotBeEmpty_message } from "../utilities/error_message";
 import { Keyboard } from "react-native";
 
 export default function Login() {
-  const { logIn, isLoggedIn, getToken } = useContext(userContext);
+  const { logIn, isLoggedIn } = useContext(userContext);
   const router = useRouter();
 
   const [email, setEmail] = useState("");

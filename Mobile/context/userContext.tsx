@@ -7,8 +7,8 @@ export const userContext = createContext({
   imageUrl: "",
   isLoggedIn: false,
   logIn: (token?: string) => {},
-  logOut: () => {},
-  getToken: () => {},
+  logOut: async () => {},
+  getToken: async () => Promise.resolve<string | null>(null),
 });
 
 export const UserProvider = ({ children }: any) => {

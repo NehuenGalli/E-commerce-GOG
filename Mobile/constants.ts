@@ -8,6 +8,8 @@ export const ROUTES_API = {
   GAMES: "/games",
   RECOMMENDED: "/games/recommended",
   LOGIN: "/login",
+  USER_CART: "/users/current/cart",
+  GAME_DELETE: "/games",
 };
 
 export const ROUTES_MOBILE = {
