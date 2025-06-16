@@ -32,7 +32,8 @@ export const styles = StyleSheet.create({
     fontWeight: "bold",
     color: "#EDEDED",
     backgroundColor: "#6E1D72",
-    paddingVertical: 5,
+    paddingVertical: 6,
     paddingHorizontal: 83,
+    borderRadius: 3,
   },
 });
