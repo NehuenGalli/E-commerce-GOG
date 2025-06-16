@@ -51,4 +51,10 @@ export const styles = StyleSheet.create({
     marginBottom: 4,
     marginHorizontal: 16,
   },
+
+    noResults: {
+    fontSize: 18,
+    textAlign: 'center',
+   
+  },
 });

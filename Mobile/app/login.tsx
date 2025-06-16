@@ -5,6 +5,7 @@ import LoginForm from "../components/loginForm/loginForm";
 import { login } from "../services/userService"
 import { fieldsCannotBeEmpty_message } from "../utilities/error_message";
 import { Keyboard } from "react-native";
+import Spinner from "@/components/spinner";
 
 export default function Login() {
   const { logIn, isLoggedIn, getToken } = useContext(userContext);
@@ -14,10 +15,15 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
+  const [isLoading, setIsLoading] = useState(true);
+  
+
   useEffect(() => {
+    setIsLoading(true);
     if (isLoggedIn) {
       router.replace("/home");
     }
+    setIsLoading(false);
   }, [isLoggedIn]);
 
   const onSubmit = async () => {
@@ -46,6 +52,11 @@ export default function Login() {
   };
 
   return (
+    <>
+    {isLoading && <Spinner />}
+     {
+      
+      !isLoading && 
     <LoginForm
       email={email}
       password={password}
@@ -54,5 +65,7 @@ export default function Login() {
       onPasswordChange={setPassword}
       onSubmit={onSubmit}
     />
+     }
+  </>
   );
 }

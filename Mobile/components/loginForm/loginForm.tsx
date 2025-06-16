@@ -1,7 +1,14 @@
-import React from "react";
 import Toast from "react-native-toast-message";
-import { View, Text, TextInput, TouchableOpacity, TouchableWithoutFeedback, Keyboard } from "react-native";
+import {
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  TouchableWithoutFeedback,
+  Keyboard,
+} from "react-native";
 import { styles } from "./loginForm.style";
+import { useEffect } from "react";
 
 type LoginFormProps = {
   email: string;
@@ -20,18 +27,17 @@ export default function LoginForm({
   onSubmit,
   error,
 }: LoginFormProps) {
-
-  React.useEffect(() => {
+  useEffect(() => {
     if (error) {
       Toast.show({
-        type: 'error',
-        text1: 'Error',
+        type: "error",
+        text1: "Error",
         text2: error,
-        position: 'top',
+        position: "top",
         topOffset: 100,
       });
     }
-  }, [error]); 
+  }, [error]);
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
