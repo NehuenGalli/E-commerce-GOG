@@ -1,9 +1,13 @@
-import { useEffect, useState } from "react";
+import {  useEffect, useState } from "react";
 import { searchGames } from "../../services/searchServices";
-import { ActivityIndicator, FlatList, TextInput, View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet } from "react-native";
 import ListAllGames from "@/components/listAllGames/listAllGames";
+import Spinner from "@/components/spinner";
+
 
 const SearchPage = () => {
+
+
   const [query, setQuery] = useState('');
   const [games, setGames] = useState<any>({
     list: [],
@@ -20,32 +24,20 @@ const SearchPage = () => {
       .then((games: any) => setGames(games))
       .catch((error: any) => console.log(error))
       .finally(() => setIsLoading(false));
-  }, [query, currentPage]);
+  }, [query,currentPage]);
+
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>SEARCH GAME</Text>
-      <View style={styles.searchContainer}>
-        <TextInput
-          placeholder="Buscar..."
-          value={query}
-          onChangeText={setQuery}
-          style={styles.searchInput}
-        />
-      </View>
-      {isLoading && <ActivityIndicator size="large" color="#007AFF" />}
+    <>
+      {isLoading && <Spinner/>}
       {!isLoading && (
         <>
-          {query === "" ? (
-            <Text style={styles.noResults}>No se encontraron resultados</Text>
-          ) : games.list.length === 0 ? (
-            <Text style={styles.noResults}>No se encontraron resultados</Text>
-          ) : (
-            <ListAllGames games={games} title="SEARCH GAME" />
-          )}
+
+         <ListAllGames games={games.list} title="SEARCH GAME" setSearch={setQuery} currentPage={currentPage} setPage={setCurrentPage}  />
+         
         </>
       )}
-    </View>
+    </>
   );
 };
 
@@ -73,11 +65,7 @@ const styles = StyleSheet.create({
     textAlign: 'left',
   },
 
-   noResults: {
-    fontSize: 18,
-    textAlign: 'center',
-    margin: 'auto',
-  },
+ 
 });
 
 export default SearchPage;

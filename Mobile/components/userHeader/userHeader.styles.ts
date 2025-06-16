@@ -2,12 +2,20 @@ import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
+    marginTop: 20,
+    paddingTop: 20,
   },
   header: {
     flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  imageContainer: {
+
+    justifyContent: 'center',
     alignItems: 'center',
   },
   image: {
@@ -15,18 +23,22 @@ export const styles = StyleSheet.create({
     height: 50,
     borderRadius: 25,
   },
+  userInfo: {
+    flex: 3,
+    justifyContent: 'center',
+    alignItems: 'flex-start',
+  },
   name: {
     fontSize: 18,
     fontWeight: 'bold',
-    marginLeft: 10,
   },
   actions: {
-    marginLeft: 20,
+    marginTop: 10,
   },
 
-  buttonLogout: {
-    backgroundColor: "#007bff",
-    padding: 10,
-    borderRadius: 5,
-  },
+  buttonLogout:{
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: '#007AFF',
+  }
 });

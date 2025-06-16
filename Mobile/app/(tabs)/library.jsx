@@ -1,13 +1,15 @@
 import ListAllGames from "@/components/listAllGames/listAllGames";
-import { useEffect, useState } from "react";
-import { ActivityIndicator } from "react-native";
+import {  useContext, useEffect, useState } from "react";
 import { userCurrent } from "../../services/userServices";
 import UserHeader from "@/components/userHeader/userHeader";
+import { userContext } from "@/context/userContext";
+import Spinner from "@/components/spinner";
+
 
 
 const LibraryPage = () => {
 
-  //NECESITO EL TOKEN
+  const { logIn, isLoggedIn, getToken } = useContext(userContext);
 
   const [isLoading, setIsLoading] = useState(true);
 
@@ -20,18 +22,22 @@ const LibraryPage = () => {
     backgroundImage: "",
     games: [],
   });
-
-  useEffect(() => {
+useEffect(() => {
     setIsLoading(true);
-    userCurrent()
-      .then((userInfo: any) => setUserLogged(userInfo))
-      .catch((error: any) => console.log(error))
-      .finally(() => setIsLoading(false));
-  }, []);
+    getToken().then(token =>(userCurrent(token)
+      .then((userInfo) => setUserLogged(userInfo))
+      .catch((error) => console.log(error))
+      .finally(() => setIsLoading(false))
+    
+    ));
+  
+}, []);
+
+ 
 
   return (
     <>
-      {isLoading && <ActivityIndicator size="large" color="#007AFF" />}
+      {isLoading && <Spinner   />}
       {!isLoading && (
         <>
           <UserHeader user={userLogged} />

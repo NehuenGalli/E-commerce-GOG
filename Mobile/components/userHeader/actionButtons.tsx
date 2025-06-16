@@ -1,25 +1,25 @@
 
-import { TouchableOpacity, Text } from "react-native";
+import {  Text, Pressable } from "react-native";
 import { styles } from "./userHeader.styles";
+import { useContext } from "react";
+import { userContext } from "@/context/userContext";
 
-const ActionButtons = (/*{ logOut, user, idUserLogged }*/) => {
+const ActionButtons = () => {
+
+   const { logOut } = useContext(userContext);
 
   return (
     <>
-      {/* {logOut && (
-        <TouchableOpacity
-         style={styles.buttonLogout}
-          onPress={() => {
-            logOutFunction(logOut, navigate);
-          }}
+      
+        <Pressable
+          // onPress={() => {
+          //   logOutFunction(logOut());
+          // }}
         >
-          <Text style={{ color: "#fff" }}>Logout</Text>
-        </TouchableOpacity>
-      )}
+          <Text  style={styles.buttonLogout}>Logout</Text>
+        </Pressable>
 
-      {!logOut && (
-        <AddOrRemoveFriend userId={user.id} idUserLogged={idUserLogged} />
-      )} */}
+     
     </>
   );
 };
