@@ -2,13 +2,14 @@ import { useState, useContext, useEffect } from "react";
 import { userContext } from "../context/userContext";
 import { useRouter } from "expo-router";
 import LoginForm from "../components/loginForm/loginForm";
-import { login } from "../services/userService"
+import { login } from "../services/userServices";
 import { fieldsCannotBeEmpty_message } from "../utilities/error_message";
 import { Keyboard } from "react-native";
 import Spinner from "@/components/spinner";
+import { ROUTES_MOBILE } from "../constants";
 
 export default function Login() {
-  const { logIn, isLoggedIn, getToken } = useContext(userContext);
+  const { logIn, isLoggedIn } = useContext(userContext);
   const router = useRouter();
 
   const [email, setEmail] = useState("");
@@ -16,12 +17,11 @@ export default function Login() {
   const [error, setError] = useState("");
 
   const [isLoading, setIsLoading] = useState(true);
-  
 
   useEffect(() => {
     setIsLoading(true);
     if (isLoggedIn) {
-      router.replace("/home");
+      router.replace(ROUTES_MOBILE.HOME);
     }
     setIsLoading(false);
   }, [isLoggedIn]);
@@ -37,35 +37,35 @@ export default function Login() {
     }
 
     try {
-      const loginResult = await login({ email: trimmedEmail, password: trimmedPassword });
+      const loginResult = await login({
+        email: trimmedEmail,
+        password: trimmedPassword,
+      });
       if (!loginResult || !loginResult.token) {
-        setError("No se pudo obtener el token de autenticación");
+        setError("Failed to obtain authentication token");
         return;
       }
       logIn(loginResult.token);
-        
-      router.replace("/home");
-      
+      console.log(ROUTES_MOBILE.HOME);
+      router.replace(ROUTES_MOBILE.HOME);
     } catch (err: any) {
-      setError(err.message || "Error al iniciar sesión");
+      setError(err.message || "Failed to log in");
     }
   };
 
   return (
     <>
-    {isLoading && <Spinner />}
-     {
-      
-      !isLoading && 
-    <LoginForm
-      email={email}
-      password={password}
-      error={error}
-      onEmailChange={setEmail}
-      onPasswordChange={setPassword}
-      onSubmit={onSubmit}
-    />
-     }
-  </>
+      {isLoading && <Spinner />}
+      {!isLoading && (
+        <LoginForm
+          email={email}
+          password={password}
+          error={error}
+          onEmailChange={setEmail}
+          onPasswordChange={setPassword}
+          onSubmit={onSubmit}
+        />
+      )}
+    </>
   );
 }

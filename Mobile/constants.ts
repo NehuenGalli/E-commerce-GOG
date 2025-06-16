@@ -16,4 +16,6 @@ export const ROUTES_API = {
 
 export const ROUTES_MOBILE = {
   GAME: "/game/[gameId]",
+  LOGIN: "/login",
+  HOME: "/home",
 } as const;

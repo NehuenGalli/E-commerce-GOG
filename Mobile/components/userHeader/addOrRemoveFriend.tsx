@@ -1,20 +1,17 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { TouchableOpacity, Text } from "react-native";
-import { addOrRemoveF } from "@/services/userServices";
 
 const AddOrRemoveFriend = () => {
-
   const [isFriendBool, setIsFriendBool] = useState(null);
 
-//   const functionAddOrRemoveFriend = () => {
-//     addOrRemoveF(userId, isFriendBool)
-//       .then((message) => {
-//         toast.success(message);
-//         setIsFriendBool((prev) => !prev);
-//       })
-//       .catch((error) => toast.error(error));
-//   };
-
+  //   const functionAddOrRemoveFriend = () => {
+  //     addOrRemoveF(userId, isFriendBool)
+  //       .then((message) => {
+  //         toast.success(message);
+  //         setIsFriendBool((prev) => !prev);
+  //       })
+  //       .catch((error) => toast.error(error));
+  //   };
 
   return (
     <>

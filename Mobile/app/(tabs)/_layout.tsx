@@ -3,7 +3,11 @@ import { Fontisto, MaterialCommunityIcons } from "@expo/vector-icons";
 import { Image } from "react-native";
 import { perfilIconStyle } from "../../app.style";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { useContext } from "react";
+import { userContext } from "../../context/userContext";
+
 const TabLayout = () => {
+  const { imageUrl } = useContext(userContext);
   return (
     <SafeAreaView style={{ flex: 1 }} edges={["left", "right", "top"]}>
       <Tabs
@@ -49,9 +53,7 @@ const TabLayout = () => {
           options={{
             tabBarIcon: ({ size, focused, color }) => (
               <Image
-                source={{
-                  uri: "https://randomuser.me/api/portraits/men/1.jpg",
-                }}
+                source={{ uri: imageUrl }}
                 style={perfilIconStyle(size, focused, color)}
               />
             ),
