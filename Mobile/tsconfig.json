@@ -5,7 +5,6 @@
     "strict": true,
     "paths": {
       "@/*": ["./*"]
-      
     }
   },
   "include": [
@@ -13,6 +12,6 @@
     "**/*.tsx",
     ".expo/types/**/*.ts",
     "expo-env.d.ts",
-    "constants.js"
-, "components/listAllGames/listAllGames.jsx", "app/(tabs)/library.jsx"  ]
+    "constants.ts"
+  ]
 }

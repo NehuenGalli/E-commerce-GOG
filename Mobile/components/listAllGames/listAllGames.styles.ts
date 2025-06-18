@@ -1,18 +1,14 @@
 import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
-  list: {
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
+  listContainer: {
+    alignSelf: "center",
   },
 
   card: {
-    maxWidth: 550,
     borderRadius: 8,
     overflow: "hidden",
     backgroundColor: "#fff",
-    marginHorizontal: 16,
     marginBottom: 8,
   },
 
@@ -50,12 +46,26 @@ export const styles = StyleSheet.create({
     fontWeight: "bold",
     color: "#333",
     marginBottom: 4,
-    marginHorizontal: 16,
   },
 
-    noResults: {
+  noResults: {
+    marginVertical: "50%",
+    alignSelf: "center",
     fontSize: 18,
-    textAlign: 'center',
-   
+  },
+
+  inputText: {
+    marginBottom: 6,
+    minWidth: "100%",
+    paddingVertical: 6,
+    paddingHorizontal: 12,
+    fontSize: 16,
+    fontWeight: "400",
+    lineHeight: 24,
+    color: "#212529",
+    backgroundColor: "#fff",
+    borderWidth: 1,
+    borderColor: "#ced4da",
+    borderRadius: 6,
   },
 });
