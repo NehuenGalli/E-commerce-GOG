@@ -1,10 +1,13 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { API } from "../constants";
+import { userCurrent } from "@/services/userServices";
 
 export const userContext = createContext({
   name: "",
   imageUrl: "",
   isLoggedIn: false,
-  logIn: () => {},
+  logIn: (token?: string) => {},
   logOut: () => {},
   getToken: () => {},
 });
@@ -14,19 +17,38 @@ export const UserProvider = ({ children }: any) => {
   const [imageUrl, setImageUrl] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  const getToken = () => {};
-
-  const logIn = () => {
-    setIsLoggedIn(true);
-    setName("");
-    setImageUrl("");
-    // setToken("token");
+  const getToken = async () => {
+    return await AsyncStorage.getItem(API.TOKEN_KEY);
   };
-  const logOut = () => {
+
+  useEffect(() => {
+    getToken().then((token) => {
+      if (token) {
+        userCurrent(token).then((user: any) => {
+          setName(user.name);
+          setImageUrl(user.image);
+          setIsLoggedIn(true);
+        });
+      }
+    });
+  }, []);
+
+  const logIn = async (token?: string) => {
+    if (token) {
+      await AsyncStorage.setItem(API.TOKEN_KEY, token);
+      setIsLoggedIn(true);
+      userCurrent(token).then((user: any) => {
+        setName(user.name);
+        setImageUrl(user.imageUrl);
+      });
+    }
+  };
+
+  const logOut = async () => {
     setIsLoggedIn(false);
     setName("");
     setImageUrl("");
-    // removeToken("token");
+    await AsyncStorage.removeItem(API.TOKEN_KEY);
   };
 
   return (
