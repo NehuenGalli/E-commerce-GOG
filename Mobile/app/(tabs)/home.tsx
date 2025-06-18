@@ -33,7 +33,7 @@ const Home = () => {
       {isLoading && <Spinner />}
       {!isLoading && (
         <>
-          <ListAllGames games={games} title="FEATURED & RECOMMENDED" />
+          <ListAllGames games={games} title="FEATURED & RECOMMENDED" setSearch={undefined} currentPage={undefined} setPage={undefined}/>
         </>
       )}
     </>
