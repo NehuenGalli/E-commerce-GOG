@@ -21,5 +21,13 @@ const getRecommendedGames = () =>
     .catch((error) => {
       throw errorMessage(error);
     });
+const getGameById = (gameId) =>
+  api
+    .get(`${ROUTES_API.GAME_BY_ID}/${gameId}`)
+    .then((res) => res.data)
+    .catch((error) => {
+      throw errorMessage(error);
+    });
+    
 
-export { getGames, getRecommendedGames };
+export { getGames, getRecommendedGames, getGameById };

@@ -8,8 +8,12 @@ export const ROUTES_API = {
   GAMES: "/games",
   RECOMMENDED: "/games/recommended",
   LOGIN: "/login",
+  GAME_BY_ID: "/games",
+  GAME_REVIEWS: (gameId: string): string => `/games/${gameId}/reviews`,
+  USER_CURRENT: "/users/current",
 };
 
 export const ROUTES_MOBILE = {
-  GAME: "/game/[gameId]",
-} as const;
+  GAME: "/game/[gameId]" as const,
+  USER_PROFILE: "/user/[userId]" as const,
+};

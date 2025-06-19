@@ -18,6 +18,17 @@ const login = async ({ email, password }) => {
     throw new Error(errorMessage);
   }
 };
+const userCurrent = () =>
+  api
+    .get(`${API.BASE_URL}${ROUTES_API.USER_CURRENT}`, {
+      headers: {
+        Authorization: getToken(),
+      },
+    })
+    .then((res) => res.data)
+    .catch((error) => {
+      throw errorMessage(error);
+    });
   
 
-export { login };
+export { login,userCurrent };
