@@ -12,6 +12,8 @@ export const ROUTES_API = {
   FRIENDS: "/friends",
   RECOMMENDED: "/games/recommended",
   LOGIN: "/login",
+  USER_CART: "/users/current/cart",
+  GAME_DELETE: "/games",
 };
 
 export const ROUTES_MOBILE = {

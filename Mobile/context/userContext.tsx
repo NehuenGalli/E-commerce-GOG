@@ -10,8 +10,8 @@ export const userContext = createContext({
   imageUrl: "https://randomuser.me/api/portraits/lego/1.jpg",
   isLoggedIn: false,
   logIn: (token?: string) => {},
-  logOut: () => {},
-  getToken: () => {},
+  logOut: async () => {},
+  getToken: async () => Promise.resolve<string | null>(null),
 });
 
 export const UserProvider = ({ children }: any) => {
