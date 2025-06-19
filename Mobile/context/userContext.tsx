@@ -5,7 +5,7 @@ import { userCurrent } from "@/services/userServices";
 
 export const userContext = createContext({
   name: "",
-  imageUrl: "",
+  imageUrl: "https://randomuser.me/api/portraits/lego/1.jpg",
   isLoggedIn: false,
   logIn: (token?: string) => {},
   logOut: () => {},
@@ -14,7 +14,9 @@ export const userContext = createContext({
 
 export const UserProvider = ({ children }: any) => {
   const [name, setName] = useState("");
-  const [imageUrl, setImageUrl] = useState("");
+  const [imageUrl, setImageUrl] = useState(
+    "https://randomuser.me/api/portraits/lego/1.jpg"
+  );
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const getToken = async () => {
