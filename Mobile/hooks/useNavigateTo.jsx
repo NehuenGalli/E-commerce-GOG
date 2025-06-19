@@ -9,7 +9,23 @@ export const useNavigateTo = () => {
       params: { gameId, name: gameName },
     });
   };
+
+  const navigateToUser = (userId) => {
+    router.push({
+      pathname: ROUTES_MOBILE.USER,
+      params: { userId },
+    });
+  };
+
+  const navigateToLogin = () => {
+    router.replace({
+      pathname: ROUTES_MOBILE.LOGIN,
+    });
+  };
+
   return {
     navigateToGame,
+    navigateToUser,
+    navigateToLogin,
   };
 };

@@ -14,10 +14,12 @@ export const ROUTES_API = {
   LOGIN: "/login",
   USER_CART: "/users/current/cart",
   GAME_DELETE: "/games",
+  USER_REVIEWS: "/userReviews",
 };
 
 export const ROUTES_MOBILE = {
   GAME: "/game/[gameId]",
   LOGIN: "/login",
   HOME: "/home",
+  USER: "/user/[userId]",
 } as const;

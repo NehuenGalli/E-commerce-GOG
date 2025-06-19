@@ -61,4 +61,22 @@ const removeGame = (gameId, token) =>
  });
 
 
-export { login, getCart, removeGame, userCurrent };
+ const getUserById = (userId) =>
+  api
+    .get(`${API.BASE_URL}${ROUTES_API.USERS}/${userId}`)
+    .then((res) => res.data)
+    .catch((error) => {
+      throw errorMessage(error);
+    });
+
+const getReviewsById = (userId) =>
+  api
+    .get(`${API.BASE_URL}${ROUTES_API.USER_REVIEWS}/${userId}`)
+    .then((res) => res.data)
+    .catch((error) => {
+      throw errorMessage(error);
+    });
+
+
+
+export { login, getCart, removeGame, userCurrent, getUserById, getReviewsById };

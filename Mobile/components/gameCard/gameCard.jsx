@@ -19,11 +19,17 @@ const GameCard = ({item}) => {
               {item.name}
             </Text>
             <View style={styles.tag}>
-              {item.tags.slice(0, 2).map((tag) => (
-                <Text key={tag.id} style={styles.link}>
-                  {tag.name}
-                </Text>
-              ))}
+              {item.tags ? (
+                <>
+                  {item.tags.slice(0, 2).map((tag) => (
+                    <Text key={tag.id} style={styles.link}>
+                      {tag.name}
+                    </Text>
+                  ))}
+                </>
+              ) : (
+                <Text style={styles.textReview}> {item.text}</Text>
+              )}
             </View>
           </View>
         </View>
