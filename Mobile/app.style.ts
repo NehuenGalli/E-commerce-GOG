@@ -19,4 +19,19 @@ export const styles = StyleSheet.create({
     marginHorizontal: "auto",
     width: "100%",
   },
+
+    noResults: {
+    marginVertical: "50%",
+    alignSelf: "center",
+    fontSize: 18,
+  },
+
+    pageTitle: {
+    marginTop: 10,
+    fontSize: 24,
+    fontWeight: "bold",
+    color: "#333",
+    marginBottom: 4,
+  },
 });
+

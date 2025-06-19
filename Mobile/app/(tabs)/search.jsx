@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import { searchGames } from "../../services/searchServices";
-import ListAllGames from "../../components/listAllGames/listAllGames";
-import { View } from "react-native";
+import GameCard from "../../components/gameCard/gameCard";
+import { View, FlatList, Text, TextInput } from "react-native";
 import { styles } from "../../app.style";
+import { stylesSearch } from "../../styles/search.style"
 
 const SearchPage = () => {
   const [query, setQuery] = useState("");
@@ -21,16 +22,36 @@ const SearchPage = () => {
   }, [query, currentPage]);
 
   return (
+
     <View style={styles.container}>
-      <ListAllGames
-        games={games.list}
-        title="SEARCH GAME"
-        setSearch={setQuery}
-        input={query}
-        currentPage={currentPage}
-        setPage={setCurrentPage}
-        amountOfPages={games.amountOfPages}
-      />
+      <FlatList
+            data={games.list}
+            keyExtractor={(game) => game.id}
+            showsVerticalScrollIndicator={false}
+            contentContainerStyle={styles.listContainer}
+            ListEmptyComponent={<Text style={styles.noResults}>No games found</Text>}
+            ListHeaderComponent={
+              <>
+                <Text style={styles.pageTitle}>SEARCH </Text>
+                
+                  <TextInput
+                    style={stylesSearch.inputText}
+                    autoCapitalize="none"
+                    placeholder="Buscar..."
+                    onSubmitEditing={(e) => {
+                      setQuery(e.nativeEvent.text);
+                    }}
+                  />
+                  
+        
+              </>
+            }
+            renderItem={({ item }) => (
+              
+              <GameCard item={item}></GameCard>
+             
+            )}
+        /> 
     </View>
   );
 };
