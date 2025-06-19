@@ -1,11 +1,13 @@
 import { createContext, useEffect, useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { API } from "../constants";
+import { API, ROUTES_MOBILE } from "../constants";
 import { userCurrent } from "@/services/userServices";
+import Spinner from "@/components/spinner";
+import { router } from "expo-router";
 
 export const userContext = createContext({
   name: "",
-  imageUrl: "",
+  imageUrl: "https://randomuser.me/api/portraits/lego/1.jpg",
   isLoggedIn: false,
   logIn: (token?: string) => {},
   logOut: () => {},
@@ -14,8 +16,10 @@ export const userContext = createContext({
 
 export const UserProvider = ({ children }: any) => {
   const [name, setName] = useState("");
-  const [imageUrl, setImageUrl] = useState("");
+  const [imageUrl, setImageUrl] = useState("https://randomuser.me/api/portraits/lego/1.jpg");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  const[isLoading, setIsLoading] = useState(true);
 
   const getToken = async () => {
     return await AsyncStorage.getItem(API.TOKEN_KEY);
@@ -28,10 +32,16 @@ export const UserProvider = ({ children }: any) => {
           setName(user.name);
           setImageUrl(user.image);
           setIsLoggedIn(true);
-        });
+     
+        })
       }
-    });
+    }).finally(()=>setIsLoading(false));
   }, []);
+
+
+  if(isLoading){
+    return <Spinner></Spinner>
+  }
 
   const logIn = async (token?: string) => {
     if (token) {
