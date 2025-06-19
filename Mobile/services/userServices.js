@@ -32,4 +32,51 @@ const userCurrent = (token) =>
       throw errorMessage(error);
     });
 
-export { userCurrent, login };
+const getCart = async (token) => {
+  try {
+    const response = await api.get(ROUTES_API.USER_CART, {
+      headers: {
+        Authorization: token,
+      },
+    });
+
+    return response.data;
+  } catch (error) {
+    const errorMessage =
+      error.response?.data?.error || error.message || "Failed to fetch cart";
+    throw new Error(errorMessage);
+  }
+};
+
+const removeGame = (gameId, token) =>
+  api
+    .delete(`${ROUTES_API.GAME_DELETE}/${gameId}`, {
+      headers: {
+        Authorization: token,
+      },
+    })
+    .then((res) => res.data)
+    .catch((error) => {
+      throw errorMessage(error);
+ });
+
+
+ const getUserById = (userId) =>
+  api
+    .get(`${API.BASE_URL}${ROUTES_API.USERS}/${userId}`)
+    .then((res) => res.data)
+    .catch((error) => {
+      throw errorMessage(error);
+    });
+
+const getReviewsById = (userId) =>
+  api
+    .get(`${API.BASE_URL}${ROUTES_API.USER_REVIEWS}/${userId}`)
+    .then((res) => res.data)
+    .catch((error) => {
+      throw errorMessage(error);
+    });
+
+
+
+export { login, getCart, removeGame, userCurrent, getUserById, getReviewsById };

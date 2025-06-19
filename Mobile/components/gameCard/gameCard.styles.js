@@ -48,11 +48,6 @@ export const styles = StyleSheet.create({
     marginBottom: 4,
   },
 
-  noResults: {
-    marginVertical: "50%",
-    alignSelf: "center",
-    fontSize: 18,
-  },
 
   inputText: {
     marginBottom: 6,
@@ -67,5 +62,11 @@ export const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: "#ced4da",
     borderRadius: 6,
+  },
+
+
+  textReview: {
+    fontSize: 24,
+    color: "#333",
   },
 });
