@@ -1,24 +1,21 @@
 import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
-  list: {
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
+  listContainer: {
+    alignSelf: "center",
   },
 
   card: {
-    maxWidth: 550,
     borderRadius: 8,
     overflow: "hidden",
     backgroundColor: "#fff",
-    marginHorizontal: 16,
     marginBottom: 8,
   },
 
   image: {
     width: "100%",
     aspectRatio: 3 / 2,
+    
   },
 
   title: {
@@ -50,6 +47,41 @@ export const styles = StyleSheet.create({
     fontWeight: "bold",
     color: "#333",
     marginBottom: 4,
-    marginHorizontal: 16,
   },
+
+
+  inputText: {
+    marginBottom: 6,
+    minWidth: "100%",
+    paddingVertical: 6,
+    paddingHorizontal: 12,
+    fontSize: 16,
+    fontWeight: "400",
+    lineHeight: 24,
+    color: "#212529",
+    backgroundColor: "#fff",
+    borderWidth: 1,
+    borderColor: "#ced4da",
+    borderRadius: 6,
+  },
+
+
+  textReview: {
+    fontSize: 24,
+    color: "#333",
+  },
+
+
+   recommendedContainer: {
+    position: "absolute",
+    bottom: 15,
+    right: 15,
+  },
+  recommendedImage: {
+    width: 50, 
+    height: 50,
+    
+  },
+
+  
 });

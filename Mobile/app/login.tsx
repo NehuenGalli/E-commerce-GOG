@@ -2,23 +2,18 @@ import { useState, useContext, useEffect } from "react";
 import { userContext } from "../context/userContext";
 import { useRouter } from "expo-router";
 import LoginForm from "../components/loginForm/loginForm";
-import { login } from "../services/userService"
+import { login } from "../services/userServices";
 import { fieldsCannotBeEmpty_message } from "../utilities/error_message";
 import { Keyboard } from "react-native";
+import { ROUTES_MOBILE } from "../constants";
 
 export default function Login() {
-  const { logIn, isLoggedIn } = useContext(userContext);
+  const { logIn } = useContext(userContext);
   const router = useRouter();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-
-  useEffect(() => {
-    if (isLoggedIn) {
-      router.replace("/home");
-    }
-  }, [isLoggedIn]);
 
   const onSubmit = async () => {
     Keyboard.dismiss();
@@ -31,28 +26,32 @@ export default function Login() {
     }
 
     try {
-      const loginResult = await login({ email: trimmedEmail, password: trimmedPassword });
+      const loginResult = await login({
+        email: trimmedEmail,
+        password: trimmedPassword,
+      });
       if (!loginResult || !loginResult.token) {
-        setError("No se pudo obtener el token de autenticación");
+        setError("Failed to obtain authentication token");
         return;
       }
       logIn(loginResult.token);
-        
-      router.replace("/home");
-      
     } catch (err: any) {
-      setError(err.message || "Error al iniciar sesión");
+      setError(err.message || "Failed to log in");
+    } finally {
+      router.replace(ROUTES_MOBILE.HOME);
     }
   };
 
   return (
-    <LoginForm
-      email={email}
-      password={password}
-      error={error}
-      onEmailChange={setEmail}
-      onPasswordChange={setPassword}
-      onSubmit={onSubmit}
-    />
+    <>
+      <LoginForm
+        email={email}
+        password={password}
+        error={error}
+        onEmailChange={setEmail}
+        onPasswordChange={setPassword}
+        onSubmit={onSubmit}
+      />
+    </>
   );
 }

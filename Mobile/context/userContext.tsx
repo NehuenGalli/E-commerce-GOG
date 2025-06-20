@@ -1,10 +1,12 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { API } from "../constants";
+import { userCurrent } from "@/services/userServices";
+import Spinner from "@/components/spinner";
 
 export const userContext = createContext({
+  idUser: "",
   name: "",
-  imageUrl: "",
   isLoggedIn: false,
   logIn: (token?: string) => {},
   logOut: async () => {},
@@ -13,32 +15,52 @@ export const userContext = createContext({
 
 export const UserProvider = ({ children }: any) => {
   const [name, setName] = useState("");
-  const [imageUrl, setImageUrl] = useState("");
+  const [idUser, setIdUser] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  const [isLoading, setIsLoading] = useState(true);
 
   const getToken = async () => {
     return await AsyncStorage.getItem(API.TOKEN_KEY);
   };
 
+  useEffect(() => {
+    getToken().then((token) => {
+      if (token) {
+        userCurrent(token).then((user: any) => {
+          setIdUser(user.id);
+          setName(user.name);
+          setIsLoggedIn(true);
+
+     
+        })
+      }
+    }).finally(()=>setIsLoading(false));
+  }, []);
+
+  if (isLoading) {
+    return <Spinner />;
+  }
+
   const logIn = async (token?: string) => {
-    setIsLoggedIn(true);
-    setName("");
-    setImageUrl("");
     if (token) {
       await AsyncStorage.setItem(API.TOKEN_KEY, token);
+      setIsLoggedIn(true);
+      userCurrent(token).then((user: any) => {
+        setName(user.name);
+      });
     }
   };
 
   const logOut = async () => {
     setIsLoggedIn(false);
     setName("");
-    setImageUrl("");
     await AsyncStorage.removeItem(API.TOKEN_KEY);
   };
 
   return (
     <userContext.Provider
-      value={{ name, imageUrl, isLoggedIn, logIn, logOut, getToken }}
+      value={{ name, isLoggedIn, idUser, logIn, logOut, getToken }}
     >
       {children}
     </userContext.Provider>
