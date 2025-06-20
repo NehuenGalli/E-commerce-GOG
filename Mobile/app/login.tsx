@@ -5,26 +5,15 @@ import LoginForm from "../components/loginForm/loginForm";
 import { login } from "../services/userServices";
 import { fieldsCannotBeEmpty_message } from "../utilities/error_message";
 import { Keyboard } from "react-native";
-import Spinner from "@/components/spinner";
 import { ROUTES_MOBILE } from "../constants";
 
 export default function Login() {
-  const { logIn, isLoggedIn } = useContext(userContext);
+  const { logIn } = useContext(userContext);
   const router = useRouter();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-
-
-
-  useEffect(() => {
-    
-    if (isLoggedIn) {
-      router.replace(ROUTES_MOBILE.HOME);
-    }
-    
-  }, [isLoggedIn]);
 
   const onSubmit = async () => {
     Keyboard.dismiss();
@@ -46,26 +35,23 @@ export default function Login() {
         return;
       }
       logIn(loginResult.token);
-     
-      router.replace(ROUTES_MOBILE.HOME);
     } catch (err: any) {
       setError(err.message || "Failed to log in");
+    } finally {
+      router.replace(ROUTES_MOBILE.HOME);
     }
   };
 
   return (
     <>
-      
-      
-        <LoginForm
-          email={email}
-          password={password}
-          error={error}
-          onEmailChange={setEmail}
-          onPasswordChange={setPassword}
-          onSubmit={onSubmit}
-        />
-      
+      <LoginForm
+        email={email}
+        password={password}
+        error={error}
+        onEmailChange={setEmail}
+        onPasswordChange={setPassword}
+        onSubmit={onSubmit}
+      />
     </>
   );
 }

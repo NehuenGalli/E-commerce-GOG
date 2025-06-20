@@ -1,9 +1,17 @@
-import React from 'react';
-import { View, Text, Image, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
-import { useRouter } from 'expo-router';
-import { FontAwesome } from '@expo/vector-icons';
-import CheckOut from '../checkOut/checkOut';
-import { styles } from './cartWithItems.style';
+import React from "react";
+import {
+  View,
+  Text,
+  Image,
+  TouchableOpacity,
+  StyleSheet,
+  ScrollView,
+} from "react-native";
+
+import { FontAwesome } from "@expo/vector-icons";
+import CheckOut from "../checkOut/checkOut";
+import { styles } from "./cartWithItems.style";
+import { useRouter } from "expo-router";
 
 type GameItem = {
   id: string;
@@ -39,7 +47,9 @@ const CartWithItems = ({ items, onRemove }: CartWithItemsProps) => {
               <View style={styles.cartItemDetails}>
                 <Text style={styles.cartItemName}>{game.name}</Text>
                 <View style={styles.cartItemActions}>
-                  <Text style={styles.cartPrice}>USD {game.price.amount.toFixed(2)}</Text>
+                  <Text style={styles.cartPrice}>
+                    USD {game.price.amount.toFixed(2)}
+                  </Text>
                   <TouchableOpacity
                     style={styles.removeItemBtn}
                     onPress={() => onRemove(game.id)}
@@ -52,16 +62,14 @@ const CartWithItems = ({ items, onRemove }: CartWithItemsProps) => {
           ))}
         </View>
 
-        <View style={styles.checkoutContainer}>
-          <CheckOut items={items}>
-            <TouchableOpacity
-              style={styles.buyButton}
-              onPress={() => router.push("/home")}
-            >
-              <Text style={styles.buyButtonText}>Buy</Text>
-            </TouchableOpacity>
-          </CheckOut>
-        </View>
+        <CheckOut items={items}>
+          <TouchableOpacity
+            style={styles.buyButton}
+            onPress={() => router.replace("/purchase")}
+          >
+            <Text style={styles.buyButtonText}>Buy</Text>
+          </TouchableOpacity>
+        </CheckOut>
       </ScrollView>
     </View>
   );
