@@ -1,4 +1,3 @@
-
 import { useContext, useEffect, useState } from "react";
 import { userCurrent } from "../../services/userServices";
 import UserHeader from "../../components/userHeader/userHeader";
@@ -30,24 +29,20 @@ const LibraryPage = () => {
     <View style={styles.container}>
       <UserHeader user={userLogged} />
       <FlatList
-            data={userLogged.games}
-            keyExtractor={(game) => game.id}
-            showsVerticalScrollIndicator={false}
-            contentContainerStyle={styles.listContainer}
-            ListEmptyComponent={<Text style={styles.noResults}>No games found</Text>}
-            ListHeaderComponent={
-              <>
-              
-                <Text style={styles.pageTitle}>YOUR GAMES </Text>
-
-              </>
-            }
-            renderItem={({ item }) => (
-              
-              <GameCard item={item}></GameCard>
-             
-            )}
-        /> 
+        data={userLogged.games}
+        keyExtractor={(game) => game.id}
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={styles.listContainer}
+        ListEmptyComponent={
+          <Text style={styles.noResults}>No games found</Text>
+        }
+        ListHeaderComponent={
+          <>
+            <Text style={styles.pageTitle}>YOUR GAMES </Text>
+          </>
+        }
+        renderItem={({ item }) => <GameCard item={item}></GameCard>}
+      />
     </View>
   );
 };

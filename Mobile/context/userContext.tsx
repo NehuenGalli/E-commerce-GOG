@@ -6,7 +6,6 @@ import Spinner from "@/components/spinner";
 
 export const userContext = createContext({
   name: "",
-  imageUrl: "https://randomuser.me/api/portraits/lego/1.jpg",
   isLoggedIn: false,
   logIn: (token?: string) => {},
   logOut: async () => {},
@@ -15,9 +14,7 @@ export const userContext = createContext({
 
 export const UserProvider = ({ children }: any) => {
   const [name, setName] = useState("");
-  const [imageUrl, setImageUrl] = useState(
-    "https://randomuser.me/api/portraits/lego/1.jpg"
-  );
+
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const [isLoading, setIsLoading] = useState(true);
@@ -32,7 +29,6 @@ export const UserProvider = ({ children }: any) => {
         if (token) {
           userCurrent(token).then((user: any) => {
             setName(user.name);
-            setImageUrl(user.image);
             setIsLoggedIn(true);
           });
         }
@@ -41,7 +37,7 @@ export const UserProvider = ({ children }: any) => {
   }, []);
 
   if (isLoading) {
-    return <Spinner></Spinner>;
+    return <Spinner />;
   }
 
   const logIn = async (token?: string) => {
@@ -50,7 +46,6 @@ export const UserProvider = ({ children }: any) => {
       setIsLoggedIn(true);
       userCurrent(token).then((user: any) => {
         setName(user.name);
-        setImageUrl(user.imageUrl);
       });
     }
   };
@@ -58,14 +53,11 @@ export const UserProvider = ({ children }: any) => {
   const logOut = async () => {
     setIsLoggedIn(false);
     setName("");
-    setImageUrl("");
     await AsyncStorage.removeItem(API.TOKEN_KEY);
   };
 
   return (
-    <userContext.Provider
-      value={{ name, imageUrl, isLoggedIn, logIn, logOut, getToken }}
-    >
+    <userContext.Provider value={{ name, isLoggedIn, logIn, logOut, getToken }}>
       {children}
     </userContext.Provider>
   );
