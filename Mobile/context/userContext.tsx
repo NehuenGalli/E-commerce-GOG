@@ -6,6 +6,7 @@ import Spinner from "@/components/spinner";
 import { router } from "expo-router";
 
 export const userContext = createContext({
+  idUser: "",
   name: "",
   imageUrl: "https://randomuser.me/api/portraits/lego/1.jpg",
   isLoggedIn: false,
@@ -17,6 +18,7 @@ export const userContext = createContext({
 export const UserProvider = ({ children }: any) => {
   const [name, setName] = useState("");
   const [imageUrl, setImageUrl] = useState("https://randomuser.me/api/portraits/lego/1.jpg");
+  const [idUser, setIdUser] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const[isLoading, setIsLoading] = useState(true);
@@ -29,9 +31,11 @@ export const UserProvider = ({ children }: any) => {
     getToken().then((token) => {
       if (token) {
         userCurrent(token).then((user: any) => {
+          setIdUser(user.id);
           setName(user.name);
           setImageUrl(user.image);
           setIsLoggedIn(true);
+
      
         })
       }
@@ -63,7 +67,7 @@ export const UserProvider = ({ children }: any) => {
 
   return (
     <userContext.Provider
-      value={{ name, imageUrl, isLoggedIn, logIn, logOut, getToken }}
+      value={{ name, imageUrl, isLoggedIn, idUser, logIn, logOut, getToken }}
     >
       {children}
     </userContext.Provider>

@@ -32,7 +32,7 @@ const CartWithItems = ({ items, onRemove }: CartWithItemsProps) => {
           {items.map((game) => (
             <View key={game.id} style={styles.cartItem}>
               <Image
-                source={{ uri: game.mainImage }}
+                source={{ uri: game.mainImage } }
                 style={styles.cartItemImage}
                 resizeMode="cover"
               />

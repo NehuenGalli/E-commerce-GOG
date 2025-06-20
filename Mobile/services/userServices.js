@@ -1,6 +1,7 @@
 import axios from "axios";
 import { errorMessage } from "../utilities/error_message";
 import { API, ROUTES_API } from "../constants";
+import {success_addFriend_message, sucess_removeFriend_message} from "../utilities/success_menssage"; 
 
 const api = axios.create({
   baseURL: API.BASE_URL,
@@ -78,5 +79,37 @@ const getReviewsById = (userId) =>
     });
 
 
+    const addOrRemoveF = (idFriend, isFriendBool, token) => {
+  return api
+    .put(
+      `${API.BASE_URL}${ROUTES_API.USERS}/${idFriend}${ROUTES_API.FRIENDS}`,
+      {},
+      {
+        headers: {
+          Authorization: token,
+        },
+      }
+    )
+    .then((res) => {
+      if (isFriendBool) {
+        return sucess_removeFriend_message;
+      } else {
+        return success_addFriend_message;
+      }
+    })
+    .catch((error) => {
+      throw errorMessage(error);
+    });
+};
 
-export { login, getCart, removeGame, userCurrent, getUserById, getReviewsById };
+
+const friendsUserLogged = (idUserLogged) =>
+  api
+    .get(`${API.BASE_URL}${ROUTES_API.USERS}/${idUserLogged}${ROUTES_API.FRIENDS}`)
+    .then((res) => res.data)
+    .catch((error) => {
+      throw errorMessage(error);
+    });
+
+
+export { login, getCart, removeGame, userCurrent, getUserById, getReviewsById, addOrRemoveF, friendsUserLogged };

@@ -1,6 +1,10 @@
-import { View, Text, Pressable, Image } from "react-native";
+import { View, Text, Pressable, Image, ImageBackground } from "react-native";
 import { useNavigateTo } from "../../hooks/useNavigateTo";
 import { styles } from "./gameCard.styles";
+
+import IsRecommendedGame from "./isRecommendedGame";
+
+
 
 const GameCard = ({item}) => {
       const { navigateToGame } = useNavigateTo();
@@ -8,9 +12,20 @@ const GameCard = ({item}) => {
   return (
     
         <View style={styles.card}>
+   
           <Pressable onPress={() => navigateToGame(item.id, item.name)}>
-            <Image source={{ uri: item.mainImage }} style={styles.image} />
+            <ImageBackground source={{ uri: item.mainImage }} style={styles.image}>
+               {item.text && (
+                <IsRecommendedGame isRecommended={item.isRecommended}/>
+
+              )}
+            </ImageBackground>
+
+           
+          
           </Pressable>
+          
+
           <View style={styles.textContainer}>
             <Text
               onPress={() => navigateToGame(item.id, item.name)}

@@ -8,7 +8,7 @@ import { styles } from "../../app.style";
 import GameCard from "../../components/gameCard/gameCard";
 
 const LibraryPage = () => {
-  const { logIn, isLoggedIn, getToken } = useContext(userContext);
+  const { getToken } = useContext(userContext);
 
   const [userLogged, setUserLogged] = useState({
     id: "",
@@ -28,7 +28,7 @@ const LibraryPage = () => {
 
   return (
     <View style={styles.container}>
-      <UserHeader user={userLogged} />
+      <UserHeader user={userLogged} displayLogoutButton={true}/>
       <FlatList
             data={userLogged.games}
             keyExtractor={(game) => game.id}

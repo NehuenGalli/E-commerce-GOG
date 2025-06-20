@@ -15,6 +15,7 @@ export const styles = StyleSheet.create({
   image: {
     width: "100%",
     aspectRatio: 3 / 2,
+    
   },
 
   title: {
@@ -69,4 +70,18 @@ export const styles = StyleSheet.create({
     fontSize: 24,
     color: "#333",
   },
+
+
+   recommendedContainer: {
+    position: "absolute",
+    bottom: 15,
+    right: 15,
+  },
+  recommendedImage: {
+    width: 50, 
+    height: 50,
+    
+  },
+
+  
 });

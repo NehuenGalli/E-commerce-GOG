@@ -53,7 +53,7 @@ const TabLayout = () => {
           options={{
             tabBarIcon: ({ size, focused, color }) => (
               <Image
-                source={{ uri: imageUrl }}
+                source={{ uri: imageUrl } }
                 style={perfilIconStyle(size, focused, color)}
               />
             ),

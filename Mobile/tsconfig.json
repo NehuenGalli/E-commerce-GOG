@@ -12,6 +12,5 @@
     "**/*.tsx",
     ".expo/types/**/*.ts",
     "expo-env.d.ts",
-    "constants.ts"
-, "components/gameCard/gameCard.styles.js"  ]
+    "constants.ts"  ]
 }

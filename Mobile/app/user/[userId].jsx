@@ -1,25 +1,18 @@
 
-import { useContext, useEffect, useState } from "react";
-import { userCurrent, getUserById, getReviewsById } from "../../services/userServices";
+import {  useEffect, useState } from "react";
+import {  getUserById, getReviewsById } from "../../services/userServices";
 import UserHeader from "../../components/userHeader/userHeader";
 import { View, FlatList, Text } from "react-native";
 import { styles } from "../../app.style";
 import GameCard from "../../components/gameCard/gameCard";
-import { useLocalSearchParams } from "expo-router";
+import { useLocalSearchParams, Stack } from "expo-router";
+
+
 
 const User = () => {
 
-    // const { logIn, isLoggedIn, getToken } = useContext(userContext);
+   
     const { userId } = useLocalSearchParams();
-
-//   const [userLogged, setUserLogged] = useState({
-//     id: "",
-//     email: "",
-//     name: "",
-//     image: "",
-//     backgroundImage: "",
-//     games: [],
-//   });
 
   const [userInfo, setUserInfo] = useState({
     id: "",
@@ -32,14 +25,6 @@ const User = () => {
 
   const [reviews, setReviews] = useState([]);
 
-
-//   useEffect(() => {
-//     getToken().then((token) =>
-//       userCurrent(token)
-//         .then((userInfo) => setUserLogged(userInfo))
-//         .catch((error) => console.log(error))
-//     );
-//   }, []);
 
   useEffect(() => {
     getUserById(userId)
@@ -70,6 +55,10 @@ const User = () => {
   
 
   return (
+    <>
+     <Stack.Screen options={{ title: userInfo.name}} />
+     
+
     <View style={styles.container}>
       <UserHeader user={userInfo} />
       <FlatList
@@ -92,6 +81,7 @@ const User = () => {
             )}
         /> 
     </View>
+    </>
   );
 };
 
