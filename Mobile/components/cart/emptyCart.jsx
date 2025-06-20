@@ -1,11 +1,11 @@
 import React from 'react';
 import { useRouter } from 'expo-router';
-import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, Image, TouchableOpacity } from 'react-native';
 import emptyCart from '../../assets/images/emptyCart.png';
 import { styles } from './emptyCart.style';
 
 const EmptyCart = () => {
-     const router = useRouter();
+    const router = useRouter();
     
     return (
         <View style={styles.container}>

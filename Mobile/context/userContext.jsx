@@ -8,16 +8,15 @@ export const userContext = createContext({
   idUser: "",
   name: "",
   isLoggedIn: false,
-  logIn: (token?: string) => {},
+  logIn: (token) => {},
   logOut: async () => {},
-  getToken: async () => Promise.resolve<string | null>(null),
+  getToken: async () => null,
 });
 
-export const UserProvider = ({ children }: any) => {
+export const UserProvider = ({ children }) => {
   const [name, setName] = useState("");
   const [idUser, setIdUser] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-
   const [isLoading, setIsLoading] = useState(true);
 
   const getToken = async () => {
@@ -27,26 +26,24 @@ export const UserProvider = ({ children }: any) => {
   useEffect(() => {
     getToken().then((token) => {
       if (token) {
-        userCurrent(token).then((user: any) => {
+        userCurrent(token).then((user) => {
           setIdUser(user.id);
           setName(user.name);
           setIsLoggedIn(true);
-
-     
-        })
+        });
       }
-    }).finally(()=>setIsLoading(false));
+    }).finally(() => setIsLoading(false));
   }, []);
 
   if (isLoading) {
     return <Spinner />;
   }
 
-  const logIn = async (token?: string) => {
+  const logIn = async (token) => {
     if (token) {
       await AsyncStorage.setItem(API.TOKEN_KEY, token);
       setIsLoggedIn(true);
-      userCurrent(token).then((user: any) => {
+      userCurrent(token).then((user) => {
         setName(user.name);
       });
     }

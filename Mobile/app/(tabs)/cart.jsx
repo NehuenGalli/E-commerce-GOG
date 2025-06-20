@@ -9,13 +9,6 @@ import CartWithItems from "../../components/cart/cartWithItems";
 import Toast from "react-native-toast-message";
 import { success_gameRemovedFromCart_message } from "../../utilities/success_menssage";
 
-type Cart = {
-  id: string;
-  name: string;
-  image: string;
-  games: any[];
-};
-
 const CartPage = () => {
   const { getToken, isLoggedIn } = useContext(userContext);
   const router = useRouter();
@@ -27,8 +20,8 @@ const CartPage = () => {
   }, [isLoggedIn]);
 
   const [isLoading, setIsLoading] = useState(true);
-  const [cart, setCart] = useState<Cart | null>(null);
-  const [error, setError] = useState<string | null>(null);
+  const [cart, setCart] = useState(null);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchCart = async () => {
@@ -39,9 +32,10 @@ const CartPage = () => {
           return;
         }
 
+        console.log("Fetching cart with token:", token);
         const cartData = await getCart(token);
         setCart(cartData);
-      } catch (err: any) {
+      } catch (err) {
         setError(err.message);
       } finally {
         setIsLoading(false);
@@ -51,7 +45,7 @@ const CartPage = () => {
     fetchCart();
   }, []);
 
-  const handleRemove = async (gameId: string) => {
+  const handleRemove = async (gameId) => {
     try {
       const token = await getToken();
       await removeGame(gameId, token);
@@ -63,7 +57,7 @@ const CartPage = () => {
 
       const updatedCart = await getCart(token);
       setCart(updatedCart);
-    } catch (err: any) {
+    } catch (err) {
       setError(err.message);
     }
   };

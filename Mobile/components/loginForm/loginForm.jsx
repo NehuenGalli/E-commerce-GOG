@@ -10,15 +10,6 @@ import {
 import { styles } from "./loginForm.style";
 import { useEffect } from "react";
 
-type LoginFormProps = {
-  email: string;
-  password: string;
-  onEmailChange: (text: string) => void;
-  onPasswordChange: (text: string) => void;
-  onSubmit: () => void;
-  error?: string;
-};
-
 export default function LoginForm({
   email,
   password,
@@ -26,7 +17,7 @@ export default function LoginForm({
   onPasswordChange,
   onSubmit,
   error,
-}: LoginFormProps) {
+}) {
   useEffect(() => {
     if (error) {
       Toast.show({
