@@ -1,10 +1,10 @@
-import ListAllGames from "@/components/listAllGames/listAllGames";
 import { useContext, useEffect, useState } from "react";
 import { userCurrent } from "../../services/userServices";
 import UserHeader from "../../components/userHeader/userHeader";
 import { userContext } from "@/context/userContext";
-import { View } from "react-native";
+import { View, FlatList, Text } from "react-native";
 import { styles } from "../../app.style";
+import GameCard from "../../components/gameCard/gameCard";
 
 const LibraryPage = () => {
   const { logIn, isLoggedIn, getToken } = useContext(userContext);
@@ -28,7 +28,21 @@ const LibraryPage = () => {
   return (
     <View style={styles.container}>
       <UserHeader user={userLogged} />
-      <ListAllGames games={userLogged.games} title="YOUR GAMES" />
+      <FlatList
+        data={userLogged.games}
+        keyExtractor={(game) => game.id}
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={styles.listContainer}
+        ListEmptyComponent={
+          <Text style={styles.noResults}>No games found</Text>
+        }
+        ListHeaderComponent={
+          <>
+            <Text style={styles.pageTitle}>YOUR GAMES </Text>
+          </>
+        }
+        renderItem={({ item }) => <GameCard item={item}></GameCard>}
+      />
     </View>
   );
 };

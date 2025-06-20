@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { getRecommendedGames } from "../../services/gameServices";
-import ListAllGames from "../../components/listAllGames/listAllGames";
 import Toast from "react-native-toast-message";
 import Spinner from "@/components/spinner";
-import { View } from "react-native";
+import { View, FlatList, Text } from "react-native";
 import { styles } from "../../app.style";
+import GameCard from "../../components/gameCard/gameCard";
 
 const Home = () => {
   const [games, setGames] = useState({
@@ -35,7 +35,24 @@ const Home = () => {
       {isLoading && <Spinner />}
       {!isLoading && (
         <View style={styles.container}>
-          <ListAllGames games={games} title="FEATURED & RECOMMENDED" />
+          <FlatList
+            data={games}
+            keyExtractor={(game) => game.id}
+            showsVerticalScrollIndicator={false}
+            contentContainerStyle={styles.listContainer}
+            ListEmptyComponent={<Text style={styles.noResults}>No games found</Text>}
+            ListHeaderComponent={
+              <>
+                <Text style={styles.pageTitle}>FEATURED & RECOMMENDED </Text>
+              </>
+            }
+            renderItem={({ item }) => (
+              
+              <GameCard item={item}></GameCard>
+             
+            )}
+        /> 
+
         </View>
       )}
     </>

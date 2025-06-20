@@ -1,13 +1,9 @@
 import { Tabs } from "expo-router";
 import { Fontisto, MaterialCommunityIcons } from "@expo/vector-icons";
-import { Image } from "react-native";
-import { perfilIconStyle } from "../../app.style";
+import Imagen from "../../components/imagen/imagen";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { useContext } from "react";
-import { userContext } from "../../context/userContext";
 
 const TabLayout = () => {
-  const { imageUrl } = useContext(userContext);
   return (
     <SafeAreaView style={{ flex: 1 }} edges={["left", "right", "top"]}>
       <Tabs
@@ -53,10 +49,7 @@ const TabLayout = () => {
           name="library"
           options={{
             tabBarIcon: ({ size, focused, color }) => (
-              <Image
-                source={{ uri: imageUrl }}
-                style={perfilIconStyle(size, focused, color)}
-              />
+              <Imagen size={size} color={color} focused={focused} />
             ),
           }}
         />

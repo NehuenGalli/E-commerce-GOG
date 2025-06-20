@@ -63,4 +63,10 @@ export const styles = StyleSheet.create({
     borderColor: "#ced4da",
     borderRadius: 6,
   },
+
+
+  textReview: {
+    fontSize: 24,
+    color: "#333",
+  },
 });

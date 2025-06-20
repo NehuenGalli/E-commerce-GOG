@@ -15,6 +15,7 @@ export const ROUTES_API = {
   USER_CART: "/users/current/cart",
   GAME_DELETE: "/games",
   PURCHASE: "/purchase",
+  USER_REVIEWS: "/userReviews",
 };
 
 export const ROUTES_MOBILE = {
@@ -22,4 +23,5 @@ export const ROUTES_MOBILE = {
   LOGIN: "/login",
   HOME: "/home",
   PURCHASE: "/purchase",
+  USER: "/user/[userId]",
 } as const;
