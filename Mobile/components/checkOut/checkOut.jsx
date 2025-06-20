@@ -3,19 +3,7 @@ import { View, Text } from "react-native";
 import { calculatePrice } from "../../utilities/calculatePrice";
 import { styles } from "./checkOut.styles";
 
-type GameItem = {
-  id: string;
-  price: {
-    amount: number;
-  };
-};
-
-type CheckOutProps = {
-  items: GameItem[];
-  children: React.ReactNode;
-};
-
-const CheckOut = ({ items, children }: CheckOutProps) => {
+const CheckOut = ({ items, children }) => {
   const { fees, total } = calculatePrice(items);
 
   return (
