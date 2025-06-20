@@ -5,9 +5,17 @@ import { userContext } from "@/context/userContext";
 import { View, FlatList, Text } from "react-native";
 import { styles } from "../../app.style";
 import GameCard from "../../components/gameCard/gameCard";
+import { useRouter } from "expo-router";
 
 const LibraryPage = () => {
-  const { logIn, isLoggedIn, getToken } = useContext(userContext);
+  const { isLoggedIn, getToken } = useContext(userContext);
+  const router = useRouter();
+
+  useEffect(() => {
+    if (!isLoggedIn) {
+      router.replace("/login");
+    }
+  }, [isLoggedIn]);
 
   const [userLogged, setUserLogged] = useState({
     id: "",
