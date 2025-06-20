@@ -32,7 +32,6 @@ const CartPage = () => {
           return;
         }
 
-        console.log("Fetching cart with token:", token);
         const cartData = await getCart(token);
         setCart(cartData);
       } catch (err) {
