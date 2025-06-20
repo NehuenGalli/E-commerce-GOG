@@ -16,14 +16,10 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
-
-
   useEffect(() => {
-    
     if (isLoggedIn) {
       router.replace(ROUTES_MOBILE.HOME);
     }
-    
   }, [isLoggedIn]);
 
   const onSubmit = async () => {
@@ -46,7 +42,7 @@ export default function Login() {
         return;
       }
       logIn(loginResult.token);
-     
+
       router.replace(ROUTES_MOBILE.HOME);
     } catch (err: any) {
       setError(err.message || "Failed to log in");
@@ -55,17 +51,14 @@ export default function Login() {
 
   return (
     <>
-      
-      
-        <LoginForm
-          email={email}
-          password={password}
-          error={error}
-          onEmailChange={setEmail}
-          onPasswordChange={setPassword}
-          onSubmit={onSubmit}
-        />
-      
+      <LoginForm
+        email={email}
+        password={password}
+        error={error}
+        onEmailChange={setEmail}
+        onPasswordChange={setPassword}
+        onSubmit={onSubmit}
+      />
     </>
   );
 }

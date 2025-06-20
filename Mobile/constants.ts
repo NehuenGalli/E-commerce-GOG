@@ -1,5 +1,5 @@
 export const API = {
-  BASE_URL: "http://192.168.0.109:3000",
+  BASE_URL: "http://10.0.2.2:3000",
   AUTH_HEADER: "authorization",
   TOKEN_KEY: "jwt",
 };
@@ -14,10 +14,12 @@ export const ROUTES_API = {
   LOGIN: "/login",
   USER_CART: "/users/current/cart",
   GAME_DELETE: "/games",
+  PURCHASE: "/purchase",
 };
 
 export const ROUTES_MOBILE = {
   GAME: "/game/[gameId]",
   LOGIN: "/login",
   HOME: "/home",
+  PURCHASE: "/purchase",
 } as const;

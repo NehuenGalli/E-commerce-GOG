@@ -16,31 +16,33 @@ export const userContext = createContext({
 
 export const UserProvider = ({ children }: any) => {
   const [name, setName] = useState("");
-  const [imageUrl, setImageUrl] = useState("https://randomuser.me/api/portraits/lego/1.jpg");
+  const [imageUrl, setImageUrl] = useState(
+    "https://randomuser.me/api/portraits/lego/1.jpg"
+  );
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  const[isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
 
   const getToken = async () => {
     return await AsyncStorage.getItem(API.TOKEN_KEY);
   };
 
   useEffect(() => {
-    getToken().then((token) => {
-      if (token) {
-        userCurrent(token).then((user: any) => {
-          setName(user.name);
-          setImageUrl(user.image);
-          setIsLoggedIn(true);
-     
-        })
-      }
-    }).finally(()=>setIsLoading(false));
+    getToken()
+      .then((token) => {
+        if (token) {
+          userCurrent(token).then((user: any) => {
+            setName(user.name);
+            setImageUrl(user.image);
+            setIsLoggedIn(true);
+          });
+        }
+      })
+      .finally(() => setIsLoading(false));
   }, []);
 
-
-  if(isLoading){
-    return <Spinner></Spinner>
+  if (isLoading) {
+    return <Spinner></Spinner>;
   }
 
   const logIn = async (token?: string) => {

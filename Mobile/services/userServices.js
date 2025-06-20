@@ -39,7 +39,6 @@ const getCart = async (token) => {
         Authorization: token,
       },
     });
-
     return response.data;
   } catch (error) {
     const errorMessage =
@@ -58,7 +57,6 @@ const removeGame = (gameId, token) =>
     .then((res) => res.data)
     .catch((error) => {
       throw errorMessage(error);
- });
-
+    });
 
 export { login, getCart, removeGame, userCurrent };

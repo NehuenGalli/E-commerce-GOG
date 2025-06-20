@@ -36,6 +36,7 @@ const TabLayout = () => {
             ),
           }}
         />
+
         <Tabs.Screen
           name="cart"
           options={{
