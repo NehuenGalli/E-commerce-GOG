@@ -48,3 +48,8 @@ Join our community of developers creating universal apps.
 
 - [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
 - [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+
+
+
+Observaciones:
+El icono de perfil esta puesto con el logo de LEGO a proposito porque habia un problema que al loguearse por primera vez se mostraba el icono vacio. Con tomy llegamos a la conclusion de que podiamos dejar un logo generico (en el tab) para todos los usuarios.
