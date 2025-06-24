@@ -12,7 +12,7 @@ import {
 import AddToCart from "../PortAddToCart/portAddToCart";
 import { userCurrent } from "../../services/userServices";
 import { userContext } from "../../context/userContext";
-import ModalTags from "./ModalTags"; // ✅ Aquí importas tu componente
+import ModalTags from "./ModalTags"; 
 
 const GamePortInfo = ({ game, isLoggedIn }) => {
   const [userGames, setUserGames] = useState([]);
@@ -98,7 +98,6 @@ const GamePortInfo = ({ game, isLoggedIn }) => {
 
       {!userHasGame && isLoggedIn && <AddToCart game={game} />}
 
-      {/* ✅ Aquí usas ModalTags */}
       <ModalTags
         tags={game.tags}
         visible={showTagsModal}
@@ -127,26 +126,29 @@ const styles = StyleSheet.create({
   },
   detailsContainer: {
     paddingBottom: 24,
+    marginHorizontal: 16
   },
   detailText: {
-    fontSize: 16,
+    fontSize: 20,
     marginBottom: 8,
-    color: "#333",
+     fontWeight:"bold"
+    
   },
   linkText: {
-    color: "#3498db",
+    color: "black",
     fontSize: 16,
     marginBottom: 8,
     textDecorationLine: "underline",
+    fontWeight:"bold"
   },
   tagsSection: {
     marginTop: 8,
   },
   tagsLabel: {
-    fontSize: 16,
+    fontSize: 20,
     fontWeight: "bold",
     marginBottom: 8,
-    color: "#555",
+   
   },
   tagsContainer: {
     flexDirection: "row",
@@ -154,12 +156,11 @@ const styles = StyleSheet.create({
     marginBottom: 8,
   },
   tag: {
-    marginRight: 8,
-    marginBottom: 8,
-    paddingVertical: 6,
-    paddingHorizontal: 12,
-    backgroundColor: "#eee",
-    borderRadius: 4,
+    marginRight: 4,
+    marginBottom: 4,
+    paddingVertical: 3,
+    paddingHorizontal: 6,
+ 
   },
   tagText: {
     color: "#333",

@@ -22,24 +22,29 @@ const Reviews = ({ game, isLoggedIn }) => {
   const [currentUser, setCurrentUser] = useState(null);
   const [reviews, setReviews] = useState(game.reviews || []);
   const [loading, setLoading] = useState(true);
+  const [userOwnsGame, setUserOwnsGame] = useState(false);
 
   const { getToken } = useContext(userContext);
 
-  
   useEffect(() => {
     const loadData = async () => {
       try {
         setLoading(true);
         if (isLoggedIn) {
           const token = await getToken();
-          //console.log(token) 
           const userData = await userCurrent(token);
-          //console.log(userData) // ✅ Obtenemos el token del contexto
-        
+
           setCurrentUser(userData);
+
+          // Verificamos si el usuario posee el juego
+          const userGames = userData.games || []; // o userData.ownedGames
+          const ownsGame = userGames.some((g) => g.id === game.id);
+          setUserOwnsGame(ownsGame);
         } else {
           setCurrentUser(null);
+          setUserOwnsGame(false);
         }
+
         setReviews(game.reviews || []);
       } catch (error) {
         const errorMessage =
@@ -62,7 +67,7 @@ const Reviews = ({ game, isLoggedIn }) => {
 
   const handleNewReview = async ({ text, isRecommended }) => {
     try {
-      const token = await getToken(); // ✅ Necesitamos el token para agregar la review
+      const token = await getToken();
       const updatedGame = await addReview(game.id, { text, isRecommended }, token);
       Toast.show({
         type: "success",
@@ -71,7 +76,6 @@ const Reviews = ({ game, isLoggedIn }) => {
       setReviews(updatedGame.reviews || []);
       return true;
     } catch (error) {
-      console.log(error);
       const errorMessage =
         error instanceof Error
           ? error.message
@@ -107,10 +111,18 @@ const Reviews = ({ game, isLoggedIn }) => {
         {userReview ? (
           <ReviewCard review={userReview} isCurrentUser={true} />
         ) : isLoggedIn && currentUser ? (
-          <CurrentReview
-            onSubmit={handleNewReview}
-            currentUser={{ name: currentUser.name, image: currentUser.image }}
-          />
+          userOwnsGame ? (
+            <CurrentReview
+              onSubmit={handleNewReview}
+              currentUser={{ name: currentUser.name, image: currentUser.image }}
+            />
+          ) : (
+            <View style={styles.bloquedReviewContainer}>
+              <Text style={styles.bloquedReviewText}>
+                Solo los usuarios que tienen este juego pueden dejar una review.
+              </Text>
+            </View>
+          )
         ) : (
           <View style={styles.bloquedReviewContainer}>
             <Text style={styles.bloquedReviewText}>

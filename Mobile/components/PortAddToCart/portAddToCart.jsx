@@ -12,7 +12,7 @@ const AddToCart = ({ game }) => {
   const [cartUpdated, setCartUpdated] = useState(false);
   const { getToken } = useContext(userContext);
   
-  // Comparación segura de IDs
+
   const isInCart = cart.games.some((g) => String(g.id) === String(game.id));
 
   const handleAddToCart = async () => {
@@ -23,7 +23,7 @@ const AddToCart = ({ game }) => {
         return;
       }
 
-      await addGameToCart(String(game.id), token); // Asegurar ID como string
+      await addGameToCart(String(game.id), token); 
       setCartUpdated(prev => !prev);
     } catch (error) {
       Alert.alert("Error", error.message);
@@ -44,27 +44,26 @@ const AddToCart = ({ game }) => {
     };
   
     fetchCart();
-  }, [cartUpdated, getToken]); // Added getToken as dependency
+  }, [cartUpdated, getToken]); 
 
   return (
     <View style={styles.cartContainer}>
-      <Text style={styles.cartTitle}>Buy </Text>
-
-      <View style={styles.bottomRow}>
+      <View style={styles.topRow}>
+        <Text style={styles.cartTitle}>Buy</Text>
         <Text style={styles.gamePrice}>
           USD {Number(game.price?.amount || 0).toFixed(2)}
         </Text>
-
-        {!isInCart && (
-          <TouchableOpacity 
-            style={styles.cartButton} 
-            onPress={handleAddToCart}
-            activeOpacity={0.7}
-          >
-            <Text style={styles.cartButtonText}>Buy</Text>
-          </TouchableOpacity>
-        )}
       </View>
+  
+      {!isInCart && (
+        <TouchableOpacity 
+          style={styles.cartButton} 
+          onPress={handleAddToCart}
+          activeOpacity={0.7}
+        >
+          <Text style={styles.cartButtonText}>Buy</Text>
+        </TouchableOpacity>
+      )}
     </View>
   );
 };
