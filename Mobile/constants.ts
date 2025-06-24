@@ -14,6 +14,7 @@ export const ROUTES_API = {
   LOGIN: "/login",
   USER_CART: "/users/current/cart",
   GAME_DELETE: "/games",
+  ADD_TO_CART: "/games",
   PURCHASE: "/purchase",
   USER_REVIEWS: "/userReviews",
   GAME_BY_ID: "/games",

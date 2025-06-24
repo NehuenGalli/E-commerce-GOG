@@ -39,6 +39,26 @@ const addReview = async (gameId, reviewData, token) => {
   } catch (error) {
     throw errorMessage(error);
   }
-};    
+};
+const addGameToCart = async (gameId, token) => {
+  try {
+    const response = await api.put(
+      `${ROUTES_API.ADD_TO_CART}/${gameId}`,
+      {},
+      {
+        headers: {
+          Authorization: token,
+        },
+      }
+    );
+    return response.data;
+  } catch (error) {
+    const errorMessage =
+      error.response?.data?.error ||
+      error.message ||
+      "Failed to add game to cart";
+    throw new Error(errorMessage);
+  }
+};
 
-export { getGames, getRecommendedGames, getGameById, addReview };
+export { getGames, getRecommendedGames, getGameById, addReview, addGameToCart };

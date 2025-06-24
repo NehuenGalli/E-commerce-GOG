@@ -1,50 +1,36 @@
-import React, { useEffect, useState, useContext } from "react";
+import { CartContext } from "../../context/cartContext";
+import React, { useContext } from "react";
 import { View, Text, TouchableOpacity, Alert } from "react-native";
-import { addGameToCart } from "../../services/gameServices";
-import { getCart } from "../../services/userServices";
-import { userContext } from "../../context/userContext";
 import { useRouter } from "expo-router";
 import styles from "./portAddToCart.style";
+import Toast from "react-native-toast-message";
 
 const AddToCart = ({ game }) => {
+  const { cart, addToCart } = useContext(CartContext);
   const router = useRouter();
-  const [cart, setCart] = useState({ games: [], user: null });
-  const [cartUpdated, setCartUpdated] = useState(false);
-  const { getToken } = useContext(userContext);
   
-
   const isInCart = cart.games.some((g) => String(g.id) === String(game.id));
 
   const handleAddToCart = async () => {
     try {
-      const token = await getToken();
-      if (!token) {
-        router.push("/login");
-        return;
-      }
-
-      await addGameToCart(String(game.id), token); 
-      setCartUpdated(prev => !prev);
+      await addToCart(game.id);
+      Toast.show({
+        type: "success",
+        text1: "Game added to cart successfully!",
+        topOffset: 100,
+      });
     } catch (error) {
-      Alert.alert("Error", error.message);
+      if (error.message) {
+        router.replace("/login");
+      } else {
+        Toast.show({
+          type: "error",
+          text1: error.message,
+          topOffset: 100,
+        });
+      }
     }
   };
-
-  useEffect(() => {
-    const fetchCart = async () => {
-      try {
-        const token = await getToken();
-        if (token) {
-          const userCart = await getCart(token);
-          setCart(userCart || { games: [], user: null });
-        }
-      } catch (error) {
-        console.error("Error fetching cart:", error);
-      }
-    };
-  
-    fetchCart();
-  }, [cartUpdated, getToken]); 
 
   return (
     <View style={styles.cartContainer}>
