@@ -1,71 +1,67 @@
-import React, { useEffect, useState } from "react";
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  StyleSheet,
-  Alert,
-} from "react-native";
-import { useNavigation } from "@react-navigation/native";
+import React, { useEffect, useState, useContext } from "react";
+import { View, Text, TouchableOpacity, Alert } from "react-native";
 import { addGameToCart } from "../../services/gameServices";
-import { getCart } from "../../services/userService";
-import { getToken } from "../../utilities/localstorageUtils";
-import { ROUTES } from "../../constants";
-import {
-  success_gameAddedSuccessfully_message,
-} from "../../utilities/success_message";
-import {
-  mustBeLoggedIn_message,
-} from "../../utilities/error_message";
-import styles from "./portAddToCart.styles";
+import { getCart } from "../../services/userServices";
+import { userContext } from "../../context/userContext";
+import { useRouter } from "expo-router";
+import styles from "./portAddToCart.style";
+
 const AddToCart = ({ game }) => {
-  const navigation = useNavigation();
-  const token = getToken();
+  const router = useRouter();
   const [cart, setCart] = useState({ games: [], user: null });
   const [cartUpdated, setCartUpdated] = useState(false);
-  const isInCart = cart.games.some((g) => g.id === game.id);
+  const { getToken } = useContext(userContext);
+  
+  // Comparación segura de IDs
+  const isInCart = cart.games.some((g) => String(g.id) === String(game.id));
 
   const handleAddToCart = async () => {
     try {
+      const token = await getToken();
       if (!token) {
-        Alert.alert("Error", mustBeLoggedIn_message, [
-          { text: "OK", onPress: () => navigation.navigate(ROUTES.LOGIN) },
-        ]);
+        router.push("/login");
         return;
       }
 
-      await addGameToCart(game.id, token);
-      Alert.alert("Success", success_gameAddedSuccessfully_message);
-      setCartUpdated((prev) => !prev);
+      await addGameToCart(String(game.id), token); // Asegurar ID como string
+      setCartUpdated(prev => !prev);
     } catch (error) {
       Alert.alert("Error", error.message);
     }
   };
 
   useEffect(() => {
-    if (token) {
-      getCart(token)
-        .then((userCart) => {
-          setCart(userCart);
-        })
-        .catch((error) => {
-          Alert.alert("Error", error.message);
-        });
-    }
-  }, [cartUpdated, token]);
+    const fetchCart = async () => {
+      try {
+        const token = await getToken();
+        if (token) {
+          const userCart = await getCart(token);
+          setCart(userCart || { games: [], user: null });
+        }
+      } catch (error) {
+        console.error("Error fetching cart:", error);
+      }
+    };
+  
+    fetchCart();
+  }, [cartUpdated, getToken]); // Added getToken as dependency
 
   return (
     <View style={styles.cartContainer}>
-      <Text style={styles.cartTitle}>Buy {game.name}</Text>
+      <Text style={styles.cartTitle}>Buy </Text>
 
       <View style={styles.bottomRow}>
         <Text style={styles.gamePrice}>
-          USD {Number(game.price.amount).toFixed(2)}
+          USD {Number(game.price?.amount || 0).toFixed(2)}
         </Text>
 
         {!isInCart && (
-          <TouchableOpacity style={styles.cartButton} onPress={handleAddToCart}>
-            <Text style={styles.cartButtonText}>Add to Cart</Text>
+          <TouchableOpacity 
+            style={styles.cartButton} 
+            onPress={handleAddToCart}
+            activeOpacity={0.7}
+          >
+            <Text style={styles.cartButtonText}>Buy</Text>
           </TouchableOpacity>
         )}
       </View>
@@ -74,4 +70,3 @@ const AddToCart = ({ game }) => {
 };
 
 export default AddToCart;
-

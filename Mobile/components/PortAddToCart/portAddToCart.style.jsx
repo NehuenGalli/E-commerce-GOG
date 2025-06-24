@@ -8,17 +8,17 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     marginVertical: 16,
     gap: 16,
+    marginHorizontal:16
   },
   cartTitle: {
     fontSize: 32,
     color: "white",
     fontWeight: "bold",
-    textAlign: "center",
     fontFamily: "sans-serif",
   },
   bottomRow: {
-    flexDirection: "row",
-    alignItems: "center",
+    
+    alignItems: "right",
     justifyContent: "space-between",
     flexWrap: "wrap",
     gap: 16,
@@ -27,11 +27,12 @@ const styles = StyleSheet.create({
     fontSize: 32,
     color: "white",
     fontFamily: "sans-serif",
+    fontWeight: "bold",
   },
   cartButton: {
     backgroundColor: "#9acd32",
-    paddingVertical: 10,
-    paddingHorizontal: 20,
+    paddingVertical: 15,
+    paddingHorizontal: 153,
     borderRadius: 2,
   },
   cartButtonText: {
@@ -41,3 +42,4 @@ const styles = StyleSheet.create({
     color: "black",
   },
 });
+export default styles;

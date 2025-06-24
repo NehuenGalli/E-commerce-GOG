@@ -28,6 +28,17 @@ const getGameById = (gameId) =>
     .catch((error) => {
       throw errorMessage(error);
     });
-    
+const addReview = async (gameId, reviewData, token) => {
+  try {
+    const response = await api.put(ROUTES_API.GAME_REVIEWS(gameId), reviewData, {
+      headers: {
+        Authorization: token,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    throw errorMessage(error);
+  }
+};    
 
-export { getGames, getRecommendedGames, getGameById };
+export { getGames, getRecommendedGames, getGameById, addReview };

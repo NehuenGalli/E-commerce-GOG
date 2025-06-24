@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   userReviewContainer: {
-    marginBottom: 30,
+    marginBottom: 12,
   },
   reviewsGrid: {
     flexDirection: isSmallScreen ? "column" : "row",

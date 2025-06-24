@@ -71,6 +71,7 @@ const Reviews = ({ game, isLoggedIn }) => {
       setReviews(updatedGame.reviews || []);
       return true;
     } catch (error) {
+      console.log(error);
       const errorMessage =
         error instanceof Error
           ? error.message

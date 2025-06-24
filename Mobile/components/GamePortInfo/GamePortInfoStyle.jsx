@@ -1,10 +1,24 @@
-import React, { useEffect, useState } from "react";
-import { View, Text, Image, ActivityIndicator, ScrollView, TouchableOpacity, Linking, StyleSheet } from "react-native";
-import {AddToCart} from "../PortAddToCart/portAddToCart";
+import React, { useEffect, useState, useContext } from "react";
+import {
+  View,
+  Text,
+  Image,
+  ActivityIndicator,
+  ScrollView,
+  TouchableOpacity,
+  Linking,
+  StyleSheet,
+} from "react-native";
+import AddToCart from "../PortAddToCart/portAddToCart";
+import { userCurrent } from "../../services/userServices";
+import { userContext } from "../../context/userContext";
+import ModalTags from "./ModalTags"; // ✅ Aquí importas tu componente
 
 const GamePortInfo = ({ game, isLoggedIn }) => {
   const [userGames, setUserGames] = useState([]);
-  const [loading, setLoading] = useState(isLoggedIn); 
+  const [loading, setLoading] = useState(isLoggedIn);
+  const [showTagsModal, setShowTagsModal] = useState(false);
+  const { getToken } = useContext(userContext);
 
   useEffect(() => {
     const fetchUserGames = async () => {
@@ -14,8 +28,9 @@ const GamePortInfo = ({ game, isLoggedIn }) => {
       }
 
       try {
-        // const user = await userCurrent();
-        // setUserGames(user?.games || []);
+        const token = await getToken();
+        const user = await userCurrent(token);
+        setUserGames(user?.games || []);
       } catch (error) {
         console.error("Failed to fetch user games:", error);
         setUserGames([]);
@@ -28,7 +43,9 @@ const GamePortInfo = ({ game, isLoggedIn }) => {
   }, [isLoggedIn]);
 
   if (loading) {
-    return <ActivityIndicator size="large" color="#0000ff" style={{ marginTop: 50 }} />;
+    return (
+      <ActivityIndicator size="large" color="#0000ff" style={{ marginTop: 50 }} />
+    );
   }
 
   if (!game) {
@@ -39,30 +56,30 @@ const GamePortInfo = ({ game, isLoggedIn }) => {
     );
   }
 
-  const userHasGame = isLoggedIn && userGames.some((userGame) => userGame.id === game.id);
+  const userHasGame =
+    isLoggedIn && userGames.some((userGame) => userGame.id === game.id);
 
   return (
     <ScrollView style={styles.container}>
-      <Image
-        source={{ uri: game.mainImage }}
-        style={styles.mainImage}
-      />
-      
-    
+      <Image source={{ uri: game.mainImage }} style={styles.mainImage} />
 
       <View style={styles.detailsContainer}>
-        <Text style={styles.detailText}>Developer: {game.developer?.name || 'N/A'}</Text>
-        
+        <Text style={styles.detailText}>
+          Developer: {game.developer?.name || "N/A"}
+        </Text>
+
         {game.website && (
           <TouchableOpacity onPress={() => Linking.openURL(game.website)}>
             <Text style={styles.linkText}>{game.website}</Text>
           </TouchableOpacity>
         )}
 
-        <Text style={styles.detailText}>Release date: {new Date(game.releaseDate).toLocaleDateString()}</Text>
+        <Text style={styles.detailText}>
+          Release date: {new Date(game.releaseDate).toLocaleDateString()}
+        </Text>
 
         <View style={styles.tagsSection}>
-          <Text style={styles.tagsLabel}>Tags: </Text>
+          <Text style={styles.tagsLabel}>Tags:</Text>
           <View style={styles.tagsContainer}>
             {game.tags?.slice(0, 5).map((tag) => (
               <View key={tag.id} style={styles.tag}>
@@ -70,68 +87,70 @@ const GamePortInfo = ({ game, isLoggedIn }) => {
               </View>
             ))}
           </View>
+
           {game.tags?.length > 5 && (
-            <Text style={styles.moreLink}>+ {game.tags.length - 5} more</Text>
+            <TouchableOpacity onPress={() => setShowTagsModal(true)}>
+              <Text style={styles.moreLink}>+ {game.tags.length - 5} more</Text>
+            </TouchableOpacity>
           )}
         </View>
       </View>
 
-      {!userHasGame && isLoggedIn && <AddToCart game={game} />} 
+      {!userHasGame && isLoggedIn && <AddToCart game={game} />}
+
+      {/* ✅ Aquí usas ModalTags */}
+      <ModalTags
+        tags={game.tags}
+        visible={showTagsModal}
+        onClose={() => setShowTagsModal(false)}
+      />
     </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
+  container: {
+    
+    flex: 1,
+   
+  },
   centered: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#f0f0f0',
+    justifyContent: "center",
+    alignItems: "center",
   },
-  
   mainImage: {
-    width: '100%',
+    width: "100%",
     height: 250,
     marginBottom: 16,
+   
   },
-  header: {
-    marginBottom: 16,
+  detailsContainer: {
+    paddingBottom: 24,
   },
-  title: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    marginBottom: 8,
-    color: '#333',
-  },
-  price: {
-    fontSize: 20,
-    color: '#27ae60',
-    fontWeight: 'bold',
-  },
- 
   detailText: {
     fontSize: 16,
     marginBottom: 8,
-    color: '#333',
+    color: "#333",
   },
   linkText: {
-    color: '#3498db',
+    color: "#3498db",
     fontSize: 16,
     marginBottom: 8,
-    textDecorationLine: 'underline',
+    textDecorationLine: "underline",
   },
   tagsSection: {
     marginTop: 8,
   },
   tagsLabel: {
     fontSize: 16,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     marginBottom: 8,
-    color: '#555',
+    color: "#555",
   },
   tagsContainer: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
+    flexDirection: "row",
+    flexWrap: "wrap",
     marginBottom: 8,
   },
   tag: {
@@ -139,15 +158,16 @@ const styles = StyleSheet.create({
     marginBottom: 8,
     paddingVertical: 6,
     paddingHorizontal: 12,
-  
+    backgroundColor: "#eee",
+    borderRadius: 4,
   },
   tagText: {
-    color: '#333',
+    color: "#333",
     fontSize: 14,
   },
   moreLink: {
-    color: '#333',
-    textDecorationLine: 'underline',
+    color: "#333",
+    textDecorationLine: "underline",
     fontSize: 16,
   },
 });
