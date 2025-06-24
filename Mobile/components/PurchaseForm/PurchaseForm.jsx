@@ -1,3 +1,5 @@
+import { useContext } from "react";
+import { CartContext } from "../../context/cartContext";
 import { useState } from "react";
 import { View, Text, TextInput, Alert, Pressable } from "react-native";
 import { purchase } from "../../services/purchaseServices";
@@ -12,6 +14,7 @@ const PurchaseForm = ({ items, token }) => {
   const [expDate, setExpDate] = useState("");
   const [cvv, setCVV] = useState("");
 
+  const { refreshCart } = useContext(CartContext);
   const router = useRouter();
 
   const submitCard = () => {
@@ -32,6 +35,7 @@ const PurchaseForm = ({ items, token }) => {
           type: "success",
           text1: "Successful purchase",
         });
+        refreshCart();
       })
       .catch((error) => {
         Toast.show({
