@@ -1,5 +1,6 @@
-import { useState } from "react";
-import { View, Text, TextInput, Alert, Pressable } from "react-native";
+import { useContext, useState } from "react";
+import { CartContext } from "../../context/cartContext";
+import { View, Text, TextInput, Pressable } from "react-native";
 import { purchase } from "../../services/purchaseServices";
 import { validateCardData } from "../../utilities/validateCard";
 import { useRouter } from "expo-router";
@@ -12,6 +13,7 @@ const PurchaseForm = ({ items, token }) => {
   const [expDate, setExpDate] = useState("");
   const [cvv, setCVV] = useState("");
 
+  const { refreshCart } = useContext(CartContext);
   const router = useRouter();
 
   const submitCard = () => {
@@ -32,6 +34,7 @@ const PurchaseForm = ({ items, token }) => {
           type: "success",
           text1: "Successful purchase",
         });
+        refreshCart();
       })
       .catch((error) => {
         Toast.show({

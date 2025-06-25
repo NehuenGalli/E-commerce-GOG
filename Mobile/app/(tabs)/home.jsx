@@ -40,19 +40,16 @@ const Home = () => {
             keyExtractor={(game) => game.id}
             showsVerticalScrollIndicator={false}
             contentContainerStyle={styles.listContainer}
-            ListEmptyComponent={<Text style={styles.noResults}>No games found</Text>}
+            ListEmptyComponent={
+              <Text style={styles.noResults}>No games found</Text>
+            }
             ListHeaderComponent={
               <>
                 <Text style={styles.pageTitle}>FEATURED & RECOMMENDED </Text>
               </>
             }
-            renderItem={({ item }) => (
-              
-              <GameCard item={item}></GameCard>
-             
-            )}
-        /> 
-
+            renderItem={({ item }) => <GameCard item={item}></GameCard>}
+          />
         </View>
       )}
     </>

@@ -20,13 +20,13 @@ export const styles = StyleSheet.create({
     width: "100%",
   },
 
-    noResults: {
+  noResults: {
     marginVertical: "50%",
     alignSelf: "center",
     fontSize: 18,
   },
 
-    pageTitle: {
+  pageTitle: {
     marginTop: 10,
     fontSize: 24,
     fontWeight: "bold",
@@ -34,4 +34,3 @@ export const styles = StyleSheet.create({
     marginBottom: 4,
   },
 });
-

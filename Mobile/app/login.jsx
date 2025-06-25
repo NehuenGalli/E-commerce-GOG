@@ -35,7 +35,7 @@ export default function Login() {
         return;
       }
       logIn(loginResult.token);
-    } catch (err: any) {
+    } catch (err) {
       setError(err.message || "Failed to log in");
     } finally {
       router.replace(ROUTES_MOBILE.HOME);

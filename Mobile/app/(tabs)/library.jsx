@@ -15,7 +15,7 @@ const LibraryPage = () => {
     if (!isLoggedIn) {
       router.replace("/login");
     }
-  }, [isLoggedIn]);
+  }, [isLoggedIn, router]);
 
   const [userLogged, setUserLogged] = useState({
     id: "",

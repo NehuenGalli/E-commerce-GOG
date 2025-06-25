@@ -4,30 +4,14 @@ import {
   Text,
   Image,
   TouchableOpacity,
-  StyleSheet,
   ScrollView,
 } from "react-native";
-
 import { FontAwesome } from "@expo/vector-icons";
 import CheckOut from "../checkOut/checkOut";
 import { styles } from "./cartWithItems.style";
 import { useRouter } from "expo-router";
 
-type GameItem = {
-  id: string;
-  name: string;
-  mainImage: string;
-  price: {
-    amount: number;
-  };
-};
-
-type CartWithItemsProps = {
-  items: GameItem[];
-  onRemove: (id: string) => void;
-};
-
-const CartWithItems = ({ items, onRemove }: CartWithItemsProps) => {
+const CartWithItems = ({ items, onRemove }) => {
   const router = useRouter();
 
   return (
@@ -40,7 +24,7 @@ const CartWithItems = ({ items, onRemove }: CartWithItemsProps) => {
           {items.map((game) => (
             <View key={game.id} style={styles.cartItem}>
               <Image
-                source={{ uri: game.mainImage } }
+                source={{ uri: game.mainImage }}
                 style={styles.cartItemImage}
                 resizeMode="cover"
               />
@@ -65,7 +49,7 @@ const CartWithItems = ({ items, onRemove }: CartWithItemsProps) => {
         <CheckOut items={items}>
           <TouchableOpacity
             style={styles.buyButton}
-            onPress={() => router.replace("/purchase")}
+            onPress={() => router.push("/purchase")}
           >
             <Text style={styles.buyButtonText}>Buy</Text>
           </TouchableOpacity>

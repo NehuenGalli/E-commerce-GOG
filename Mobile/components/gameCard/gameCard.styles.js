@@ -15,7 +15,6 @@ export const styles = StyleSheet.create({
   image: {
     width: "100%",
     aspectRatio: 3 / 2,
-    
   },
 
   title: {
@@ -49,7 +48,6 @@ export const styles = StyleSheet.create({
     marginBottom: 4,
   },
 
-
   inputText: {
     marginBottom: 6,
     minWidth: "100%",
@@ -65,23 +63,18 @@ export const styles = StyleSheet.create({
     borderRadius: 6,
   },
 
-
   textReview: {
     fontSize: 24,
     color: "#333",
   },
 
-
-   recommendedContainer: {
+  recommendedContainer: {
     position: "absolute",
     bottom: 15,
     right: 15,
   },
   recommendedImage: {
-    width: 50, 
+    width: 50,
     height: 50,
-    
   },
-
-  
 });
