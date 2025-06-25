@@ -1,10 +1,6 @@
 import { StyleSheet } from "react-native";
 
-export const perfilIconStyle = (
-  size: number,
-  focused: boolean,
-  color: string
-) => ({
+export const perfilIconStyle = (size, focused, color) => ({
   width: size,
   height: size,
   borderRadius: size / 2,
