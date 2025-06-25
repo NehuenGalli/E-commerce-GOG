@@ -15,7 +15,7 @@ const LibraryPage = () => {
     if (!isLoggedIn) {
       router.replace("/login");
     }
-  }, [isLoggedIn]);
+  }, [isLoggedIn, router]);
 
   const [userLogged, setUserLogged] = useState({
     id: "",
@@ -35,7 +35,7 @@ const LibraryPage = () => {
 
   return (
     <View style={styles.container}>
-      <UserHeader user={userLogged} displayLogoutButton={true}/>
+      <UserHeader user={userLogged} displayLogoutButton={true} />
       <FlatList
         data={userLogged.games}
         keyExtractor={(game) => game.id}

@@ -1,30 +1,27 @@
-import React from "react";
-import { View, Text, Image,TouchableOpacity } from "react-native";
-import { useRouter } from "expo-router";
+import { View, Text, Image, Pressable } from "react-native";
 import recommendedIcon from "../../assets/images/recommendedIcon.png";
 import unrecommendedIcon from "../../assets/images/unrecommendedIcon.png";
 import styles from "./reviewCard.style";
-
-
-
+import { useNavigateTo } from "../../hooks/useNavigateTo";
 
 const ReviewCard = ({ review, isCurrentUser }) => {
-  const router = useRouter();
-
+  const { navigateToUser } = useNavigateTo();
 
   return (
     <View style={[styles.card, isCurrentUser && styles.currentUser]}>
       <View style={styles.header}>
-        <TouchableOpacity  style={styles.userInfo}>
+        <Pressable
+          style={styles.userInfo}
+          onPress={() => navigateToUser(review.user.id)}
+        >
           <Image source={{ uri: review.user.image }} style={styles.avatar} />
           <Text style={styles.userName}>{review.user.name}</Text>
-        </TouchableOpacity>
+        </Pressable>
         <Image
           source={review.isRecommended ? recommendedIcon : unrecommendedIcon}
           style={[styles.icon, { width: 24, height: 24 }]}
         />
       </View>
-
 
       <View style={styles.content}>
         <Text style={styles.reviewText}>{review.text}</Text>
@@ -32,6 +29,5 @@ const ReviewCard = ({ review, isCurrentUser }) => {
     </View>
   );
 };
-
 
 export default ReviewCard;

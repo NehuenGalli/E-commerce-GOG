@@ -6,56 +6,58 @@ import { userContext } from "../../context/userContext";
 import { addOrRemoveF } from "../../services/userServices";
 import { useEffect } from "react";
 import { isFriend } from "../../utilities/isFriend";
+import Toast from "react-native-toast-message";
 
-
-
-const AddOrRemoveFriend = ({userId}) => {
-
-
+const AddOrRemoveFriend = ({ userId }) => {
   const [isFriendBool, setIsFriendBool] = useState(null);
 
   const { idUser, getToken } = useContext(userContext);
 
-
-    const functionAddOrRemoveFriend = () => {
-      getToken().then((token) =>
+  const functionAddOrRemoveFriend = () => {
+    getToken().then((token) =>
       addOrRemoveF(userId, isFriendBool, token)
         .then((message) => {
-          console.log(message);
+          Toast.show({
+            type: "success",
+            text1: "Success",
+            text2: message,
+          });
           setIsFriendBool((prev) => !prev);
         })
-         .catch((error) => console.log(error))
+        .catch((error) =>
+          Toast.show({
+            type: "error",
+            text1: error,
+          })
+        )
     );
   };
 
-
-    useEffect(() => {
+  useEffect(() => {
     if (userId && idUser) {
       isFriend(userId, idUser).then(setIsFriendBool);
     }
   }, [userId, idUser]);
 
-
   return (
     <>
       {!isFriendBool && (
-
         <Pressable
-           onPress={() => {
-           functionAddOrRemoveFriend()
+          onPress={() => {
+            functionAddOrRemoveFriend();
           }}
         >
-          <Text  style={styles.buttonLogout}>AddFriend</Text>
+          <Text style={styles.buttonLogout}>AddFriend</Text>
         </Pressable>
       )}
 
       {isFriendBool && (
-         <Pressable
-           onPress={() => {
-           functionAddOrRemoveFriend()
+        <Pressable
+          onPress={() => {
+            functionAddOrRemoveFriend();
           }}
         >
-          <Text  style={styles.buttonLogout}>Remove Friend</Text>
+          <Text style={styles.buttonLogout}>Remove Friend</Text>
         </Pressable>
       )}
     </>
