@@ -35,7 +35,7 @@ const LibraryPage = () => {
 
   return (
     <View style={styles.container}>
-      <UserHeader user={userLogged} displayLogoutButton={true}/>
+      <UserHeader user={userLogged} displayLogoutButton={true} />
       <FlatList
         data={userLogged.games}
         keyExtractor={(game) => game.id}

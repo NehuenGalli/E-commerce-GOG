@@ -1,6 +1,9 @@
 import { Tabs } from "expo-router";
-import { Fontisto, MaterialCommunityIcons } from "@expo/vector-icons";
-import Imagen from "../../components/imagen/imagen";
+import {
+  Fontisto,
+  MaterialCommunityIcons,
+  AntDesign,
+} from "@expo/vector-icons";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 const TabLayout = () => {
@@ -49,7 +52,7 @@ const TabLayout = () => {
           name="library"
           options={{
             tabBarIcon: ({ size, focused, color }) => (
-              <Imagen size={size} color={color} focused={focused} />
+              <AntDesign name="user" size={size} color={color} />
             ),
           }}
         />
