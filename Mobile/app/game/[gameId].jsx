@@ -1,12 +1,10 @@
-import React, { useEffect, useState, useContext} from "react";
-import { Text, ActivityIndicator, ScrollView,View } from "react-native";
+import React, { useEffect, useState, useContext } from "react";
+import { Text, ActivityIndicator, ScrollView, View } from "react-native";
 import { useRoute } from "@react-navigation/native";
 import Toast from "react-native-toast-message";
 import { Stack, useLocalSearchParams } from "expo-router";
 
-
 import { getGameById } from "../../services/gameServices";
-
 
 import GamePortInfo from "../../components/GamePortInfo/GamePortInfoStyle";
 import GameImagesCarrucel from "../../components/GameImagesCarrucel/gameImagesCarrucel";
@@ -15,7 +13,6 @@ import Reviews from "../../components/reviews/reviews";
 // import RelatedGameSection from "./game/RelatedGameSection";
 import { userContext } from "../../context/userContext";
 
-
 const Game = () => {
   const route = useRoute();
   const { name } = useLocalSearchParams();
@@ -23,7 +20,6 @@ const Game = () => {
   const { isLoggedIn } = useContext(userContext);
   const [game, setGame] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
-
 
   useEffect(() => {
     const fetchGameData = async () => {
@@ -34,44 +30,39 @@ const Game = () => {
       } catch (error) {
         Toast.show({
           type: "error",
-          text1: error.message
+          text1: error.message,
         });
       } finally {
         setIsLoading(false);
       }
     };
 
-
     fetchGameData();
   }, [gameId]);
-
 
   if (isLoading) {
     return <ActivityIndicator size="large" color="#0000ff" />;
   }
 
-
   if (!game) {
     return <Text>El juego no se encontró</Text>;
   }
 
-
   return (
     <>
       <Stack.Screen options={{ title: name }} />
-      
+
       <ScrollView>
         <GamePortInfo game={game} isLoggedIn={isLoggedIn} />
-  
-        {/* Resto de componentes con padding */}
+
         <View style={{ padding: 16 }}>
           <GameImagesCarrucel game={game} />
         </View>
-        
+
         <View style={{ padding: 16 }}>
           <GameAbout game={game} />
         </View>
-  
+
         <View style={{ padding: 16 }}>
           <Reviews game={game} isLoggedIn={isLoggedIn} />
         </View>
@@ -79,6 +70,5 @@ const Game = () => {
     </>
   );
 };
-
 
 export default Game;
