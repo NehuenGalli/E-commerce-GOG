@@ -5,6 +5,8 @@ export const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     margin: 10,
+
+
   },
 
   image: {
@@ -17,6 +19,10 @@ export const styles = StyleSheet.create({
 
   userInfo: {
     justifyContent: "space-between",
+    marginRight: 20,
+    marginLeft: 25,
+    
+    
   },
 
   name: {
@@ -34,7 +40,20 @@ export const styles = StyleSheet.create({
     color: "#EDEDED",
     backgroundColor: "#6E1D72",
     paddingVertical: 6,
-    paddingHorizontal: 83,
+    width: 250,
     borderRadius: 3,
+    textAlign: "center",
   },
+
+  buttonRemoveFriend: {
+    fontSize: 15,
+    fontWeight: "bold",
+    color: "#EDEDED",
+    backgroundColor: "#A50A1A",
+    paddingVertical: 6,
+    width: 250,
+    borderRadius: 3,
+    textAlign: "center",
+  },
+  
 });

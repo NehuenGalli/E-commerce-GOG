@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { View, Image, TouchableOpacity, ScrollView } from "react-native";
 
 import styles from "./gameImagesCarrucel.styles";

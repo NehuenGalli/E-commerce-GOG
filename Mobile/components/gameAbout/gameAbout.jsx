@@ -1,13 +1,8 @@
-import React from "react";
 import { View, Text } from "react-native";
-
 import styles from "./gameAbout.styles";
-import { GameT } from "../../types/game";
-type GameAboutProps = {
-    game: GameT;
-  };
+
   
-  const GameAbout: React.FC<GameAboutProps> = ({ game }) => {
+  const GameAbout = ({ game }) => {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>
