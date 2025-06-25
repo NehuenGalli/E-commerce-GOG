@@ -1,10 +1,8 @@
-import { useState } from "react";
+import { useState, useEffect, useContext} from "react";
 import { Pressable, Text } from "react-native";
 import { styles } from "./userHeader.styles";
-import { useContext } from "react";
 import { userContext } from "../../context/userContext";
 import { addOrRemoveF } from "../../services/userServices";
-import { useEffect } from "react";
 import { isFriend } from "../../utilities/isFriend";
 import Toast from "react-native-toast-message";
 
@@ -57,7 +55,7 @@ const AddOrRemoveFriend = ({ userId }) => {
             functionAddOrRemoveFriend();
           }}
         >
-          <Text style={styles.buttonLogout}>Remove Friend</Text>
+          <Text style={styles.buttonRemoveFriend}>Remove Friend</Text>
         </Pressable>
       )}
     </>

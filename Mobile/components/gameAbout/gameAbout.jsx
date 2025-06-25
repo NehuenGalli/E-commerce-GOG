@@ -1,10 +1,9 @@
 import { View, Text } from "react-native";
-
 import styles from "./gameAbout.styles";
 
 const GameAbout = ({ game }) => {
   return (
-    <View style={styles.container}>
+    <View>
       <Text style={styles.title}>ABOUT THIS GAME</Text>
 
       <View style={styles.section}>

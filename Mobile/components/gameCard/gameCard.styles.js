@@ -48,21 +48,6 @@ export const styles = StyleSheet.create({
     marginBottom: 4,
   },
 
-  inputText: {
-    marginBottom: 6,
-    minWidth: "100%",
-    paddingVertical: 6,
-    paddingHorizontal: 12,
-    fontSize: 16,
-    fontWeight: "400",
-    lineHeight: 24,
-    color: "#212529",
-    backgroundColor: "#fff",
-    borderWidth: 1,
-    borderColor: "#ced4da",
-    borderRadius: 6,
-  },
-
   textReview: {
     fontSize: 24,
     color: "#333",
@@ -73,6 +58,7 @@ export const styles = StyleSheet.create({
     bottom: 15,
     right: 15,
   },
+
   recommendedImage: {
     width: 50,
     height: 50,

@@ -39,7 +39,6 @@ const Home = () => {
             data={games}
             keyExtractor={(game) => game.id}
             showsVerticalScrollIndicator={false}
-            contentContainerStyle={styles.listContainer}
             ListEmptyComponent={
               <Text style={styles.noResults}>No games found</Text>
             }

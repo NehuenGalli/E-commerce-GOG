@@ -9,7 +9,7 @@ import AddOrRemoveFriend from "./addOrRemoveFriend";
 const ActionButtons = ({displayLogoutButton, userId}) => {
 
    const { logOut } = useContext(userContext);
-      const { navigateToLogin } = useNavigateTo();
+    const { navigateToLogin } = useNavigateTo();
 
   return (
     <>
@@ -26,7 +26,6 @@ const ActionButtons = ({displayLogoutButton, userId}) => {
         </Pressable>
 
         ) :(
-
 
           <AddOrRemoveFriend userId={userId}></AddOrRemoveFriend>
        

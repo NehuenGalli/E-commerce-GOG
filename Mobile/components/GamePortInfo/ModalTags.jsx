@@ -1,5 +1,3 @@
-// components/ModalTags.js
-import React from "react";
 import {
   Modal,
   View,
