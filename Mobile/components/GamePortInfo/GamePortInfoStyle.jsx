@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from "react";
+import { useEffect, useState, useContext } from "react";
 import {
   View,
   Text,
@@ -12,7 +12,7 @@ import {
 import AddToCart from "../PortAddToCart/portAddToCart";
 import { userCurrent } from "../../services/userServices";
 import { userContext } from "../../context/userContext";
-import ModalTags from "./ModalTags"; 
+import ModalTags from "./ModalTags";
 
 const GamePortInfo = ({ game, isLoggedIn }) => {
   const [userGames, setUserGames] = useState([]);
@@ -32,7 +32,6 @@ const GamePortInfo = ({ game, isLoggedIn }) => {
         const user = await userCurrent(token);
         setUserGames(user?.games || []);
       } catch (error) {
-        console.error("Failed to fetch user games:", error);
         setUserGames([]);
       } finally {
         setLoading(false);
@@ -44,7 +43,11 @@ const GamePortInfo = ({ game, isLoggedIn }) => {
 
   if (loading) {
     return (
-      <ActivityIndicator size="large" color="#0000ff" style={{ marginTop: 50 }} />
+      <ActivityIndicator
+        size="large"
+        color="#0000ff"
+        style={{ marginTop: 50 }}
+      />
     );
   }
 
@@ -109,9 +112,7 @@ const GamePortInfo = ({ game, isLoggedIn }) => {
 
 const styles = StyleSheet.create({
   container: {
-    
     flex: 1,
-   
   },
   centered: {
     flex: 1,
@@ -120,26 +121,24 @@ const styles = StyleSheet.create({
   },
   mainImage: {
     width: "100%",
-    height: 250,
+    aspectRatio: 21 / 9,
     marginBottom: 16,
-   
   },
   detailsContainer: {
     paddingBottom: 24,
-    marginHorizontal: 16
+    marginHorizontal: 16,
   },
   detailText: {
     fontSize: 20,
     marginBottom: 8,
-     fontWeight:"bold"
-    
+    fontWeight: "bold",
   },
   linkText: {
     color: "black",
     fontSize: 16,
     marginBottom: 8,
     textDecorationLine: "underline",
-    fontWeight:"bold"
+    fontWeight: "bold",
   },
   tagsSection: {
     marginTop: 8,
@@ -148,7 +147,6 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: "bold",
     marginBottom: 8,
-   
   },
   tagsContainer: {
     flexDirection: "row",
@@ -160,7 +158,6 @@ const styles = StyleSheet.create({
     marginBottom: 4,
     paddingVertical: 3,
     paddingHorizontal: 6,
- 
   },
   tagText: {
     color: "#333",

@@ -39,6 +39,7 @@ const Game = ({ isLoggedIn }) => {
       <GamePortInfo game={game} isLoggedIn={isLoggedIn} />
       <GameImagesCarrucel game={game} />
       <GameAbout game={game} />
+      console.log(game.relatedGames);
       {game.relatedGames.length > 0 && (
         <RelatedGameSection relatedGames={game.relatedGames} />
       )}

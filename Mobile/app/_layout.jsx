@@ -10,7 +10,7 @@ export default function RootLayout() {
         <Stack
           initialRouteName="(tabs)"
           screenOptions={{ contentStyle: { backgroundColor: "#D9D9D9" } }}
-          >
+        >
           <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
           <Stack.Screen name="login" options={{ headerShown: false }} />
         </Stack>

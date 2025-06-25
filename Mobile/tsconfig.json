@@ -12,5 +12,14 @@
     "**/*.tsx",
     ".expo/types/**/*.ts",
     "expo-env.d.ts",
-    "constants.ts", "app/(tabs)/cart.jsx", "app/login.jsx", "components/cart/cartWithItems.jsx", "components/cart/emptyCart.jsx", "components/checkOut/checkOut.jsx", "components/loginForm/loginForm.jsx", "context/userContext.jsx"  ]
+    "constants.ts",
+    "app/(tabs)/cart.jsx",
+    "app/login.jsx",
+    "components/cart/cartWithItems.jsx",
+    "components/cart/emptyCart.jsx",
+    "components/checkOut/checkOut.jsx",
+    "components/loginForm/loginForm.jsx",
+    "context/userContext.jsx",
+    "components/pagination/paginacion.styles.jsx"
+  ]
 }

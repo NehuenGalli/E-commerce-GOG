@@ -1,5 +1,5 @@
 import { userContext } from "../../context/userContext";
-import { CartContext } from "../../context/cartContext"; 
+import { CartContext } from "../../context/cartContext";
 import { useContext, useEffect } from "react";
 import { useRouter } from "expo-router";
 import { Text } from "react-native";
@@ -19,8 +19,7 @@ const CartPage = () => {
     if (!isLoggedIn) {
       router.replace("/login");
     }
-  }, [isLoggedIn]);
-
+  }, [isLoggedIn, router]);
 
   const handleRemove = async (gameId) => {
     try {

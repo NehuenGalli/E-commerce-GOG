@@ -21,6 +21,7 @@ const getRecommendedGames = () =>
     .catch((error) => {
       throw errorMessage(error);
     });
+
 const getGameById = (gameId) =>
   api
     .get(`${ROUTES_API.GAME_BY_ID}/${gameId}`)
@@ -28,18 +29,24 @@ const getGameById = (gameId) =>
     .catch((error) => {
       throw errorMessage(error);
     });
+
 const addReview = async (gameId, reviewData, token) => {
   try {
-    const response = await api.put(ROUTES_API.GAME_REVIEWS(gameId), reviewData, {
-      headers: {
-        Authorization: token,
-      },
-    });
+    const response = await api.put(
+      ROUTES_API.GAME_REVIEWS(gameId),
+      reviewData,
+      {
+        headers: {
+          Authorization: token,
+        },
+      }
+    );
     return response.data;
   } catch (error) {
     throw errorMessage(error);
   }
 };
+
 const addGameToCart = async (gameId, token) => {
   try {
     const response = await api.put(

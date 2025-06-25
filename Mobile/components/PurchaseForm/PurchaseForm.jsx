@@ -1,7 +1,6 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { CartContext } from "../../context/cartContext";
-import { useState } from "react";
-import { View, Text, TextInput, Alert, Pressable } from "react-native";
+import { View, Text, TextInput, Pressable } from "react-native";
 import { purchase } from "../../services/purchaseServices";
 import { validateCardData } from "../../utilities/validateCard";
 import { useRouter } from "expo-router";

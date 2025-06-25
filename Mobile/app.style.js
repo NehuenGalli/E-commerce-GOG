@@ -1,10 +1,6 @@
 import { StyleSheet } from "react-native";
 
-export const perfilIconStyle = (
-  size: number,
-  focused: boolean,
-  color: string
-) => ({
+export const perfilIconStyle = (size, focused, color) => ({
   width: size,
   height: size,
   borderRadius: size / 2,
@@ -20,13 +16,13 @@ export const styles = StyleSheet.create({
     width: "100%",
   },
 
-    noResults: {
+  noResults: {
     marginVertical: "50%",
     alignSelf: "center",
     fontSize: 18,
   },
 
-    pageTitle: {
+  pageTitle: {
     marginTop: 10,
     fontSize: 24,
     fontWeight: "bold",
@@ -34,4 +30,3 @@ export const styles = StyleSheet.create({
     marginBottom: 4,
   },
 });
-
