@@ -12,7 +12,7 @@ import { useLocalSearchParams, Stack } from "expo-router";
 const User = () => {
 
    
-    const { userId } = useLocalSearchParams();
+  const { userId } = useLocalSearchParams();
 
   const [userInfo, setUserInfo] = useState({
     id: "",
@@ -31,7 +31,10 @@ const User = () => {
       .then((userInfo) => 
         setUserInfo(userInfo)
       )
-      .catch((error) => console.log(error))
+      .catch((error) =>  Toast.show({
+                type: "error",
+                text1: error.message
+              }))
   }, []);
 
   useEffect(() => {
@@ -39,8 +42,10 @@ const User = () => {
       .then((reviewsInfo) => 
         setReviews(reviewsInfo)
        )
-      .catch((error) => console.log(error))
-      
+      .catch((error) =>  Toast.show({
+                type: "error",
+                text1: error.message
+              }))      
   }, []);
 
   const reviewsFormated = reviews.map((review) => ({
