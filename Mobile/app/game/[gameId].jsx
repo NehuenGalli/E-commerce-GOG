@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from "react";
+import { useEffect, useState, useContext } from "react";
 import { Text, ActivityIndicator, ScrollView, View } from "react-native";
 import { useRoute } from "@react-navigation/native";
 import Toast from "react-native-toast-message";
@@ -10,7 +10,7 @@ import GamePortInfo from "../../components/GamePortInfo/GamePortInfoStyle";
 import GameImagesCarrucel from "../../components/GameImagesCarrucel/gameImagesCarrucel";
 import GameAbout from "../../components/gameAbout/gameAbout";
 import Reviews from "../../components/reviews/reviews";
-// import RelatedGameSection from "./game/RelatedGameSection";
+import RelatedGames from "../../components/relatedGames/RelatedGames";
 import { userContext } from "../../context/userContext";
 
 const Game = () => {
@@ -47,23 +47,18 @@ const Game = () => {
   if (!game) {
     return <Text>El juego no se encontró</Text>;
   }
-
   return (
     <>
       <Stack.Screen options={{ title: name }} />
 
       <ScrollView>
         <GamePortInfo game={game} isLoggedIn={isLoggedIn} />
-
         <View style={{ padding: 16 }}>
           <GameImagesCarrucel game={game} />
-        </View>
-
-        <View style={{ padding: 16 }}>
           <GameAbout game={game} />
-        </View>
-
-        <View style={{ padding: 16 }}>
+          {game.relatedGames.length > 0 && (
+            <RelatedGames relatedGames={game.relatedGames} />
+          )}
           <Reviews game={game} isLoggedIn={isLoggedIn} />
         </View>
       </ScrollView>
