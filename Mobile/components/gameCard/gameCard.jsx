@@ -1,4 +1,4 @@
-import { View, Text, Pressable, ImageBackground } from "react-native";
+import { ImageBackground, Pressable, Text, View } from "react-native";
 import { useNavigateTo } from "../../hooks/useNavigateTo";
 import { styles } from "./gameCard.styles";
 

@@ -1,16 +1,11 @@
-import { StyleSheet, Dimensions } from "react-native";
-
+import { Dimensions, StyleSheet } from "react-native";
 
 const { width } = Dimensions.get("window");
 const isSmallScreen = width <= 768;
 
-
 const styles = StyleSheet.create({
   container: {
-     // Simula margin: 0 auto
-    
     paddingBottom: 32,
-
   },
   title: {
     fontSize: 24,
@@ -67,6 +62,5 @@ const styles = StyleSheet.create({
     color: "#666",
   },
 });
-
 
 export default styles;

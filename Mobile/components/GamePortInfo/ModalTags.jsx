@@ -1,4 +1,4 @@
-import { Modal, View, Text, ScrollView, TouchableOpacity } from "react-native";
+import { Modal, ScrollView, Text, TouchableOpacity, View } from "react-native";
 import { styles } from "./modalTags.style";
 
 const ModalTags = ({ tags, visible, onClose }) => {

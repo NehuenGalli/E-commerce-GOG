@@ -1,4 +1,4 @@
-import { View, Image, TouchableOpacity, ScrollView } from "react-native";
+import { Image, ScrollView, TouchableOpacity, View } from "react-native";
 import styles from "./gameImagesCarrucel.styles";
 
 const GameImagesCarrucel = ({ game }) => {

@@ -1,10 +1,10 @@
-import { useState, useEffect, useContext} from "react";
+import { useContext, useEffect, useState } from "react";
 import { Pressable, Text } from "react-native";
-import { styles } from "./userHeader.styles";
+import Toast from "react-native-toast-message";
 import { userContext } from "../../context/userContext";
 import { addOrRemoveF } from "../../services/userServices";
 import { isFriend } from "../../utilities/isFriend";
-import Toast from "react-native-toast-message";
+import { styles } from "./userHeader.styles";
 
 const AddOrRemoveFriend = ({ userId }) => {
   const [isFriendBool, setIsFriendBool] = useState(null);

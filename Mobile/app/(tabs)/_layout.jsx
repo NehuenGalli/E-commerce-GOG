@@ -1,9 +1,9 @@
-import { Tabs } from "expo-router";
 import {
+  AntDesign,
   Fontisto,
   MaterialCommunityIcons,
-  AntDesign,
 } from "@expo/vector-icons";
+import { Tabs } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 const TabLayout = () => {

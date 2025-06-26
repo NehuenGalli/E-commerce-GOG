@@ -1,11 +1,11 @@
-import { useState, useContext } from "react";
-import { userContext } from "../context/userContext";
 import { useRouter } from "expo-router";
+import { useContext, useState } from "react";
+import { Keyboard } from "react-native";
 import LoginForm from "../components/loginForm/loginForm";
+import { ROUTES_MOBILE } from "../constants";
+import { userContext } from "../context/userContext";
 import { login } from "../services/userServices";
 import { fieldsCannotBeEmpty_message } from "../utilities/error_message";
-import { Keyboard } from "react-native";
-import { ROUTES_MOBILE } from "../constants";
 
 export default function Login() {
   const { logIn } = useContext(userContext);
@@ -35,10 +35,9 @@ export default function Login() {
         return;
       }
       logIn(loginResult.token);
+      router.replace(ROUTES_MOBILE.HOME);
     } catch (err) {
       setError(err.message || "Failed to log in");
-    } finally {
-      router.replace(ROUTES_MOBILE.HOME);
     }
   };
 

@@ -1,16 +1,16 @@
-import { useEffect, useState, useContext } from "react";
-import { Text, ActivityIndicator, ScrollView, View } from "react-native";
 import { useRoute } from "@react-navigation/native";
-import Toast from "react-native-toast-message";
 import { Stack, useLocalSearchParams } from "expo-router";
+import { useContext, useEffect, useState } from "react";
+import { ActivityIndicator, ScrollView, Text, View } from "react-native";
+import Toast from "react-native-toast-message";
 
 import { getGameById } from "../../services/gameServices";
 
-import GamePortInfo from "../../components/GamePortInfo/GamePortInfo";
 import GameImagesCarrucel from "../../components/GameImagesCarrucel/gameImagesCarrucel";
+import GamePortInfo from "../../components/GamePortInfo/GamePortInfo";
 import GameAbout from "../../components/gameAbout/gameAbout";
-import Reviews from "../../components/reviews/reviews";
 import RelatedGames from "../../components/relatedGames/RelatedGames";
+import Reviews from "../../components/reviews/reviews";
 import { userContext } from "../../context/userContext";
 
 const Game = () => {

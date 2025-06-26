@@ -1,11 +1,12 @@
+import { useRouter } from "expo-router";
 import { useContext, useState } from "react";
+import { Pressable, Text, TextInput, View } from "react-native";
+import Toast from "react-native-toast-message";
+import { ROUTES_MOBILE } from "../../constants";
 import { CartContext } from "../../context/cartContext";
-import { View, Text, TextInput, Pressable } from "react-native";
 import { purchase } from "../../services/purchaseServices";
 import { validateCardData } from "../../utilities/validateCard";
-import { useRouter } from "expo-router";
 import { styles } from "./purchaseForm.styles";
-import Toast from "react-native-toast-message";
 
 const PurchaseForm = ({ items, token }) => {
   const [nameCard, setNameCard] = useState("");
@@ -45,7 +46,7 @@ const PurchaseForm = ({ items, token }) => {
       })
       .finally(
         setTimeout(() => {
-          router.replace("/home");
+          router.replace(ROUTES_MOBILE.HOME);
         }),
         2000
       );

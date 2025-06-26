@@ -1,15 +1,15 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import {
-  View,
+  ActivityIndicator,
+  Image,
   Text,
   TextInput,
-  Image,
   TouchableOpacity,
-  ActivityIndicator,
+  View,
 } from "react-native";
-import styles from "./currentReview.style";
 import recommendedIcon from "../../assets/images/recommendedIcon.png";
 import unrecommendedIcon from "../../assets/images/unrecommendedIcon.png";
+import styles from "./currentReview.style";
 
 const CurrentReview = ({ onSubmit, currentUser }) => {
   const [review, setReview] = useState({

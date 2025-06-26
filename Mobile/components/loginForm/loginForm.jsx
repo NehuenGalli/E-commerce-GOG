@@ -1,14 +1,14 @@
-import Toast from "react-native-toast-message";
+import { useEffect } from "react";
 import {
-  View,
+  Keyboard,
   Text,
   TextInput,
   TouchableOpacity,
   TouchableWithoutFeedback,
-  Keyboard,
+  View,
 } from "react-native";
+import Toast from "react-native-toast-message";
 import { styles } from "./loginForm.style";
-import { useEffect } from "react";
 
 export default function LoginForm({
   email,
