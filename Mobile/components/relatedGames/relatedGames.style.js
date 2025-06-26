@@ -6,6 +6,13 @@ export const styles = StyleSheet.create({
     marginBottom: 20,
   },
 
+  title: {
+    fontSize: 20,
+    fontbold: "bold",
+    fontWeight: "bold",
+    marginBottom: 10,
+  },
+
   overlay: {
     ...StyleSheet.absoluteFillObject,
     backgroundColor: "rgba(0,0,0,0.2)",

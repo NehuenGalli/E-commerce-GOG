@@ -5,6 +5,8 @@ import { View, FlatList, Text, TextInput } from "react-native";
 import { styles } from "../../app.style";
 import { stylesSearch } from "../../styles/search.style";
 import Paginacion from "../../components/pagination/paginacion";
+import Toast from "react-native-toast-message";
+import Spinner from "@/components/spinner";
 
 const SearchPage = () => {
   const [query, setQuery] = useState("");
@@ -15,14 +17,23 @@ const SearchPage = () => {
     amountOfPages: 1,
   });
   const [currentPage, setCurrentPage] = useState(1);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     searchGames(query, currentPage)
       .then((games) => setGames(games))
-      .catch((error) => console.log(error));
+      .catch((error) => Toast.show({
+                type: "error",
+                text1: "Error loading games",
+                text2: error.message
+              }))
+      .finally(() => setIsLoading(false));
   }, [query, currentPage]);
 
   return (
+     <>
+         {isLoading && <Spinner />}
+          {!isLoading && (
     <View style={styles.container}>
       <FlatList
         data={games.list}
@@ -47,15 +58,21 @@ const SearchPage = () => {
           </>
         }
         ListFooterComponent={
+          
+          
+        games.list.length > 0 && (
           <Paginacion
             currentPage={currentPage}
             totalPages={games.amountOfPages}
             onPageChange={setCurrentPage}
           />
+        )
         }
         renderItem={({ item }) => <GameCard item={item}></GameCard>}
       />
     </View>
+  )}
+     </>  
   );
 };
 

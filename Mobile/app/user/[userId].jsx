@@ -6,6 +6,8 @@ import { View, FlatList, Text } from "react-native";
 import { styles } from "../../app.style";
 import GameCard from "../../components/gameCard/gameCard";
 import { useLocalSearchParams, Stack } from "expo-router";
+import Toast from "react-native-toast-message";
+import Spinner from "@/components/spinner";
 
 
 
@@ -13,6 +15,8 @@ const User = () => {
 
    
   const { userId } = useLocalSearchParams();
+
+  const [isLoading, setIsLoading] = useState(true);
 
   const [userInfo, setUserInfo] = useState({
     id: "",
@@ -33,8 +37,10 @@ const User = () => {
       )
       .catch((error) =>  Toast.show({
                 type: "error",
-                text1: error.message
+                text1: "Error loading user info",
+                text2: error.message
               }))
+      .finally(() => setIsLoading(false));  
   }, []);
 
   useEffect(() => {
@@ -44,31 +50,34 @@ const User = () => {
        )
       .catch((error) =>  Toast.show({
                 type: "error",
-                text1: error.message
-              }))      
+                text1: "Error loading user reviews",
+                text2: error.message
+              }))
+      .finally(() => setIsLoading(false));      
   }, []);
 
   const reviewsFormated = reviews.map((review) => ({
-    id: review.id,
+    reviewId: review.id,
     name: review.game.name,
     mainImage: review.game.mainImage,
     text: review.text,
     isRecommended: review.isRecommended,
-    gameId: review.game.id,
+    id: review.game.id,
   }));
 
-  
 
   return (
     <>
      <Stack.Screen options={{ title: userInfo.name}} />
-     
 
+    {isLoading && <Spinner />}
+      {!isLoading && (
+   
     <View style={styles.container}>
       <UserHeader user={userInfo} />
       <FlatList
             data={reviewsFormated}
-            keyExtractor={(review) => review.id}
+            keyExtractor={(review) => review.reviewId}
             showsVerticalScrollIndicator={false}
             contentContainerStyle={styles.listContainer}
             ListEmptyComponent={<Text style={styles.noResults}>No reviews found</Text>}
@@ -86,6 +95,7 @@ const User = () => {
             )}
         /> 
     </View>
+        )}
     </>
   );
 };

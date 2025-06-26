@@ -20,37 +20,36 @@ const CurrentReview = ({ onSubmit, currentUser }) => {
 
   const handleSubmit = async () => {
     if (!review.text.trim()) return;
-    
-    setReview(prev => ({ ...prev, submitting: true }));
-    
+
+    setReview((prev) => ({ ...prev, submitting: true }));
+
     try {
       const success = await onSubmit({
         text: review.text,
         isRecommended: review.isRecommended,
       });
-      
+
       if (success) {
         setReview({
           text: "",
           isRecommended: true,
-          submitting: false
+          submitting: false,
         });
       } else {
-        setReview(prev => ({ ...prev, submitting: false }));
+        setReview((prev) => ({ ...prev, submitting: false }));
       }
     } catch (error) {
       console.error("Error submitting review12:", error);
-      setReview(prev => ({ ...prev, submitting: false }));
+      setReview((prev) => ({ ...prev, submitting: false }));
     }
   };
 
   return (
     <View style={styles.container}>
-      {/* User Header */}
       <View style={styles.userHeader}>
         <View style={styles.avatarContainer}>
-          <Image 
-            source={{ uri: currentUser.image }} 
+          <Image
+            source={{ uri: currentUser.image }}
             style={styles.avatar}
             resizeMode="cover"
           />
@@ -58,12 +57,13 @@ const CurrentReview = ({ onSubmit, currentUser }) => {
         <Text style={styles.username}>{currentUser.name}</Text>
       </View>
 
-      {/* Recommendation Section */}
       <View style={styles.recommendationSection}>
         <Text style={styles.label}>Recommended</Text>
         <View style={styles.recommendationButtons}>
           <TouchableOpacity
-            onPress={() => setReview(prev => ({ ...prev, isRecommended: true }))}
+            onPress={() =>
+              setReview((prev) => ({ ...prev, isRecommended: true }))
+            }
             style={[
               styles.thumbButton,
               review.isRecommended ? styles.thumbActive : styles.thumbInactive,
@@ -72,7 +72,9 @@ const CurrentReview = ({ onSubmit, currentUser }) => {
             <Image source={recommendedIcon} style={styles.thumbIcon} />
           </TouchableOpacity>
           <TouchableOpacity
-            onPress={() => setReview(prev => ({ ...prev, isRecommended: false }))}
+            onPress={() =>
+              setReview((prev) => ({ ...prev, isRecommended: false }))
+            }
             style={[
               styles.thumbButton,
               !review.isRecommended ? styles.thumbActive : styles.thumbInactive,
@@ -83,7 +85,6 @@ const CurrentReview = ({ onSubmit, currentUser }) => {
         </View>
       </View>
 
-      {/* Review Text Input */}
       <Text style={styles.label}>Text</Text>
       <TextInput
         style={styles.textarea}
@@ -91,11 +92,10 @@ const CurrentReview = ({ onSubmit, currentUser }) => {
         placeholder="Write your review..."
         placeholderTextColor="#A9A9A9"
         value={review.text}
-        onChangeText={(text) => setReview(prev => ({ ...prev, text }))}
+        onChangeText={(text) => setReview((prev) => ({ ...prev, text }))}
         editable={!review.submitting}
       />
 
-      {/* Submit Button */}
       <TouchableOpacity
         style={[
           styles.submitButton,

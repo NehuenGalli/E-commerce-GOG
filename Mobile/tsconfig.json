@@ -12,7 +12,7 @@
     "**/*.tsx",
     ".expo/types/**/*.ts",
     "expo-env.d.ts",
-    "constants.ts",
+    "constants.js",
     "app/(tabs)/cart.jsx",
     "app/login.jsx",
     "components/cart/cartWithItems.jsx",
@@ -20,6 +20,9 @@
     "components/checkOut/checkOut.jsx",
     "components/loginForm/loginForm.jsx",
     "context/userContext.jsx",
-    "components/pagination/paginacion.styles.jsx"
+    "components/pagination/paginacion.styles.jsx",
+    "app.style.js",
+    "app/(tabs)/_layout.jsx",
+    "app/_layout.jsx"
   ]
 }

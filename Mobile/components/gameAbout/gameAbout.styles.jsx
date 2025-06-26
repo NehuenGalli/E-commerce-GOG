@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
 
-const styles = StyleSheet.create({  
+const styles = StyleSheet.create({
   container: {
     marginTop: 16,
     padding: 16,
@@ -21,6 +21,7 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 18,
     marginBottom: 4,
+    paddingHorizontal: 4,
   },
 });
 
