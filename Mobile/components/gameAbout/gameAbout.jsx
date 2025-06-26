@@ -2,6 +2,8 @@ import { View, Text } from "react-native";
 import styles from "./gameAbout.styles";
 
 const GameAbout = ({ game }) => {
+  console.log(game.id);
+
   return (
     <View>
       <Text style={styles.title}>ABOUT THIS GAME</Text>
@@ -14,16 +16,16 @@ const GameAbout = ({ game }) => {
       <View style={styles.section}>
         <Text style={styles.subtitle}>REQUIREMENTS</Text>
         <Text style={styles.subtitle}>OS:</Text>
-        <Text style={styles.text}> {game.requirement.os.join(", ")}</Text>
+        <Text style={styles.text}>{game.requirement.os.join(", ")}</Text>
         <Text style={styles.subtitle}>Processor: </Text>
-        <Text style={styles.text}> {game.requirement.processor}</Text>
+        <Text style={styles.text}>{game.requirement.processor}</Text>
         <Text style={styles.subtitle}>Memory: </Text>
-        <Text style={styles.text}> {game.requirement.memory} GB</Text>
-
+        <Text style={styles.text}>{game.requirement.memory} GB</Text>
         <Text style={styles.subtitle}>Graphics: </Text>
         <Text style={styles.text}>
-          {" "}
-          {game.requirement.graphics.join(", ")} GB
+          {Array.isArray(game.requirement.graphics)
+            ? game.requirement.graphics.join(", ")
+            : game.requirement.graphics}
         </Text>
       </View>
     </View>
