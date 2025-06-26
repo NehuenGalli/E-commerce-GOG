@@ -6,7 +6,7 @@ import { Stack, useLocalSearchParams } from "expo-router";
 
 import { getGameById } from "../../services/gameServices";
 
-import GamePortInfo from "../../components/GamePortInfo/GamePortInfoStyle";
+import GamePortInfo from "../../components/GamePortInfo/GamePortInfo";
 import GameImagesCarrucel from "../../components/GameImagesCarrucel/gameImagesCarrucel";
 import GameAbout from "../../components/gameAbout/gameAbout";
 import Reviews from "../../components/reviews/reviews";

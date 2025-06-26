@@ -2,17 +2,13 @@ import { View, Text } from "react-native";
 import styles from "./gameAbout.styles";
 
 const GameAbout = ({ game }) => {
-  console.log(game.id);
-
   return (
     <View>
       <Text style={styles.title}>ABOUT THIS GAME</Text>
-
       <View style={styles.section}>
         <Text style={styles.text}>{game.description}</Text>
         <Text style={styles.text}></Text>
       </View>
-
       <View style={styles.section}>
         <Text style={styles.subtitle}>REQUIREMENTS</Text>
         <Text style={styles.subtitle}>OS:</Text>
