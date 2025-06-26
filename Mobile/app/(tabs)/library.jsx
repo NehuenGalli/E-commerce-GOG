@@ -1,13 +1,15 @@
-import { useContext, useEffect, useState } from "react";
-import { userCurrent } from "../../services/userServices";
-import UserHeader from "../../components/userHeader/userHeader";
+import Spinner from "@/components/spinner";
 import { userContext } from "@/context/userContext";
-import { View, FlatList, Text } from "react-native";
+import { useRouter } from "expo-router";
+import { useContext, useEffect, useState } from "react";
+import { FlatList, Text, View } from "react-native";
+import Toast from "react-native-toast-message";
 import { styles } from "../../app.style";
 import GameCard from "../../components/gameCard/gameCard";
-import { useRouter } from "expo-router";
-import Toast from "react-native-toast-message";
-import Spinner from "@/components/spinner";
+import UserHeader from "../../components/userHeader/userHeader";
+import { userCurrent } from "../../services/userServices";
+
+import { ROUTES_MOBILE } from "@/constants";
 
 const LibraryPage = () => {
   const { isLoggedIn, getToken } = useContext(userContext);
@@ -17,7 +19,7 @@ const LibraryPage = () => {
 
   useEffect(() => {
     if (!isLoggedIn) {
-      router.replace("/login");
+      router.replace(ROUTES_MOBILE.LOGIN);
     }
   }, [isLoggedIn, router]);
 

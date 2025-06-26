@@ -1,6 +1,6 @@
-import { View, Text, Pressable } from "react-native";
-import { styles } from "./paginacion.styles";
 import { Ionicons } from "@expo/vector-icons";
+import { Pressable, Text, View } from "react-native";
+import { styles } from "./paginacion.styles";
 
 const Paginacion = ({ totalPages, currentPage, onPageChange }) => {
   const firstPage = () => onPageChange(1);

@@ -1,14 +1,15 @@
-import { CartContext } from "../../context/cartContext";
-import React, { useContext } from "react";
-import { View, Text, TouchableOpacity, Alert } from "react-native";
 import { useRouter } from "expo-router";
-import styles from "./portAddToCart.style";
+import { useContext } from "react";
+import { Text, TouchableOpacity, View } from "react-native";
 import Toast from "react-native-toast-message";
+import { ROUTES_MOBILE } from "../../constants";
+import { CartContext } from "../../context/cartContext";
+import styles from "./portAddToCart.style";
 
 const AddToCart = ({ game }) => {
   const { cart, addToCart } = useContext(CartContext);
   const router = useRouter();
-  
+
   const isInCart = cart.games.some((g) => String(g.id) === String(game.id));
 
   const handleAddToCart = async () => {
@@ -21,7 +22,7 @@ const AddToCart = ({ game }) => {
       });
     } catch (error) {
       if (error.message) {
-        router.replace("/login");
+        router.replace(ROUTES_MOBILE.LOGIN);
       } else {
         Toast.show({
           type: "error",
@@ -40,10 +41,10 @@ const AddToCart = ({ game }) => {
           USD {Number(game.price?.amount || 0).toFixed(2)}
         </Text>
       </View>
-  
+
       {!isInCart && (
-        <TouchableOpacity 
-          style={styles.cartButton} 
+        <TouchableOpacity
+          style={styles.cartButton}
           onPress={handleAddToCart}
           activeOpacity={0.7}
         >

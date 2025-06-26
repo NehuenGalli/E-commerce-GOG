@@ -1,16 +1,16 @@
-import { useEffect, useState, useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import {
-  View,
-  Text,
-  Image,
   ActivityIndicator,
-  ScrollView,
-  TouchableOpacity,
+  Image,
   Linking,
+  ScrollView,
+  Text,
+  TouchableOpacity,
+  View,
 } from "react-native";
-import AddToCart from "../PortAddToCart/portAddToCart";
-import { userCurrent } from "../../services/userServices";
 import { userContext } from "../../context/userContext";
+import { userCurrent } from "../../services/userServices";
+import AddToCart from "../PortAddToCart/portAddToCart";
 import ModalTags from "./ModalTags";
 import { styles } from "./gamePortInfo.style";
 

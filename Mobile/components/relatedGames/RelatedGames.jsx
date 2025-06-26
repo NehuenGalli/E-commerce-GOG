@@ -1,6 +1,6 @@
 import { FlatList, ImageBackground, Pressable, Text, View } from "react-native";
-import { styles } from "./relatedGames.style";
 import { useNavigateTo } from "../../hooks/useNavigateTo";
+import { styles } from "./relatedGames.style";
 
 const RelatedGames = ({ relatedGames }) => {
   const { navigateToGame } = useNavigateTo();

@@ -1,7 +1,7 @@
-import { UserProvider } from "../context/userContext";
-import { CartProvider } from "../context/cartContext";
 import { Stack } from "expo-router";
 import Toast from "react-native-toast-message";
+import { CartProvider } from "../context/cartContext";
+import { UserProvider } from "../context/userContext";
 
 export default function RootLayout() {
   return (

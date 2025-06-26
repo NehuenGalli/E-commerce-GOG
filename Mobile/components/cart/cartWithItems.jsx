@@ -1,15 +1,8 @@
-import React from "react";
-import {
-  View,
-  Text,
-  Image,
-  TouchableOpacity,
-  ScrollView,
-} from "react-native";
 import { FontAwesome } from "@expo/vector-icons";
+import { useRouter } from "expo-router";
+import { Image, ScrollView, Text, TouchableOpacity, View } from "react-native";
 import CheckOut from "../checkOut/checkOut";
 import { styles } from "./cartWithItems.style";
-import { useRouter } from "expo-router";
 
 const CartWithItems = ({ items, onRemove }) => {
   const router = useRouter();

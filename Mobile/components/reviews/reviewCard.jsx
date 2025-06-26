@@ -1,8 +1,8 @@
-import { View, Text, Image, Pressable } from "react-native";
+import { Image, Pressable, Text, View } from "react-native";
 import recommendedIcon from "../../assets/images/recommendedIcon.png";
 import unrecommendedIcon from "../../assets/images/unrecommendedIcon.png";
-import styles from "./reviewCard.style";
 import { useNavigateTo } from "../../hooks/useNavigateTo";
+import styles from "./reviewCard.style";
 
 const ReviewCard = ({ review, isCurrentUser }) => {
   const { navigateToUser } = useNavigateTo();

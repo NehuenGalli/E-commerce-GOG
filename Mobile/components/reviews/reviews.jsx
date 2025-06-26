@@ -1,20 +1,21 @@
-import React, { useEffect, useState, useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import {
-  View,
-  Text,
   ActivityIndicator,
   ScrollView,
+  Text,
   TouchableOpacity,
+  View,
 } from "react-native";
 
 import { useRouter } from "expo-router";
 import Toast from "react-native-toast-message";
 
+import { ROUTES_MOBILE } from "../../constants";
+import { userContext } from "../../context/userContext";
 import { addReview } from "../../services/gameServices";
 import { userCurrent } from "../../services/userServices";
 import CurrentReview from "./currentReview";
 import ReviewCard from "./reviewCard";
-import { userContext } from "../../context/userContext";
 import styles from "./reviews.styles";
 
 const Reviews = ({ game, isLoggedIn }) => {
@@ -33,11 +34,8 @@ const Reviews = ({ game, isLoggedIn }) => {
         if (isLoggedIn) {
           const token = await getToken();
           const userData = await userCurrent(token);
-
           setCurrentUser(userData);
-
-          // Verificamos si el usuario posee el juego
-          const userGames = userData.games || []; // o userData.ownedGames
+          const userGames = userData.games || [];
           const ownsGame = userGames.some((g) => g.id === game.id);
           setUserOwnsGame(ownsGame);
         } else {
@@ -68,7 +66,11 @@ const Reviews = ({ game, isLoggedIn }) => {
   const handleNewReview = async ({ text, isRecommended }) => {
     try {
       const token = await getToken();
-      const updatedGame = await addReview(game.id, { text, isRecommended }, token);
+      const updatedGame = await addReview(
+        game.id,
+        { text, isRecommended },
+        token
+      );
       Toast.show({
         type: "success",
         text1: "Review añadida con éxito",
@@ -77,9 +79,7 @@ const Reviews = ({ game, isLoggedIn }) => {
       return true;
     } catch (error) {
       const errorMessage =
-        error instanceof Error
-          ? error.message
-          : "No se pudo agregar la review";
+        error instanceof Error ? error.message : "No se pudo agregar la review";
 
       Toast.show({
         type: "error",
@@ -130,7 +130,7 @@ const Reviews = ({ game, isLoggedIn }) => {
             </Text>
             <TouchableOpacity
               style={styles.btnBloquedReview}
-              onPress={() => router.push("/login")}
+              onPress={() => router.push(ROUTES_MOBILE.LOGIN)}
             >
               <Text style={styles.btnText}>Login</Text>
             </TouchableOpacity>
@@ -142,11 +142,7 @@ const Reviews = ({ game, isLoggedIn }) => {
         {reviews
           .filter((review) => !userReview || review.id !== userReview.id)
           .map((review) => (
-            <ReviewCard
-              key={review.id}
-              review={review}
-              isCurrentUser={false}
-            />
+            <ReviewCard key={review.id} review={review} isCurrentUser={false} />
           ))}
       </View>
     </ScrollView>

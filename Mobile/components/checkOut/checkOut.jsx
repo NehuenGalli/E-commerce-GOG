@@ -1,5 +1,4 @@
-import React from "react";
-import { View, Text } from "react-native";
+import { Text, View } from "react-native";
 import { calculatePrice } from "../../utilities/calculatePrice";
 import { styles } from "./checkOut.styles";
 

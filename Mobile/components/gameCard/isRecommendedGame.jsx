@@ -1,29 +1,18 @@
-
-import recommendedIcon from "../../assets/images/thumb-up.png";
+import { Image, View } from "react-native";
 import unrecommendedIcon from "../../assets/images/thumb-down.png";
-import { Image,Pressable,Text, View } from 'react-native';
+import recommendedIcon from "../../assets/images/thumb-up.png";
 import { styles } from "./gameCard.styles";
 
-
-
-const IsRecommendedGame = ({isRecommended}) => {
-
+const IsRecommendedGame = ({ isRecommended }) => {
   return (
-   <View style={styles.recommendedContainer}>
-      { isRecommended ? (
-        <Image
-          source={recommendedIcon}
-          style={styles.recommendedImage}
-        />
+    <View style={styles.recommendedContainer}>
+      {isRecommended ? (
+        <Image source={recommendedIcon} style={styles.recommendedImage} />
       ) : (
-        <Image
-          source={unrecommendedIcon}
-          style={styles.recommendedImage}
-        />  
-      )
-      }
-   </View>  
-  )
-}
+        <Image source={unrecommendedIcon} style={styles.recommendedImage} />
+      )}
+    </View>
+  );
+};
 
 export default IsRecommendedGame;

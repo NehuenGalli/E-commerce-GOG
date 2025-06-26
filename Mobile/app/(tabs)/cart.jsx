@@ -1,12 +1,13 @@
-import { userContext } from "../../context/userContext";
-import { CartContext } from "../../context/cartContext";
-import { useContext, useEffect } from "react";
-import { useRouter } from "expo-router";
-import { Text } from "react-native";
 import Spinner from "@/components/spinner";
-import EmptyCart from "../../components/cart/emptyCart";
-import CartWithItems from "../../components/cart/cartWithItems";
+import { useRouter } from "expo-router";
+import { useContext, useEffect } from "react";
+import { Text } from "react-native";
 import Toast from "react-native-toast-message";
+import CartWithItems from "../../components/cart/cartWithItems";
+import EmptyCart from "../../components/cart/emptyCart";
+import { ROUTES_MOBILE } from "../../constants";
+import { CartContext } from "../../context/cartContext";
+import { userContext } from "../../context/userContext";
 import { success_gameRemovedFromCart_message } from "../../utilities/success_menssage";
 
 const CartPage = () => {
@@ -17,7 +18,7 @@ const CartPage = () => {
 
   useEffect(() => {
     if (!isLoggedIn) {
-      router.replace("/login");
+      router.replace(ROUTES_MOBILE.LOGIN);
     }
   }, [isLoggedIn, router]);
 

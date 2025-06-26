@@ -1,10 +1,10 @@
-import { useEffect, useState } from "react";
-import { getRecommendedGames } from "../../services/gameServices";
-import Toast from "react-native-toast-message";
 import Spinner from "@/components/spinner";
-import { View, FlatList, Text } from "react-native";
+import { useEffect, useState } from "react";
+import { FlatList, Text, View } from "react-native";
+import Toast from "react-native-toast-message";
 import { styles } from "../../app.style";
 import GameCard from "../../components/gameCard/gameCard";
+import { getRecommendedGames } from "../../services/gameServices";
 
 const Home = () => {
   const [games, setGames] = useState({

@@ -1,32 +1,30 @@
-import React from 'react';
-import { useRouter } from 'expo-router';
-import { View, Text, Image, TouchableOpacity } from 'react-native';
-import emptyCart from '../../assets/images/emptyCart.png';
-import { styles } from './emptyCart.style';
+import { useRouter } from "expo-router";
+import { Image, Text, TouchableOpacity, View } from "react-native";
+import emptyCart from "../../assets/images/emptyCart.png";
+import { ROUTES_MOBILE } from "../../constants";
+import { styles } from "./emptyCart.style";
 
 const EmptyCart = () => {
-    const router = useRouter();
-    
-    return (
-        <View style={styles.container}>
-            <View style={styles.contentContainer}>
-                <Image
-                    source={emptyCart}
-                    style={styles.emptyCartImage}
-                    resizeMode="contain"
-                />
-                <Text style={styles.emptyCartText}>
-                    Start by adding a game!
-                </Text>
-                <TouchableOpacity 
-                    style={styles.emptyCartBtn}
-                    onPress={() => router.replace("/home")}
-                >
-                    <Text style={styles.btnText}>Add games</Text>
-                </TouchableOpacity>
-            </View>
-        </View>
-    );
+  const router = useRouter();
+
+  return (
+    <View style={styles.container}>
+      <View style={styles.contentContainer}>
+        <Image
+          source={emptyCart}
+          style={styles.emptyCartImage}
+          resizeMode="contain"
+        />
+        <Text style={styles.emptyCartText}>Start by adding a game!</Text>
+        <TouchableOpacity
+          style={styles.emptyCartBtn}
+          onPress={() => router.replace(ROUTES_MOBILE.HOME)}
+        >
+          <Text style={styles.btnText}>Add games</Text>
+        </TouchableOpacity>
+      </View>
+    </View>
+  );
 };
 
 export default EmptyCart;
