@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import UserHeader from "../components/user/userHeader";
 import Spinner from "../components/spinner/Spinner";
 import { userCurrent } from "../services/userService";
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 import LibraryEmpty from "../components/library/libraryEmpty";
 import { ROUTES } from "../constants";
 import { useNavigate } from "react-router";
@@ -58,7 +58,6 @@ const Library = ({ logOut, isLoggedIn }) => {
           displayUser={true}
         />
       )}
-      <ToastContainer />
     </>
   );
 };

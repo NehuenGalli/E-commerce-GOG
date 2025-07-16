@@ -3,7 +3,7 @@ import Paginacion from "../components/pagination/paginacion";
 import Spinner from "../components/spinner/Spinner";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router";
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 import { searchGames } from "../services/searchService";
 import { notFoundGames_message } from "../utilities/error_message";
 const SearchGames = () => {
@@ -53,7 +53,6 @@ const SearchGames = () => {
         </div>
       )}
 
-      <ToastContainer />
     </>
   );
 };

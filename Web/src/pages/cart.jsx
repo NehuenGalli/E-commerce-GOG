@@ -7,7 +7,7 @@ import { removeGame } from "../services/gameServices";
 import { success_gameRemovedFromCart_message } from "../utilities/success_message";
 import { ROUTES } from "../constants";
 import { getToken } from "../utilities/localstorageUtils";
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 
 const Cart = () => {
   const navigate = useNavigate();
@@ -51,7 +51,6 @@ const Cart = () => {
       ) : (
         <CartWithItems items={cart.games} onRemove={handleRemove} />
       )}
-      <ToastContainer />
     </>
   );
 };

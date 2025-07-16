@@ -7,7 +7,7 @@ import {
   getUserById,
   getReviewsById,
 } from "../services/userService";
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 import { useParams } from "react-router";
 import { ROUTES } from "../constants";
 import { useNavigate } from "react-router";
@@ -114,7 +114,6 @@ const User = ({ isLoggedIn }) => {
             title={"GAMES "}
             displayUser={true}
           />
-          <ToastContainer />
         </>
       ) : (
         <div className="alert alert-danger d-flex justify-content-center fw-semibold fs-1">

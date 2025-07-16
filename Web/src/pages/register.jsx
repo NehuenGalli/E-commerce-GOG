@@ -3,7 +3,6 @@ import { useNavigate } from "react-router";
 import { register } from "../services/userService";
 import { useState, useEffect } from "react";
 import { ROUTES } from "../constants";
-import { ToastContainer } from "react-toastify";
 
 const Register = ({ isLoggedIn }) => {
   const navigate = useNavigate();
@@ -61,7 +60,6 @@ const Register = ({ isLoggedIn }) => {
         onSubmit={onSubmit}
         error={error}
       />
-      <ToastContainer />
     </>
   );
 };

@@ -1,5 +1,5 @@
 import "./purchaseStyle.css";
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 import FormPurchase from "../../components/FormPurchase/FormPurchase";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
@@ -58,7 +58,6 @@ const Purchase = ({ isLoggedIn }) => {
           </div>
         </div>
       )}
-      <ToastContainer />
     </>
   );
 };

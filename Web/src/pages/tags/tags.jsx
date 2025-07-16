@@ -1,6 +1,6 @@
 import { getTags } from "../../services/tagServices";
 import { useState, useEffect } from "react";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import ListAllTags from "../../components/listAllTags/ListAllTags";
 const Tags = () => {
   const [tags, setTags] = useState([]);
@@ -15,7 +15,6 @@ const Tags = () => {
         <h3 className="my-4">BROWSE BY CATEGORY</h3>
         <ListAllTags tags={tags} />
       </div>
-      <ToastContainer />
     </>
   );
 };

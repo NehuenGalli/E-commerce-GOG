@@ -15,6 +15,7 @@ import Purchase from "./pages/purchasePage/purchase";
 import Game from "./pages/game";
 import Register from "./pages/register";
 import { getToken } from "./utilities/localstorageUtils";
+import { ToastContainer } from "react-toastify";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(!!getToken());
@@ -58,6 +59,7 @@ function App() {
             element={<Purchase isLoggedIn={isLoggedIn} />}
           />
         </Routes>
+        <ToastContainer />
       </BrowserRouter>
     </>
   );

@@ -3,7 +3,6 @@ import { useNavigate } from "react-router";
 import { login } from "../services/userService";
 import { useState } from "react";
 import { logInFunction } from "../utilities/buttonFunction";
-import { ToastContainer } from "react-toastify";
 import { fieldsCannotBeEmpty_message } from "../utilities/error_message";
 import { useEffect } from "react";
 import { ROUTES } from "../constants";
@@ -51,7 +50,6 @@ const Login = ({ logIn, isLoggedIn }) => {
         onPasswordChange={(e) => setPassword(e.target.value)}
         onSubmit={onSubmit}
       />
-      <ToastContainer />
     </>
   );
 };

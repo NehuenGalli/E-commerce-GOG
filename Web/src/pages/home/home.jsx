@@ -1,7 +1,6 @@
 import TrendingSection from "./trendingSection/TrendingSection";
 import TagSection from "./tagSection/TagSection";
 import RecommendedSection from "./recommendedSection/RecommendedSection";
-import { ToastContainer } from "react-toastify";
 
 const Home = () => {
   return (
@@ -11,7 +10,6 @@ const Home = () => {
         <TagSection />
         <TrendingSection />
       </div>
-      <ToastContainer />
     </>
   );
 };

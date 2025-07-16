@@ -3,7 +3,7 @@ import Paginacion from "../components/pagination/paginacion";
 import Spinner from "../components/spinner/Spinner";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 import { getGamesByTag } from "../services/tagServices";
 import { findTagInGames } from "../utilities/filters";
 
@@ -48,7 +48,6 @@ const TagGames = () => {
       />
       </>
       )}
-      <ToastContainer />
     </>
   );
 };
