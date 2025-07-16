@@ -10,15 +10,12 @@ import { getToken } from "../utilities/localstorageUtils";
 import { toast, ToastContainer } from "react-toastify";
 
 const Cart = () => {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const navigate = useNavigate();
   const [cart, setCart] = useState(null);
-  const [error, setError] = useState(null);
 
   useEffect(() => {
     const token = getToken();
     const isAuth = !!token;
-    setIsAuthenticated(isAuth);
 
     if (!isAuth) {
       navigate(ROUTES.LOGIN);
