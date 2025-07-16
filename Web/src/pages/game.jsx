@@ -35,15 +35,20 @@ const Game = ({ isLoggedIn }) => {
   }
 
   return (
-    <div className="container ">
-      <GamePortInfo game={game} isLoggedIn={isLoggedIn} />
-      <GameImagesCarrucel game={game} />
-      <GameAbout game={game} />
-      console.log(game.relatedGames);
-      {game.relatedGames.length > 0 && (
-        <RelatedGameSection relatedGames={game.relatedGames} />
+    <div className="container">
+      {!game ? (
+        <p className="text-center mt-4">No se encontro un juego para el id dado</p>
+      ) : (
+        <>
+          <GamePortInfo game={game} isLoggedIn={isLoggedIn} />
+          <GameImagesCarrucel game={game} />
+          <GameAbout game={game} />
+          {game.relatedGames.length > 0 && (
+            <RelatedGameSection relatedGames={game.relatedGames} />
+          )}
+          <Reviews game={game} isLoggedIn={isLoggedIn} />
+        </>
       )}
-      <Reviews game={game} isLoggedIn={isLoggedIn} />
       <ToastContainer />
     </div>
   );

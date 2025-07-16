@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, use } from "react";
 import { addReview } from "../../services/gameServices";
 import { userCurrent } from "../../services/userService";
 import CurrentReview from "./currentReviews";
@@ -12,6 +12,7 @@ import "./reviews.css";
 
 const Reviews = ({ game, isLoggedIn }) => {
   const [currentUser, setCurrentUser] = useState(null);
+  const [userGames, setUserGames] = useState([]);
   const [reviews, setReviews] = useState([]);
   const [loading, setLoading] = useState(true);
   const token = getToken();
@@ -23,6 +24,7 @@ const Reviews = ({ game, isLoggedIn }) => {
         setLoading(true);
         const userData = isLoggedIn ? await userCurrent() : null;
         setCurrentUser(userData);
+        setUserGames(userData?.games || []);
         setReviews(game.reviews || []);
       } catch (error) {
         toast.error(error.mensaje);
@@ -51,6 +53,8 @@ const Reviews = ({ game, isLoggedIn }) => {
     ? reviews.find((r) => r.user.id === currentUser.id)
     : null;
 
+  const userHasGame = isLoggedIn && userGames.some((userGame) => userGame.id === game.id);
+
   return (
     <div className="reviews-container">
       <h2 className="reviews-title">REVIEWS</h2>
@@ -58,6 +62,12 @@ const Reviews = ({ game, isLoggedIn }) => {
       <div className="user-review-container">
         {userReview ? (
           <ReviewCard review={userReview} isCurrentUser />
+        ) : isLoggedIn && !userHasGame ? (
+          <div className="bloqued-review-container">
+            <p className="bloqued-review-text">
+              Compre el juego para dejar una review
+            </p>
+          </div>
         ) : isLoggedIn ? (
           <CurrentReview onSubmit={handleNewReview} currentUser={currentUser} />
         ) : (
