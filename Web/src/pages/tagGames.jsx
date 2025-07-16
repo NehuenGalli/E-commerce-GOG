@@ -33,16 +33,21 @@ const TagGames = () => {
 
   return (
     <>
+      {games.list.length === 0 ? (
+        <p className="text-center mt-4">No se encontraron juegos para este tag</p>
+      ) : (
+      <>
       <ListGames
         games={games.list}
         title={"TAG: " + findTagInGames(tagId, games.list)?.name}
       />
-
       <Paginacion
         currentPage={currentPage}
         totalPages={games.amountOfPages}
         onPageChange={setCurrentPage}
       />
+      </>
+      )}
       <ToastContainer />
     </>
   );
