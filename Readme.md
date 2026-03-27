@@ -6,6 +6,19 @@ Este proyecto fue desarrollado como trabajo académico colaborativo con el objet
 
 ---
 
+## 🌐 Demo en vivo
+
+El proyecto está desplegado en **[Render](https://render.com)** y podés probarlo online:
+
+| Servicio | URL |
+|----------|-----|
+| 🖥️ **Web (Frontend)** | [https://e-commerce-gog-web.onrender.com](https://e-commerce-gog-web.onrender.com) |
+| 🔧 **API (Backend)** | [https://e-commerce-gog-api.onrender.com](https://e-commerce-gog-api.onrender.com) |
+
+> ⚠️ **Nota:** El hosting gratuito de Render pone los servicios en reposo tras ~15 minutos de inactividad. La primera visita después de un período de inactividad puede tardar entre **30 y 50 segundos** en levantar. Una vez activo, funciona con normalidad.
+
+---
+
 ## 🧠 Tecnologías Utilizadas
 
 <div align="center">
