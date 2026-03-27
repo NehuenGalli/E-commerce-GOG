@@ -1,5 +1,5 @@
 export const API = {
-  BASE_URL: "http://localhost:3000",
+  BASE_URL: import.meta.env.VITE_API_URL || "http://localhost:3000",
   AUTH_HEADER: "authorization",
   TOKEN_KEY: "jwt",
 };

@@ -12,7 +12,7 @@ import TagController from "./controllers/tagController.js";
 const gogSystem = initGogSystem();
 
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 const corsOptions = {
   exposedHeaders: "Authorization",
