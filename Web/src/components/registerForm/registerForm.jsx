@@ -1,4 +1,4 @@
-import "./RegisterForm.css";
+import "./registerForm.css";
 
 const RegisterForm = ({ formData, onChange, onSubmit, error }) => {
     return (
