@@ -1,4 +1,4 @@
-import "./gamePort-info.css";
+import "./gamePort-Info.css";
 import Spinner from "../spinner/Spinner";
 import AddToCart from "../portAddToCart/addToCart";
 import { userCurrent } from "../../services/userService";
